@@ -381,6 +381,8 @@
 		200E55901521B63000698A18 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		200E55911521B63000698A18 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		200E55921521B63000698A18 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		200E55CF1521C22F00698A18 /* CCMenuItemSpriteIndependent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCMenuItemSpriteIndependent.h; sourceTree = "<group>"; };
+		200E55D01521C23000698A18 /* CCMenuItemSpriteIndependent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCMenuItemSpriteIndependent.m; sourceTree = "<group>"; };
 		2015C5E11521AB7300F3AE56 /* pattycombat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pattycombat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2015C5E51521AB7300F3AE56 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2015C5E71521AB7300F3AE56 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1516,6 +1518,8 @@
 		2015C7D41521AE4C00F3AE56 /* MenuScene */ = {
 			isa = PBXGroup;
 			children = (
+				200E55CF1521C22F00698A18 /* CCMenuItemSpriteIndependent.h */,
+				200E55D01521C23000698A18 /* CCMenuItemSpriteIndependent.m */,
 				2015C7D51521AE4C00F3AE56 /* MenuLayer.h */,
 				2015C7D61521AE4C00F3AE56 /* MenuLayer.m */,
 				2015C7D71521AE4C00F3AE56 /* MenuScene.h */,
