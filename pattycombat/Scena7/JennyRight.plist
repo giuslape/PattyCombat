@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>Jenny_dx_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{142, 670}, {190, 236}}</string>
+			<key>offset</key>
+			<string>{18, -50}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{201, 101}, {190, 236}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+		<key>Jenny_dx_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{322, 1}, {310, 302}}</string>
+			<key>offset</key>
+			<string>{-96, 18}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{27, 0}, {310, 302}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+		<key>Jenny_dx_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{310, 304}, {294, 238}}</string>
+			<key>offset</key>
+			<string>{-104, -13}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{27, 63}, {294, 238}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+		<key>Jenny_dx_0004.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 670}, {140, 282}}</string>
+			<key>offset</key>
+			<string>{-9, 28}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{199, 0}, {140, 282}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+		<key>Jenny_dx_0005.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {320, 278}}</string>
+			<key>offset</key>
+			<string>{-117, 6}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 24}, {320, 278}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+		<key>Jenny_dx_0006.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{633, 1}, {306, 264}}</string>
+			<key>offset</key>
+			<string>{-111, -1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{14, 38}, {306, 264}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+		<key>Jenny_dx_0007.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{633, 266}, {306, 204}}</string>
+			<key>offset</key>
+			<string>{101, -33}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{226, 100}, {306, 204}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+		<key>Jenny_dx_0008.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{605, 471}, {286, 176}}</string>
+			<key>offset</key>
+			<string>{111, -19}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{246, 100}, {286, 176}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+		<key>Jenny_dx_0009.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{333, 543}, {200, 204}}</string>
+			<key>offset</key>
+			<string>{48, -34}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{226, 101}, {200, 204}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+		<key>Jenny_dx_0010.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 280}, {308, 208}}</string>
+			<key>offset</key>
+			<string>{122, -30}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{246, 95}, {308, 208}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+		<key>Jenny_dx_0011.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 489}, {292, 180}}</string>
+			<key>offset</key>
+			<string>{114, -21}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{246, 100}, {292, 180}}</string>
+			<key>sourceSize</key>
+			<string>{556, 338}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+	</dict>
+</dict>
+</plist>

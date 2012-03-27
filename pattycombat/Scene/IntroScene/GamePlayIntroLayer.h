@@ -1,0 +1,37 @@
+//
+//  GamePlayIntroLayer.h
+//  PattyCombat
+//
+//  Created by Giuseppe Lapenta on 10/10/11.
+//  Copyright 2011 Lapenta. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "cocos2d.h"
+#import "GameManager.h"
+
+@interface GamePlayIntroLayer : CCLayer {
+    
+    CCSpriteBatchNode* spriteBatchNode;
+    CharacterStates state;
+    CGPoint firstTouchLocInView;
+    NSTimeInterval firstTouchTimeStamp;
+
+}
+
+@property (nonatomic, strong) NSMutableArray* patternArray;
+@property (nonatomic, strong) CCAnimation* animationHandRightOk;
+@property (nonatomic, strong) CCAnimation* animationHandLeftOk;
+@property (nonatomic, strong) CCAnimation* animationHandRightErr;
+@property (nonatomic, strong) CCAnimation* animationHandLeftErr;
+@property (nonatomic, strong) CCAnimation* animationFeedLeft;
+@property (nonatomic, strong) CCAnimation* animationFeedRight;
+@property (nonatomic, strong) NSMutableArray* feedHand;
+
+
+-(void)handleHitWithTouch:(CGPoint)location;
+-(void)handleHitsWithTouches:(NSArray*)touches;
+-(void)showActorAndName;
+-(void)showButtonAndFeed;
+
+@end

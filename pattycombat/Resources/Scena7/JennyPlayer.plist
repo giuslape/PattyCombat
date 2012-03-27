@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>Jenny_body_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {302, 564}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {302, 564}}</string>
+			<key>sourceSize</key>
+			<string>{304, 564}</string>
+		</dict>
+		<key>Jenny_body_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{607, 1}, {302, 562}}</string>
+			<key>offset</key>
+			<string>{0, -1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 2}, {302, 562}}</string>
+			<key>sourceSize</key>
+			<string>{304, 564}</string>
+		</dict>
+		<key>Jenny_body_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{304, 1}, {302, 564}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 0}, {302, 564}}</string>
+			<key>sourceSize</key>
+			<string>{304, 564}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+	</dict>
+</dict>
+</plist>

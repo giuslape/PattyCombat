@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>kGamelevel1</key>
+	<dict>
+		<key>BELL</key>
+		<string>bell.aif</string>
+		<key>PERFECT_TAP</key>
+		<string>tap_2.aif</string>
+		<key>WRONGTAP</key>
+		<string>tap_sbagliato.aif</string>
+	</dict>
+	<key>kBonusLevel1</key>
+	<dict>
+		<key>BELL</key>
+		<string>bell.aif</string>
+		<key>WRONGTAP</key>
+		<string>tap_sbagliato.aif</string>
+		<key>PERFECT_TAP</key>
+		<string>tap_3.aif</string>
+	</dict>
+	<key>kBonusLevel2</key>
+	<dict>
+		<key>BELL</key>
+		<string>bell.aif</string>
+		<key>WRONGTAP</key>
+		<string>tap_sbagliato.aif</string>
+		<key>PERFECT_TAP</key>
+		<string>tap_2.mp3</string>
+	</dict>
+</dict>
+</plist>

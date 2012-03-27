@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>crocodile_sx_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{451, 1}, {190, 206}}</string>
+			<key>offset</key>
+			<string>{-110, -69}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 146}, {190, 206}}</string>
+			<key>sourceSize</key>
+			<string>{410, 360}</string>
+		</dict>
+		<key>crocodile_sx_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 346}, {302, 282}}</string>
+			<key>offset</key>
+			<string>{11, -25}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{65, 64}, {302, 282}}</string>
+			<key>sourceSize</key>
+			<string>{410, 360}</string>
+		</dict>
+		<key>crocodile_sx_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 629}, {268, 278}}</string>
+			<key>offset</key>
+			<string>{28, -26}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{99, 67}, {268, 278}}</string>
+			<key>sourceSize</key>
+			<string>{410, 360}</string>
+		</dict>
+		<key>crocodile_sx_0004.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{312, 1}, {138, 318}}</string>
+			<key>offset</key>
+			<string>{-81, -20}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{55, 41}, {138, 318}}</string>
+			<key>sourceSize</key>
+			<string>{410, 360}</string>
+		</dict>
+		<key>crocodile_sx_0005.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {310, 344}}</string>
+			<key>offset</key>
+			<string>{49, 7}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{99, 1}, {310, 344}}</string>
+			<key>sourceSize</key>
+			<string>{410, 360}</string>
+		</dict>
+		<key>crocodile_sx_0006.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{304, 346}, {288, 326}}</string>
+			<key>offset</key>
+			<string>{38, -3}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{99, 20}, {288, 326}}</string>
+			<key>sourceSize</key>
+			<string>{410, 360}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>gong0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{95, 316}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{189, 316}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{459, 95}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0004.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{369, 308}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0005.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{275, 1}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0006.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 110}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0007.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{560, 1}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0008.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{402, 402}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0009.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{455, 1}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0010.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{95, 106}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0011.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{189, 106}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0012.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{95, 211}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0013.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{455, 203}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0014.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 320}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0015.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{181, 1}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0016.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{87, 1}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0017.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{189, 211}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0018.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 215}, {104, 93}}</string>
+			<key>offset</key>
+			<string>{1, 1}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 93}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0019.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{283, 106}, {104, 89}}</string>
+			<key>offset</key>
+			<string>{1, 3}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 89}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0020.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{211, 421}, {104, 85}}</string>
+			<key>offset</key>
+			<string>{1, 5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0021.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{560, 189}, {104, 85}}</string>
+			<key>offset</key>
+			<string>{1, 5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0022.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{474, 297}, {104, 85}}</string>
+			<key>offset</key>
+			<string>{1, 5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0023.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{369, 1}, {104, 85}}</string>
+			<key>offset</key>
+			<string>{1, 5}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0024.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{106, 421}, {104, 85}}</string>
+			<key>offset</key>
+			<string>{1, 5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0025.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{283, 211}, {104, 85}}</string>
+			<key>offset</key>
+			<string>{1, 5}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0026.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 425}, {104, 85}}</string>
+			<key>offset</key>
+			<string>{1, 5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {104, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0027.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{564, 95}, {102, 85}}</string>
+			<key>offset</key>
+			<string>{0, 5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {102, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0028.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{283, 316}, {96, 85}}</string>
+			<key>offset</key>
+			<string>{-3, 5}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {96, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0029.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{665, 1}, {96, 85}}</string>
+			<key>offset</key>
+			<string>{-3, 5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {96, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0030.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{373, 106}, {96, 85}}</string>
+			<key>offset</key>
+			<string>{-3, 5}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {96, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0031.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{369, 211}, {96, 85}}</string>
+			<key>offset</key>
+			<string>{-3, 5}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {96, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0032.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{316, 413}, {96, 85}}</string>
+			<key>offset</key>
+			<string>{-3, 5}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{9, 0}, {96, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0033.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{665, 181}, {98, 77}}</string>
+			<key>offset</key>
+			<string>{-3, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{8, 9}, {98, 77}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0034.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {108, 85}}</string>
+			<key>offset</key>
+			<string>{-5, -0}</string>
+			<key>rotated</key>
+			<true/>
+			<key>sourceColorRect</key>
+			<string>{{1, 5}, {108, 85}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0035.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{507, 383}, {108, 81}}</string>
+			<key>offset</key>
+			<string>{-6, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 7}, {108, 81}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0036.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{579, 275}, {106, 77}}</string>
+			<key>offset</key>
+			<string>{-7, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 9}, {106, 77}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0037.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{667, 87}, {96, 77}}</string>
+			<key>offset</key>
+			<string>{-3, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 9}, {96, 77}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>gong0038.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{762, 1}, {96, 77}}</string>
+			<key>offset</key>
+			<string>{-3, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{9, 9}, {96, 77}}</string>
+			<key>sourceSize</key>
+			<string>{120, 95}</string>
+		</dict>
+		<key>pause_btn.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{616, 353}, {58, 55}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {58, 55}}</string>
+			<key>sourceSize</key>
+			<string>{58, 55}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{1024, 512}</string>
+	</dict>
+</dict>
+</plist>

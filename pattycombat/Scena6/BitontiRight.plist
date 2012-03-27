@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>steven_dx_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 713}, {256, 256}}</string>
+			<key>offset</key>
+			<string>{90, -83}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{180, 215}, {256, 256}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+		<key>steven_dx_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{986, 368}, {374, 280}}</string>
+			<key>offset</key>
+			<string>{31, -120}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{62, 240}, {374, 280}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+		<key>steven_dx_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{758, 691}, {226, 304}}</string>
+			<key>offset</key>
+			<string>{-43, -107}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{62, 215}, {226, 304}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+		<key>steven_dx_0004.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 424}, {216, 284}}</string>
+			<key>offset</key>
+			<string>{69, -95}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{179, 213}, {216, 284}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+		<key>steven_dx_0005.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{587, 382}, {296, 308}}</string>
+			<key>offset</key>
+			<string>{-27, -105}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{43, 211}, {296, 308}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+		<key>steven_dx_0006.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{306, 408}, {228, 304}}</string>
+			<key>offset</key>
+			<string>{-43, -107}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{61, 215}, {228, 304}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+		<key>steven_dx_0007.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{587, 1}, {398, 380}}</string>
+			<key>offset</key>
+			<string>{19, 14}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{38, 56}, {398, 380}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+		<key>steven_dx_0008.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{986, 1}, {268, 366}}</string>
+			<key>offset</key>
+			<string>{-46, 21}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{38, 56}, {268, 366}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+		<key>steven_dx_0009.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{587, 691}, {170, 324}}</string>
+			<key>offset</key>
+			<string>{40, -19}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{173, 117}, {170, 324}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+		<key>steven_dx_0010.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {304, 422}}</string>
+			<key>offset</key>
+			<string>{-64, 49}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{2, 0}, {304, 422}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+		<key>steven_dx_0011.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{306, 1}, {280, 406}}</string>
+			<key>offset</key>
+			<string>{-53, 42}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{25, 15}, {280, 406}}</string>
+			<key>sourceSize</key>
+			<string>{436, 520}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{2048, 1024}</string>
+	</dict>
+</dict>
+</plist>

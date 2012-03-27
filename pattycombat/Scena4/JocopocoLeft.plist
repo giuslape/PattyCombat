@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>joco_sx_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{325, 555}, {201, 216}}</string>
+			<key>offset</key>
+			<string>{-96, -33}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 76}, {201, 216}}</string>
+			<key>sourceSize</key>
+			<string>{393, 302}</string>
+		</dict>
+		<key>joco_sx_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {385, 300}}</string>
+			<key>offset</key>
+			<string>{-4, 1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {385, 300}}</string>
+			<key>sourceSize</key>
+			<string>{393, 302}</string>
+		</dict>
+		<key>joco_sx_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{325, 302}, {315, 252}}</string>
+			<key>offset</key>
+			<string>{30, -23}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{69, 48}, {315, 252}}</string>
+			<key>sourceSize</key>
+			<string>{393, 302}</string>
+		</dict>
+		<key>joco_sx_0004.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 597}, {113, 252}}</string>
+			<key>offset</key>
+			<string>{-71, -21}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{69, 46}, {113, 252}}</string>
+			<key>sourceSize</key>
+			<string>{393, 302}</string>
+		</dict>
+		<key>joco_sx_0005.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 302}, {323, 294}}</string>
+			<key>offset</key>
+			<string>{34, -3}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{69, 7}, {323, 294}}</string>
+			<key>sourceSize</key>
+			<string>{393, 302}</string>
+		</dict>
+		<key>joco_sx_0006.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{387, 1}, {307, 264}}</string>
+			<key>offset</key>
+			<string>{26, -15}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{69, 34}, {307, 264}}</string>
+			<key>sourceSize</key>
+			<string>{393, 302}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+	</dict>
+</dict>
+</plist>

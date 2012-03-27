@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bellAnimation</key>
+	<dict>
+		<key>animationFrames</key>
+		<string>01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33</string>
+		<key>delay</key>
+		<real>0.1</real>
+		<key>filenamePrefix</key>
+		<string>gong00</string>
+	</dict>
+	<key>gongAnimation</key>
+	<dict>
+		<key>animationFrames</key>
+		<string>33,34,35,36,37,38</string>
+		<key>delay</key>
+		<real>0.08</real>
+		<key>filenamePrefix</key>
+		<string>gong00</string>
+	</dict>
+</dict>
+</plist>

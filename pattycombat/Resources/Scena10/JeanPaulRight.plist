@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>JeanPaul_dx_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{262, 1}, {202, 224}}</string>
+			<key>offset</key>
+			<string>{20, -62}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{217, 130}, {202, 224}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+		<key>JeanPaul_dx_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{290, 228}, {302, 282}}</string>
+			<key>offset</key>
+			<string>{-103, -27}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{44, 66}, {302, 282}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+		<key>JeanPaul_dx_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 228}, {288, 278}}</string>
+			<key>offset</key>
+			<string>{-110, -28}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{44, 69}, {288, 278}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+		<key>JeanPaul_dx_0004.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{593, 228}, {138, 316}}</string>
+			<key>offset</key>
+			<string>{-11, -22}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{218, 44}, {138, 316}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+		<key>JeanPaul_dx_0005.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1041, 228}, {330, 344}}</string>
+			<key>offset</key>
+			<string>{-132, 5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{1, 3}, {330, 344}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+		<key>JeanPaul_dx_0006.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{732, 228}, {308, 326}}</string>
+			<key>offset</key>
+			<string>{-121, -5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{23, 22}, {308, 326}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+		<key>JeanPaul_dx_0007.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1472, 1}, {308, 226}}</string>
+			<key>offset</key>
+			<string>{91, -61}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{235, 128}, {308, 226}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+		<key>JeanPaul_dx_0008.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{826, 1}, {308, 226}}</string>
+			<key>offset</key>
+			<string>{91, -62}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{235, 129}, {308, 226}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+		<key>JeanPaul_dx_0009.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {260, 204}}</string>
+			<key>offset</key>
+			<string>{68, -49}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{236, 127}, {260, 204}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+		<key>JeanPaul_dx_0010.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{465, 1}, {360, 224}}</string>
+			<key>offset</key>
+			<string>{117, -61}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{235, 129}, {360, 224}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+		<key>JeanPaul_dx_0011.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1135, 1}, {336, 226}}</string>
+			<key>offset</key>
+			<string>{105, -62}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{235, 129}, {336, 226}}</string>
+			<key>sourceSize</key>
+			<string>{596, 360}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{2048, 1024}</string>
+	</dict>
+</dict>
+</plist>

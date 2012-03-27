@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>bud_body_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{448, 1}, {446, 614}}</string>
+			<key>offset</key>
+			<string>{-1, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{3, 0}, {446, 614}}</string>
+			<key>sourceSize</key>
+			<string>{454, 614}</string>
+		</dict>
+		<key>bud_body_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{895, 1}, {446, 614}}</string>
+			<key>offset</key>
+			<string>{-1, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{3, 0}, {446, 614}}</string>
+			<key>sourceSize</key>
+			<string>{454, 614}</string>
+		</dict>
+		<key>bud_body_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {446, 614}}</string>
+			<key>offset</key>
+			<string>{-1, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{3, 0}, {446, 614}}</string>
+			<key>sourceSize</key>
+			<string>{454, 614}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{2048, 1024}</string>
+	</dict>
+</dict>
+</plist>

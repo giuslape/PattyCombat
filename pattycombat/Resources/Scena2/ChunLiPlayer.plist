@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>cinziah_body_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{238, 1}, {236, 563}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {236, 563}}</string>
+			<key>sourceSize</key>
+			<string>{236, 563}</string>
+		</dict>
+		<key>cinziah_body_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {236, 563}}</string>
+			<key>offset</key>
+			<string>{0, -0}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 0}, {236, 563}}</string>
+			<key>sourceSize</key>
+			<string>{236, 563}</string>
+		</dict>
+		<key>cinziah_body_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{475, 1}, {236, 541}}</string>
+			<key>offset</key>
+			<string>{0, -11}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 22}, {236, 541}}</string>
+			<key>sourceSize</key>
+			<string>{236, 563}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+	</dict>
+</dict>
+</plist>

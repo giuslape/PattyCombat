@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>maa_sx_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{553, 310}, {180, 270}}</string>
+			<key>offset</key>
+			<string>{-98, 20}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{2, 57}, {180, 270}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+		<key>maa_sx_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {286, 308}}</string>
+			<key>offset</key>
+			<string>{23, 39}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{70, 19}, {286, 308}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+		<key>maa_sx_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{282, 310}, {270, 276}}</string>
+			<key>offset</key>
+			<string>{30, 55}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{85, 19}, {270, 276}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+		<key>maa_sx_0004.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{581, 1}, {106, 292}}</string>
+			<key>offset</key>
+			<string>{-50, 31}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{87, 35}, {106, 292}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+		<key>maa_sx_0005.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{288, 1}, {292, 294}}</string>
+			<key>offset</key>
+			<string>{41, 64}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{85, 1}, {292, 294}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+		<key>maa_sx_0006.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 310}, {280, 276}}</string>
+			<key>offset</key>
+			<string>{35, 56}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{85, 18}, {280, 276}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+		<key>maa_sx_0007.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 587}, {288, 242}}</string>
+			<key>offset</key>
+			<string>{31, -55}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{77, 146}, {288, 242}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+		<key>maa_sx_0008.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{290, 587}, {280, 242}}</string>
+			<key>offset</key>
+			<string>{35, -55}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{85, 146}, {280, 242}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+		<key>maa_sx_0009.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{571, 587}, {106, 174}}</string>
+			<key>offset</key>
+			<string>{-61, -21}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{76, 146}, {106, 174}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+		<key>maa_sx_0010.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{688, 1}, {294, 278}}</string>
+			<key>offset</key>
+			<string>{42, -73}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{85, 146}, {294, 278}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+		<key>maa_sx_0011.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{734, 310}, {280, 268}}</string>
+			<key>offset</key>
+			<string>{35, -68}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{85, 146}, {280, 268}}</string>
+			<key>sourceSize</key>
+			<string>{380, 424}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+	</dict>
+</dict>
+</plist>

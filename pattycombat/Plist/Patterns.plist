@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Scena1</key>
+	<string>dx,sx</string>
+	<key>Scena2</key>
+	<string>sx,dx,two</string>
+	<key>Scena3</key>
+	<string>sxCross,dxCross,two</string>
+	<key>Scena5</key>
+	<string>sx,dx,dxCross,sxCross</string>
+	<key>Scena6</key>
+	<string>sx,dx,two,sx,dx,dx</string>
+	<key>Scena7</key>
+	<string>sx,dx,sxCross,dxCross,two</string>
+	<key>Scena8</key>
+	<string>sx,dx,sxCross,dxCross,two,two</string>
+	<key>Scena10</key>
+	<string>sx,dx,dx,sxCross,dxCross,two,two</string>
+	<key>Scena11</key>
+	<string>sx,sxCross,sx,dx,dxCross,dxCross,two</string>
+	<key>Scena12</key>
+	<string>dx,sx,sxCross,dxCross,two</string>
+</dict>
+</plist>

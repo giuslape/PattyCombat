@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>bud_dx_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 452}, {266, 268}}</string>
+			<key>offset</key>
+			<string>{82, -89}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{169, 220}, {266, 268}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+		<key>bud_dx_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{551, 1}, {394, 396}}</string>
+			<key>offset</key>
+			<string>{-4, 5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{19, 62}, {394, 396}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+		<key>bud_dx_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{946, 1}, {258, 396}}</string>
+			<key>offset</key>
+			<string>{-72, 5}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{19, 62}, {258, 396}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+		<key>bud_dx_0004.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1205, 310}, {160, 324}}</string>
+			<key>offset</key>
+			<string>{42, -20}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{182, 123}, {160, 324}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+		<key>bud_dx_0005.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {296, 450}}</string>
+			<key>offset</key>
+			<string>{-70, 34}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{2, 6}, {296, 450}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+		<key>bud_dx_0006.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{298, 1}, {252, 436}}</string>
+			<key>offset</key>
+			<string>{-69, 26}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{25, 21}, {252, 436}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+		<key>bud_dx_0007.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1205, 1}, {356, 308}}</string>
+			<key>offset</key>
+			<string>{20, -109}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{62, 220}, {356, 308}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+		<key>bud_dx_0008.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{850, 398}, {226, 308}}</string>
+			<key>offset</key>
+			<string>{-45, -109}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{62, 220}, {226, 308}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+		<key>bud_dx_0009.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 721}, {222, 288}}</string>
+			<key>offset</key>
+			<string>{64, -99}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{173, 220}, {222, 288}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+		<key>bud_dx_0010.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{551, 398}, {298, 310}}</string>
+			<key>offset</key>
+			<string>{-28, -107}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{43, 217}, {298, 310}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+		<key>bud_dx_0011.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{298, 438}, {228, 308}}</string>
+			<key>offset</key>
+			<string>{-45, -109}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{61, 220}, {228, 308}}</string>
+			<key>sourceSize</key>
+			<string>{440, 530}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{2048, 1024}</string>
+	</dict>
+</dict>
+</plist>

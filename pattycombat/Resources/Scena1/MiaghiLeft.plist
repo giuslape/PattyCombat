@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		<key>miaghi_sx_0001.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 737}, {202, 212}}</string>
+			<key>offset</key>
+			<string>{-99, -79}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{0, 158}, {202, 212}}</string>
+			<key>sourceSize</key>
+			<string>{400, 370}</string>
+		</dict>
+		<key>miaghi_sx_0002.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 1}, {310, 368}}</string>
+			<key>offset</key>
+			<string>{16, -1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{61, 2}, {310, 368}}</string>
+			<key>sourceSize</key>
+			<string>{400, 370}</string>
+		</dict>
+		<key>miaghi_sx_0003.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{459, 346}, {292, 320}}</string>
+			<key>offset</key>
+			<string>{25, -25}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{79, 50}, {292, 320}}</string>
+			<key>sourceSize</key>
+			<string>{400, 370}</string>
+		</dict>
+		<key>miaghi_sx_0004.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{312, 1}, {146, 348}}</string>
+			<key>offset</key>
+			<string>{-67, 3}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{60, 8}, {146, 348}}</string>
+			<key>sourceSize</key>
+			<string>{400, 370}</string>
+		</dict>
+		<key>miaghi_sx_0005.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{1, 370}, {318, 366}}</string>
+			<key>offset</key>
+			<string>{38, -1}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{79, 3}, {318, 366}}</string>
+			<key>sourceSize</key>
+			<string>{400, 370}</string>
+		</dict>
+		<key>miaghi_sx_0006.png</key>
+		<dict>
+			<key>frame</key>
+			<string>{{459, 1}, {296, 344}}</string>
+			<key>offset</key>
+			<string>{27, -13}</string>
+			<key>rotated</key>
+			<false/>
+			<key>sourceColorRect</key>
+			<string>{{79, 26}, {296, 344}}</string>
+			<key>sourceSize</key>
+			<string>{400, 370}</string>
+		</dict>
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>format</key>
+		<integer>2</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+	</dict>
+</dict>
+</plist>
