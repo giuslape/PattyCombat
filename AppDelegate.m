@@ -200,4 +200,9 @@ static NSString* kAppId = @"321845184543524";
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [_facebook handleOpenURL:url]; 
+}
+
 @end

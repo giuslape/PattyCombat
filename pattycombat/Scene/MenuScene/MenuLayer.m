@@ -40,7 +40,6 @@
 @synthesize size;
 @synthesize play,highScores,credits;
 @synthesize hud = _hud;
-@synthesize purchaseMenu = _purchaseMenu;
 
 #pragma mark -
 #pragma mark ===  Dealloc  ===
@@ -57,6 +56,10 @@
     
     [[GameManager sharedGameManager] stopBackgroundMusic];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductsLoadedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchasedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchaseFailedNotification object:nil];
+    
     
 }
 
@@ -65,7 +68,7 @@
 #pragma mark -
 
 
--(void)buildCreditsMenu{
+-(void)buildGetCoins{
     
     CCSprite* creditsBackground = [CCSprite spriteWithFile:@"menu_01.png"];
     [self addChild:creditsBackground z:1 tag:kCreditsBackgroundTag];
@@ -89,7 +92,7 @@
     [_purchaseMenu alignItemsVertically];
 }
 
--(void)buildHighScoresMenu{
+-(void)buildStats{
     
     CCSprite* highscoresBackground = [CCSprite spriteWithFile:@"menu_03.png"];
     [self addChild:highscoresBackground z:1 tag:kHighScoresTag];
@@ -149,9 +152,9 @@
         
         [self addChild:myagi z:0 tag:13];
         
-        [self buildCreditsMenu];
+        [self buildGetCoins];
         
-        [self buildHighScoresMenu];
+        [self buildStats];
                 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:kProductPurchasedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(productPurchaseFailed:) name:kProductPurchaseFailedNotification object: nil];
@@ -160,6 +163,26 @@
 	}
 	return self;
 }
+
+#pragma mark On Enter 
+
+-(void)onEnterTransitionDidFinish{
+    
+    [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
+    
+    CCSprite* myagi = (CCSprite*)[self getChildByTag:13];
+    
+    CCRotateBy* rotate = [CCRotateBy actionWithDuration:0.2 angle:-180];
+    
+    id move = [CCMoveBy actionWithDuration:0.05f position:CGPointMake(5, 0)];
+    id movereverse = [move reverse];
+    
+    [myagi runAction:[CCSequence actions:rotate,[CCRepeat actionWithAction:[CCSequence actions:move,movereverse, nil] times:1], nil]];
+    
+    [self scheduleUpdate];
+    
+}
+
 
 
 
@@ -323,27 +346,6 @@
     self.isTouchEnabled = FALSE;
     
     [[GameManager sharedGameManager] runSceneWithID:kIntroScene];
-    
-}
-
-#pragma mark -
-#pragma mark === On Enter ===
-#pragma mark -
-
--(void)onEnterTransitionDidFinish{
-    
-    [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
-    
-    CCSprite* myagi = (CCSprite*)[self getChildByTag:13];
-    
-    CCRotateBy* rotate = [CCRotateBy actionWithDuration:0.2 angle:-180];
-    
-    id move = [CCMoveBy actionWithDuration:0.05f position:CGPointMake(5, 0)];
-    id movereverse = [move reverse];
-    
-    [myagi runAction:[CCSequence actions:rotate,[CCRepeat actionWithAction:[CCSequence actions:move,movereverse, nil] times:1], nil]];
-    
-    [self scheduleUpdate];
     
 }
 

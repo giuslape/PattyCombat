@@ -18,10 +18,10 @@
     MBProgressHUD* _hud;
     CCMenu* _purchaseMenu;
     NSArray* _permissions;
+    CCMenu* _mainMenu;
 }
 
 @property (strong)MBProgressHUD* hud;
-@property (nonatomic, strong)CCMenu* purchaseMenu;
 
 
 @end
