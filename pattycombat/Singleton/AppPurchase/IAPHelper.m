@@ -122,13 +122,6 @@
 #pragma mark ===  Dealloc  ===
 #pragma mark -
 
-- (void)dealloc
-{
-    _productIdentifiers = nil;
-    _products = nil;
-    _purchasedProducts = nil;
-    _request = nil;
-}
 
 
 @end

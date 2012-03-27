@@ -19,7 +19,6 @@
                 
         MenuLayer* menuLayer = [MenuLayer node];
         [self addChild:menuLayer z:0];
-        
              
     }
     return self;

@@ -15,7 +15,7 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import <Twitter/Twitter.h>
-
+#import "CCMenuItemSpriteIndependent.h"
 
 @interface MenuLayer ()
 
@@ -24,12 +24,10 @@
 @property (nonatomic, strong)CCSprite* highScores;
 @property (nonatomic, strong)CCSprite* credits;
 
--(void) menuCreditsTouched;
--(void) menuHighScoresTouched;
 -(void) goBack;
 -(void)playGame;
--(void)menuHighScoresTouched;
--(void)menuCreditsTouched;
+-(void)itemStatsTouched;
+-(void)itemGetCoinsTouched;
 -(void)showAchievements;
 -(void)showLeaderboard;
 @end
@@ -69,27 +67,89 @@
 
 
 -(void)buildGetCoins{
+        
+    //Add background
     
-    CCSprite* creditsBackground = [CCSprite spriteWithFile:@"menu_01.png"];
-    [self addChild:creditsBackground z:1 tag:kCreditsBackgroundTag];
-    [creditsBackground setPosition:ccp(-size.width/2, size.height/2)];
+    CCSprite* getCoinsBackground = [CCSprite spriteWithFile:@"menu_01.png"];
+    [self addChild:getCoinsBackground z:kGetCoinsBackgroundZValue tag:kGetCoinsBackgroundTagValue];
+    [getCoinsBackground setPosition:ccp(-size.width/2, size.height/2)];
+    
+    
+    //Number of product purchased
     
     int quantity = [[PattyCombatIAPHelper sharedHelper] quantity];
-    CCLabelBMFont* labelQuantity = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",quantity] fntFile:FONTNUMBERS];
-    [creditsBackground addChild:labelQuantity z:1 tag:10];
-    [labelQuantity setPosition:ccp(300, 100)];
     
-    CCMenuItemLabel* facebook = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"Facebook" fntFile:FONTLETTERS] target:self selector:@selector(loginToFacebook:)];
+    CCLabelBMFont* labelQuantity =
+    [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",quantity]
+                           fntFile:FONTNUMBERS];
     
-    CCMenuItemLabel* twitter = [CCMenuItemLabel itemWithLabel:[CCLabelBMFont labelWithString:@"Twitter" fntFile:FONTLETTERS] target:self selector:@selector(postOnTwitter:)];
+    [getCoinsBackground addChild:labelQuantity z:kLabelCoinsReachedZValue tag:kLabelCoinsReachedTagValue];
+    [labelQuantity setPosition:ccp(size.width * 0.8, size.height * 0.3)];
     
     
-    _purchaseMenu = [CCMenu menuWithItems:facebook,twitter,nil];
+    //  Store Button for post to Facebook
+    
+    CCSprite* facebook = [CCSprite spriteWithSpriteFrameName:@"store1_btn.png"];
+    CCSprite* facebookSelected = [CCSprite spriteWithSpriteFrameName:@"store1_btn_over.png"];
+    
+    
+    CCMenuItemSprite* facebookButton = 
+    [CCMenuItemSprite  itemWithNormalSprite:facebook
+                                     selectedSprite:facebookSelected 
+                                        target:self 
+                                            selector:@selector(loginToFacebook:)]; 
+    
+    facebookButton.tag = kFacebookItemTagValue;
+    
+    // Store Button 25 coins
+    
+    CCSprite* firstPurchase = [CCSprite spriteWithSpriteFrameName:@"store2_btn.png"];
+    CCSprite* firstPurchaseSelected = [CCSprite spriteWithSpriteFrameName:@"store2_btn_over.png"];
+    
+    CCMenuItemSprite* firstPurchaseButton = 
+    [CCMenuItemSprite  itemWithNormalSprite:firstPurchase
+                            selectedSprite:firstPurchaseSelected
+                                    target:self 
+                                        selector:@selector(buyButtonTapped:)];
+    
+    firstPurchaseButton.tag = kFirstPurchaseItemTagValue;
 
-    [creditsBackground addChild:_purchaseMenu z:1 tag:20];
-        
-    [_purchaseMenu setPosition:ccp(100, 100)];
-    [_purchaseMenu alignItemsVertically];
+    // Store Button 75 coins
+    
+    CCSprite* secondPurchase = [CCSprite spriteWithSpriteFrameName:@"store3_btn.png"];
+    CCSprite* secondPurchaseSelected = [CCSprite spriteWithSpriteFrameName:@"store3_btn_over.png"];
+    
+    CCMenuItemSprite* secondPurchaseButton = 
+    [CCMenuItemSprite itemWithNormalSprite:secondPurchase 
+                                       selectedSprite:secondPurchaseSelected 
+                                            target:self 
+                                                selector:@selector(buyButtonTapped:)];
+    
+    secondPurchaseButton.tag = kSecondPurchaseItemTagValue;
+    
+    // Store Button 200 coins
+    
+    CCSprite* thirdPurchase = [CCSprite spriteWithSpriteFrameName:@"store4_btn.png"];
+    CCSprite* thirdPurchaseSelected = [CCSprite spriteWithSpriteFrameName:@"store4_btn_over.png"];
+    
+    CCMenuItemSprite* thirdPurchaseButton =
+    [CCMenuItemSprite   itemWithNormalSprite:thirdPurchase 
+                                        selectedSprite:thirdPurchaseSelected 
+                                             target:self 
+                                                 selector:@selector(buyButtonTapped:)];
+    
+    thirdPurchaseButton.tag = kThirdPurchaseItemTagValue;
+    
+    // Add Purchase Menu
+    
+    _purchaseMenu = [CCMenu menuWithItems:facebookButton,firstPurchaseButton,secondPurchaseButton,thirdPurchaseButton,nil];
+
+    [getCoinsBackground addChild:_purchaseMenu];
+    
+    _purchaseMenu.position = ccp(size.width * 0.25, size.height * 0.4);
+    
+    [_purchaseMenu alignItemsVerticallyWithPadding:3];
+    
 }
 
 -(void)buildStats{
@@ -107,7 +167,7 @@
     [highscoresBackground addChild:highScoreLabel z:1 tag:kHighScoreLabelTagValue];
     
     
-    CCSprite* reset = [CCSprite spriteWithFile:@"resetScore.png"];
+    CCSprite* reset = [CCSprite spriteWithSpriteFrameName:@"reset_btn.png"];
     [reset setPosition:ccp(435,15)];
     [highscoresBackground addChild:reset z:1 tag:kResetTagValue];
     
@@ -134,6 +194,17 @@
 	if ((self = [super init]))
         
 	{
+        
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"MenuAtlas.plist"];
+        
+        _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"MenuAtlas.png"];
+        
+        [self addChild:_spriteBatchNode z:kSpriteBatchNodeMenuZValue];
+        
+        _spriteBatchNode.anchorPoint = ccp(0, 0);
+        
+        _spriteBatchNode.position = ccp(0,0);
+        
         AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
         
         [[delegate facebook] setSessionDelegate:self];
@@ -197,7 +268,7 @@
                                               swallowsTouches:YES];
 }
 
--(BOOL) ccTouchBegan:(UITouch*)touch withEvent:(UIEvent *)event
+-(BOOL)ccTouchBegan:(UITouch*)touch withEvent:(UIEvent *)event
 {
 	CGPoint touchLocation = [touch locationInView:[touch view]];
     
@@ -221,7 +292,7 @@
         
     }else if(CGRectContainsPoint([highScores boundingBox], touchLocation)){
         
-        [self menuHighScoresTouched];
+        [self itemStatsTouched];
         
         CCLOG(@"Touch: %@",NSStringFromCGPoint(touchLocation));
         
@@ -229,7 +300,7 @@
         
     }else if(CGRectContainsPoint([credits boundingBox], touchLocation)){
         
-        [self menuCreditsTouched];
+        [self itemGetCoinsTouched];
         
         return YES;
         
@@ -248,13 +319,14 @@
     }else if (!CGRectContainsPoint([mainMenuSprite boundingBox], touchLocation) ) {
         [self goBack];
         return YES;
-    }else 
-        return NO;
+    }
+    
+    return YES;
     
 }
 
 
-- (void) menuCreditsTouched
+- (void) itemGetCoinsTouched
 {
     CCLOG(@"Sono in Credits Touched");
     
@@ -314,7 +386,7 @@
         
 }
 
-- (void) menuHighScoresTouched
+- (void) itemStatsTouched
 {
     CCLOG(@"Sono in High Scores Touched");
     
@@ -460,7 +532,7 @@ viewController
     
     NSString *productIdentifier = (NSString *) notification.object;
     NSInteger quantity = [[PattyCombatIAPHelper sharedHelper] updateQuantityForProduct:productIdentifier];
-    CCSprite* back = (CCSprite *)[self getChildByTag:kCreditsBackgroundTag];
+    CCSprite* back = (CCSprite *)[self getChildByTag:kGetCoinsBackgroundTagValue];
     CCLabelBMFont* label = (CCLabelBMFont *)[back getChildByTag:10];
     
     [label setString:[NSString stringWithFormat:@"%d", quantity]];
@@ -619,6 +691,7 @@ viewController
     if (![[delegate facebook] isSessionValid]) {
         
         [[delegate facebook] authorize:_permissions];
+        
     }else {
         
         [self postToFacebook:self];

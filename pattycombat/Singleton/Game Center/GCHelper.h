@@ -31,7 +31,7 @@
 }
 
 @property (strong) NSMutableArray *scoresToReport;
-@property (retain) NSMutableArray *achievementsToReport;
+@property  (strong)NSMutableArray *achievementsToReport;
 
 + (GCHelper *) sharedInstance;
 - (void)authenticationChanged;

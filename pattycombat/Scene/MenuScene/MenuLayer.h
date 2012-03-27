@@ -19,6 +19,7 @@
     CCMenu* _purchaseMenu;
     NSArray* _permissions;
     CCMenu* _mainMenu;
+    CCSpriteBatchNode* _spriteBatchNode;
 }
 
 @property (strong)MBProgressHUD* hud;
