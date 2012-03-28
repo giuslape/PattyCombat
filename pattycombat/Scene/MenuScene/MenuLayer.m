@@ -250,11 +250,11 @@
         
         CCSprite* myagi = [CCSprite spriteWithFile:@"myagi.png"];
         
-        myagi.anchorPoint = ccp(0, 1);
+        myagi.anchorPoint = ccp(0, 0);
         
-        myagi.position = ccp(size.width - 20, 0);
+        myagi.position = ccp(size.width * 0.2, - myagi.contentSize.height * 0.14);
         
-        [self addChild:myagi z:0 tag:13];
+        [self addChild:myagi z:kPlayerMiaghiZValue tag:kPlayerMiaghiTagValue];
         
         // Build Menu GetCoins
         
@@ -266,9 +266,20 @@
         
         // Add Observer for Purchase Notification
                 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:kProductPurchasedNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(productPurchaseFailed:) name:kProductPurchaseFailedNotification object: nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsLoaded:) name:kProductsLoadedNotification object:nil];       
+        [[NSNotificationCenter defaultCenter]    addObserver:self
+                                                 selector:@selector(productPurchased:)
+                                                 name:kProductPurchasedNotification
+                                                 object:nil];
+        
+        [[NSNotificationCenter defaultCenter]    addObserver:self 
+                                                 selector: @selector(productPurchaseFailed:)
+                                                 name:kProductPurchaseFailedNotification 
+                                                 object: nil];
+        
+        [[NSNotificationCenter defaultCenter]    addObserver:self
+                                                 selector:@selector(productsLoaded:)
+                                                 name:kProductsLoadedNotification 
+                                                 object:nil];       
         
 	}
 	return self;
@@ -280,9 +291,9 @@
     
     [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
     
-    CCSprite* myagi = (CCSprite*)[self getChildByTag:13];
+    CCSprite* myagi = (CCSprite*)[self getChildByTag:kPlayerMiaghiTagValue];
     
-    CCRotateBy* rotate = [CCRotateBy actionWithDuration:0.2 angle:-180];
+    CCRotateTo* rotate = [CCRotateTo actionWithDuration:0.05f angle:- 20];
     
     id move = [CCMoveBy actionWithDuration:0.05f position:CGPointMake(5, 0)];
     id movereverse = [move reverse];
@@ -292,6 +303,56 @@
     [self scheduleUpdate];
     
 }
+
+#pragma mark -
+#pragma mark === Update ===
+#pragma mark -
+
+-(void) update:(ccTime)delta
+{
+    
+    CCSprite* miaghi = (CCSprite*)[self getChildByTag:13];
+    
+    if ([miaghi numberOfRunningActions] == 0) {
+        
+        [self unscheduleAllSelectors];
+        
+        CCFiniteTimeAction* scaleUp = [CCScaleTo actionWithDuration:0.1f scale:1.5];
+        CCFiniteTimeAction* scaleDown = [CCScaleTo actionWithDuration:0.1f scale:1];
+        
+        ccTime d1 = [scaleUp duration];
+        ccTime d2 = [scaleDown duration];
+        
+        CCFiniteTimeAction* delay = [CCDelayTime actionWithDuration:(d1 + d2)];
+        
+        id seq = [CCSequence actionOne:scaleUp two:scaleDown];
+        
+        play = [CCSprite spriteWithFile:@"play.png"];
+        [self addChild:play z:1];
+        [play setPosition:ccp(size.width/2 -10, size.height/2 -40)];
+        [play setScale:0.01f];
+        [play runAction:seq];
+        
+        
+        highScores = [CCSprite spriteWithFile:@"highscore.png"];
+        [self addChild:highScores z:1];
+        [highScores setScale:0.01f];
+        [highScores runAction:[CCSequence actionOne:delay two:[seq copy]]];
+        highScores.position = ccp(size.width - 100 ,40);
+        
+        [delay setDuration:2*[delay duration]];
+        
+        credits = [CCSprite spriteWithFile:@"credits.png"];
+        [self addChild:credits z:1];
+        [credits setScale:0.01f];
+        [credits runAction:[CCSequence actionOne:delay two:[seq copy]]];
+        credits.position = ccp(80,40);
+        
+        self.isTouchEnabled = TRUE;
+        
+    }
+}
+
 
 
 
@@ -447,55 +508,6 @@
     
 }
 
-#pragma mark -
-#pragma mark === Update ===
-#pragma mark -
-
--(void) update:(ccTime)delta
-{
-    
-    CCSprite* miaghi = (CCSprite*)[self getChildByTag:13];
-    
-    if ([miaghi numberOfRunningActions] == 0) {
-        
-        [self unscheduleAllSelectors];
-         
-        CCFiniteTimeAction* scaleUp = [CCScaleTo actionWithDuration:0.1f scale:1.5];
-        CCFiniteTimeAction* scaleDown = [CCScaleTo actionWithDuration:0.1f scale:1];
-        
-        ccTime d1 = [scaleUp duration];
-        ccTime d2 = [scaleDown duration];
-        
-        CCFiniteTimeAction* delay = [CCDelayTime actionWithDuration:(d1 + d2)];
-        
-        id seq = [CCSequence actionOne:scaleUp two:scaleDown];
-
-        play = [CCSprite spriteWithFile:@"play.png"];
-        [self addChild:play z:1];
-        [play setPosition:ccp(size.width/2 -10, size.height/2 -40)];
-        [play setScale:0.01f];
-        [play runAction:seq];
-
-        
-        highScores = [CCSprite spriteWithFile:@"highscore.png"];
-        [self addChild:highScores z:1];
-        [highScores setScale:0.01f];
-        [highScores runAction:[CCSequence actionOne:delay two:[seq copy]]];
-        highScores.position = ccp(size.width - 100 ,40);
-
-        [delay setDuration:2*[delay duration]];
-        
-        credits = [CCSprite spriteWithFile:@"credits.png"];
-        [self addChild:credits z:1];
-        [credits setScale:0.01f];
-        [credits runAction:[CCSequence actionOne:delay two:[seq copy]]];
-        credits.position = ccp(80,40);
-        
-        self.isTouchEnabled = TRUE;
-        
-    }
-}
-
 
 #pragma mark -
 #pragma mark ===  Game Center  ===
@@ -564,6 +576,7 @@ viewController
 - (void)productPurchased:(NSNotification *)notification {
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
+    
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
     
     

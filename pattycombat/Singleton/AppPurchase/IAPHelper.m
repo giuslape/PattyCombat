@@ -26,7 +26,7 @@
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
     
-    NSLog(@"Received products results...");   
+    NSLog(@"Received products results...%d",[response.products count]);   
     self.products = response.products;
     self.request = nil; 
     

@@ -16,10 +16,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// GetCoins
 #define kGetCoinsBackgroundTagValue 10
 #define kGetCoinsBackgroundZValue 0
 
-#define kPurchaseMenuTagValue 10
+#define kPurchaseMenuTagValue 11
 #define kPurchaseMenuZValue 2
 #define kFacebookItemTagValue 4
 #define kFacebookItemZValue 2
@@ -33,6 +34,9 @@
 #define kLabelCoinsReachedTagValue 15
 #define kLabelCoinsReachedZValue 2
 
+// Main
+#define kPlayerMiaghiTagValue 12
+#define kPlayerMiaghiZValue 2
 
 
 
