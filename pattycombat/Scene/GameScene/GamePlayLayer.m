@@ -103,7 +103,7 @@
     
     self.isTouchEnabled = FALSE;
     
-    CCLabelBMFont* finishLabel = [CCLabelBMFont labelWithString:@"Finish" fntFile:FONTLETTERS];
+    CCLabelBMFont* finishLabel = [CCLabelBMFont labelWithString:@"Finish" fntFile:FONTHIGHSCORES];
     
     [self addChild:finishLabel z:100];
     
@@ -155,7 +155,7 @@
                 
         CGSize winSize = [[CCDirectorIOS sharedDirector]winSize];
                                                               
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Ready" fntFile:FONTLETTERS];
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Ready" fntFile:FONTHIGHSCORES];
         [self addChild:label z:10 tag:300];
         [label setPosition:ccp(winSize.width/2, winSize.height/2)];
         

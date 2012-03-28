@@ -209,12 +209,6 @@
 
 -(void)sendAchievements{
     
-    CCLabelBMFont *achievementLabel = [CCLabelBMFont labelWithString:@"" fntFile:FONTLETTERS];;
-    
-    [achievementLabel setPosition:
-     ccp(screenSize.width/2, screenSize.height * 0.7f)];
-    [self addChild:achievementLabel];
-    
     if (currentLevel == 1 && playerIsDied) {
         
         CCLOG(@"Finished level 1");
@@ -226,7 +220,6 @@
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel1
                                          percentComplete:100.0];
             
-            achievementLabel.string = @"Achievement Unlocked: Level 1 Completed!";
         }
     }
     
@@ -267,7 +260,7 @@
             
             timeBonus = lrint(roundf((GAMETIME - elapsedTime) * 20));
             
-            labelTimeBonus = [CCLabelBMFont labelWithString:@"0" fntFile:FONTNUMBERS];
+            labelTimeBonus = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
             
             [labelTimeBonus setAnchorPoint:ccp(0, 0)];
             
@@ -277,7 +270,7 @@
             
         }
         
-        labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTNUMBERS];
+        labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
         
         [labelScore setAnchorPoint:ccp(0, 0)];
         
@@ -285,7 +278,7 @@
         
         [self addChild:labelScore z:1];
         
-        labelTotalScore = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", totalGameScore] fntFile:FONTNUMBERS];
+        labelTotalScore = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", totalGameScore] fntFile:FONTFEEDBACK];
         
         [labelTotalScore setAnchorPoint:ccp(0, 0)];
         

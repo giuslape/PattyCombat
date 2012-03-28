@@ -103,7 +103,7 @@
                       atLocation:ccp(410, 295)
                       withZValue:kLabelScoreZValue];
         
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Ready" fntFile:FONTLETTERS];
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Ready" fntFile:FONTHIGHSCORES];
         [self addChild:label z:2 tag:kLabelCountDown];
         [label setPosition:ccp(size.width/2, size.height/2)];
         
@@ -277,7 +277,7 @@
     
     if (objectType == kObjectTypeScoreLabel) {
         
-        CCLabelBMFont* labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTNUMBERS];
+        CCLabelBMFont* labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTHIGHSCORES];
         
         [self addChild:labelScore z:ZValue tag:kLabelScoreTagValue];
         
@@ -307,7 +307,7 @@
         
         [self unscheduleUpdate];
         
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Finish" fntFile:FONTLETTERS];
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Finish" fntFile:FONTHIGHSCORES];
         
         [self addChild:label z:2];
         
@@ -326,13 +326,13 @@
         
         [self removeChildByTag:kLabelScoreTagValue cleanup:YES];
         
-        CCLabelBMFont* labelFinal = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",score] fntFile:FONTNUMBERS];
+        CCLabelBMFont* labelFinal = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",score] fntFile:FONTHIGHSCORES];
         
         [self addChild:labelFinal z:2 tag:102];
         
         [labelFinal setPosition:ccp(240, 220)];
         
-        CCLabelBMFont * totalScoreLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",totalScore] fntFile:FONTNUMBERS];
+        CCLabelBMFont * totalScoreLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",totalScore] fntFile:FONTHIGHSCORES];
         
         [self addChild:totalScoreLabel z:2 tag:101];
         

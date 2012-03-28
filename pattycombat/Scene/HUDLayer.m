@@ -149,14 +149,14 @@
         
         [bar setDelegate:self];
         
-        CCLabelBMFont* namePlayerLabel = [CCLabelBMFont labelWithString:namePlayer fntFile:FONTLETTERS];
+        CCLabelBMFont* namePlayerLabel = [CCLabelBMFont labelWithString:namePlayer fntFile:FONTHIGHSCORES];
         [namePlayerLabel setPosition:ccp(240, 290)];
         [namePlayerLabel setScale:0.5];
         [self addChild:namePlayerLabel z:3];
     }
     if (kObjectTypeScoreLabel == objectType){
         
-        _scoreLabel = [CCLabelBMFont labelWithString:@"0" fntFile:FONTNUMBERS];
+        _scoreLabel = [CCLabelBMFont labelWithString:@"0" fntFile:FONTHIGHSCORES];
         
         [self addChild:_scoreLabel z:ZValue tag:kLabelScoreTagValue];
         [_scoreLabel setAnchorPoint:ccp(1, 0)];

@@ -76,7 +76,7 @@
     
     //Label Coins Purchased
     
-    CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins" fntFile:FONTLETTERS];
+    CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins" fntFile:FONTHIGHSCORES];
     [labelCoinsPurchased setPosition:ccp(size.width * 0.8, size.height * 0.4)];
     [getCoinsBackground addChild:labelCoinsPurchased];
     
@@ -86,7 +86,7 @@
     
     CCLabelBMFont* labelQuantity =
     [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",quantity]
-                           fntFile:FONTNUMBERS];
+                           fntFile:FONTHIGHSCORES];
     
     [getCoinsBackground addChild:labelQuantity z:kLabelCoinsReachedZValue tag:kLabelCoinsReachedTagValue];
     [labelQuantity setPosition:ccp(size.width * 0.8, size.height * 0.3)];
@@ -181,7 +181,7 @@
     
     int highScore = [[GameManager sharedGameManager] bestScore];
 
-    CCLabelBMFont* highScoreLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", highScore] fntFile:FONTNUMBERS];
+    CCLabelBMFont* highScoreLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", highScore] fntFile:FONTHIGHSCORES];
     [highScoreLabel setAnchorPoint:ccp(0.5,0.5)];
     [highScoreLabel setPosition:ccp(125, 155)];
     [highScoreLabel setScale:1.5];
@@ -192,12 +192,12 @@
     [reset setPosition:ccp(435,15)];
     [highscoresBackground addChild:reset z:1 tag:kResetTagValue];
     
-    CCLabelBMFont* nextNameLabel = [CCLabelBMFont labelWithString:@"Achievements" fntFile:FONTLETTERS];
+    CCLabelBMFont* nextNameLabel = [CCLabelBMFont labelWithString:@"Achievements" fntFile:FONTHIGHSCORES];
     [nextNameLabel setScale:0.5];
 
     CCMenuItemAtlasFont* menuAchievement = [CCMenuItemAtlasFont itemWithLabel:nextNameLabel target:self selector:@selector(showAchievements)];
     
-    CCLabelBMFont* leaderboard = [CCLabelBMFont labelWithString:@"Leaderboard" fntFile:FONTLETTERS];
+    CCLabelBMFont* leaderboard = [CCLabelBMFont labelWithString:@"Leaderboard" fntFile:FONTHIGHSCORES];
     [nextNameLabel setScale:0.5];
     
     CCMenuItemAtlasFont* menuLeaderboard = [CCMenuItemAtlasFont itemWithLabel:leaderboard target:self selector:@selector(showLeaderboard)];
