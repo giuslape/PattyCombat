@@ -221,6 +221,9 @@
        /* [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstPost"];
         [[NSUserDefaults standardUserDefaults] synchronize];*/
         
+        
+        // Add Sprite at cache 
+        
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"MenuAtlas.plist"];
         
         _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"MenuAtlas.png"];
@@ -237,9 +240,13 @@
         
         size = [[CCDirector sharedDirector] winSize];
         
+        // Main Menu
+        
         CCSprite* background1 = [CCSprite spriteWithFile:@"menu_02.png"];
         [self addChild:background1 z:0 tag:kMenuSpriteTag];
         [background1 setPosition:ccp(size.width/2, size.height/2)];
+        
+        // Actor Myagi
         
         CCSprite* myagi = [CCSprite spriteWithFile:@"myagi.png"];
         
@@ -249,9 +256,15 @@
         
         [self addChild:myagi z:0 tag:13];
         
+        // Build Menu GetCoins
+        
         [self buildGetCoins];
         
+        // Build Menu Stats
+        
         [self buildStats];
+        
+        // Add Observer for Purchase Notification
                 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:kProductPurchasedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(productPurchaseFailed:) name:kProductPurchaseFailedNotification object: nil];
