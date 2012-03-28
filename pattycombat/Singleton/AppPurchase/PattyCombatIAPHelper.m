@@ -26,7 +26,7 @@ static PattyCombatIAPHelper * _sharedHelper;
 
 - (id)init
 {
-    NSSet *productIdentifiers = [NSSet setWithObjects:kProductTest4, nil];
+    NSSet *productIdentifiers = [NSSet setWithObjects:kProductPurchase25coins,kProductPurchse75coins,kProductPurchase200coins, nil];
     
     if ((self = [super initWithProductIdentifiers:productIdentifiers])) {}
     return self;
@@ -48,7 +48,10 @@ static PattyCombatIAPHelper * _sharedHelper;
     
     value = [self quantity];
     
-    if ([productIdentifier isEqualToString:kProductPurchase5coins])constant = 5;
+    if ([productIdentifier isEqualToString:kProductPurchaseFacebookCoins]) constant = 3;
+        else if ([productIdentifier isEqualToString:kProductPurchase25coins])constant = 25;
+            else if([productIdentifier isEqualToString:kProductPurchse75coins]) constant = 75;
+                    else if ([productIdentifier isEqualToString:kProductPurchase200coins])constant = 200;
     
     quantity = constant + value;
     

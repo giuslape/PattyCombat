@@ -74,6 +74,11 @@
     [self addChild:getCoinsBackground z:kGetCoinsBackgroundZValue tag:kGetCoinsBackgroundTagValue];
     [getCoinsBackground setPosition:ccp(-size.width/2, size.height/2)];
     
+    //Label Coins Purchased
+    
+    CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins" fntFile:FONTLETTERS];
+    [labelCoinsPurchased setPosition:ccp(size.width * 0.8, size.height * 0.4)];
+    [getCoinsBackground addChild:labelCoinsPurchased];
     
     //Number of product purchased
     
@@ -113,6 +118,7 @@
                                         selector:@selector(buyButtonTapped:)];
     
     firstPurchaseButton.tag = kFirstPurchaseItemTagValue;
+    firstPurchase.opacity = 100;
 
     // Store Button 75 coins
     
@@ -126,6 +132,7 @@
                                                 selector:@selector(buyButtonTapped:)];
     
     secondPurchaseButton.tag = kSecondPurchaseItemTagValue;
+    secondPurchase.opacity = 100;
     
     // Store Button 200 coins
     
@@ -139,6 +146,7 @@
                                                  selector:@selector(buyButtonTapped:)];
     
     thirdPurchaseButton.tag = kThirdPurchaseItemTagValue;
+    thirdPurchase.opacity = 100;
     
     // Add Purchase Menu
     
@@ -146,9 +154,11 @@
 
     [getCoinsBackground addChild:_purchaseMenu];
     
-    _purchaseMenu.position = ccp(size.width * 0.25, size.height * 0.4);
+    _purchaseMenu.position = ccp(size.width * 0.23, size.height * 0.4);
     
     [_purchaseMenu alignItemsVerticallyWithPadding:3];
+    
+    _purchaseMenu.isTouchEnabled = NO;
     
 }
 
@@ -330,10 +340,14 @@
 {
     CCLOG(@"Sono in Credits Touched");
     
+    // Movement animation to Get Coins Area
+    
     CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(size.width , 0)];
 	CCEaseExponentialOut* ease = [CCEaseExponentialOut actionWithAction:move];
     CCCallBlock* blockLoadingPurchase = [CCCallBlock actionWithBlock:(^{
     
+        // Check if internet connection is available 
+        
         Reachability *reach = [Reachability reachabilityForInternetConnection];	
         NetworkStatus netStatus = [reach currentReachabilityStatus];    
         if (netStatus == NotReachable) { 
@@ -357,27 +371,10 @@
                 [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
             }
             else {
+                    for (CCMenuItemSprite* item in _purchaseMenu.children) item.opacity = 255;
                 
-                NSInteger index = 0;
-                
-                for (SKProduct* product in [PattyCombatIAPHelper sharedHelper].products) {
-                    
-                    CCMenuItemLabel* item = (CCMenuItemLabel *)[_purchaseMenu getChildByTag:index];
-                    
-                    if(!item) {
-                        
-                        item = [CCMenuItemLabel itemWithLabel:nil target:self selector:@selector(buyButtonTapped:)];
-                        [_purchaseMenu addChild:item z:1 tag:index];
-                        [_purchaseMenu alignItemsVertically];
-                        
-                    }
-                    CCLabelBMFont* itemLabel = [CCLabelBMFont labelWithString:product.localizedTitle fntFile:FONTLETTERS];
-                    [item setLabel:itemLabel];
-                    [itemLabel setScale:0.5];
-                                        
-                    index++;
+                    _purchaseMenu.isTouchEnabled = TRUE; 
                 }
-            }
         }
 
     
@@ -532,8 +529,8 @@ viewController
     
     NSString *productIdentifier = (NSString *) notification.object;
     NSInteger quantity = [[PattyCombatIAPHelper sharedHelper] updateQuantityForProduct:productIdentifier];
-    CCSprite* back = (CCSprite *)[self getChildByTag:kGetCoinsBackgroundTagValue];
-    CCLabelBMFont* label = (CCLabelBMFont *)[back getChildByTag:10];
+    CCSprite* getcoinsBackGround = (CCSprite *)[self getChildByTag:kGetCoinsBackgroundTagValue];
+    CCLabelBMFont* label = (CCLabelBMFont *)[getcoinsBackGround getChildByTag:kLabelCoinsReachedTagValue];
     
     [label setString:[NSString stringWithFormat:@"%d", quantity]];
     NSLog(@"Purchased: %@", productIdentifier);
@@ -566,28 +563,17 @@ viewController
     
 }
 
+//Callback when products are loaded
+
 - (void)productsLoaded:(NSNotification *)notification {
-    
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    
-    
-    NSUInteger index = 0;
-    
-    NSArray* products = [notification object];
-   
-    NSParameterAssert([products isKindOfClass:[NSArray class]]);
+    _purchaseMenu.isTouchEnabled = YES;
+
+    for (CCMenuItemSprite* item in _purchaseMenu.children) {
         
-    for (SKProduct* product in products) {
-        
-        CCLabelBMFont* itemLabel = [CCLabelBMFont labelWithString:product.localizedTitle fntFile:FONTLETTERS];
-        [itemLabel setScale:0.5];
-        
-        CCMenuItemAtlasFont* item = [CCMenuItemAtlasFont itemWithLabel:itemLabel target:self selector:@selector(buyButtonTapped:)];
-        [_purchaseMenu addChild:item z:10 tag:index];
-        [_purchaseMenu alignItemsVertically];
-        index++;
+        item.opacity = 255;
     }
 }
 
@@ -603,7 +589,11 @@ viewController
 
 - (void)buyButtonTapped:(id)sender {
     
-    CCMenuItem *buyButton = (CCMenuItem *)sender;    
+    CCMenuItem *buyButton = (CCMenuItem *)sender;
+    
+    if (buyButton.tag < [[PattyCombatIAPHelper sharedHelper].products count]) {
+        
+    
     SKProduct *product = [[PattyCombatIAPHelper sharedHelper].products objectAtIndex:buyButton.tag];
     
     NSLog(@"Buying %@...", product.productIdentifier);
@@ -611,7 +601,9 @@ viewController
     
     self.hud = [MBProgressHUD showHUDAddedTo:[CCDirectorIOS sharedDirector].view animated:YES];
     _hud.labelText = @"Buying Coins...";
-    [self performSelector:@selector(timeout:) withObject:nil afterDelay:60*5];
+        [self performSelector:@selector(timeout:) withObject:nil afterDelay:60*5];
+    
+    }
     
 }
 

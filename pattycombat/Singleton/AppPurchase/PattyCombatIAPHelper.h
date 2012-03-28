@@ -10,9 +10,10 @@
 #import "IAPHelper.h"
 
 #define kQuantityProductPurchased @"quantity"
-#define kProductPurchase5coins @"com.tadaa.pattycombat.fivecoins"
-#define kProductTest @"com.tadaa.pattycombat.test3"
-#define kProductTest4 @"com.tadaa.pattycombat.test4"
+#define kProductPurchaseFacebookCoins @"facebook"
+#define kProductPurchase25coins @"com.tadaa.pattycombat.purchase.25coins"
+#define kProductPurchse75coins @"com.tadaa.pattycombat.purchase.75coins"
+#define kProductPurchase200coins @"com.tadaa.pattycombat.purchase.200coins"
 
 
 @interface PattyCombatIAPHelper : IAPHelper
