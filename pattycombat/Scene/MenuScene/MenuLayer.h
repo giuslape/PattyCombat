@@ -13,7 +13,7 @@
 #import "FBConnect.h"
 
 
-@interface MenuLayer :CCLayer  <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate, FBSessionDelegate, FBDialogDelegate>{
+@interface MenuLayer :CCLayer  <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate, FBSessionDelegate, FBDialogDelegate, UIAlertViewDelegate>{
     
     MBProgressHUD* _hud;
     CCMenu* _purchaseMenu;

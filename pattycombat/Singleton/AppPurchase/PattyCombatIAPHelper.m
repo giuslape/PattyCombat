@@ -40,7 +40,7 @@ static PattyCombatIAPHelper * _sharedHelper;
 }
 
 
--(NSInteger)updateQuantityForProduct:(NSString *)productIdentifier{
+-(NSInteger)updateQuantityForProductIdentifier:(NSString *)productIdentifier{
     
     NSInteger quantity = 0;
     NSInteger constant = 0;

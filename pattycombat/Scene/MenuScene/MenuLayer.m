@@ -92,18 +92,29 @@
     [labelQuantity setPosition:ccp(size.width * 0.8, size.height * 0.3)];
     
     
-    //  Store Button for post to Facebook
+    //  Store Button for post to Social Network
     
     CCSprite* facebook = [CCSprite spriteWithSpriteFrameName:@"store1_btn.png"];
     CCSprite* facebookSelected = [CCSprite spriteWithSpriteFrameName:@"store1_btn_over.png"];
     
     
     CCMenuItemSprite* facebookButton = 
-    [CCMenuItemSprite  itemWithNormalSprite:facebook
-                                     selectedSprite:facebookSelected 
-                                        target:self 
-                                            selector:@selector(loginToFacebook:)]; 
-    
+    [CCMenuItemSprite  itemWithNormalSprite:facebook selectedSprite:facebookSelected block:^(id sender) {
+        
+        // Alert View for choise Social Network where post.
+        
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Social Network" 
+                                                            message:@""
+                                                           delegate:self 
+                                                  cancelButtonTitle:@"Cancel" 
+                                                  otherButtonTitles:@"Facebook",@"Twitter", nil];
+        
+        
+        [alertView show];
+        //[self postToFacebook:self];
+        
+    }];
+                                            
     facebookButton.tag = kFacebookItemTagValue;
     
     // Store Button 25 coins
@@ -204,6 +215,11 @@
 	if ((self = [super init]))
         
 	{
+        
+        // Reset First Post (for Test)
+        
+       /* [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstPost"];
+        [[NSUserDefaults standardUserDefaults] synchronize];*/
         
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"MenuAtlas.plist"];
         
@@ -519,6 +535,17 @@ viewController
 #pragma mark ===  App Purchase  ===
 #pragma mark -
 
+
+-(void)updateLabelCoinsForProductIdentifier:(NSString *)productIdentifier{
+    
+    NSInteger quantity = [[PattyCombatIAPHelper sharedHelper] updateQuantityForProductIdentifier:productIdentifier];
+    CCSprite* getcoinsBackGround = (CCSprite *)[self getChildByTag:kGetCoinsBackgroundTagValue];
+    CCLabelBMFont* label = (CCLabelBMFont *)[getcoinsBackGround getChildByTag:kLabelCoinsReachedTagValue];
+    
+    [label setString:[NSString stringWithFormat:@"%d", quantity]];
+    
+}
+
 // Notification CallBack when product is purchased
 
 - (void)productPurchased:(NSNotification *)notification {
@@ -528,15 +555,14 @@ viewController
     
     
     NSString *productIdentifier = (NSString *) notification.object;
-    NSInteger quantity = [[PattyCombatIAPHelper sharedHelper] updateQuantityForProduct:productIdentifier];
-    CCSprite* getcoinsBackGround = (CCSprite *)[self getChildByTag:kGetCoinsBackgroundTagValue];
-    CCLabelBMFont* label = (CCLabelBMFont *)[getcoinsBackGround getChildByTag:kLabelCoinsReachedTagValue];
-    
-    [label setString:[NSString stringWithFormat:@"%d", quantity]];
+    [self updateLabelCoinsForProductIdentifier:productIdentifier];
+   
     NSLog(@"Purchased: %@", productIdentifier);
     
             
 }
+
+// Notification Callback when purchase is failed
 
 - (void)productPurchaseFailed:(NSNotification *)notification {
     
@@ -608,6 +634,48 @@ viewController
 }
 
 #pragma mark -
+#pragma mark ===  Check if is First Post  ===
+#pragma mark -
+
+-(void)updateSocialCoins{
+
+    BOOL isFirstPost = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPost"]; 
+    
+    if (!isFirstPost) {
+        [self updateLabelCoinsForProductIdentifier:kProductPurchaseFacebookCoins];
+        isFirstPost = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:isFirstPost forKey:@"FirstPost"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+
+}
+
+
+
+#pragma mark -
+#pragma mark ===  Alert View Social Delegate   ===
+#pragma mark -
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
+    
+    switch (buttonIndex) {
+        case 0:
+            break;
+        case 1:
+            [self loginToFacebook:self];
+            break;
+        case 2:
+            [self postOnTwitter:self];
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark -
 #pragma mark ===  Facebook Delegate  ===
 #pragma mark -
 
@@ -617,10 +685,11 @@ viewController
     [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];
     [defaults setObject:expiresAt forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
+    
 }
 
 
-
+//Callback login on Facebook
 
 - (void)fbDidLogin {
     
@@ -638,17 +707,16 @@ viewController
 }
 
 
- //* Called when the user canceled the authorization dialog.
+ // Called when the user canceled the authorization dialog.
  
 -(void)fbDidNotLogin:(BOOL)cancelled {
-    
     
     NSLog(@"%@", NSStringFromSelector(_cmd));
 
 }
 
 
- //* Called when the request logout has succeeded.
+ // Called when the request logout has succeeded.
  
 - (void)fbDidLogout {
     
@@ -676,6 +744,8 @@ viewController
     [self fbDidLogout];
 }
 
+
+// Call when button is pressed 
 
 -(void)loginToFacebook:(id)sender{
     
@@ -720,9 +790,39 @@ viewController
     [[delegate facebook] dialog:@"feed"
                       andParams:params
                     andDelegate:self];
-
-    
 }
+
+
+#pragma mark -
+#pragma mark ===  Facebook Dialog Delegate  ===
+#pragma mark -
+
+// Called when dialog is finish
+
+- (void)dialogCompleteWithUrl:(NSURL *)url {
+   
+    if (![url query]) {
+        NSLog(@"User canceled dialog or there was an error");
+        return;
+    }
+    
+    
+    [self updateSocialCoins];
+
+    NSLog(@"Dialog Complete");
+}
+
+- (void)dialogDidNotComplete:(FBDialog *)dialog {
+    
+    NSLog(@"Dialog dismissed.");
+}
+
+- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error {
+    NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
+    //[self showMessage:@"Oops, something went haywire."];
+}
+
+
 
 #pragma mark -
 #pragma mark ===  Twitter  ===
@@ -735,6 +835,19 @@ viewController
     {
         TWTweetComposeViewController *tweetSheet =
         [[TWTweetComposeViewController alloc] init];
+        tweetSheet.completionHandler = ^(TWTweetComposeViewControllerResult
+                                         result){
+            if (result == TWTweetComposeViewControllerResultCancelled)
+            {
+                NSLog(@"Cancelled the Tweet");
+            }
+            else
+            {
+                [self updateSocialCoins];
+            }
+            [[CCDirectorIOS sharedDirector] dismissModalViewControllerAnimated:YES];
+
+        };
         [tweetSheet setInitialText:
          @"Tweeting from Patty Combat! :)"];
         [[CCDirectorIOS sharedDirector] presentModalViewController:tweetSheet animated:YES];
