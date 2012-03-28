@@ -577,6 +577,7 @@ viewController
     }
 }
 
+
 - (void)timeout:(id)arg {
     
     _hud.labelText = @"Timeout!";
@@ -593,7 +594,6 @@ viewController
     
     if (buyButton.tag < [[PattyCombatIAPHelper sharedHelper].products count]) {
         
-    
     SKProduct *product = [[PattyCombatIAPHelper sharedHelper].products objectAtIndex:buyButton.tag];
     
     NSLog(@"Buying %@...", product.productIdentifier);
@@ -612,6 +612,7 @@ viewController
 #pragma mark -
 
 - (void)storeAuthData:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];
     [defaults setObject:expiresAt forKey:@"FBExpirationDateKey"];
@@ -625,13 +626,13 @@ viewController
     
     AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
 
-        
     [self storeAuthData:[[delegate facebook] accessToken] expiresAt:[[delegate facebook] expirationDate]];
     
     [self postToFacebook:nil];
     
 }
 -(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
+    
     NSLog(@"token extended");
     [self storeAuthData:accessToken expiresAt:expiresAt];
 }
@@ -642,7 +643,8 @@ viewController
 -(void)fbDidNotLogin:(BOOL)cancelled {
     
     
-    
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+
 }
 
 
@@ -674,9 +676,10 @@ viewController
     [self fbDidLogout];
 }
 
+
 -(void)loginToFacebook:(id)sender{
     
-    _permissions = [[NSArray alloc] initWithObjects:@"offline_access",@"publish_stream", nil];
+    _permissions = [[NSArray alloc] initWithObjects:@"offline_access", nil];
     
     AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
 
