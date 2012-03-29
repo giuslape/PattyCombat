@@ -17,10 +17,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // GetCoins
+
 #define kGetCoinsBackgroundTagValue 10
 #define kGetCoinsBackgroundZValue 0
 
-#define kPurchaseMenuTagValue 11
+#define kPurchaseMenuTagValue 20
 #define kPurchaseMenuZValue 2
 #define kFacebookItemTagValue 4
 #define kFacebookItemZValue 2
@@ -31,14 +32,25 @@
 #define kThirdPurchaseItemTagValue 0
 #define kThirdPurchaseItemZValue 2
 #define kSpriteBatchNodeMenuZValue 2
-#define kLabelCoinsReachedTagValue 15
+#define kLabelCoinsReachedTagValue 21
 #define kLabelCoinsReachedZValue 2
 
-// Main
+// Main Menu
+
+#define kMainMenuBackgroundTagValue 11
+#define kMainMenuBackgroundZValue 1
+#define kCreditsBackgroundTagValue 17
+#define kCreditsBackgroundZValue 3
 #define kPlayerMiaghiTagValue 12
-#define kPlayerMiaghiZValue 2
-
-
+#define kPlayerMiaghiZValue 1
+#define kItemPlayNodeTagValue 13
+#define kItemPlayNodeZValue 2
+#define kItemGetCoinsTagValue 14
+#define kItemGetCoinsZValue 2
+#define kItemStatsTagValue 15
+#define kItemStatsZValue 2
+#define kItemCreditsTagValue 16
+#define kItemCreditsZValue 2
 
 
 

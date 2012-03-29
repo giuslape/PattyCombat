@@ -20,9 +20,6 @@
 @interface MenuLayer ()
 
 @property CGSize size;
-@property (nonatomic, strong)CCSprite* play;
-@property (nonatomic, strong)CCSprite* highScores;
-@property (nonatomic, strong)CCSprite* credits;
 
 -(void) goBack;
 -(void)playGame;
@@ -36,7 +33,6 @@
 @implementation MenuLayer
 
 @synthesize size;
-@synthesize play,highScores,credits;
 @synthesize hud = _hud;
 
 #pragma mark -
@@ -62,7 +58,7 @@
 }
 
 #pragma mark -
-#pragma mark === Init ===
+#pragma mark === Init Methods ===
 #pragma mark -
 
 
@@ -111,7 +107,6 @@
         
         
         [alertView show];
-        //[self postToFacebook:self];
         
     }];
                                             
@@ -208,6 +203,106 @@
     
 }
 
+-(void)buildMainMenu{
+    
+    float xPosition = size.width * 0.7;
+    
+    // Main Menu Background
+    
+    CCSprite* mainMenuBackground = [CCSprite spriteWithFile:@"menu_02.png"];
+    [self addChild:mainMenuBackground z:kMainMenuBackgroundZValue tag:kMainMenuBackgroundTagValue];
+    [mainMenuBackground setPosition:ccp(size.width/2, size.height/2)];
+    
+    // Actor Myagi
+    
+    CCSprite* myagi = [CCSprite spriteWithFile:@"myagi.png"];
+    
+    myagi.anchorPoint = ccp(0, 0);
+    
+    myagi.position = ccp(size.width * 0.2, - myagi.contentSize.height * 0.14);
+    
+    [mainMenuBackground addChild:myagi z:kPlayerMiaghiZValue tag:kPlayerMiaghiTagValue];
+    
+    //Play button
+    
+    CCSprite* play = [CCSprite spriteWithSpriteFrameName:@"play_btn.png"];
+    play.anchorPoint = ccp(0.5f,0);
+    CCSprite* playSelected = [CCSprite spriteWithSpriteFrameName:@"play_btn_over.png"];
+    playSelected.anchorPoint = ccp(0.5f,0);
+    CCNode* nodePlay = [CCNode node];
+    nodePlay.contentSize = play.contentSize;
+    [nodePlay addChild:play];
+    [nodePlay addChild:playSelected];
+    [mainMenuBackground addChild:nodePlay z:kItemPlayNodeZValue tag:kItemPlayNodeTagValue];
+    nodePlay.position = ccp(xPosition ,size.height);
+    
+    CCMenuItemSpriteIndependent* playButton = [CCMenuItemSpriteIndependent 
+                                               itemWithNormalSprite:play
+                                                    selectedSprite:playSelected 
+                                                        target:self 
+                                                            selector:@selector(playGame)];
+    // Get Coins Button
+    
+    CCSprite* getCoins = [CCSprite spriteWithSpriteFrameName:@"getcoins_btn.png"];
+    getCoins.anchorPoint = ccp(0.5f,0);
+    CCSprite* getCoinsSelected = [CCSprite spriteWithSpriteFrameName:@"getcoins_btn_over.png"];
+    getCoinsSelected.anchorPoint = ccp(0.5f,0);
+    CCNode* nodeGetCoins = [CCNode node];
+    [nodeGetCoins addChild:getCoins];
+    [nodeGetCoins addChild:getCoinsSelected];
+    [mainMenuBackground addChild:nodeGetCoins z:kItemGetCoinsZValue tag:kItemGetCoinsTagValue];
+    nodeGetCoins.position = ccp(xPosition,size.height);
+    
+    CCMenuItemSpriteIndependent* getCoinsButton = [CCMenuItemSpriteIndependent
+                                                    itemWithNormalSprite:getCoins 
+                                                        selectedSprite:getCoinsSelected
+                                                            target:self 
+                                                                selector:@selector(itemGetCoinsTouched)];
+    
+    // Stats Button
+    
+    CCSprite* stats = [CCSprite spriteWithSpriteFrameName:@"stats_btn.png"];
+    stats.anchorPoint = ccp(0.5f,0);
+    CCSprite* statsSelected = [CCSprite spriteWithSpriteFrameName:@"stats_btn_over.png"];
+    statsSelected.anchorPoint = ccp(0.5f,0);
+    CCNode* nodeStats = [CCNode node];
+    [nodeStats addChild:stats];
+    [nodeStats addChild:statsSelected];
+    [mainMenuBackground addChild:nodeStats z:kItemStatsZValue tag:kItemStatsTagValue];
+    nodeStats.position = ccp(xPosition ,size.height);
+    
+    CCMenuItemSpriteIndependent* statsButton = [CCMenuItemSpriteIndependent
+                                                   itemWithNormalSprite:stats 
+                                                   selectedSprite:statsSelected
+                                                   target:self 
+                                                   selector:@selector(itemStatsTouched)];
+    
+    // Credits Button
+    
+    CCSprite* credits = [CCSprite spriteWithSpriteFrameName:@"credits_btn.png"];
+    credits.anchorPoint = ccp(0.5f,0);
+    CCSprite* creditsSelected = [CCSprite spriteWithSpriteFrameName:@"credits_btn_over.png"];
+    creditsSelected.anchorPoint = ccp(0.5f,0);
+    CCNode* nodeCredits = [CCNode node];
+    [nodeCredits addChild:credits];
+    [nodeCredits addChild:creditsSelected];
+    [mainMenuBackground addChild:nodeCredits z:kItemCreditsZValue tag:kItemCreditsTagValue];
+    nodeCredits.position = ccp(xPosition ,size.height);
+    
+    CCMenuItemSpriteIndependent* creditsButton = [CCMenuItemSpriteIndependent
+                                                    itemWithNormalSprite:credits 
+                                                        selectedSprite:creditsSelected
+                                                            target:self 
+                                                                selector:@selector(itemCreditsTouched)];
+    
+    
+    // Main Menu 
+    CCMenu* mainMenu = [CCMenu menuWithItems:playButton,getCoinsButton,statsButton,creditsButton, nil];
+    
+    [mainMenuBackground addChild:mainMenu z:kMainMenuBackgroundZValue tag:kMainMenuBackgroundTagValue];
+    
+    mainMenu.isTouchEnabled = FALSE;
+}
 
 
 -(id) init
@@ -240,21 +335,9 @@
         
         size = [[CCDirector sharedDirector] winSize];
         
-        // Main Menu
+        //Build Main Menu
         
-        CCSprite* background1 = [CCSprite spriteWithFile:@"menu_02.png"];
-        [self addChild:background1 z:0 tag:kMenuSpriteTag];
-        [background1 setPosition:ccp(size.width/2, size.height/2)];
-        
-        // Actor Myagi
-        
-        CCSprite* myagi = [CCSprite spriteWithFile:@"myagi.png"];
-        
-        myagi.anchorPoint = ccp(0, 0);
-        
-        myagi.position = ccp(size.width * 0.2, - myagi.contentSize.height * 0.14);
-        
-        [self addChild:myagi z:kPlayerMiaghiZValue tag:kPlayerMiaghiTagValue];
+        [self buildMainMenu];
         
         // Build Menu GetCoins
         
@@ -289,11 +372,16 @@
 
 -(void)onEnterTransitionDidFinish{
     
+    //Play Theme music
+    
     [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
     
-    CCSprite* myagi = (CCSprite*)[self getChildByTag:kPlayerMiaghiTagValue];
+    // Action of Miaghi (Rotate + Move)
     
-    CCRotateTo* rotate = [CCRotateTo actionWithDuration:0.05f angle:- 20];
+    CCSprite* mainMenuBackground = (CCSprite *)[self getChildByTag:kMainMenuBackgroundTagValue];
+    CCSprite* myagi = (CCSprite*)[mainMenuBackground getChildByTag:kPlayerMiaghiTagValue];
+    
+    CCRotateTo* rotate = [CCRotateTo actionWithDuration:0.05f angle:-20];
     
     id move = [CCMoveBy actionWithDuration:0.05f position:CGPointMake(5, 0)];
     id movereverse = [move reverse];
@@ -311,43 +399,58 @@
 -(void) update:(ccTime)delta
 {
     
-    CCSprite* miaghi = (CCSprite*)[self getChildByTag:13];
+    CCSprite* mainMenuBackground = (CCSprite *)[self getChildByTag:kMainMenuBackgroundTagValue];
+    CCSprite* miaghi = (CCSprite*)[mainMenuBackground getChildByTag:kPlayerMiaghiTagValue];
     
     if ([miaghi numberOfRunningActions] == 0) {
-        
+                
         [self unscheduleAllSelectors];
         
-        CCFiniteTimeAction* scaleUp = [CCScaleTo actionWithDuration:0.1f scale:1.5];
-        CCFiniteTimeAction* scaleDown = [CCScaleTo actionWithDuration:0.1f scale:1];
+        CCNode* nodePlay =     [mainMenuBackground getChildByTag:kItemPlayNodeTagValue];
+        CCNode* nodeGetCoins = [mainMenuBackground getChildByTag:kItemGetCoinsTagValue];
+        CCNode* nodeStats =    [mainMenuBackground getChildByTag:kItemStatsTagValue];
+        CCNode* nodeCredits =  [mainMenuBackground getChildByTag:kItemCreditsTagValue];
+        CCMenu* mainMenu =     (CCMenu *)[mainMenuBackground getChildByTag:kMainMenuBackgroundTagValue];
         
-        ccTime d1 = [scaleUp duration];
-        ccTime d2 = [scaleDown duration];
+        // Move down the menu's buttons
         
-        CCFiniteTimeAction* delay = [CCDelayTime actionWithDuration:(d1 + d2)];
+        float xPosition = size.width * 0.7;
+        float yPosition = size.height * 0.125f;
+
+        CCMoveTo* moveDown = [CCMoveTo actionWithDuration:0.2f position:ccp(xPosition, yPosition)];
         
-        id seq = [CCSequence actionOne:scaleUp two:scaleDown];
+        ccTime d1 = [moveDown duration];
         
-        play = [CCSprite spriteWithFile:@"play.png"];
-        [self addChild:play z:1];
-        [play setPosition:ccp(size.width/2 -10, size.height/2 -40)];
-        [play setScale:0.01f];
-        [play runAction:seq];
+        float height = nodePlay.contentSize.height;
+        float padding = 0;
+
+        [nodeCredits runAction:[CCSequence actionOne:moveDown two:[CCCallBlock actionWithBlock:^{
+            
+            float heightStats = height;  
+            
+            CCMoveTo* moveStats = [CCMoveTo actionWithDuration:d1 position:ccp(xPosition, heightStats + padding + yPosition)];
+            
+                [nodeStats runAction:[CCSequence actionOne:moveStats two:[CCCallBlock actionWithBlock:^{
+                    
+                    float heightGetCoins = 2*height;
+                    
+                    CCMoveTo* moveGetCoins = [CCMoveTo actionWithDuration:d1 position:ccp(xPosition, heightGetCoins + padding + yPosition)];
+                    
+                    [nodeGetCoins runAction:[CCSequence actionOne:moveGetCoins two:[CCCallBlock actionWithBlock:^{
+                        
+                        float heightPlay = 3*height;
+                        
+                        CCMoveTo* movePlay = [CCMoveTo actionWithDuration:d1 position:ccp(xPosition, heightPlay + padding + yPosition)];
+                        
+                        [nodePlay runAction:movePlay];
+                         
+                    }]]];
+                    
+                }]]];
+            
+        }]]];
         
-        
-        highScores = [CCSprite spriteWithFile:@"highscore.png"];
-        [self addChild:highScores z:1];
-        [highScores setScale:0.01f];
-        [highScores runAction:[CCSequence actionOne:delay two:[seq copy]]];
-        highScores.position = ccp(size.width - 100 ,40);
-        
-        [delay setDuration:2*[delay duration]];
-        
-        credits = [CCSprite spriteWithFile:@"credits.png"];
-        [self addChild:credits z:1];
-        [credits setScale:0.01f];
-        [credits runAction:[CCSequence actionOne:delay two:[seq copy]]];
-        credits.position = ccp(80,40);
-        
+        mainMenu.isTouchEnabled = TRUE;
         self.isTouchEnabled = TRUE;
         
     }
@@ -376,35 +479,18 @@
     
     touchLocation = [self convertToNodeSpace:touchLocation];
     
-    CCSprite* mainMenuSprite = (CCSprite*)[self getChildByTag:kMenuSpriteTag];
-    CCSprite* background = (CCSprite *)[self getChildByTag:kHighScoresTag];
+    CCSprite* mainMenuBackground = (CCSprite *)[self getChildByTag:kMainMenuBackgroundTagValue];
     
-    CGRect boundingBox = CGRectMake(900, 0, 50, 50);
+   // CGRect boundingBox = CGRectMake(900, 0, 50, 50);
     
     CCLOG(@"Touch: %@",NSStringFromCGPoint(touchLocation));
-
     
-    if (CGRectContainsPoint([play boundingBox], touchLocation)) {
+    if (!CGRectContainsPoint([mainMenuBackground boundingBox], touchLocation)) {
         
-        [self playGame];
-                
-        return YES;
+        [self goBack];
+    }
         
-    }else if(CGRectContainsPoint([highScores boundingBox], touchLocation)){
-        
-        [self itemStatsTouched];
-        
-        CCLOG(@"Touch: %@",NSStringFromCGPoint(touchLocation));
-        
-        return YES;
-        
-    }else if(CGRectContainsPoint([credits boundingBox], touchLocation)){
-        
-        [self itemGetCoinsTouched];
-        
-        return YES;
-        
-    }else if(CGRectContainsPoint(boundingBox, touchLocation)){
+  /*  if(CGRectContainsPoint(boundingBox, touchLocation)){
         
         [[GameManager sharedGameManager] resetBestScore];
         
@@ -417,14 +503,17 @@
         return YES;
         
     }else if (!CGRectContainsPoint([mainMenuSprite boundingBox], touchLocation) ) {
+        
         [self goBack];
+        
         return YES;
-    }
+    }*/
     
     return YES;
     
 }
 
+// Called when GetCoins Button is touched
 
 - (void) itemGetCoinsTouched
 {
@@ -473,6 +562,8 @@
         
 }
 
+// Called when Stats Button is touched
+
 - (void) itemStatsTouched
 {
     CCLOG(@"Sono in High Scores Touched");
@@ -483,11 +574,28 @@
     
 }
 
+
+// Called when Credits Button is Touched
+
+-(void) itemCreditsTouched{
+    
+    // Add Credits Background (maybe will be a layer)
+    CCSprite* creditsBackground= [CCSprite spriteWithFile:@"credits_window.png"];
+    creditsBackground.opacity = 0;
+    [self addChild:creditsBackground z:kCreditsBackgroundZValue tag:kCreditsBackgroundTagValue];
+    [creditsBackground setPosition:ccp(size.width/2, size.height/2)];
+    
+    CCFadeIn* fade = [CCFadeIn actionWithDuration:1];
+    [creditsBackground runAction:fade];
+    
+}
+
+// Return to the Main Menu
+
 -(void) goBack
 {
     
     CCLOG(@"sono in GoBack");
-    
     CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointZero];
 	CCEaseExponentialOut* ease = [CCEaseExponentialOut actionWithAction:move];
 	[self runAction:ease];
@@ -559,6 +667,9 @@ viewController
 #pragma mark -
 #pragma mark ===  App Purchase  ===
 #pragma mark -
+
+
+// Called when purchase is done for update label coins 
 
 
 -(void)updateLabelCoinsForProductIdentifier:(NSString *)productIdentifier{
