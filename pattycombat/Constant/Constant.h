@@ -54,7 +54,12 @@
 #define kMainMenuTagValue 18
 #define kMainMenuZValue 2
 
+// Stats Menu
 
+#define kStatsBackgroundTagValue 20
+#define kStatsBackgroundZValue 2
+#define kHighScoreLabelTagValue 21
+#define kHighScoreLabelZValue 2
 
 
 
@@ -75,7 +80,6 @@
 #define kBellZValue 0
 #define kLabelScoreTagValue 22
 #define kResetTagValue 23
-#define kHighScoreLabelTagValue 24
 #define kNextLevelLabelTagValue 25
 #define kLabelScoreZValue 0
 #define kHandFeedRight 90
@@ -87,10 +91,6 @@
 #define kTapForProgress 20
 #define MaxZOrder 100
 #define MinZOrder 2
-
-
-#define kHighScoresTag 51
-#define kMenuSpriteTag 52
 
 typedef enum{
     kNoSceneUninitialized=0,

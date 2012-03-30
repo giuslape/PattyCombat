@@ -170,37 +170,95 @@
 
 -(void)buildStats{
     
+    // Add background Stats
+    
     CCSprite* highscoresBackground = [CCSprite spriteWithFile:@"menu_03.png"];
-    [self addChild:highscoresBackground z:1 tag:kHighScoresTag];
+    [self addChild:highscoresBackground z:kStatsBackgroundZValue tag:kStatsBackgroundTagValue];
     [highscoresBackground setPosition:ccp(1.5*size.width, size.height/2)];
     
+    // Position of Menu
+    
+    float xPosition = size.width * 0.2;
+    
+    // Label Highscore
+    
+    CCLabelBMFont* labelHighscores = [CCLabelBMFont labelWithString:@"Highscores" fntFile:FONTHIGHSCORES];
+    [labelHighscores setPosition:ccp(xPosition, size.height * 0.8)];
+    [labelHighscores setAnchorPoint:ccp(0.5f, 0)];
+    [highscoresBackground addChild:labelHighscores];
+    
+    // Label Highscore Value
+    
     int highScore = [[GameManager sharedGameManager] bestScore];
+    
+    CCLabelBMFont* highScoreLabelValue = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", highScore] fntFile:FONTHIGHSCORES];
+    [highScoreLabelValue setPosition:ccp(xPosition, size.height * 0.7)];
+    [highScoreLabelValue setAnchorPoint:ccp(0.5f, 0)];
+    [highscoresBackground addChild:highScoreLabelValue z:kHighScoreLabelZValue tag:kHighScoreLabelTagValue];
+    
+    // Add Leaderboard Button
+    
+    CCSprite* leaderboard = [CCSprite spriteWithSpriteFrameName:@"leaderboard_btn.png"];
+    [leaderboard setPosition:ccp(xPosition, size.height * 0.55)];
+    [leaderboard setAnchorPoint:ccp(0.5f, 0)];
+    [highscoresBackground addChild:leaderboard];
+    CCSprite* leaderboardSelected = [CCSprite spriteWithSpriteFrameName:@"leaderboard_btn_over.png"];
+    [leaderboardSelected setPosition:ccp(xPosition, size.height * 0.55)];
+    [leaderboardSelected setAnchorPoint:ccp(0.5f, 0)];
+    [highscoresBackground addChild:leaderboardSelected];
+    
+    CCMenuItemSpriteIndependent* leaderboardButton = [CCMenuItemSpriteIndependent itemWithNormalSprite:leaderboard
+                                                                                        selectedSprite:leaderboardSelected
+                                                                                                target:self
+                                                                                              selector:@selector(showLeaderboard)];
+    
+    // Label Level Reached
+    
+    CCLabelBMFont* labelLevelReached = [CCLabelBMFont labelWithString:@"Level Reached" fntFile:FONTHIGHSCORES];
+    [labelLevelReached setPosition:ccp(xPosition, size.height * 0.4)];
+    [labelLevelReached setAnchorPoint:ccp(0.5f, 0)];
+    [highscoresBackground addChild:labelLevelReached];
+    
+    // Label Level Reached Value
+    
+    CCLabelBMFont* levelReachedValue = [CCLabelBMFont labelWithString:@"0" fntFile:FONTHIGHSCORES];
+    [levelReachedValue setPosition:ccp(xPosition, size.height * 0.3)];
+    [levelReachedValue setAnchorPoint:ccp(0.5f, 0)];
+    [highscoresBackground addChild:levelReachedValue];
 
-    CCLabelBMFont* highScoreLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", highScore] fntFile:FONTHIGHSCORES];
-    [highScoreLabel setAnchorPoint:ccp(0.5,0.5)];
-    [highScoreLabel setPosition:ccp(125, 155)];
-    [highScoreLabel setScale:1.5];
-    [highscoresBackground addChild:highScoreLabel z:1 tag:kHighScoreLabelTagValue];
+    
+    // Add Achievement Button
+    
+    CCSprite* achievement = [CCSprite spriteWithSpriteFrameName:@"achievements_btn.png"];
+    [achievement setPosition:ccp(xPosition, size.height * 0.125)];
+    [achievement setAnchorPoint:ccp(0.5f, 0)];
+    [highscoresBackground addChild:achievement];
+    CCSprite* achievementSelected = [CCSprite spriteWithSpriteFrameName:@"achievements_btn_over.png"];
+    [achievementSelected setPosition:ccp(xPosition,size.height * 0.125)];
+    [achievementSelected setAnchorPoint:ccp(0.5f, 0)];
+    [highscoresBackground addChild:achievementSelected];
+
+
+    
+    CCMenuItemSpriteIndependent* achievementButton = [CCMenuItemSpriteIndependent 
+                                                         itemWithNormalSprite:achievement 
+                                                            selectedSprite:achievementSelected 
+                                                                target:self
+                                                                    selector:@selector(showAchievements)];
+    
+   
+    
+    // Menu Stats
+    
+    CCMenu* menuStats = [CCMenu menuWithItems:achievementButton,leaderboardButton, nil];
+    [highscoresBackground addChild:menuStats];
+    
     
     
     CCSprite* reset = [CCSprite spriteWithSpriteFrameName:@"reset_btn.png"];
     [reset setPosition:ccp(435,15)];
     [highscoresBackground addChild:reset z:1 tag:kResetTagValue];
-    
-    CCLabelBMFont* nextNameLabel = [CCLabelBMFont labelWithString:@"Achievements" fntFile:FONTHIGHSCORES];
-    [nextNameLabel setScale:0.5];
-
-    CCMenuItemAtlasFont* menuAchievement = [CCMenuItemAtlasFont itemWithLabel:nextNameLabel target:self selector:@selector(showAchievements)];
-    
-    CCLabelBMFont* leaderboard = [CCLabelBMFont labelWithString:@"Leaderboard" fntFile:FONTHIGHSCORES];
-    [nextNameLabel setScale:0.5];
-    
-    CCMenuItemAtlasFont* menuLeaderboard = [CCMenuItemAtlasFont itemWithLabel:leaderboard target:self selector:@selector(showLeaderboard)];
-    CCMenu* optionMenu = [CCMenu menuWithItems:menuAchievement,menuLeaderboard, nil];
-    [optionMenu setPosition:ccp(125, 72)];
-    [optionMenu alignItemsVertically];
-    [highscoresBackground addChild:optionMenu z:3 tag:kNextLevelLabelTagValue];
-    
+        
 }
 
 -(void)buildMainMenu{
@@ -358,19 +416,19 @@
         // Add Observer for Purchase Notification
                 
         [[NSNotificationCenter defaultCenter]    addObserver:self
-                                                 selector:@selector(productPurchased:)
-                                                 name:kProductPurchasedNotification
-                                                 object:nil];
+                                                    selector:@selector(productPurchased:)
+                                                        name:kProductPurchasedNotification
+                                                            object:nil];
         
         [[NSNotificationCenter defaultCenter]    addObserver:self 
-                                                 selector: @selector(productPurchaseFailed:)
-                                                 name:kProductPurchaseFailedNotification 
-                                                 object: nil];
+                                                    selector: @selector(productPurchaseFailed:)
+                                                        name:kProductPurchaseFailedNotification 
+                                                            object: nil];
         
         [[NSNotificationCenter defaultCenter]    addObserver:self
-                                                 selector:@selector(productsLoaded:)
-                                                 name:kProductsLoadedNotification 
-                                                 object:nil];       
+                                                    selector:@selector(productsLoaded:)
+                                                        name:kProductsLoadedNotification 
+                                                            object:nil];  
         
 	}
 	return self;
@@ -512,7 +570,7 @@
             mainMenu.isTouchEnabled = YES;
 
         }]]];
-        
+
         
     }
         
