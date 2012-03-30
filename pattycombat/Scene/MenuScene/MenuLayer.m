@@ -299,7 +299,7 @@
     // Main Menu 
     CCMenu* mainMenu = [CCMenu menuWithItems:playButton,getCoinsButton,statsButton,creditsButton, nil];
     
-    [mainMenuBackground addChild:mainMenu z:kMainMenuBackgroundZValue tag:kMainMenuBackgroundTagValue];
+    [mainMenuBackground addChild:mainMenu z:kMainMenuZValue tag:kMainMenuTagValue];
     
     mainMenu.isTouchEnabled = FALSE;
 }
@@ -346,6 +346,14 @@
         // Build Menu Stats
         
         [self buildStats];
+        
+        // Add Credits Background (maybe will be a layer)
+        
+        CCSprite* creditsBackground= [CCSprite spriteWithFile:@"credits_window.png"];
+        creditsBackground.opacity = 0;
+        [self addChild:creditsBackground z:kCreditsBackgroundZValue tag:kCreditsBackgroundTagValue];
+        [creditsBackground setPosition:ccp(size.width/2, size.height/2)];
+
         
         // Add Observer for Purchase Notification
                 
@@ -410,7 +418,7 @@
         CCNode* nodeGetCoins = [mainMenuBackground getChildByTag:kItemGetCoinsTagValue];
         CCNode* nodeStats =    [mainMenuBackground getChildByTag:kItemStatsTagValue];
         CCNode* nodeCredits =  [mainMenuBackground getChildByTag:kItemCreditsTagValue];
-        CCMenu* mainMenu =     (CCMenu *)[mainMenuBackground getChildByTag:kMainMenuBackgroundTagValue];
+        CCMenu* mainMenu =     (CCMenu *)[mainMenuBackground getChildByTag:kMainMenuTagValue];
         
         // Move down the menu's buttons
         
@@ -481,6 +489,8 @@
     
     CCSprite* mainMenuBackground = (CCSprite *)[self getChildByTag:kMainMenuBackgroundTagValue];
     
+    CCSprite* creditsBackground = (CCSprite *)[self getChildByTag:kCreditsBackgroundTagValue];
+    
    // CGRect boundingBox = CGRectMake(900, 0, 50, 50);
     
     CCLOG(@"Touch: %@",NSStringFromCGPoint(touchLocation));
@@ -488,6 +498,22 @@
     if (!CGRectContainsPoint([mainMenuBackground boundingBox], touchLocation)) {
         
         [self goBack];
+        
+    }else if (CGRectContainsPoint([creditsBackground boundingBox], touchLocation) && creditsBackground.opacity == 255) {
+        
+        // Fade Out of Credits Background and enable main menu
+        
+        CCMenu* mainMenu = (CCMenu *)[mainMenuBackground getChildByTag:kMainMenuTagValue];
+        
+        CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:1];
+        
+        [creditsBackground runAction:[CCSequence actionOne:fadeOut two:[CCCallBlock actionWithBlock:^{
+            
+            mainMenu.isTouchEnabled = YES;
+
+        }]]];
+        
+        
     }
         
   /*  if(CGRectContainsPoint(boundingBox, touchLocation)){
@@ -579,14 +605,15 @@
 
 -(void) itemCreditsTouched{
     
-    // Add Credits Background (maybe will be a layer)
-    CCSprite* creditsBackground= [CCSprite spriteWithFile:@"credits_window.png"];
-    creditsBackground.opacity = 0;
-    [self addChild:creditsBackground z:kCreditsBackgroundZValue tag:kCreditsBackgroundTagValue];
-    [creditsBackground setPosition:ccp(size.width/2, size.height/2)];
+    CCSprite* creditsBackground = (CCSprite *)[self getChildByTag:kCreditsBackgroundTagValue];
     
     CCFadeIn* fade = [CCFadeIn actionWithDuration:1];
     [creditsBackground runAction:fade];
+    
+    // Disabled Touch for Main Menu
+    CCSprite* mainMenuBackground = (CCSprite *)[self getChildByTag:kMainMenuBackgroundTagValue];
+    CCMenu* mainMenu = (CCMenu *)[mainMenuBackground getChildByTag:kMainMenuTagValue];
+    mainMenu.isTouchEnabled = FALSE;
     
 }
 

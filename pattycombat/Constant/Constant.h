@@ -51,6 +51,8 @@
 #define kItemStatsZValue 2
 #define kItemCreditsTagValue 16
 #define kItemCreditsZValue 2
+#define kMainMenuTagValue 18
+#define kMainMenuZValue 2
 
 
 

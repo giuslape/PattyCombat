@@ -26,7 +26,7 @@ static PattyCombatIAPHelper * _sharedHelper;
 
 - (id)init
 {
-    NSSet *productIdentifiers = [NSSet setWithObjects:kProductPurchase25coins,kProductPurchse75coins,kProductPurchase200coins, nil];
+    NSSet *productIdentifiers = [NSSet setWithObjects:kProductPurchase25coins,kProductPurchse75coins,kProductPurchase200coins,kProductTest, nil];
     
     if ((self = [super initWithProductIdentifiers:productIdentifiers])) {}
     return self;
