@@ -23,6 +23,8 @@
     int totalScore;
     int currentScore;
     
+    int _levelReached;
+    
     // Added for audio
     BOOL hasAudioBeenInitialized;
     GameManagerSoundState managerSoundState;
@@ -39,6 +41,7 @@
 @property (readwrite) BOOL isSoundEffectsON;
 @property (readwrite) BOOL hasPlayerDied;
 @property (readwrite) BOOL isBonusLevel;
+@property (readwrite, nonatomic) int levelReached;
 @property (nonatomic, strong) NSString* namePlayer;
 @property (strong, readonly) id<SceneDao> dao;
 @property (readwrite) GameManagerSoundState managerSoundState;

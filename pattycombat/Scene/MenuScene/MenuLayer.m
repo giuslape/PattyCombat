@@ -221,7 +221,10 @@
     
     // Label Level Reached Value
     
-    CCLabelBMFont* levelReachedValue = [CCLabelBMFont labelWithString:@"0" fntFile:FONTHIGHSCORES];
+    CCLabelBMFont* levelReachedValue = [CCLabelBMFont
+                                        labelWithString:[NSString stringWithFormat:@"%d", [[GameManager sharedGameManager] levelReached]] 
+                                            fntFile:FONTHIGHSCORES];
+    
     [levelReachedValue setPosition:ccp(xPosition, size.height * 0.3)];
     [levelReachedValue setAnchorPoint:ccp(0.5f, 0)];
     [highscoresBackground addChild:levelReachedValue];

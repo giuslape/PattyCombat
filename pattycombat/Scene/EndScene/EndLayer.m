@@ -268,6 +268,8 @@
             
             [self addChild:labelTimeBonus z:1];
             
+            [[GameManager sharedGameManager] setLevelReached:currentLevel];
+            
         }
         
         labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];

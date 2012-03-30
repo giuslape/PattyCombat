@@ -36,6 +36,7 @@ static GameManager* _sharedGameManager = nil;
 @synthesize isLastLevel;
 @synthesize isBonusLevel;
 @synthesize totalScore;
+@synthesize levelReached = _levelReached;
 
 +(GameManager*)sharedGameManager {
     
@@ -591,6 +592,24 @@ static GameManager* _sharedGameManager = nil;
 
         [hudlayer onPause:self];
     }
+    
+}
+
+#pragma mark -
+#pragma mark ===  Level Reached  ===
+#pragma mark -
+
+
+-(int)levelReached{
+    
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"LevelReached"];
+
+}
+
+-(void)setLevelReached:(int)newLevel{
+    
+    [[NSUserDefaults standardUserDefaults]setInteger:newLevel forKey:@"LevelReached"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
 }
 
