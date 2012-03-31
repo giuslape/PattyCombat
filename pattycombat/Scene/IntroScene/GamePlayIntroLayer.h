@@ -20,13 +20,13 @@
 }
 
 @property (nonatomic, strong) NSMutableArray* patternArray;
+@property (nonatomic, strong) NSMutableArray* feedHand;
 @property (nonatomic, strong) CCAnimation* animationHandRightOk;
 @property (nonatomic, strong) CCAnimation* animationHandLeftOk;
 @property (nonatomic, strong) CCAnimation* animationHandRightErr;
 @property (nonatomic, strong) CCAnimation* animationHandLeftErr;
 @property (nonatomic, strong) CCAnimation* animationFeedLeft;
 @property (nonatomic, strong) CCAnimation* animationFeedRight;
-@property (nonatomic, strong) NSMutableArray* feedHand;
 
 
 -(void)handleHitWithTouch:(CGPoint)location;
