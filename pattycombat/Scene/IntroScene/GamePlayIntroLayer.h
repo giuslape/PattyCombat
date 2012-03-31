@@ -12,10 +12,10 @@
 
 @interface GamePlayIntroLayer : CCLayer {
     
-    CCSpriteBatchNode* spriteBatchNode;
-    CharacterStates state;
-    CGPoint firstTouchLocInView;
-    NSTimeInterval firstTouchTimeStamp;
+    CCSpriteBatchNode* _spriteBatchNode;
+    CharacterStates _state;
+    CGPoint _firstTouchLocInView;
+    NSTimeInterval _firstTouchTimeStamp;
 
 }
 

@@ -53,7 +53,7 @@
     [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-    spriteBatchNode = nil;
+    _spriteBatchNode = nil;
     
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
@@ -73,7 +73,7 @@
         
         patternIndex = 0;
         feedIndex = 0;
-        state = kStateNone;
+        _state = kStateNone;
         
         isLastLevel = [[GameManager sharedGameManager] isLastLevel];
         
@@ -207,7 +207,7 @@
     
     for (CCSprite* item in feedHand) {
         
-        [spriteBatchNode addChild:item];
+        [_spriteBatchNode addChild:item];
         CGSize itemSize = item.textureRect.size;
         [item setPosition:ccp(x + itemSize.width * item.scaleX / 2.0f, size.height - itemSize.height * item.scaleY /2.0f)];
         x += itemSize.width * item.scaleX + padding;
@@ -290,26 +290,26 @@
         
         [self handleHitsWithTouches:userTouches];
 
-        state = kStateOneTouchWaiting;
+        _state = kStateOneTouchWaiting;
         
     }
     
-    else if((state!= kStateTwoHandsHit)&&((noTouchesBegan== 1)&&(noTouchesInEvent==1))){
+    else if((_state!= kStateTwoHandsHit)&&((noTouchesBegan== 1)&&(noTouchesInEvent==1))){
         
-        state = kStateTwoHandsHit; // S2 ho ricevuto il primo tocco e aspetto il secondo
+        _state = kStateTwoHandsHit; // S2 ho ricevuto il primo tocco e aspetto il secondo
         oldTouch = (UITouch*)[touches anyObject];
-        firstTouchTimeStamp = oldTouch.timestamp;
-        firstTouchLocInView = [oldTouch locationInView:[oldTouch view]];
-        [[CCDirector sharedDirector]convertToGL:firstTouchLocInView];
-        [self performSelector:@selector(verifiedTouchFromLocation:) withObject:[NSValue valueWithCGPoint:firstTouchLocInView] afterDelay:MAX_ELAPSED_TIME];
+        _firstTouchTimeStamp = oldTouch.timestamp;
+        _firstTouchLocInView = [oldTouch locationInView:[oldTouch view]];
+        [[CCDirector sharedDirector]convertToGL:_firstTouchLocInView];
+        [self performSelector:@selector(verifiedTouchFromLocation:) withObject:[NSValue valueWithCGPoint:_firstTouchLocInView] afterDelay:MAX_ELAPSED_TIME];
         return;
     }                                                                                                                                
-    else if((state == kStateTwoHandsHit) && (noTouchesInEvent== 2) ){
+    else if((_state == kStateTwoHandsHit) && (noTouchesInEvent== 2) ){
                 
         isTouchInTime = TRUE;
 
         UITouch *aTouch = (UITouch*)[touches anyObject];
-        if((aTouch.timestamp - firstTouchTimeStamp) <= MAX_ELAPSED_TIME){
+        if((aTouch.timestamp - _firstTouchTimeStamp) <= MAX_ELAPSED_TIME){
                         
             // S1 Ho ricevuto il secondo tocco entro la soglia MAX_ELAPSED_TIME
             
@@ -319,27 +319,27 @@
             
             [[CCDirector sharedDirector]convertToGL:secondLocation];
             
-            [userTouches addObject:[NSValue valueWithCGPoint:firstTouchLocInView]];
+            [userTouches addObject:[NSValue valueWithCGPoint:_firstTouchLocInView]];
             [userTouches addObject:[NSValue valueWithCGPoint:secondLocation]];
             
             [self handleHitsWithTouches:userTouches];
             
-            state = kStateOneTouchWaiting;
+            _state = kStateOneTouchWaiting;
             
         }
         else {
-            firstTouchTimeStamp = aTouch.timestamp;
-            firstTouchLocInView = [aTouch locationInView:[aTouch view]];
+            _firstTouchTimeStamp = aTouch.timestamp;
+            _firstTouchLocInView = [aTouch locationInView:[aTouch view]];
         }
     }
     else {
         
-        state = kStateOneTouchWaiting;
+        _state = kStateOneTouchWaiting;
         oldTouch = (UITouch*)[touches anyObject];
-        firstTouchTimeStamp = oldTouch.timestamp;
-        firstTouchLocInView = [oldTouch locationInView:[oldTouch view]];
-        [[CCDirector sharedDirector]convertToGL:firstTouchLocInView];
-        [self handleHitWithTouch:firstTouchLocInView];
+        _firstTouchTimeStamp = oldTouch.timestamp;
+        _firstTouchLocInView = [oldTouch locationInView:[oldTouch view]];
+        [[CCDirector sharedDirector]convertToGL:_firstTouchLocInView];
+        [self handleHitWithTouch:_firstTouchLocInView];
     }
         
 }
@@ -523,9 +523,9 @@
         
     if (!isTouchInTime && patternIndex <= [patternArray count]) {
                 
-        [self handleHitWithTouch:firstTouchLocInView];
+        [self handleHitWithTouch:_firstTouchLocInView];
         
-        state = kStateOneTouchWaiting;
+        _state = kStateOneTouchWaiting;
     }
     
     if (isLastLevel) {
@@ -613,10 +613,10 @@
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:
          [NSString stringWithString:@"IntroButtAndFeed.plist"]];
         
-        spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:
+        _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:
                            [NSString stringWithFormat:@"IntroButtAndFeed.png"]];
         
-        [self addChild:spriteBatchNode z:0 tag:100];
+        [self addChild:_spriteBatchNode z:0 tag:100];
 
         
         [self feedPattern];
@@ -626,14 +626,14 @@
         rightHand = [CCSprite spriteWithSpriteFrameName:
                      [NSString stringWithString:@"intro_btn_dx_01.png"]];
         
-        [spriteBatchNode addChild:rightHand z:1000];
+        [_spriteBatchNode addChild:rightHand z:1000];
         
         [rightHand setPosition:ccp(winSize.width/2 - 150, winSize.height/2)];
         
         leftHand = [CCSprite spriteWithSpriteFrameName:
                     [NSString stringWithString:@"intro_btn_sx_01.png"]];
         
-        [spriteBatchNode addChild:leftHand z:1000];
+        [_spriteBatchNode addChild:leftHand z:1000];
         
         [leftHand setPosition:ccp(winSize.width/2 + 150, winSize.height/2)];
         

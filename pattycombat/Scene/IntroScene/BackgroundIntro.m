@@ -18,7 +18,7 @@
     self = [super init];
     if (self) {
         
-        CGSize size = [[CCDirector sharedDirector]winSize];
+        CGSize size = [[CCDirector sharedDirector] winSize];
         
         NSString* introBackground = [[[GameManager sharedGameManager]dao]loadBackgroundIntro:NSStringFromClass([self class]) atLevel:[[GameManager sharedGameManager]currentLevel]];
         

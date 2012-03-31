@@ -452,6 +452,13 @@
         
         [self buildStats];
         
+        // Add Logo
+        
+        CCSprite* logo = [CCSprite spriteWithFile:@"logo.png"];
+        [logo setAnchorPoint:ccp(0.5f, 1)];
+        [logo setPosition:ccp(size.width * 0.7f, size.height * 0.97f)];
+        [self addChild:logo z:3];
+        
         // Add Credits Background (maybe will be a layer)
         
         CCSprite* creditsBackground= [CCSprite spriteWithFile:@"credits_window.png"];
