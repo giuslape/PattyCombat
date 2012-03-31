@@ -20,6 +20,10 @@
     NSArray* _permissions;
     CCMenu* _mainMenu;
     CCSpriteBatchNode* _spriteBatchNode;
+    CCLayerGradient* _darkLayer;
+    
+    float _elapsedTime;
+    float _neonEffectInterval;
 
 }
 

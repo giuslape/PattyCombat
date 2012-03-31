@@ -72,9 +72,9 @@
     
     //Label Coins Purchased
     
-    CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins" fntFile:FONTHIGHSCORES];
-    [labelCoinsPurchased setPosition:ccp(size.width * 0.8, size.height * 0.4)];
-    [getCoinsBackground addChild:labelCoinsPurchased];
+    CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins Hield" fntFile:FONTHIGHSCORES];
+    [labelCoinsPurchased setPosition:ccp(-size.width + size.width * 0.8, size.height * 0.4)];
+    [self addChild:labelCoinsPurchased z:3];
     
     //Number of product purchased
     
@@ -84,8 +84,8 @@
     [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",quantity]
                            fntFile:FONTHIGHSCORES];
     
-    [getCoinsBackground addChild:labelQuantity z:kLabelCoinsReachedZValue tag:kLabelCoinsReachedTagValue];
-    [labelQuantity setPosition:ccp(size.width * 0.8, size.height * 0.3)];
+    [self addChild:labelQuantity z:kLabelCoinsReachedZValue tag:kLabelCoinsReachedTagValue];
+    [labelQuantity setPosition:ccp(-size.width + size.width * 0.8, size.height * 0.3)];
     
     
     //  Store Button for post to Social Network
@@ -158,9 +158,9 @@
     
     _purchaseMenu = [CCMenu menuWithItems:facebookButton,firstPurchaseButton,secondPurchaseButton,thirdPurchaseButton,nil];
 
-    [getCoinsBackground addChild:_purchaseMenu];
+    [self addChild:_purchaseMenu z:kPurchaseMenuZValue tag:kPurchaseMenuTagValue];
     
-    _purchaseMenu.position = ccp(size.width * 0.23, size.height * 0.4);
+    _purchaseMenu.position = ccp(-size.width + size.width * 0.23, size.height * 0.43);
     
     [_purchaseMenu alignItemsVerticallyWithPadding:3];
     
@@ -178,14 +178,14 @@
     
     // Position of Menu
     
-    float xPosition = size.width * 0.2;
+    float xPosition = size.width + size.width * 0.2;
     
     // Label Highscore
     
     CCLabelBMFont* labelHighscores = [CCLabelBMFont labelWithString:@"Highscores" fntFile:FONTHIGHSCORES];
     [labelHighscores setPosition:ccp(xPosition, size.height * 0.8)];
     [labelHighscores setAnchorPoint:ccp(0.5f, 0)];
-    [highscoresBackground addChild:labelHighscores];
+    [self addChild:labelHighscores z:3];
     
     // Label Highscore Value
     
@@ -194,18 +194,18 @@
     CCLabelBMFont* highScoreLabelValue = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", highScore] fntFile:FONTHIGHSCORES];
     [highScoreLabelValue setPosition:ccp(xPosition, size.height * 0.7)];
     [highScoreLabelValue setAnchorPoint:ccp(0.5f, 0)];
-    [highscoresBackground addChild:highScoreLabelValue z:kHighScoreLabelZValue tag:kHighScoreLabelTagValue];
+    [self addChild:highScoreLabelValue z:kHighScoreLabelZValue tag:kHighScoreLabelTagValue];
     
     // Add Leaderboard Button
     
     CCSprite* leaderboard = [CCSprite spriteWithSpriteFrameName:@"leaderboard_btn.png"];
-    [leaderboard setPosition:ccp(xPosition, size.height * 0.55)];
+    [leaderboard setPosition:ccp(xPosition, size.height * 0.53)];
     [leaderboard setAnchorPoint:ccp(0.5f, 0)];
-    [highscoresBackground addChild:leaderboard];
+    [self addChild:leaderboard z:3];
     CCSprite* leaderboardSelected = [CCSprite spriteWithSpriteFrameName:@"leaderboard_btn_over.png"];
-    [leaderboardSelected setPosition:ccp(xPosition, size.height * 0.55)];
+    [leaderboardSelected setPosition:ccp(xPosition, size.height * 0.53)];
     [leaderboardSelected setAnchorPoint:ccp(0.5f, 0)];
-    [highscoresBackground addChild:leaderboardSelected];
+    [self addChild:leaderboardSelected z:3];
     
     CCMenuItemSpriteIndependent* leaderboardButton = [CCMenuItemSpriteIndependent itemWithNormalSprite:leaderboard
                                                                                         selectedSprite:leaderboardSelected
@@ -217,7 +217,7 @@
     CCLabelBMFont* labelLevelReached = [CCLabelBMFont labelWithString:@"Level Reached" fntFile:FONTHIGHSCORES];
     [labelLevelReached setPosition:ccp(xPosition, size.height * 0.4)];
     [labelLevelReached setAnchorPoint:ccp(0.5f, 0)];
-    [highscoresBackground addChild:labelLevelReached];
+    [self addChild:labelLevelReached z:3];
     
     // Label Level Reached Value
     
@@ -227,7 +227,7 @@
     
     [levelReachedValue setPosition:ccp(xPosition, size.height * 0.3)];
     [levelReachedValue setAnchorPoint:ccp(0.5f, 0)];
-    [highscoresBackground addChild:levelReachedValue];
+    [self addChild:levelReachedValue z:kLevelReachedValueZValue tag:kLevelReachedValueTagValue];
 
     
     // Add Achievement Button
@@ -235,11 +235,11 @@
     CCSprite* achievement = [CCSprite spriteWithSpriteFrameName:@"achievements_btn.png"];
     [achievement setPosition:ccp(xPosition, size.height * 0.125)];
     [achievement setAnchorPoint:ccp(0.5f, 0)];
-    [highscoresBackground addChild:achievement];
+    [self addChild:achievement z:3];
     CCSprite* achievementSelected = [CCSprite spriteWithSpriteFrameName:@"achievements_btn_over.png"];
     [achievementSelected setPosition:ccp(xPosition,size.height * 0.125)];
     [achievementSelected setAnchorPoint:ccp(0.5f, 0)];
-    [highscoresBackground addChild:achievementSelected];
+    [self addChild:achievementSelected z:3];
 
 
     
@@ -254,13 +254,13 @@
     // Menu Stats
     
     CCMenu* menuStats = [CCMenu menuWithItems:achievementButton,leaderboardButton, nil];
-    [highscoresBackground addChild:menuStats];
+    [self addChild:menuStats z:3];
     
     
     
     CCSprite* reset = [CCSprite spriteWithSpriteFrameName:@"reset_btn.png"];
-    [reset setPosition:ccp(435,15)];
-    [highscoresBackground addChild:reset z:1 tag:kResetTagValue];
+    [reset setPosition:ccp(size.width + size.width * 0.9, size.height * 0.07)];
+    [self addChild:reset z:kResetZValue tag:kResetTagValue];
         
 }
 
@@ -282,7 +282,7 @@
     
     myagi.position = ccp(size.width * 0.2, - myagi.contentSize.height * 0.14);
     
-    [mainMenuBackground addChild:myagi z:kPlayerMiaghiZValue tag:kPlayerMiaghiTagValue];
+    [self addChild:myagi z:kPlayerMiaghiZValue tag:kPlayerMiaghiTagValue];
     
     //Play button
     
@@ -294,7 +294,7 @@
     nodePlay.contentSize = play.contentSize;
     [nodePlay addChild:play];
     [nodePlay addChild:playSelected];
-    [mainMenuBackground addChild:nodePlay z:kItemPlayNodeZValue tag:kItemPlayNodeTagValue];
+    [self addChild:nodePlay z:kItemPlayNodeZValue tag:kItemPlayNodeTagValue];
     nodePlay.position = ccp(xPosition ,size.height);
     
     CCMenuItemSpriteIndependent* playButton = [CCMenuItemSpriteIndependent 
@@ -311,7 +311,7 @@
     CCNode* nodeGetCoins = [CCNode node];
     [nodeGetCoins addChild:getCoins];
     [nodeGetCoins addChild:getCoinsSelected];
-    [mainMenuBackground addChild:nodeGetCoins z:kItemGetCoinsZValue tag:kItemGetCoinsTagValue];
+    [self addChild:nodeGetCoins z:kItemGetCoinsZValue tag:kItemGetCoinsTagValue];
     nodeGetCoins.position = ccp(xPosition,size.height);
     
     CCMenuItemSpriteIndependent* getCoinsButton = [CCMenuItemSpriteIndependent
@@ -329,7 +329,7 @@
     CCNode* nodeStats = [CCNode node];
     [nodeStats addChild:stats];
     [nodeStats addChild:statsSelected];
-    [mainMenuBackground addChild:nodeStats z:kItemStatsZValue tag:kItemStatsTagValue];
+    [self addChild:nodeStats z:kItemStatsZValue tag:kItemStatsTagValue];
     nodeStats.position = ccp(xPosition ,size.height);
     
     CCMenuItemSpriteIndependent* statsButton = [CCMenuItemSpriteIndependent
@@ -347,7 +347,7 @@
     CCNode* nodeCredits = [CCNode node];
     [nodeCredits addChild:credits];
     [nodeCredits addChild:creditsSelected];
-    [mainMenuBackground addChild:nodeCredits z:kItemCreditsZValue tag:kItemCreditsTagValue];
+    [self addChild:nodeCredits z:kItemCreditsZValue tag:kItemCreditsTagValue];
     nodeCredits.position = ccp(xPosition ,size.height);
     
     CCMenuItemSpriteIndependent* creditsButton = [CCMenuItemSpriteIndependent
@@ -360,9 +360,53 @@
     // Main Menu 
     CCMenu* mainMenu = [CCMenu menuWithItems:playButton,getCoinsButton,statsButton,creditsButton, nil];
     
-    [mainMenuBackground addChild:mainMenu z:kMainMenuZValue tag:kMainMenuTagValue];
+    [self addChild:mainMenu z:kMainMenuZValue tag:kMainMenuTagValue];
     
     mainMenu.isTouchEnabled = FALSE;
+}
+
+
+// Dark Layer
+
+-(void)addDarkLayer{
+    
+    _darkLayer = [CCLayerGradient layerWithColor:ccc4(50, 21 , 46, 0) 
+                                                            fadingTo:ccc4(50, 21, 46, 153)
+                                                                alongVector:ccp(0, 1)];
+    
+    [_darkLayer setAnchorPoint:ccp(0, 0)];
+    
+    [_darkLayer setPosition:ccp(-size.width, 0)];
+    
+    [_darkLayer setContentSize:CGSizeMake(2*size.width + size.width * 0.49, size.height)];
+    
+    [self addChild:_darkLayer z:kDarkLayerZValue tag:kDarkLayerTagValue];
+    
+    
+    
+}
+
+
+// Effect Neon Dark Layer
+
+-(void)doEffectNeon:(ccTime)delta{
+    
+    _elapsedTime += delta;
+    
+    if (_elapsedTime > _neonEffectInterval) {
+        
+        _neonEffectInterval = arc4random() % 8;
+        
+        _elapsedTime = 0;
+    
+        id fadeIn = [CCFadeIn actionWithDuration:0.05];
+    
+        id fadeOut = [fadeIn reverse];
+    
+        [_darkLayer runAction:[CCRepeat actionWithAction:[CCSequence actionOne:fadeOut two:fadeIn] times:6]];
+        
+    }
+    
 }
 
 
@@ -380,21 +424,21 @@
         
         // Add Sprite at cache 
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"MenuAtlas.plist"];
+        _neonEffectInterval = 0;
         
-        _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"MenuAtlas.png"];
+        _elapsedTime = 0;
         
-        [self addChild:_spriteBatchNode z:kSpriteBatchNodeMenuZValue];
-        
-        _spriteBatchNode.anchorPoint = ccp(0, 0);
-        
-        _spriteBatchNode.position = ccp(0,0);
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"MenuAtlas.plist" textureFilename:@"MenuAtlas.png"];
         
         AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
         
         [[delegate facebook] setSessionDelegate:self];
         
         size = [[CCDirector sharedDirector] winSize];
+        
+        // Add Dark Layer
+        
+        [self addDarkLayer];
         
         //Build Main Menu
         
@@ -447,8 +491,7 @@
     
     // Action of Miaghi (Rotate + Move)
     
-    CCSprite* mainMenuBackground = (CCSprite *)[self getChildByTag:kMainMenuBackgroundTagValue];
-    CCSprite* myagi = (CCSprite*)[mainMenuBackground getChildByTag:kPlayerMiaghiTagValue];
+    CCSprite* myagi = (CCSprite*)[self getChildByTag:kPlayerMiaghiTagValue];
     
     CCRotateTo* rotate = [CCRotateTo actionWithDuration:0.05f angle:-20];
     
@@ -468,25 +511,24 @@
 -(void) update:(ccTime)delta
 {
     
-    CCSprite* mainMenuBackground = (CCSprite *)[self getChildByTag:kMainMenuBackgroundTagValue];
-    CCSprite* miaghi = (CCSprite*)[mainMenuBackground getChildByTag:kPlayerMiaghiTagValue];
+    CCSprite* miaghi = (CCSprite*)[self getChildByTag:kPlayerMiaghiTagValue];
     
     if ([miaghi numberOfRunningActions] == 0) {
                 
         [self unscheduleAllSelectors];
         
-        CCNode* nodePlay =     [mainMenuBackground getChildByTag:kItemPlayNodeTagValue];
-        CCNode* nodeGetCoins = [mainMenuBackground getChildByTag:kItemGetCoinsTagValue];
-        CCNode* nodeStats =    [mainMenuBackground getChildByTag:kItemStatsTagValue];
-        CCNode* nodeCredits =  [mainMenuBackground getChildByTag:kItemCreditsTagValue];
-        CCMenu* mainMenu =     (CCMenu *)[mainMenuBackground getChildByTag:kMainMenuTagValue];
+        CCNode* nodePlay =     [self getChildByTag:kItemPlayNodeTagValue];
+        CCNode* nodeGetCoins = [self getChildByTag:kItemGetCoinsTagValue];
+        CCNode* nodeStats =    [self getChildByTag:kItemStatsTagValue];
+        CCNode* nodeCredits =  [self getChildByTag:kItemCreditsTagValue];
+        CCMenu* mainMenu =     (CCMenu *)[self getChildByTag:kMainMenuTagValue];
         
         // Move down the menu's buttons
         
         float xPosition = size.width * 0.7;
         float yPosition = size.height * 0.125f;
 
-        CCMoveTo* moveDown = [CCMoveTo actionWithDuration:0.2f position:ccp(xPosition, yPosition)];
+        CCMoveTo* moveDown = [CCMoveTo actionWithDuration:0.1f position:ccp(xPosition, yPosition)];
         
         ccTime d1 = [moveDown duration];
         
@@ -522,7 +564,10 @@
         mainMenu.isTouchEnabled = TRUE;
         self.isTouchEnabled = TRUE;
         
+        [self schedule:@selector(doEffectNeon:) interval:0.01 repeat:-1 delay:1];
     }
+    
+    
 }
 
 
@@ -552,19 +597,38 @@
     
     CCSprite* creditsBackground = (CCSprite *)[self getChildByTag:kCreditsBackgroundTagValue];
     
-   // CGRect boundingBox = CGRectMake(900, 0, 50, 50);
+    CGRect boundingBox = CGRectMake(2*size.width * 0.9f, size.height * 0.03f, 80, 60);
     
     CCLOG(@"Touch: %@",NSStringFromCGPoint(touchLocation));
     
-    if (!CGRectContainsPoint([mainMenuBackground boundingBox], touchLocation)) {
+    if (CGRectContainsPoint(boundingBox, touchLocation)) {
         
-        [self goBack];
+        // Reset Level Reached
         
-    }else if (CGRectContainsPoint([creditsBackground boundingBox], touchLocation) && creditsBackground.opacity == 255) {
+        [[GameManager sharedGameManager] setLevelReached:0];
+        
+        // Reset Achievements
+        
+        [[GCHelper sharedInstance] resetAchievements];
+        
+        // Reset Best Score
+        
+        [[GameManager sharedGameManager] resetBestScore];
+        
+        // Reset Labels
+        
+        CCLabelBMFont* levelReachedValue = (CCLabelBMFont *)[self getChildByTag:kLevelReachedValueTagValue];
+        
+        CCLabelBMFont* highscoreValue = (CCLabelBMFont *)[self getChildByTag:kHighScoreLabelTagValue];
+        
+        [levelReachedValue setString:@"0"];
+        [highscoreValue setString:@"0"];
+        
+    }  else if (CGRectContainsPoint([creditsBackground boundingBox], touchLocation) && creditsBackground.opacity == 255) {
         
         // Fade Out of Credits Background and enable main menu
         
-        CCMenu* mainMenu = (CCMenu *)[mainMenuBackground getChildByTag:kMainMenuTagValue];
+        CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
         
         CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:1];
         
@@ -572,30 +636,13 @@
             
             mainMenu.isTouchEnabled = YES;
 
-        }]]];
-
+        }]]];  
         
-    }
-        
-  /*  if(CGRectContainsPoint(boundingBox, touchLocation)){
-        
-        [[GameManager sharedGameManager] resetBestScore];
-        
-        CCLabelBMFont* highScoreLabel = (CCLabelBMFont *)[background getChildByTag:kHighScoreLabelTagValue];
-        
-        [highScoreLabel setString:@"0"];
-        
-        [[GCHelper sharedInstance] resetAchievements];
-       
-        return YES;
-        
-    }else if (!CGRectContainsPoint([mainMenuSprite boundingBox], touchLocation) ) {
+    }else if (!CGRectContainsPoint([mainMenuBackground boundingBox], touchLocation)) {
         
         [self goBack];
         
-        return YES;
-    }*/
-    
+    }  
     return YES;
     
 }
@@ -672,8 +719,7 @@
     [creditsBackground runAction:fade];
     
     // Disabled Touch for Main Menu
-    CCSprite* mainMenuBackground = (CCSprite *)[self getChildByTag:kMainMenuBackgroundTagValue];
-    CCMenu* mainMenu = (CCMenu *)[mainMenuBackground getChildByTag:kMainMenuTagValue];
+    CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     mainMenu.isTouchEnabled = FALSE;
     
 }
@@ -763,8 +809,7 @@ viewController
 -(void)updateLabelCoinsForProductIdentifier:(NSString *)productIdentifier{
     
     NSInteger quantity = [[PattyCombatIAPHelper sharedHelper] updateQuantityForProductIdentifier:productIdentifier];
-    CCSprite* getcoinsBackGround = (CCSprite *)[self getChildByTag:kGetCoinsBackgroundTagValue];
-    CCLabelBMFont* label = (CCLabelBMFont *)[getcoinsBackGround getChildByTag:kLabelCoinsReachedTagValue];
+    CCLabelBMFont* label = (CCLabelBMFont *)[self getChildByTag:kLabelCoinsReachedTagValue];
     
     [label setString:[NSString stringWithFormat:@"%d", quantity]];
     
@@ -922,7 +967,7 @@ viewController
 
     [self storeAuthData:[[delegate facebook] accessToken] expiresAt:[[delegate facebook] expirationDate]];
     
-    [self postToFacebook:nil];
+ //   [self postToFacebook:nil];
     
 }
 -(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
@@ -993,6 +1038,8 @@ viewController
 
 -(void)postToFacebook:(id)sender{
     
+    self.isTouchEnabled = FALSE;
+    
     SBJSON *jsonWriter = [SBJSON new];
     
     // The action links to be shown with the post in the feed
@@ -1025,12 +1072,13 @@ viewController
 // Called when dialog is finish
 
 - (void)dialogCompleteWithUrl:(NSURL *)url {
-   
+    
+    self.isTouchEnabled = TRUE;
+
     if (![url query]) {
         NSLog(@"User canceled dialog or there was an error");
         return;
     }
-    
     
     [self updateSocialCoins];
 
@@ -1054,7 +1102,8 @@ viewController
 #pragma mark -
 
 -(void)postOnTwitter:(id)sender{
-    
+        
+    self.isTouchEnabled = FALSE;
     
     if ([TWTweetComposeViewController canSendTweet])
     {
@@ -1087,6 +1136,9 @@ viewController
                                   otherButtonTitles:nil];
         [alertView show];
     }
+    
+    self.isTouchEnabled = TRUE;
+
 }
 
 @end

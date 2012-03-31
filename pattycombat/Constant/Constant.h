@@ -19,21 +19,21 @@
 // GetCoins
 
 #define kGetCoinsBackgroundTagValue 10
-#define kGetCoinsBackgroundZValue 0
+#define kGetCoinsBackgroundZValue 1
 
-#define kPurchaseMenuTagValue 20
-#define kPurchaseMenuZValue 2
+#define kPurchaseMenuTagValue 24
+#define kPurchaseMenuZValue 3
 #define kFacebookItemTagValue 4
-#define kFacebookItemZValue 2
+#define kFacebookItemZValue 3
 #define kFirstPurchaseItemTagValue 1
-#define kFirstPurchaseItemZValue 2
+#define kFirstPurchaseItemZValue 3
 #define kSecondPurchaseItemTagValue 2
-#define kSecondPurchaseItemZValue 2
-#define kThirdPurchaseItemTagValue 0
-#define kThirdPurchaseItemZValue 2
-#define kSpriteBatchNodeMenuZValue 2
-#define kLabelCoinsReachedTagValue 21
-#define kLabelCoinsReachedZValue 2
+#define kSecondPurchaseItemZValue 3
+#define kThirdPurchaseItemTagValue 3
+#define kThirdPurchaseItemZValue 3
+#define kSpriteBatchNodeMenuZValue 3
+#define kLabelCoinsReachedTagValue 25
+#define kLabelCoinsReachedZValue 3
 
 // Main Menu
 
@@ -42,25 +42,36 @@
 #define kCreditsBackgroundTagValue 17
 #define kCreditsBackgroundZValue 3
 #define kPlayerMiaghiTagValue 12
-#define kPlayerMiaghiZValue 1
+#define kPlayerMiaghiZValue 3
 #define kItemPlayNodeTagValue 13
-#define kItemPlayNodeZValue 2
+#define kItemPlayNodeZValue 3
 #define kItemGetCoinsTagValue 14
-#define kItemGetCoinsZValue 2
+#define kItemGetCoinsZValue 3
 #define kItemStatsTagValue 15
-#define kItemStatsZValue 2
+#define kItemStatsZValue 3
 #define kItemCreditsTagValue 16
-#define kItemCreditsZValue 2
+#define kItemCreditsZValue 3
 #define kMainMenuTagValue 18
-#define kMainMenuZValue 2
+#define kMainMenuZValue 3
+#define kPattyCombatLogoTagValue 19
+#define kPattyCombatLogoZValue 3
 
 // Stats Menu
 
 #define kStatsBackgroundTagValue 20
-#define kStatsBackgroundZValue 2
+#define kStatsBackgroundZValue 1
 #define kHighScoreLabelTagValue 21
-#define kHighScoreLabelZValue 2
+#define kHighScoreLabelZValue 3
+#define kLevelReachedValueTagValue 22
+#define kLevelReachedValueZValue 3
+#define kResetTagValue 23
+#define kResetZValue 3
 
+
+// Dark Layer
+
+#define kDarkLayerTagValue 24
+#define kDarkLayerZValue 2
 
 
 #define GAMETIME 43
@@ -79,7 +90,6 @@
 #define kHealthZValue 2
 #define kBellZValue 0
 #define kLabelScoreTagValue 22
-#define kResetTagValue 23
 #define kNextLevelLabelTagValue 25
 #define kLabelScoreZValue 0
 #define kHandFeedRight 90
