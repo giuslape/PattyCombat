@@ -9,15 +9,6 @@
 #import "GamePlayIntroLayer.h"
 
 @interface GamePlayIntroLayer()   
-    
-@property(nonatomic, strong)CCSprite* leftHand;
-@property(nonatomic, strong)CCSprite* rightHand;
-@property(readwrite)int feedIndex;
-@property(readwrite)int patternIndex;
-@property(readwrite)BOOL isTouchInTime;
-@property (readonly)BOOL isLastLevel;
-@property (readwrite)int positionActorX;
-
 
 -(void)startGamePlay;
 -(void)feedPattern;
@@ -26,38 +17,36 @@
 -(void)resetPatternWithNodeTouched:(CharacterStates)nodeTouched;
 -(CharacterStates)detectNodeFromTouches:(NSArray*)touches;
 -(CharacterStates)detectNodeFromTouch:(CGPoint)touch;
--(int)getPositionX;
 
 @end
 
 @implementation GamePlayIntroLayer
 
 @synthesize patternArray;
-@synthesize rightHand;
-@synthesize leftHand;
-@synthesize feedIndex;
 @synthesize feedHand;
-@synthesize patternIndex;
 @synthesize animationHandLeftOk;
 @synthesize animationHandRightOk;
 @synthesize animationHandLeftErr;
 @synthesize animationHandRightErr;
-@synthesize isTouchInTime;
-@synthesize isLastLevel;
 @synthesize animationFeedLeft;
 @synthesize animationFeedRight;
-@synthesize positionActorX;
+
+
+
+#pragma mark -
+#pragma mark ===  Dealloc  ===
+#pragma mark -
 
 - (void)dealloc {
     
-    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
-    
+    [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
+    [[CCTextureCache sharedTextureCache] removeUnusedTextures];    
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    
     _spriteBatchNode = nil;
     
-    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
-    [[CCTextureCache sharedTextureCache] removeUnusedTextures];
-    
+        
     NSLog(@"%@ %@", NSStringFromSelector(_cmd), self);
 
 }
@@ -69,44 +58,30 @@
 - (id)init {
     
     self = [super init];
+    
     if (self) {
         
-        patternIndex = 0;
-        feedIndex = 0;
+        _patternIndex = -1;
+        _feedIndex = 0;
         _state = kStateNone;
+        _isLastLevel = [[GameManager sharedGameManager] isLastLevel];
         
-        isLastLevel = [[GameManager sharedGameManager] isLastLevel];
+        [[CCDirectorIOS sharedDirector].view setMultipleTouchEnabled:YES];
         
-        NSString* playerName = [[GameManager sharedGameManager] namePlayer];
-
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-
-        CCSprite* player = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@_intro_player.png",playerName]];
+      //  CGSize size = [CCDirectorIOS sharedDirector].winSize;
         
-        [self addChild:player z:2 tag:13];
-        
-        int xPosition = [self getPositionX];
-        
-        player.position = ccp(xPosition, player.boundingBox.size.height + 20);
-        
-        player.anchorPoint = ccp(1, 1);
-        
-        player.opacity = 0;
-        
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-        
+        CCLayerColor* layer = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];
+                
+        [self addChild:layer z:kDarkValueIntroZValue tag:kDarkLayerIntroTagValue];
+                
         NSLog(@"Inizializzazione Intro");
     }
     return self;
 }
 
 -(void)onEnterTransitionDidFinish{
-    
-    CCCallFunc * call = [CCCallFunc actionWithTarget:self selector:@selector(showActorAndName)];
-    
-    CCDelayTime* delay = [CCDelayTime actionWithDuration:0.5];
-    
-    [self runAction:[CCSequence actionOne:delay two:call]];
+        
+    [self scheduleOnce:@selector(showButtonAndFeed) delay:0.5f];
     
     [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
     
@@ -121,8 +96,12 @@
     
     feedHand = [[NSMutableArray alloc] init];       
     
+    
+    //Load Pattern for current Level
+    
     patternArray = [[NSMutableArray alloc] initWithArray:[gameManager patternForLevel]];
     
+    // Insert each item of PatternArray in feedHand array with check if is dx, sx or two
     
     for (NSString* hand in patternArray) {
         
@@ -135,28 +114,26 @@
             handSprite = [CCSprite spriteWithSpriteFrame: 
                           [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_dx_01.png"]];
 
-        [handSprite setTag:kHandFeedRight];
+        [handSprite setTag:kHandFeedRightTagValue];
             
         }else if([hand isEqualToString:@"sx"] || [hand isEqualToString:@"sxCross"]){
             
             handSprite = [CCSprite spriteWithSpriteFrame:
                           [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_sx_01.png"]];
             
-            handSprite.flipX = YES;
             
-            [handSprite setTag:kHandFeedLeft];
+            [handSprite setTag:kHandFeedLeftTagValue];
             
         }else if([hand isEqualToString:@"two"]){
             
             handSprite = [CCSprite spriteWithSpriteFrame: 
                                 [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_dx_01.png"]];
             twoHandSprite = [CCSprite spriteWithSpriteFrame: 
-                             [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_sx_01.png"]];
+                                [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_sx_01.png"]];
             
-            twoHandSprite.flipX = YES;
             
-            [handSprite setTag:kHandFeedRight];
-            [twoHandSprite setTag:kHandFeedLeft];
+            [handSprite setTag:kHandFeedRightTagValue];
+            [twoHandSprite setTag:kHandFeedLeftTagValue];
             
         }else CCLOG(@"Pattern non riconosciuto");
         
@@ -166,17 +143,18 @@
             arrow = [CCSprite spriteWithSpriteFrame: 
                      [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_arrow.png"]];
             
-            [arrow setTag:kArrow];
+            [arrow setTag:kArrowFeedTagValue];
             
             [feedHand addObject:handSprite];
             [feedHand addObject:twoHandSprite];
             [feedHand addObject:arrow];
             
         }else if (handSprite != nil) {
+            
             arrow = [CCSprite spriteWithSpriteFrame: 
                      [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_arrow.png"]];
             
-            [arrow setTag:kArrow];
+            [arrow setTag:kArrowFeedTagValue];
             
             [feedHand addObject:handSprite];
             [feedHand addObject:arrow];
@@ -184,6 +162,9 @@
         
     } 
     [feedHand removeLastObject];
+    
+    // Align elements of array feedhand
+    
     [self alignHandsWithPadding:padding];
     
     
@@ -191,7 +172,7 @@
 
 -(void)alignHandsWithPadding:(float)padding{
     
-    CGSize size = [[CCDirector sharedDirector]winSize];
+    CGSize size = [[CCDirectorIOS sharedDirector] winSize];
     
     float width = -padding;
     
@@ -209,7 +190,7 @@
         
         [_spriteBatchNode addChild:item];
         CGSize itemSize = item.textureRect.size;
-        [item setPosition:ccp(x + itemSize.width * item.scaleX / 2.0f, size.height - itemSize.height * item.scaleY /2.0f)];
+        [item setPosition:ccp(x + itemSize.width * item.scaleX / 2.0f, size.height * 0.95f - itemSize.height * item.scaleY /2.0f)];
         x += itemSize.width * item.scaleX + padding;
     }
     
@@ -220,32 +201,31 @@
     
     [self setAnimationHandLeftOk:[CCAnimation animationWithSpriteFrames:
                                   [NSArray arrayWithObjects:
-                                   [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_sx_01.png"],
-                                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_sx_02.png"], nil]
-                                    delay:0.08]];
+                                    [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_btn_sx_02.png"],
+                                    [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_btn_sx_01.png"], nil]delay:0.08]];
     
     [self setAnimationHandRightOk:[CCAnimation animationWithSpriteFrames:
                                    [NSArray arrayWithObjects:
-                                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_dx_01.png"],
-                                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_dx_02.png"], nil]delay:0.08]];
+                                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_dx_02.png"],
+                                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_dx_01.png"], nil] delay:0.08]];
     
     [self setAnimationHandLeftErr:[CCAnimation animationWithSpriteFrames:
                                    [NSArray arrayWithObjects:
-                                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_sx_01.png"],
-                                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_sx_03.png"], nil]delay:0.08]];
+                                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_sx_03.png"],
+                                    [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_sx_01.png"], nil] delay:0.08]];
     
     [self setAnimationHandRightErr:[CCAnimation animationWithSpriteFrames:
                                     [NSArray arrayWithObjects:
-                                     [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_dx_01.png"],
-                                     [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_dx_03.png"], nil]delay:0.08]];
+                                     [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_dx_03.png"],
+                                     [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_btn_dx_01.png"], nil] delay:0.08]];
     [self setAnimationFeedLeft:[CCAnimation animationWithSpriteFrames:
                                 [NSArray arrayWithObjects:
                                  [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_sx_01.png"],
-                                 [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_sx_02.png"], nil] delay:0.08]];
+                                 [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_sx_02.png"], nil] delay:0.08]];
     [self setAnimationFeedRight:[CCAnimation animationWithSpriteFrames:
                                 [NSArray arrayWithObjects:
                                  [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_dx_01.png"],
-                                 [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_dx_02.png"], nil] delay:0.08]];
+                                 [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_dx_02.png"], nil] delay:0.08]];
 
 }
 #pragma mark -
@@ -254,15 +234,14 @@
 -(void) registerWithTouchDispatcher
 {
     
-    [[[CCDirector sharedDirector] touchDispatcher] addStandardDelegate:self priority:-1];
-
+    [[[CCDirectorIOS sharedDirector] touchDispatcher] addStandardDelegate:self priority:-1];
+    
 }
-
 
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
             
-    isTouchInTime = FALSE;
+    _isTouchInTime = FALSE;
     
     int noTouchesInEvent = ((NSSet*)[event allTouches]).count;
     int noTouchesBegan = touches.count;
@@ -282,8 +261,8 @@
         
         CGPoint firstLocation = [oldTouch locationInView:[oldTouch view]];
         CGPoint secondLocation = [currentTouch locationInView:[currentTouch view]];
-        [[CCDirector sharedDirector]convertToGL:firstLocation];
-        [[CCDirector sharedDirector]convertToGL:secondLocation];
+        [[CCDirectorIOS sharedDirector]convertToGL:firstLocation];
+        [[CCDirectorIOS sharedDirector]convertToGL:secondLocation];
         
         [userTouches addObject:[NSValue valueWithCGPoint:firstLocation]];
         [userTouches addObject:[NSValue valueWithCGPoint:secondLocation]];
@@ -300,16 +279,15 @@
         oldTouch = (UITouch*)[touches anyObject];
         _firstTouchTimeStamp = oldTouch.timestamp;
         _firstTouchLocInView = [oldTouch locationInView:[oldTouch view]];
-        [[CCDirector sharedDirector]convertToGL:_firstTouchLocInView];
+        [[CCDirectorIOS sharedDirector]convertToGL:_firstTouchLocInView];
         [self performSelector:@selector(verifiedTouchFromLocation:) withObject:[NSValue valueWithCGPoint:_firstTouchLocInView] afterDelay:MAX_ELAPSED_TIME];
         return;
-    }                                                                                                                                
+    }                                                                                                                               
     else if((_state == kStateTwoHandsHit) && (noTouchesInEvent== 2) ){
                 
-        isTouchInTime = TRUE;
+        _isTouchInTime = TRUE;
 
         UITouch *aTouch = (UITouch*)[touches anyObject];
-        if((aTouch.timestamp - _firstTouchTimeStamp) <= MAX_ELAPSED_TIME){
                         
             // S1 Ho ricevuto il secondo tocco entro la soglia MAX_ELAPSED_TIME
             
@@ -317,7 +295,7 @@
             
             CGPoint secondLocation = [aTouch locationInView:[aTouch view]];
             
-            [[CCDirector sharedDirector]convertToGL:secondLocation];
+            [[CCDirectorIOS sharedDirector]convertToGL:secondLocation];
             
             [userTouches addObject:[NSValue valueWithCGPoint:_firstTouchLocInView]];
             [userTouches addObject:[NSValue valueWithCGPoint:secondLocation]];
@@ -325,178 +303,169 @@
             [self handleHitsWithTouches:userTouches];
             
             _state = kStateOneTouchWaiting;
-            
-        }
-        else {
-            _firstTouchTimeStamp = aTouch.timestamp;
-            _firstTouchLocInView = [aTouch locationInView:[aTouch view]];
-        }
+        
     }
     else {
         
-        _state = kStateOneTouchWaiting;
         oldTouch = (UITouch*)[touches anyObject];
         _firstTouchTimeStamp = oldTouch.timestamp;
         _firstTouchLocInView = [oldTouch locationInView:[oldTouch view]];
-        [[CCDirector sharedDirector]convertToGL:_firstTouchLocInView];
-        [self handleHitWithTouch:_firstTouchLocInView];
+        [[CCDirectorIOS sharedDirector]convertToGL:_firstTouchLocInView];
+        //[self handleHitWithTouch:_firstTouchLocInView];
     }
         
 }
 
 #pragma mark -
-#pragma mark Handle Hit
+#pragma mark ===  Handle Hits  ===
+#pragma mark -
+
 
 -(void)handleHitWithTouch:(CGPoint)location 
 {
-    
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-
-    NSString * patternDescription = nil;
+    _patternIndex++;
             
-    if(patternIndex < [patternArray count]) patternDescription = [patternArray objectAtIndex:patternIndex];    
+    if(_patternIndex >= [patternArray count]) return;
         
+    NSString* patternDescription = [patternArray objectAtIndex:_patternIndex];    
+        
+    // Return the node hit
+    
     CharacterStates nodeHit = [self detectNodeFromTouch:location];
     
-    if (nodeHit == kStateLeftHandHit && patternDescription != nil){
-        
-        if (([patternDescription isEqualToString:@"sx"] || [patternDescription isEqualToString:@"sxCross"]) && [leftHand numberOfRunningActions] == 0)
+        // Compare with current item of pattern
+    
+        if (nodeHit == kStateLeftHandHit &&
+            ([patternDescription isEqualToString:@"sx"] ||
+             [patternDescription isEqualToString:@"sxCross"]))
         {
-         
-        patternIndex++;
-        [leftHand stopAllActions];
-        [leftHand runAction:
-         [CCAnimate actionWithAnimation:animationHandLeftOk]];
+                     
+        [_leftHand stopAllActions];
+        [_leftHand runAction:[CCAnimate actionWithAnimation:animationHandLeftOk]];
         
-            
-            [[feedHand objectAtIndex:feedIndex]
-             setDisplayFrame:[[animationFeedLeft frames] objectAtIndex:1]];
-            
-        feedIndex += 2;
+            CCSpriteFrame* frame = [[[animationFeedLeft frames] objectAtIndex:1] spriteFrame];
 
-                    
-        }else [self resetPatternWithNodeTouched:nodeHit];
-        
-    }else if(nodeHit == kStateRightHandHit && patternDescription != nil){
-        
-        if(([patternDescription isEqualToString:@"dx"] || [patternDescription isEqualToString:@"dxCross"]) && [rightHand numberOfRunningActions] == 0){
+            [[feedHand objectAtIndex:_feedIndex] setDisplayFrame:frame];
             
-        patternIndex++;
-        [rightHand stopAllActions];
-        [rightHand runAction:
-         [CCAnimate actionWithAnimation:animationHandRightOk]];
+            _feedIndex += 2;
+            
+        }else if(nodeHit == kStateRightHandHit && 
+           ([patternDescription isEqualToString:@"dx"] ||
+            [patternDescription isEqualToString:@"dxCross"])){
+            
+                [_rightHand stopAllActions];
+                [_rightHand runAction:[CCAnimate actionWithAnimation:animationHandRightOk]];
                  
-            [[feedHand objectAtIndex:feedIndex] 
-             setDisplayFrame:[[animationFeedRight frames] objectAtIndex:1]];
+                CCSpriteFrame* frame = [[[animationFeedRight frames] objectAtIndex:1] spriteFrame];
 
-            feedIndex += 2;
+                [[feedHand objectAtIndex:_feedIndex] setDisplayFrame:frame];
 
-                
-        }else [self resetPatternWithNodeTouched:nodeHit];
+                _feedIndex += 2;
+            
+                } else [self resetPatternWithNodeTouched:nodeHit];
     
+    if(_patternIndex == [patternArray count] - 1){
+        
+        CCSprite * fightButton = (CCSprite *)[_spriteBatchNode getChildByTag:kFightButtonTagValue];
+        fightButton.opacity = 255;
+
     }
-    
-    [self performSelector:@selector(startGamePlay) withObject:nil afterDelay:MAX_ELAPSED_TIME];
 
-    
 }
+
+
+// Handle Touches
 
 -(void)handleHitsWithTouches:(NSArray*)touches
 {
     
-    NSLog(@"%@", NSStringFromSelector(_cmd));
+    _patternIndex++;
 
-    NSString* patternDescription = [patternArray objectAtIndex:patternIndex];    
-
-    if ([patternDescription isEqualToString:@"end"]) return;
+    if(_patternIndex >= [patternArray count]) return;
+    
+    NSString* patternDescription = [patternArray objectAtIndex:_patternIndex];    
         
     if ([touches count] == 2) {
         
     CharacterStates nodesTouched = [self detectNodeFromTouches:touches];
-    
-    CCLOG(@"Nodo toccato:%i", nodesTouched);
-        
-    if(nodesTouched == kStateTwoHandsHit ){
-        
-        if([patternDescription isEqualToString:@"two"] && [leftHand numberOfRunningActions] == 0 && [rightHand numberOfRunningActions] == 0){
+                    
+        if(nodesTouched == kStateTwoHandsHit &&
+           [patternDescription isEqualToString:@"two"])
+        {
 
-            [[feedHand objectAtIndex:feedIndex] 
-             setDisplayFrame:[[animationFeedLeft frames] objectAtIndex:1]];
+            [[feedHand objectAtIndex:_feedIndex] 
+             setDisplayFrame:[[[animationFeedRight frames] objectAtIndex:1]spriteFrame]];
 
             
-            feedIndex++;
+            _feedIndex++;
             
+            CCSpriteFrame* frame = [[[animationFeedLeft frames] objectAtIndex:1] spriteFrame];
             
-            [[feedHand objectAtIndex:feedIndex]        
-             setDisplayFrame:[[animationFeedRight frames] objectAtIndex:1]];
+            [[feedHand objectAtIndex:_feedIndex]        
+             setDisplayFrame:frame];
 
             
-            feedIndex += 2;
+            _feedIndex += 2;
             
-            [leftHand stopAllActions];
-            [leftHand runAction:
+            [_leftHand stopAllActions];
+            [_leftHand runAction:
               [CCAnimate actionWithAnimation:animationHandLeftOk]];
             
-            [rightHand stopAllActions];
-            [rightHand runAction:
+            [_rightHand stopAllActions];
+            [_rightHand runAction:
              [CCAnimate actionWithAnimation:animationHandRightOk]];
-                
-            
-            patternIndex++;
-
-            [self performSelector:@selector(startGamePlay) withObject:nil afterDelay:MAX_ELAPSED_TIME];
-            
+                        
+        }else [self resetPatternWithNodeTouched:nodesTouched];
         
-        
-            }else [self resetPatternWithNodeTouched:nodesTouched];
-    
+        if(_patternIndex == [patternArray count] - 1) {
+            
+            CCSprite * fightButton = (CCSprite *)[_spriteBatchNode getChildByTag:kFightButtonTagValue];
+            fightButton.opacity = 255;
         }
+
     }
 
 }
 
+// Reset feed pattern
+
 -(void)resetPatternWithNodeTouched:(CharacterStates)nodeTouched
 {
     
-    isTouchInTime = FALSE;
-            
-    CCLOG(@"%@ %@", NSStringFromSelector(_cmd), self);
+    _isTouchInTime = FALSE;
+
+    _feedIndex = 0;
+    _patternIndex = -1;
         
-        feedIndex = 0;
-        patternIndex = 0;
-        
-        if (nodeTouched == kStateTwoHandsHit) {
+    if (nodeTouched == kStateTwoHandsHit) {
             
-            [leftHand runAction:[CCAnimate actionWithAnimation:animationHandLeftErr]];
+            [_leftHand runAction:[CCAnimate actionWithAnimation:animationHandLeftErr]];
             
-            [rightHand runAction:[CCAnimate actionWithAnimation:animationHandRightErr]];
+            [_rightHand runAction:[CCAnimate actionWithAnimation:animationHandRightErr]];
         }
         
-        else if (nodeTouched == kStateLeftHandHit) {
+        else if (nodeTouched == kStateLeftHandHit) 
             
-            [leftHand runAction:[CCAnimate actionWithAnimation:animationHandLeftErr]];
+                [_leftHand runAction:[CCAnimate actionWithAnimation:animationHandLeftErr]];
             
-        }else if(nodeTouched == kStateRightHandHit)
-        {
-            [rightHand runAction:[CCAnimate actionWithAnimation:animationHandRightErr]];
-        }
+                else if(nodeTouched == kStateRightHandHit)
+        
+                        [_rightHand runAction:[CCAnimate actionWithAnimation:animationHandRightErr]];
+        
 
     
     for (CCSprite* pat in feedHand) {
         
-        if (pat.tag == kHandFeedLeft) {
+        if (pat.tag == kHandFeedLeftTagValue) 
             
-            [pat setDisplayFrame:[[animationFeedLeft frames] objectAtIndex:0]];
+            [pat setDisplayFrame:[[[animationFeedLeft frames] objectAtIndex:0]spriteFrame]];
             
-        }else if(pat.tag == kHandFeedRight){
+        else if(pat.tag == kHandFeedRightTagValue)
             
-            [pat setDisplayFrame:[[animationFeedRight frames]objectAtIndex:0]];
-            
-            }
-        
+            [pat setDisplayFrame:[[[animationFeedRight frames]objectAtIndex:0]spriteFrame]];
         
         }
-    }
+}
     
 
 
@@ -504,31 +473,62 @@
 #pragma mark - Start Game Method
 
 -(void)startGamePlay {
-    
             
-    if (patternIndex == [patternArray count] || isLastLevel) {
-        
         CCLOG(@"Intro complete, asking Game Manager to start the Game play");
         
         [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
         
         self.isTouchEnabled = FALSE;
-        
-        patternIndex++;
-    }
-    
 }
 
 -(void)verifiedTouchFromLocation:(NSValue*)location{
+    
+    CGPoint pointLocation = [location CGPointValue];
+    
+    pointLocation = [[CCDirectorIOS sharedDirector] convertToGL:pointLocation];
+    pointLocation = [self convertToNodeSpace:pointLocation];
+    
+    CCSprite* fightButton = (CCSprite *)[_spriteBatchNode getChildByTag:kFightButtonTagValue];
+    
+    if (CGRectContainsPoint([fightButton boundingBox], pointLocation) && fightButton.opacity == 255) {
         
-    if (!isTouchInTime && patternIndex <= [patternArray count]) {
-                
-        [self handleHitWithTouch:_firstTouchLocInView];
+        self.isTouchEnabled = FALSE;
+        
+        [fightButton removeFromParentAndCleanup:YES];
+        [_leftHand removeFromParentAndCleanup:YES];
+        [_rightHand removeFromParentAndCleanup:YES];
+        
+        CGSize size = [CCDirectorIOS sharedDirector].winSize;
+
+        CCLabelBMFont* labelEnd = [CCLabelBMFont labelWithString:@"Don't forget the pattern" fntFile:FONTHIGHSCORES];
+        
+        [self addChild:labelEnd z:4];
+        
+        [labelEnd setPosition:ccp(size.width/2, size.height * 0.6)];
+        
+        CCLayerColor* darkLayer = (CCLayerColor *)[self getChildByTag:kDarkLayerIntroTagValue];
+        
+        [darkLayer runAction:[CCFadeIn actionWithDuration:1]];
+        
+        for (CCSprite* item in feedHand) {
+            
+            CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:ccp(item.position.x, size.height/2)];
+            
+            [item runAction:move];
+        }
+        
+        [self scheduleOnce:@selector(startGamePlay) delay:2];
+    }
+    
+    if (!_isTouchInTime) {
+        
+        
+        [self handleHitWithTouch:pointLocation];
         
         _state = kStateOneTouchWaiting;
     }
     
-    if (isLastLevel) {
+    if (_isLastLevel) {
         
         [self startGamePlay];
     }
@@ -545,19 +545,23 @@
     CGPoint firstLocation = [[touches objectAtIndex:0] CGPointValue];
     CGPoint secondLocation = [[touches objectAtIndex:1] CGPointValue];
     
-    if((CGRectContainsPoint([rightHand boundingBox], firstLocation) && 
-        CGRectContainsPoint([leftHand boundingBox], secondLocation)) || 
-       ((CGRectContainsPoint([rightHand boundingBox], secondLocation) && 
-         CGRectContainsPoint([leftHand boundingBox], firstLocation))))
+    if((CGRectContainsPoint([_rightHand boundingBox], firstLocation) && 
+        CGRectContainsPoint([_leftHand boundingBox], secondLocation)) || 
+       ((CGRectContainsPoint([_rightHand boundingBox], secondLocation) && 
+         CGRectContainsPoint([_leftHand boundingBox], firstLocation))))
         
     nodeHits =  kStateTwoHandsHit;
     
 
-    else if (CGRectContainsPoint([rightHand boundingBox], firstLocation) || CGRectContainsPoint([rightHand boundingBox], secondLocation))nodeHits = kStateRightHandHit;
+    else if (CGRectContainsPoint([_rightHand boundingBox], firstLocation) ||
+             CGRectContainsPoint([_rightHand boundingBox], secondLocation))
+                    nodeHits = kStateRightHandHit;
         
-    else if (CGRectContainsPoint([leftHand boundingBox], firstLocation)|| CGRectContainsPoint([leftHand boundingBox], secondLocation))nodeHits =  kStateLeftHandHit;
+        else if (CGRectContainsPoint([_leftHand boundingBox], firstLocation)||
+                 CGRectContainsPoint([_leftHand boundingBox], secondLocation))
+                    nodeHits =  kStateLeftHandHit;
         
-    else nodeHits = kStateHitBackground;
+                else nodeHits = kStateHitBackground;
     }
 
     
@@ -570,9 +574,9 @@
 
     CharacterStates nodeHit;
     
-    if (CGRectContainsPoint([rightHand boundingBox], touch))nodeHit = kStateRightHandHit;
+    if (CGRectContainsPoint([_rightHand boundingBox], touch))nodeHit = kStateRightHandHit;
     
-    else if (CGRectContainsPoint([leftHand boundingBox], touch))nodeHit =  kStateLeftHandHit;
+    else if (CGRectContainsPoint([_leftHand boundingBox], touch))nodeHit =  kStateLeftHandHit;
     
     else nodeHit = kStateHitBackground;
     
@@ -580,71 +584,64 @@
 
 }
 
--(void)showActorAndName{
-    
-    
-    CCSprite* player = (CCSprite *)[self getChildByTag:13];
-    
-    CCFadeIn* fade = [CCFadeIn actionWithDuration:0.2];
-        
-    [player runAction:fade];
-       
-    [self scheduleUpdate];
-}
-
--(void) update:(ccTime)delta
-{
-    CCSprite* player = (CCSprite *)[self getChildByTag:13];
-    
-    if ([player numberOfRunningActions] == 0) {
-        
-        [self unscheduleUpdate];
-        [self showButtonAndFeed];
-    }
-}
-
-
 -(void)showButtonAndFeed{
     
-    CGSize winSize = [[CCDirector sharedDirector]winSize];
+    CGSize size = [[CCDirectorIOS sharedDirector] winSize];
     
-    if (!isLastLevel) {
+    // Check if is last level
+    
+    if (!_isLastLevel) {
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:
-         [NSString stringWithString:@"IntroButtAndFeed.plist"]];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"IntroButtAndFeed.plist"];
         
-        _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:
-                           [NSString stringWithFormat:@"IntroButtAndFeed.png"]];
+        _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"IntroButtAndFeed.png"];
         
-        [self addChild:_spriteBatchNode z:0 tag:100];
-
+        [self addChild:_spriteBatchNode z:kSpriteBatchNodeIntroZValue tag:kSpriteBatchNodeIntroTagValue];
         
-        [self feedPattern];
+        //Load animation for Hands
         
         [self loadAnimation];
         
-        rightHand = [CCSprite spriteWithSpriteFrameName:
+        // Set Pattern
+        
+        [self feedPattern];
+        
+        // Add Right Hand
+        
+        _rightHand = [CCSprite spriteWithSpriteFrameName:
                      [NSString stringWithString:@"intro_btn_dx_01.png"]];
         
-        [_spriteBatchNode addChild:rightHand z:1000];
+        [_spriteBatchNode addChild:_rightHand z:kRightHandZValue tag:kRightHandTagValue];
         
-        [rightHand setPosition:ccp(winSize.width/2 - 150, winSize.height/2)];
+        [_rightHand setPosition:ccp(size.width * 0.19f, size.height * 0.5f)];
         
-        leftHand = [CCSprite spriteWithSpriteFrameName:
+        
+        // Add Left Hand
+        
+        _leftHand = [CCSprite spriteWithSpriteFrameName:
                     [NSString stringWithString:@"intro_btn_sx_01.png"]];
         
-        [_spriteBatchNode addChild:leftHand z:1000];
+        [_spriteBatchNode addChild:_leftHand z:kLeftHandZvalue tag:kLeftHandTagValue];
         
-        [leftHand setPosition:ccp(winSize.width/2 + 150, winSize.height/2)];
+        [_leftHand setPosition:ccp(size.width * 0.81f, size.height * 0.5f)];
+        
+        CCSprite* fightButton = [CCSprite spriteWithSpriteFrameName:@"fight_btn.png"];
+        fightButton.opacity = 0;
+        
+        [_spriteBatchNode addChild:fightButton z:kFightButtonZValue tag:kFightButtonTagValue];
+        
+        [fightButton setPosition:ccp(size.width - fightButton.contentSize.width * 0.6f, 0)];
+        
+        [fightButton setAnchorPoint:ccp(0.5f, 0)];
         
     }
     else{
         
-        CCLabelTTF* label = [CCLabelTTF labelWithString:@"????" fontName:@"Marker Felt" fontSize:20];
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"????" fntFile:@"Marker Felt"];
         
         [self addChild:label];
         
-        [label setPosition:ccp(winSize.width/2, winSize.height - label.boundingBox.size.height + 10)];
+        [label setPosition:ccp(size.width * 0.5f, size.height * 0.97f - label.boundingBox.size.height)];
         
     }
     
@@ -652,54 +649,6 @@
     
     
 }
-
-
--(int)getPositionX{
-    
-    int x = 0;
-    
-    int currentLevel = [[GameManager sharedGameManager] currentLevel];
-    
-    switch (currentLevel) {
-            
-        case 1:
-            x = 330;
-            break;
-        case 2:
-            x = 316;
-            break;
-        case 3:
-            x = 328;
-            break;
-        case 5:
-            x= 286;
-            break;
-        case 6:
-            x = 304;
-            break;
-        case 7:
-            x = 302;
-            break;
-        case 8:
-            x = 336;
-            break;
-        case 10:
-            x = 188;
-            break;
-        case 11:
-            x= 238;
-            break;
-        case 12:
-            x= 320;
-            break;
-        default:
-            break;
-    }
-    
-    
-    return x;
-}
-
 
 
 @end

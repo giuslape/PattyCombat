@@ -31,7 +31,6 @@
 #define kSecondPurchaseItemZValue 3
 #define kThirdPurchaseItemTagValue 3
 #define kThirdPurchaseItemZValue 3
-#define kSpriteBatchNodeMenuZValue 3
 #define kLabelCoinsReachedTagValue 25
 #define kLabelCoinsReachedZValue 3
 
@@ -74,27 +73,47 @@
 #define kDarkLayerZValue 2
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////   Intro   ///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#define kSpriteBatchNodeIntroTagValue 10
+#define kSpriteBatchNodeIntroZValue 3
+#define kHandFeedRightTagValue 11
+#define kHandFeedRightZValue 3
+#define kHandFeedLeftTagValue 12
+#define kHandFeedLeftZValue 3
+#define kArrowFeedTagValue 13
+#define kLeftHandTagValue 14
+#define kLeftHandZvalue 1
+#define kRightHandZValue 1
+#define kRightHandTagValue 15
+#define kFightButtonTagValue 16
+#define kFightButtonZValue 1
+#define kDarkLayerIntroTagValue 17
+#define kDarkValueIntroZValue 3
+
+
+
+
 #define GAMETIME 43
 #define GAMETIMEBONUSLEVEL 10
 #define DELAY 12
 #define INTERVAL 0.50f
-#define MAX_ELAPSED_TIME 0.08f
+#define MAX_ELAPSED_TIME 0.1f
 #define kPlayerTagValue 0
 #define kPlayerZValue 1
-#define kLeftHandZvalue 101
-#define kLeftHandTagValue 1
-#define kRightHandZValue 101
-#define kRightHandTagValue 2
+
 #define kBellTagValue 20
+#define kBellZValue 0
 #define kHealthTagValue 21
 #define kHealthZValue 2
-#define kBellZValue 0
 #define kLabelScoreTagValue 22
 #define kNextLevelLabelTagValue 25
 #define kLabelScoreZValue 0
-#define kHandFeedRight 90
-#define kHandFeedLeft 91
-#define kArrow 92
+
 #define kScore 1
 #define kWallTagValue 1
 #define kWallZValue 1

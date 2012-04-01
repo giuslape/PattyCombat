@@ -16,6 +16,14 @@
     CharacterStates _state;
     CGPoint _firstTouchLocInView;
     NSTimeInterval _firstTouchTimeStamp;
+    
+    CCSprite* _leftHand;
+    CCSprite* _rightHand;
+    
+    BOOL _isTouchInTime;
+    BOOL _isLastLevel;
+    int _patternIndex;
+    int _feedIndex;
 
 }
 
@@ -31,7 +39,6 @@
 
 -(void)handleHitWithTouch:(CGPoint)location;
 -(void)handleHitsWithTouches:(NSArray*)touches;
--(void)showActorAndName;
 -(void)showButtonAndFeed;
 
 @end

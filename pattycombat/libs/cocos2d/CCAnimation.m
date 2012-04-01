@@ -113,7 +113,7 @@
 
 		self.frames = [NSMutableArray arrayWithCapacity:[array count]];
 		
-		for( CCSpriteFrame *frame in array ) {
+		for(CCSpriteFrame *frame in array ) {
 			CCAnimationFrame *animFrame = [[CCAnimationFrame alloc] initWithSpriteFrame:frame delayUnits:1 userInfo:nil];
 			
 			[self.frames addObject:animFrame];

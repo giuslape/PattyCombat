@@ -50,7 +50,7 @@
             
         case kStateBellUpdate:
         {
-            [self setDisplayFrame:[[_bellAnimation frames]objectAtIndex:currentFrame]];
+            [self setDisplayFrame:[[[_bellAnimation frames]objectAtIndex:currentFrame]spriteFrame]];
             currentFrame = currentFrame+1 % [[_bellAnimation frames] count];
             
             break;
@@ -72,7 +72,7 @@
         }
         case kStateBellStart:
             
-            [self setDisplayFrame:[[_bellAnimation frames]lastObject]];
+            [self setDisplayFrame:[[[_bellAnimation frames]lastObject] spriteFrame]];
             [self changeState:[NSNumber numberWithInt:kStateBellGong]];
             break;
             

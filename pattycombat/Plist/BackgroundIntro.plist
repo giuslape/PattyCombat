@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>Intro1</key>
-	<string>myaghi_intro_bg.png</string>
+	<string>miaghi_intro_bg.png</string>
 	<key>Intro2</key>
-	<string>crocodile_intro_bg.png</string>
+	<string>johnny_intro_bg.png</string>
 	<key>Intro3</key>
 	<string>cinziah_intro_bg.png</string>
 	<key>Intro5</key>
 	<string>maa_intro_bg.png</string>
 	<key>Intro6</key>
-	<string>joco_intro_bg.png</string>
+	<string>jocopoco_intro_bg.png</string>
 	<key>Intro7</key>
 	<string>jenny_intro_bg.png</string>
 	<key>Intro8</key>
-	<string>bud_intro_bg.png</string>
+	<string>charlie_intro_bg.png</string>
 	<key>Intro10</key>
-	<string>Jeanpaul_intro_bg.png</string>
+	<string>jeanpaul_intro_bg.png</string>
 	<key>Intro11</key>
 	<string>steven_intro_bg.png</string>
 	<key>Intro12</key>

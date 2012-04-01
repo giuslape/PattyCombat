@@ -43,6 +43,7 @@ static NSString* kAppId = @"321845184543524";
     //Audio Init
     [[GameManager sharedGameManager] setupAudioEngine];
     
+    //[glView setMultipleTouchEnabled:YES];
     
     // Facebook Init
     
@@ -95,7 +96,6 @@ static NSString* kAppId = @"321845184543524";
     
     [[GCHelper sharedInstance] authenticateLocalUser];
 
-
 	director_.wantsFullScreenLayout = YES;
 
 	// Display FSP and SPF
@@ -109,6 +109,7 @@ static NSString* kAppId = @"321845184543524";
 
 	// for rotation and other messages
 	[director_ setDelegate:self];
+    
 
 	// 2D projection
 	[director_ setProjection:kCCDirectorProjection2D];

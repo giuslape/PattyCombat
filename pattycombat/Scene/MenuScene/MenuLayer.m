@@ -751,6 +751,8 @@
 
 -(void)playGame{
     
+    CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
+    mainMenu.isTouchEnabled = false;
     self.isTouchEnabled = FALSE;
     
     [[GameManager sharedGameManager] runSceneWithID:kIntroScene];
