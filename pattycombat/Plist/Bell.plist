@@ -9,7 +9,7 @@
 		<key>delay</key>
 		<real>0.1</real>
 		<key>filenamePrefix</key>
-		<string>gong00</string>
+		<string>gong_00</string>
 	</dict>
 	<key>gongAnimation</key>
 	<dict>
@@ -18,7 +18,7 @@
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>gong00</string>
+		<string>gong_00</string>
 	</dict>
 </dict>
 </plist>

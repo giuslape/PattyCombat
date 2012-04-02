@@ -75,7 +75,7 @@
     
     Bell* tempBell = (Bell *)[_commonElements getChildByTag:kBellTagValue];
     
-    [tempBell changeState:[NSNumber numberWithInt:kStateBellGong]];
+    [tempBell changeState:[NSNumber numberWithInt:kStateBellGongFinish]];
     
        
     [_delegate gameOverHandler:bar.characterState withScore:[NSNumber numberWithInt:_score] andPlayerIsDead:([bar progress] > _threshold ? YES : NO) fromLayer:self];
@@ -83,7 +83,7 @@
     }
 
 
--(void)bellDidFinish:(Bell *)bell{
+-(void)bellDidFinishTime:(Bell *)bell{
     
     NSLog(@"%@", NSStringFromSelector(_cmd));
     
@@ -134,7 +134,7 @@
     if (kObjectTypeBell == objectType) {
         
         CCLOG(@"Creating the Bell");
-        Bell* bell = [Bell spriteWithSpriteFrameName:@"gong0001.png"];
+        Bell* bell = [Bell spriteWithSpriteFrameName:@"gong_0001.png"];
         [bell setPosition:spawnLocation];
         [_commonElements addChild:bell z:ZValue tag:kBellTagValue];
         
@@ -180,7 +180,7 @@
         
         _barProgress = 0;
         
-        CGSize winSize = [[CCDirectorIOS sharedDirector]winSize];
+        CGSize size = [[CCDirectorIOS sharedDirector]winSize];
         
         isPause = FALSE;
         
@@ -199,16 +199,41 @@
                       withZValue:kHealthZValue];
         
         [self createObjectOfType:kObjectTypeScoreLabel
-                      atLocation:ccp(945/2, winSize.height - 46)
+                      atLocation:ccp(945/2, size.height - 46)
                       withZValue:kLabelScoreZValue];
-        
         
         _pauseButton = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"pause_btn.png"]];
         
         [_commonElements addChild:_pauseButton z:10 tag:11];
         
-        _pauseButton.position = ccp(winSize.width - 20, 20);
+        _pauseButton.position = ccp(size.width - 20, 20);
 
+        CCMenuItemSprite* resume = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"resume_btn.png"] 
+                                                           selectedSprite:[CCSprite spriteWithSpriteFrameName:@"resume_btn_over.png"] 
+                                                                   target:self 
+                                                                        selector:@selector(resumeGame:)];
+        
+        CCMenuItemSprite* restart = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn.png"] 
+                                                            selectedSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn_over.png"] 
+                                                                    target:self
+                                                                        selector:@selector(restartTapped:)];
+        
+        CCMenuItemSprite* mainMenu = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"giveup_btn.png"] 
+                                                             selectedSprite:[CCSprite spriteWithSpriteFrameName:@"giveup_btn_over.png"] 
+                                                                     target:self 
+                                                                        selector:@selector(mainMenu:)];
+        
+        CCMenu *pauseMenu = [CCMenu menuWithItems:resume,restart,mainMenu, nil];
+        
+        [pauseMenu alignItemsVerticallyWithPadding:20];
+        
+        [self addChild:pauseMenu z:10 tag:10];
+        
+        pauseMenu.opacity = 0;
+        
+        pauseMenu.position = ccp(size.width/2,size.height/2);
+        
+        pauseMenu.isTouchEnabled = FALSE;
         
     }
     return self;
@@ -224,32 +249,18 @@
     if (!isPause) {
         
     isPause = TRUE;
-        
-    CGSize winSize = [[CCDirectorIOS sharedDirector]winSize];
-    
+            
     NSLog(@"on pause");
     
     [[CDAudioManager sharedManager] pauseBackgroundMusic];
         
     [[CCDirectorIOS sharedDirector] pause];
-            
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
-    
-    CCMenuItemImage* resume = [CCMenuItemImage itemWithNormalImage:@"resume_btn.png" selectedImage:@"resume_btn.png" target:self selector:@selector(resumeGame:)];
-    
-    CCMenuItemImage* restart = [CCMenuItemImage itemWithNormalImage:@"restart_btn.png" selectedImage:@"restart_btn.png" target:self selector:@selector(restartTapped:)];
-    
-    CCMenuItemImage* mainMenu = [CCMenuItemImage itemWithNormalImage:@"main_menu_btn.png" selectedImage:@"main_menu_btn.png" target:self selector:@selector(mainMenu:)];
-    
-    CCMenu *pauseMenu = [CCMenu menuWithItems:resume,restart,mainMenu, nil];
-    
-    [pauseMenu alignItemsVerticallyWithPadding:20];
-    
-    [self addChild:pauseMenu z:10 tag:10];
-    
-    pauseMenu.position = ccp(winSize.width/2,winSize.height/2);
-    
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:10];
+        
+        pauseMenu.opacity = 255;
+        
+        pauseMenu.isTouchEnabled = TRUE;
             
     }
 
@@ -261,9 +272,10 @@
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:10];
     
+    pauseMenu.opacity = 0;
+            
+    pauseMenu.isTouchEnabled = FALSE;
     
-    [self removeChild: pauseMenu cleanup:YES]; 
-        
     [[CCDirectorIOS sharedDirector] resume];
     [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
     

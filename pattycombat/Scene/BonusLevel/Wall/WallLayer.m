@@ -370,7 +370,7 @@
     
     if (indexSprite >= 6) {
         
-        [tempChar changeState:[NSNumber numberWithInt:kStateBellGong]];
+        [tempChar changeState:[NSNumber numberWithInt:kStateBellGongFinish]];
 
     }
     

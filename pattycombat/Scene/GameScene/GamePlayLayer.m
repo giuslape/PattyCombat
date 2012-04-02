@@ -15,15 +15,10 @@
 @interface GamePlayLayer ()
 
 @property (assign)CharacterStates state;
-@property (nonatomic, strong)CCLabelBMFont* labelScore;
 @property (readwrite) NSTimeInterval firstTouchTimeStamp;
 @property (readwrite) CGPoint firstTouchLocInView;
-@property (readwrite) BOOL isTouchInTime;
-@property (readwrite) int countDown;
+@property (nonatomic, strong)CCLabelBMFont* labelScore;
 @property (nonatomic, strong)NSString * backgroundTrack;
-@property int count;
-@property (readonly)int bpm;
-@property double currentTime;
 @property (nonatomic, strong)NSString* namePlayer;
 
 -(void)verifiedTouchFromLocation:(NSValue*)location;
@@ -34,12 +29,7 @@
 @synthesize state;
 @synthesize firstTouchTimeStamp;
 @synthesize firstTouchLocInView;
-@synthesize isTouchInTime;
-@synthesize countDown;
 @synthesize labelScore;
-@synthesize count;
-@synthesize currentTime;
-@synthesize bpm;
 @synthesize backgroundTrack;
 @synthesize namePlayer;
 @synthesize player = _player;
@@ -50,7 +40,6 @@
 
 -(void) update:(ccTime)deltaTime
 {
-
     [_player updateStateWithDeltaTime:deltaTime];
     [_hudLayer updateStateWithDelta:deltaTime];
     
@@ -61,11 +50,9 @@
 - (void)dealloc {
     
     NSLog(@"%@ , %@",NSStringFromSelector(_cmd), self);
-   
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.png"];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.plist"];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
-    
 }
 
 
@@ -127,9 +114,10 @@
     
     if (self) {
                                     
-        self.countDown = 15;
-        currentTime = 0;
-        count = 1;
+        _countDown = 15;
+        
+        _currentTime = 0;
+        _count = 1;
                 
         id dao = [GameManager sharedGameManager].dao;
         
@@ -141,7 +129,7 @@
         
         NSDictionary* playerSettings = [sceneObjects objectForKey:@"player"];
                 
-        bpm = [[playerSettings objectForKey:@"bpm"] intValue];
+        _bpm = [[playerSettings objectForKey:@"bpm"] intValue];
 
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
 
@@ -210,7 +198,7 @@
     
     else if((state!= kStateTwoHandsHit)&&((noTouchesBegan == 1)&&(noTouchesInEvent == 1))){
         
-        isTouchInTime = FALSE;
+        _isTouchInTime = FALSE;
         
         state = kStateTwoHandsHit; // S2 ho ricevuto il primo tocco e aspetto il secondo
         oldTouch = (UITouch *)[touches anyObject];
@@ -227,7 +215,7 @@
     }                                                                                                                                
     else if((state == kStateTwoHandsHit) && (noTouchesInEvent== 2) ){
         
-        isTouchInTime = TRUE;
+        _isTouchInTime = TRUE;
         
         UITouch *aTouch = (UITouch*)[touches anyObject];
         if((aTouch.timestamp - firstTouchTimeStamp) <= MAX_ELAPSED_TIME){
@@ -268,7 +256,7 @@
 
 -(void)verifiedTouchFromLocation:(NSValue*)location{
         
-    if (!isTouchInTime){
+    if (!_isTouchInTime){
         
         CGPoint loc = [location CGPointValue];
         
@@ -303,24 +291,24 @@
 
 -(void)countDown:(ccTime)delta{
     
-    currentTime += delta;
+    _currentTime += delta;
     
-    if ((count * (60.0 / bpm)) <= currentTime) {
+    if ((_count * (60.0 / _bpm)) <= _currentTime) {
         
-    count++;
+    _count++;
         
-    self.countDown --;
+    _countDown --;
     
     CCLabelBMFont* label = (CCLabelBMFont*)[self getChildByTag:300];
    
-     if(self.countDown <= 3){
+     if(_countDown <= 3){
          
-         NSString *tempString = [NSString stringWithFormat:@"%d", self.countDown];
+         NSString *tempString = [NSString stringWithFormat:@"%d", _countDown];
          [label setString:tempString];
         
     }
     
-    if (self.countDown == 0) {
+    if (_countDown == 0) {
         
         [self removeChild:label cleanup:YES];
         

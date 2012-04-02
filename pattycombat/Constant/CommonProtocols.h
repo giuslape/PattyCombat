@@ -28,14 +28,19 @@ typedef enum{
     kStateTwoHandsHit,
     kStateHitBackground,
     kStateOneTouchWaiting,
-    kStateBellUpdate,
-    kStateBellGong,
-    kStateBellStart,
-    kStateBellFinish,
     kStateHealthIsEmpty,
     kStateHealthUpThreshold,
     kStateHealthIdle
 }CharacterStates;
+
+typedef enum{
+    
+    kStateBellUpdate,
+    kStateBellGongFinish,
+    kStateBellStart,
+    kStateBellFinish,
+    
+}BellStates;
 
 
 typedef enum{

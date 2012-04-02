@@ -11,12 +11,6 @@
 
 @interface Bell ()
 
-    @property (readwrite)float elapsedTime;
-    @property (readwrite)float currentFrame;
-    @property (readwrite)float delayBetweenFrames;
-    @property (readwrite)float oldElapsedTime;
-    @property (readwrite)float gameTime;
-    @property (readwrite)BOOL  isBonusLevel;
 
 @end
 
@@ -24,67 +18,59 @@
 
 @synthesize bellAnimation = _bellAnimation;
 @synthesize gongAnimation = _gongAnimation;
-@synthesize elapsedTime, currentFrame, delayBetweenFrames,oldElapsedTime;
-@synthesize isBonusLevel;
-@synthesize gameTime;
 @synthesize delegate = _delegate;
 
 - (void)dealloc 
 {
-    
-    [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
-    [[CCTextureCache sharedTextureCache]         removeUnusedTextures];
+    NSLog(@"%@", NSStringFromSelector(_cmd)); 
 }
 
 
 -(void)changeState:(NSNumber *)newState
 {
     
-    CharacterStates state = (CharacterStates)[newState intValue];
+    BellStates state = (BellStates)[newState intValue];
     id action = nil;
     id changeCharacter = nil;
     id sequence = nil;
     [self setCharacterState:state];
     
     switch (state) {
-            
+          
+        case kStateBellStart: 
+            PLAYSOUNDEFFECT(BELL);
+            action = [CCAnimate actionWithAnimation:_gongAnimation];
+            break;
+      
         case kStateBellUpdate:
-        {
-            [self setDisplayFrame:[[[_bellAnimation frames]objectAtIndex:currentFrame]spriteFrame]];
-            currentFrame = currentFrame+1 % [[_bellAnimation frames] count];
+        
+            [self setDisplayFrame:[[[_bellAnimation frames]objectAtIndex:_currentFrame]spriteFrame]];
+            _currentFrame = _currentFrame+1 % [[_bellAnimation frames] count];
             
             break;
-        }
-        case kStateBellGong:
-        {
+        
+        case kStateBellGongFinish:{
             PLAYSOUNDEFFECT(BELL);
             changeCharacter = [CCCallBlock actionWithBlock:
                             (^{
                 
                             [self setCharacterState:kStateBellFinish]; 
-                            [_delegate bellDidFinish:self];
-                
+                            [_delegate bellDidFinishTime:self];
+        
             })];
             action = [CCAnimate actionWithAnimation:_gongAnimation];
             sequence =[CCSequence actionOne:changeCharacter two:action];
-
             break;
         }
-        case kStateBellStart:
-            
-            [self setDisplayFrame:[[[_bellAnimation frames]lastObject] spriteFrame]];
-            [self changeState:[NSNumber numberWithInt:kStateBellGong]];
-            break;
-            
-        default:{
+        default:
             CCLOG(@"Unhandled state %d in Bell", state);
-            break;}
+            break;
     }
-    if (action != nil) {
-        
-        [self runAction:sequence];
+    
+    if (sequence != nil) [self runAction:sequence];
+    else if (action != nil) [self runAction:action];
 
-    }
+    
 }
 
 -(void)updateStateWithDeltaTime:(ccTime)deltaTime
@@ -92,26 +78,33 @@
     
     if ([self characterState] == kStateBellFinish) return;
     
+    // init scheduler
     
-    elapsedTime += deltaTime;
+    if (_elapsedTime == 0) {
+        
+        [self changeState:[NSNumber numberWithInt:kStateBellStart]];
+    }
     
-    float diff = elapsedTime - oldElapsedTime;
+    // Check how time is elapsed
     
-    if (diff >= delayBetweenFrames) {
+    _elapsedTime += deltaTime;
+    
+    float diff = _elapsedTime - _oldElapsedTime;
+    
+    if (diff >= _delayBetweenFrames) {
         
         [self changeState:[NSNumber numberWithInt:kStateBellUpdate]];
-        oldElapsedTime = elapsedTime;
+        _oldElapsedTime = _elapsedTime;
 
     }
-    else if (elapsedTime >= gameTime &&
-             [self isFrameDisplayed:[[_bellAnimation frames] lastObject]]) 
+    else if (_elapsedTime >= _gameTime &&
+             [self isFrameDisplayed:[[[_bellAnimation frames] lastObject]spriteFrame]]) 
     {
         
-        [self changeState:[NSNumber numberWithInt:kStateBellGong]];
+        [self changeState:[NSNumber numberWithInt:kStateBellGongFinish]];
         
     }
         
-            
 }
 
 
@@ -131,17 +124,14 @@
     if( (self=[super initWithTexture:texture rect:rect]))
         
     {
-        
         self.gameObjectType = kObjectTypeBell;
         [self initAnimations];
-        elapsedTime = 0;
-        currentFrame = 0;
-        oldElapsedTime = 0;
-        isBonusLevel = [[GameManager sharedGameManager] isBonusLevel];
-        gameTime = (isBonusLevel) ? GAMETIMEBONUSLEVEL : GAMETIME;
-        delayBetweenFrames = (float)gameTime /[[_bellAnimation frames] count];
-
-        
+        _elapsedTime = 0;
+        _currentFrame = 0;
+        _oldElapsedTime = 0;
+        _isBonusLevel = [[GameManager sharedGameManager] isBonusLevel];
+        _gameTime = (_isBonusLevel) ? GAMETIMEBONUSLEVEL : GAMETIME;
+        _delayBetweenFrames = (float)_gameTime /[[_bellAnimation frames] count];
     }
     return self;
 }

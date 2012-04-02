@@ -55,7 +55,7 @@
 
 -(void)barDidEmpty:(GPBar *)bar;
 
--(void)bellDidFinish:(Bell *)bell;
+-(void)bellDidFinishTime:(Bell *)bell;
 
 -(void)updateHealthBar:(BOOL)touch;
 

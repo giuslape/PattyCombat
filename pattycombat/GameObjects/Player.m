@@ -171,25 +171,25 @@
     
     if (handIsOpen) {
         
-        if ([leftHand isFrameDisplayed:[[manoSinistraApre frames]objectAtIndex:2]]
+        if ([leftHand isFrameDisplayed:[[[manoSinistraApre frames]objectAtIndex:2]spriteFrame]]
             && CGRectContainsPoint(rectLeft, location)) {
             
             [self changeState:[NSNumber numberWithInt:kStateLeftHandHit]];
             touchOk = YES;
             
-        }else if(([rightHand isFrameDisplayed:[[manoDestraApre frames]objectAtIndex:2]])
+        }else if(([rightHand isFrameDisplayed:[[[manoDestraApre frames]objectAtIndex:2]spriteFrame]])
             && CGRectContainsPoint(rectRight, location)){
             
             [self changeState:[NSNumber numberWithInt:kStateRightHandHit]];
             touchOk = YES;
             
-        }else if ([leftHand isFrameDisplayed:[[manoSinistraCrossApre frames]objectAtIndex:2]]
+        }else if ([leftHand isFrameDisplayed:[[[manoSinistraCrossApre frames]objectAtIndex:2]spriteFrame]]
                    && CGRectContainsPoint(rectLeftCross, location)) {
             
             [self changeState:[NSNumber numberWithInt:kStateLeftCrossHandHit]];
             touchOk = YES;
             
-        }else if([rightHand isFrameDisplayed:[[manoDestraCrossApre frames]objectAtIndex:2]] 
+        }else if([rightHand isFrameDisplayed:[[[manoDestraCrossApre frames]objectAtIndex:2]spriteFrame]] 
                  && CGRectContainsPoint(rectRightCross, location)){
             
             [self changeState:[NSNumber numberWithInt:kStateRightCrossHandHit]];
@@ -223,10 +223,10 @@
     
     if (handsAreOpen) {
         
-        if (([leftHand isFrameDisplayed:[[manoSinistraApre frames]objectAtIndex:frameForDoubleTouch]]
+        if (([leftHand isFrameDisplayed:[[[manoSinistraApre frames]objectAtIndex:frameForDoubleTouch]spriteFrame]]
             && (CGRectContainsPoint(rectLeft, firstLocation) 
             || CGRectContainsPoint(rectLeft, secondLocation)))
-            && ([rightHand isFrameDisplayed:[[manoDestraApre frames]objectAtIndex:frameForDoubleTouch]]
+            && ([rightHand isFrameDisplayed:[[[manoDestraApre frames]objectAtIndex:frameForDoubleTouch]spriteFrame]]
             && (CGRectContainsPoint(rectRight, secondLocation)
             || CGRectContainsPoint(rectRight, firstLocation))))
         {
