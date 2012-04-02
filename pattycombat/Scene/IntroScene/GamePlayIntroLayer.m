@@ -67,9 +67,7 @@
         _isLastLevel = [[GameManager sharedGameManager] isLastLevel];
         
         [[CCDirectorIOS sharedDirector].view setMultipleTouchEnabled:YES];
-        
-      //  CGSize size = [CCDirectorIOS sharedDirector].winSize;
-        
+                
         CCLayerColor* layer = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];
                 
         [self addChild:layer z:kDarkValueIntroZValue tag:kDarkLayerIntroTagValue];
@@ -488,11 +486,15 @@
     pointLocation = [[CCDirectorIOS sharedDirector] convertToGL:pointLocation];
     pointLocation = [self convertToNodeSpace:pointLocation];
     
+    // Check is touch is on fight button
+    
     CCSprite* fightButton = (CCSprite *)[_spriteBatchNode getChildByTag:kFightButtonTagValue];
     
     if (CGRectContainsPoint([fightButton boundingBox], pointLocation) && fightButton.opacity == 255) {
         
         self.isTouchEnabled = FALSE;
+        
+        // Remove Sprite unused
         
         CCSprite* arrowLeft = (CCSprite *)[self getChildByTag:kArrowLeftTutorialTagValue];
         CCSprite* arrowRight = (CCSprite *)[self getChildByTag:kArrowRightTutorialTagValue];
@@ -504,6 +506,8 @@
         [fightButton removeFromParentAndCleanup:YES];
         [_leftHand removeFromParentAndCleanup:YES];
         [_rightHand removeFromParentAndCleanup:YES];
+        
+        // Add animation 
         
         CGSize size = [CCDirectorIOS sharedDirector].winSize;
 
@@ -529,6 +533,8 @@
         return;
     }
     
+    
+    
     if (!_isTouchInTime) {
         
         [self handleHitWithTouch:pointLocation];
@@ -541,6 +547,9 @@
         [self startGamePlay];
     }
 }
+
+
+// Detect which hands are touched by 2 tap
 
 -(CharacterStates)detectNodeFromTouches:(NSArray*)touches{
     
@@ -575,6 +584,9 @@
     
     return nodeHits;
 }
+
+
+// Detect whic hand is touched by 1 tap
 
 -(CharacterStates)detectNodeFromTouch:(CGPoint)touch{
     
