@@ -94,6 +94,11 @@
 #define kFightButtonZValue 1
 #define kDarkLayerIntroTagValue 17
 #define kDarkValueIntroZValue 3
+#define kLabelTutorialTagValue 18
+#define kLabelTutorialZValue 3
+#define kArrowLeftTutorialTagValue 19
+#define kArrowRightTutorialTagValue 20
+#define kArrowsTutorialZValue 3
 
 
 

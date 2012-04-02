@@ -20,9 +20,10 @@
 
 static GameManager* _sharedGameManager = nil;         
 
-@synthesize currentLevel;
-@synthesize currentScore;
-@synthesize namePlayer;
+@synthesize currentLevel = _currentLevel;
+@synthesize currentScore = _currentScore;
+@synthesize totalScore   = _totalScore;
+@synthesize namePlayer   = _namePlayer;
 @synthesize hasPlayerDied;
 @synthesize bestScore;
 @synthesize dao;
@@ -35,7 +36,6 @@ static GameManager* _sharedGameManager = nil;
 @synthesize elapsedTime;
 @synthesize isLastLevel;
 @synthesize isBonusLevel;
-@synthesize totalScore;
 @synthesize levelReached = _levelReached;
 
 +(GameManager*)sharedGameManager {
@@ -76,7 +76,8 @@ static GameManager* _sharedGameManager = nil;
 
 
 
--(id)init {                                                        
+-(id)init {  
+    
     self = [super init];
     
     if (self != nil) {
@@ -90,7 +91,7 @@ static GameManager* _sharedGameManager = nil;
         managerSoundState = kAudioManagerUninitialized;
         currentScene = kNoSceneUninitialized;
         elapsedTime = 0;  
-        namePlayer = nil;
+        _namePlayer = nil;
         
     }
     return self;
@@ -174,7 +175,7 @@ static GameManager* _sharedGameManager = nil;
     
     NSString* result = nil;
     
-    switch (currentLevel) {
+    switch (_currentLevel) {
             
         case 1:
             result = @"MAESTRO MIAGHI";
@@ -505,37 +506,37 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            currentLevel = 0;
-            totalScore = 0;
+            _currentLevel = 0;
+            _totalScore = 0;
             isLastLevel = FALSE;
             sceneToRun = [MenuScene node];
             break;
         case kIntroScene:
-            currentLevel++;
+            _currentLevel++;
             hasPlayerDied = FALSE;
-            isLastLevel = (currentLevel == 12) ? TRUE : FALSE;
+            isLastLevel = (_currentLevel == 12) ? TRUE : FALSE;
             patternForLevel = nil;
-            if (currentLevel == 4) {
+            if (_currentLevel == 4) {
                 isBonusLevel = TRUE;
                 sceneToRun = [WallScene node];
                 currentScene = kBonusLevel1;
                 break;
             }
-            if (currentLevel == 9) {
+            if (_currentLevel == 9) {
                 isBonusLevel = TRUE;
                 sceneToRun = [CarScene node];
                 currentScene = kBonusLevel2;
                 break;
             }
-            patternForLevel = [[NSMutableArray alloc] initWithArray:[self.dao loadPlistForPatternWithLevel:currentLevel]];
-            namePlayer = [self formatPlayerTypeToString:currentLevel];
+            patternForLevel = [[NSMutableArray alloc] initWithArray:[self.dao loadPlistForPatternWithLevel:_currentLevel]];
+            self.namePlayer = [self formatPlayerTypeToString:_currentLevel];
             sceneToRun = [IntroScene node];
             break;
         case kLevelCompleteScene:            
             sceneToRun = [EndScene node];
             break;
         case kGamelevel1:
-            currentScore = 0;
+            _currentScore = 0;
             sceneToRun = [GameScene node];
             break;
         case kBonusLevel1:
@@ -613,5 +614,15 @@ static GameManager* _sharedGameManager = nil;
     
 }
 
+#pragma mark -
+#pragma mark ===  Tutorial  ===
+#pragma mark -
+
+-(BOOL)isTutorial{
+    
+    BOOL tutorial = (self.levelReached == 0) ? YES : NO;
+    
+    return tutorial;
+}
 
 @end

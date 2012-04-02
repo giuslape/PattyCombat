@@ -16,14 +16,13 @@
     
     SceneTypes currentScene;
     BOOL hasPlayerDied;
-    int currentLevel;
-    NSString* namePlayer;
     BOOL isMusicON;
     BOOL isSoundEffectsON;
-    int totalScore;
-    int currentScore;
-    
-    int _levelReached;
+    BOOL _isTutorial;
+    int  _totalScore;
+    int  _currentScore;
+    int  _currentLevel;
+    int  _levelReached;
     
     // Added for audio
     BOOL hasAudioBeenInitialized;
@@ -31,12 +30,16 @@
     SimpleAudioEngine *soundEngine;
     NSMutableDictionary *listOfSoundEffectFiles;
     NSMutableDictionary *soundEffectsState;  
+    
+    NSString* _namePlayer;
+
 }
 
 @property (readwrite) int currentLevel;
-@property (readwrite, nonatomic) int currentScore;
+@property (readwrite) int currentScore;
 @property (readwrite) int totalScore;
 @property (readwrite, nonatomic) int bestScore;
+@property (readonly ,nonatomic) BOOL isTutorial;
 @property (readwrite) BOOL isMusicON;
 @property (readwrite) BOOL isSoundEffectsON;
 @property (readwrite) BOOL hasPlayerDied;

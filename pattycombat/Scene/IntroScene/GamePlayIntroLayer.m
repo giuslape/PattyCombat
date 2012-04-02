@@ -494,6 +494,13 @@
         
         self.isTouchEnabled = FALSE;
         
+        CCSprite* arrowLeft = (CCSprite *)[self getChildByTag:kArrowLeftTutorialTagValue];
+        CCSprite* arrowRight = (CCSprite *)[self getChildByTag:kArrowRightTutorialTagValue];
+        CCLabelBMFont* labelTutorial = (CCLabelBMFont *)[self getChildByTag:kLabelTutorialTagValue];
+        
+        [arrowRight removeFromParentAndCleanup:YES];
+        [arrowLeft removeFromParentAndCleanup:YES];
+        [labelTutorial removeFromParentAndCleanup:YES];
         [fightButton removeFromParentAndCleanup:YES];
         [_leftHand removeFromParentAndCleanup:YES];
         [_rightHand removeFromParentAndCleanup:YES];
@@ -518,10 +525,11 @@
         }
         
         [self scheduleOnce:@selector(startGamePlay) delay:2];
+        
+        return;
     }
     
     if (!_isTouchInTime) {
-        
         
         [self handleHitWithTouch:pointLocation];
         
@@ -613,7 +621,7 @@
         
         [_spriteBatchNode addChild:_rightHand z:kRightHandZValue tag:kRightHandTagValue];
         
-        [_rightHand setPosition:ccp(size.width * 0.19f, size.height * 0.5f)];
+        [_rightHand setPosition:ccp(size.width * 0.19f, size.height * 0.45f)];
         
         
         // Add Left Hand
@@ -623,7 +631,7 @@
         
         [_spriteBatchNode addChild:_leftHand z:kLeftHandZvalue tag:kLeftHandTagValue];
         
-        [_leftHand setPosition:ccp(size.width * 0.81f, size.height * 0.5f)];
+        [_leftHand setPosition:ccp(size.width * 0.81f, size.height * 0.45f)];
         
         CCSprite* fightButton = [CCSprite spriteWithSpriteFrameName:@"fight_btn.png"];
         fightButton.opacity = 0;
@@ -633,6 +641,27 @@
         [fightButton setPosition:ccp(size.width - fightButton.contentSize.width * 0.6f, 0)];
         
         [fightButton setAnchorPoint:ccp(0.5f, 0)];
+        
+        if ([[GameManager sharedGameManager] isTutorial]) {
+            
+            CCLabelBMFont* labelHelp = [CCLabelBMFont labelWithString:@"Follow the sequence by tapping on the hands buttons" fntFile:FONTFEEDBACK];
+            
+            [self addChild:labelHelp z:kLabelTutorialZValue tag:kLabelTutorialTagValue];
+            
+            [labelHelp setPosition:ccp(size.width/2, size.height * 0.79f)];
+            
+            CCSprite* arrowLeft = [CCSprite spriteWithSpriteFrameName:@"intro_help1.png"];
+            
+            [arrowLeft setPosition:ccp(size.width * 0.19f, size.height * 0.70f)];
+            
+            [self addChild:arrowLeft z:kArrowsTutorialZValue tag:kArrowRightTutorialTagValue];
+            
+            CCSprite* arrowRight = [CCSprite spriteWithSpriteFrameName:@"intro_help2.png"];
+            
+            [arrowRight setPosition:ccp(size.width * 0.80f, size.height * 0.70f)];
+            
+            [self addChild:arrowRight z:kArrowsTutorialZValue tag:kArrowLeftTutorialTagValue];
+        }
         
     }
     else{
