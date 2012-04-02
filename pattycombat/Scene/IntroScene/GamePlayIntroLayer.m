@@ -523,7 +523,7 @@
         
         for (CCSprite* item in feedHand) {
             
-            CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:ccp(item.position.x, size.height/2)];
+            CCMoveTo* move = [CCMoveTo actionWithDuration:0.5f position:ccp(item.position.x, size.height/2)];
             
             [item runAction:move];
         }

@@ -5,7 +5,7 @@
 	<key>bodyFeed</key>
 	<dict>
 		<key>animationFrames</key>
-		<string>02</string>
+		<string>02,01</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
@@ -14,7 +14,7 @@
 	<key>bodyFeedErr</key>
 	<dict>
 		<key>animationFrames</key>
-		<string>03</string>
+		<string>03,01</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>

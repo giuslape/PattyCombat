@@ -51,8 +51,9 @@
     
     NSLog(@"%@ , %@",NSStringFromSelector(_cmd), self);
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.plist"];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
+
 }
 
 
@@ -158,7 +159,7 @@
 -(void) registerWithTouchDispatcher
 {
        
-    [[[CCDirectorIOS sharedDirector] touchDispatcher]addStandardDelegate:self priority:-1];
+    [[[CCDirectorIOS sharedDirector] touchDispatcher]addStandardDelegate:self priority:0];
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -218,7 +219,6 @@
         _isTouchInTime = TRUE;
         
         UITouch *aTouch = (UITouch*)[touches anyObject];
-        if((aTouch.timestamp - firstTouchTimeStamp) <= MAX_ELAPSED_TIME){
             
             // S1 Ho ricevuto il secondo tocco entro la soglia MAX_ELAPSED_TIME
             
@@ -235,18 +235,11 @@
             
             state = kStateOneTouchWaiting;
                                    
-        }
-        else {
-            firstTouchTimeStamp = aTouch.timestamp;
-            firstTouchLocInView = [aTouch locationInView:[aTouch view]];
-            [tempChar handleHit:firstTouchLocInView];
-            state = kStateOneTouchWaiting;
-        }
     }
     else {
         state = kStateNone;
         [[CCDirectorIOS sharedDirector]convertToGL:firstTouchLocInView];
-        [tempChar handleHit:firstTouchLocInView];
+       // [tempChar handleHit:firstTouchLocInView];
         state = kStateOneTouchWaiting;
         
     }
@@ -260,20 +253,9 @@
         
         CGPoint loc = [location CGPointValue];
         
-        loc= [[CCDirectorIOS sharedDirector] convertToGL:loc];
+        GameCharacter* player = (GameCharacter*)[self getChildByTag:kPlayerTagValue];
         
-        if (CGRectContainsPoint([_hudLayer.pauseButton boundingBox], loc)) {
-            
-            [_hudLayer onPause:self];
-            
-            return;
-        }
-        
-        loc = [[CCDirectorIOS sharedDirector] convertToGL:loc];
-        
-        GameCharacter* tempChar = (GameCharacter*)[self getChildByTag:kPlayerTagValue];
-        
-        [tempChar handleHit:loc];
+        [player handleHit:loc];
         
         state = kStateOneTouchWaiting;
             
@@ -311,8 +293,6 @@
     if (_countDown == 0) {
         
         [self removeChild:label cleanup:YES];
-        
-        PLAYSOUNDEFFECT(BELL);
         [self unschedule:_cmd];
         id delay = [CCDelayTime actionWithDuration:0.2f];
         id func = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];

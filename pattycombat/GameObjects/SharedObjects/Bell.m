@@ -9,11 +9,6 @@
 #import "Bell.h"
 #import "GameManager.h"
 
-@interface Bell ()
-
-
-@end
-
 @implementation Bell
 
 @synthesize bellAnimation = _bellAnimation;

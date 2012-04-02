@@ -92,7 +92,6 @@
 }
 -(id) initBarWithBarFrame:(NSString *)b insetFrame:(NSString *)i maskFrame:(NSString *)m {
     
-    
     if ((self = [super init])) {
         
         spritesheet = YES;
@@ -103,17 +102,19 @@
         
         screenMid = ccp(screenSize.width * 0.5f, screenSize.height * 0.5f);
         
-        insetSprite = [[CCSprite alloc] initWithSpriteFrameName:inset];
+        insetSprite = [[CCSprite alloc] initWithSpriteFrameName:i];
         insetSprite.anchorPoint = ccp(0.5,0.5);
         insetSprite.position = screenMid;
         [self addChild:insetSprite z:1];
 
-        barSprite = [[CCSprite alloc] initWithSpriteFrameName:bar];
+        barSprite = [[CCSprite alloc] initWithSpriteFrameName:b];
         barSprite.anchorPoint = ccp(0,0.5);
         barSprite.position = ccp(((screenSize.width - barSprite.boundingBox.size.width)/2),screenMid.y);
         
+        greenBar = [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"bar_green.png"];
+        redBar   = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:b];
         		
-        maskSprite = [[CCSprite alloc] initWithSpriteFrameName:mask];
+        maskSprite = [[CCSprite alloc] initWithSpriteFrameName:m];
         maskSprite.anchorPoint = ccp(0.5,0.5);
         maskSprite.position = screenMid;
         
@@ -176,6 +177,7 @@
     
     [renderMasked end];
 }
+
 -(void) setProgress:(float)lp {
     
     if (self.characterState == kStateHealthIsEmpty) return;
@@ -185,7 +187,10 @@
     oldProgress = progress;
     progress = lp;
     
-        if(progress > 100){
+    if (progress > 60) [barSprite setDisplayFrame:greenBar];
+    else [barSprite setDisplayFrame:redBar];
+    
+    if(progress > 100){
         
         progress = 100;
     }
@@ -231,14 +236,13 @@
     int signValue = (barLR) ? 1 : -1;
     
     oldProgress +=   1 * signValue; 
-            
+        
     barSprite.position =ccp(((screenSize.width - barSprite.boundingBox.size.width) / 2) - (oldProgress / 100 * barSprite.boundingBox.size.width), screenMid.y);
     [self clearRender];
     [self maskBar];
     
-    
     if ((barLR && oldProgress >= progress) || (!barLR && oldProgress <= progress)){
-    
+
         [self unscheduleUpdate];
         [self setCharacterState:kStateHealthIdle];
     }

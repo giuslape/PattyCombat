@@ -10,9 +10,11 @@ typedef enum{
 } kBarTypes;
 
 
+@class GPBar;
+
 @protocol GPBarDelegate
 
--(void)barDidEmpty:(id)bar;
+-(void)barDidEmpty:(GPBar *)bar;
 
 @end
 
@@ -21,6 +23,8 @@ typedef enum{
     
     NSString *bar, *inset, *mask;
     CCSprite *barSprite, *maskSprite, *insetSprite, *masked;
+    CCSpriteFrame* greenBar;
+    CCSpriteFrame* redBar;
     CCRenderTexture *renderMasked, *renderMaskNegative;
     kBarTypes type;
     float progress;

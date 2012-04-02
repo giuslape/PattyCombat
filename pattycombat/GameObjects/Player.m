@@ -108,7 +108,7 @@
     touchOk = NO;
         
     if ([self characterState] == kStateDead) return;
-        
+    
     NSString* indexPattern = (NSString*)[pattern objectAtIndex:currentItem];
     
     if([indexPattern isEqualToString:@"two"]){
@@ -256,6 +256,9 @@
     CharacterStates state = (CharacterStates)[newState intValue];
     CCSprite* leftHand = (CCSprite *)[_leftHandBatchNode getChildByTag:kLeftHandTagValue];
     CCSprite* rightHand = (CCSprite *)[_rightHandBatchNode getChildByTag:kRightHandTagValue];
+    
+    [leftHand stopAllActions];
+    [rightHand stopAllActions];
 
     NSLog(@"%@", NSStringFromSelector(_cmd));
 

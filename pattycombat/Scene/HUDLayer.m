@@ -143,16 +143,15 @@
     if (kObjectTypeHealth == objectType) {
         
         NSString* namePlayer = [[GameManager sharedGameManager] formatPlayerNameTypeToString];
-        GPBar* bar = [GPBar barWithBar:@"bar_red.png" inset:@"bar_background.png" mask:@"bar_mask.png"]; 
+        GPBar* bar = [GPBar barWithBarFrameName:@"bar_red.png" insetFrameName:@"bar_mask.png" maskFrameName:@"bar_mask.png"];
         [bar setPosition:spawnLocation];
         [self  addChild:bar z:ZValue tag:kHealthTagValue];
-        
         [bar setDelegate:self];
         
         CCLabelBMFont* namePlayerLabel = [CCLabelBMFont labelWithString:namePlayer fntFile:FONTHIGHSCORES];
         [namePlayerLabel setPosition:ccp(240, 290)];
-        [namePlayerLabel setScale:0.5];
         [self addChild:namePlayerLabel z:3];
+        [namePlayerLabel setScale:0.8f];
     }
     if (kObjectTypeScoreLabel == objectType){
         
@@ -161,8 +160,7 @@
         [self addChild:_scoreLabel z:ZValue tag:kLabelScoreTagValue];
         [_scoreLabel setAnchorPoint:ccp(1, 0)];
         [_scoreLabel setPosition:spawnLocation];
-        [_scoreLabel setScale:1.5];
-        
+        [_scoreLabel setScale:0.8];
         
     }
     
@@ -180,33 +178,35 @@
         
         _barProgress = 0;
         
-        CGSize size = [[CCDirectorIOS sharedDirector]winSize];
+        CGSize size = [[CCDirectorIOS sharedDirector] winSize];
         
         isPause = FALSE;
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[NSString stringWithString:@"Common.plist"]];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Common.plist"];
         
         _commonElements = [CCSpriteBatchNode batchNodeWithFile:@"Common.png"];
         
         [self addChild:_commonElements];
                         
         [self createObjectOfType:kObjectTypeBell
-                      atLocation:ccp(40,295) 
+                      atLocation:ccp(size.width * 0.083f , size.height* 0.92f) 
                       withZValue:kBellZValue];
         
         [self createObjectOfType:kObjectTypeHealth
-                      atLocation:ccp(0, 140)
+                      atLocation:ccp(0, size.height * 0.44f)
                       withZValue:kHealthZValue];
         
         [self createObjectOfType:kObjectTypeScoreLabel
-                      atLocation:ccp(945/2, size.height - 46)
+                      atLocation:ccp(size.width * 0.98f, size.height * 0.92f)
                       withZValue:kLabelScoreZValue];
         
         _pauseButton = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"pause_btn.png"]];
         
         [_commonElements addChild:_pauseButton z:10 tag:11];
         
-        _pauseButton.position = ccp(size.width - 20, 20);
+        _pauseButton.position = ccp(size.width * 0.96f, size.height * 0.0625f);
+        
+        _pauseButton.flipX = YES;
 
         CCMenuItemSprite* resume = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"resume_btn.png"] 
                                                            selectedSprite:[CCSprite spriteWithSpriteFrameName:@"resume_btn_over.png"] 
@@ -227,7 +227,7 @@
         
         [pauseMenu alignItemsVerticallyWithPadding:20];
         
-        [self addChild:pauseMenu z:10 tag:10];
+        [self addChild:pauseMenu z:kPauseMenuZValue tag:kPauseMenuTagValue];
         
         pauseMenu.opacity = 0;
         
@@ -235,9 +235,38 @@
         
         pauseMenu.isTouchEnabled = FALSE;
         
+        self.isTouchEnabled = YES;
+        
     }
     return self;
 }
+
+
+#pragma mark -
+#pragma mark ===  Touch Handler  ===
+#pragma mark -
+
+-(void) registerWithTouchDispatcher
+{
+    [[[CCDirectorIOS sharedDirector] touchDispatcher] addTargetedDelegate:self priority:-1 swallowsTouches:YES];
+}
+
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+    CGPoint touchLocation = [touch locationInView:[touch view]];
+    
+    touchLocation = [[CCDirectorIOS sharedDirector] convertToGL:touchLocation];
+    touchLocation = [self convertToNodeSpace:touchLocation];
+    
+    if (CGRectContainsPoint([_pauseButton boundingBox], touchLocation)) {
+        
+        [self onPause:self];
+        return YES;
+    }
+    
+    return NO;
+}
+
 
 #pragma mark -
 #pragma mark ===  Events Handler  ===
@@ -256,7 +285,7 @@
         
     [[CCDirectorIOS sharedDirector] pause];
         
-        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:10];
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         
         pauseMenu.opacity = 255;
         
@@ -270,7 +299,9 @@
     
     isPause = FALSE;
     
-    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:10];
+    NSLog(@"Resume");
+
+    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
     
     pauseMenu.opacity = 0;
             
@@ -283,12 +314,13 @@
 
 -(void)mainMenu:(id)sender{
     
-    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:10];
+    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
     
-    CCLayerColor* pauseLayer = (CCLayerColor *)[self getChildByTag:9];
+    NSLog(@"Give Up");
     
+    pauseMenu.isTouchEnabled = FALSE;
+        
     [self removeChild: pauseMenu cleanup:YES]; 
-    [self removeChild: pauseLayer cleanup:YES];
     
     [[CCDirectorIOS sharedDirector] resume];
     [[CDAudioManager sharedManager] stopBackgroundMusic];
@@ -298,14 +330,11 @@
 
 -(void)restartTapped:(id)sender{
     
+    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
     
-    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:10];
-    
-    CCLayerColor* pauseLayer = (CCLayerColor *)[self getChildByTag:9];
-    
-    [self removeChild: pauseMenu cleanup:YES]; 
-    [self removeChild: pauseLayer cleanup:YES]; 
-    
+    self.isTouchEnabled = FALSE;
+        
+    [self removeChild: pauseMenu cleanup:YES];     
     
     [[CCDirectorIOS sharedDirector] resume];
     [[CDAudioManager sharedManager] stopBackgroundMusic];
@@ -323,7 +352,7 @@
     
     _commonElements = nil;
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.plist"];
 
 }
 

@@ -178,13 +178,13 @@ static GameManager* _sharedGameManager = nil;
     switch (_currentLevel) {
             
         case 1:
-            result = @"MAESTRO MIAGHI";
+            result = @"Maestro Miaghi";
             break;
         case 2:
-            result = @"JOHNNY DENTI";
+            result = @"Johnny Denti";
             break;
         case 3:
-            result = @"CINZIAH";
+            result = @"Cin";
             break;
         case 5:
             result = @"MAA SALLO";
