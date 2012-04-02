@@ -6,8 +6,6 @@
 	<dict>
 		<key>backgroundTrack</key>
 		<string>120_miyagi_music.mp3</string>
-		<key>name</key>
-		<string>MAESTRO MIAGHI</string>
 		<key>player</key>
 		<dict>
 			<key>bpm</key>
@@ -41,15 +39,11 @@
 			<key>texture</key>
 			<string>miaghi_body_0001.png</string>
 		</dict>
-		<key>threshold</key>
-		<integer>60</integer>
 	</dict>
 	<key>Scena2</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>120_coccodrillo_music.mp3</string>
-		<key>name</key>
-		<string>JOHNNY DENTI</string>
 		<key>player</key>
 		<dict>
 			<key>bpm</key>
@@ -83,15 +77,11 @@
 			<key>texture</key>
 			<string>crocodile_body_0001.png</string>
 		</dict>
-		<key>threshold</key>
-		<integer>60</integer>
 	</dict>
 	<key>Scena3</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>120_cinziah_music.mp3</string>
-		<key>name</key>
-		<string>Cinziah</string>
 		<key>player</key>
 		<dict>
 			<key>bpm</key>
@@ -133,15 +123,11 @@
 			<key>leftRectCrossPositionY</key>
 			<string>330</string>
 		</dict>
-		<key>threshold</key>
-		<integer>70</integer>
 	</dict>
 	<key>Scena5</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>140_masai_music.mp3</string>
-		<key>name</key>
-		<string>Maa Sallo</string>
 		<key>player</key>
 		<dict>
 			<key>bpm</key>
@@ -183,15 +169,11 @@
 			<key>leftRectCrossPositionY</key>
 			<string>342</string>
 		</dict>
-		<key>threshold</key>
-		<integer>60</integer>
 	</dict>
 	<key>Scena6</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>140_jocopoco_music.mp3</string>
-		<key>name</key>
-		<string>JOCOPOCO</string>
 		<key>player</key>
 		<dict>
 			<key>bpm</key>
@@ -225,15 +207,11 @@
 			<key>texture</key>
 			<string>joco_body_0001.png</string>
 		</dict>
-		<key>threshold</key>
-		<integer>70</integer>
 	</dict>
 	<key>Scena7</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>140_jenny_lava.mp3</string>
-		<key>name</key>
-		<string>JENNY LAVA</string>
 		<key>player</key>
 		<dict>
 			<key>bpm</key>
@@ -275,15 +253,11 @@
 			<key>leftRectCrossPositionY</key>
 			<string>296</string>
 		</dict>
-		<key>threshold</key>
-		<integer>60</integer>
 	</dict>
 	<key>Scena8</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>160_bud_music.mp3</string>
-		<key>name</key>
-		<string>CHARLIE JUMBO</string>
 		<key>player</key>
 		<dict>
 			<key>bpm</key>
@@ -325,15 +299,11 @@
 			<key>leftRectCrossPositionY</key>
 			<string>358</string>
 		</dict>
-		<key>threshold</key>
-		<integer>60</integer>
 	</dict>
 	<key>Scena10</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>160_van_damme_music.mp3</string>
-		<key>name</key>
-		<string>JEAN PAUL</string>
 		<key>player</key>
 		<dict>
 			<key>bpm</key>
@@ -375,15 +345,11 @@
 			<key>leftRectCrossPositionY</key>
 			<string>360</string>
 		</dict>
-		<key>threshold</key>
-		<integer>60</integer>
 	</dict>
 	<key>Scena11</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>160_bitonti_music.mp3</string>
-		<key>name</key>
-		<string>STEVEN</string>
 		<key>player</key>
 		<dict>
 			<key>bpm</key>
@@ -425,15 +391,11 @@
 			<key>leftRectCrossPositionY</key>
 			<string>162</string>
 		</dict>
-		<key>threshold</key>
-		<integer>90</integer>
 	</dict>
 	<key>Scena12</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>180_chuck_music.mp3</string>
-		<key>name</key>
-		<string>Chuck</string>
 		<key>player</key>
 		<dict>
 			<key>bpm</key>
@@ -475,8 +437,6 @@
 			<key>leftRectCrossPositionY</key>
 			<string>174</string>
 		</dict>
-		<key>threshold</key>
-		<integer>60</integer>
 	</dict>
 </dict>
 </plist>

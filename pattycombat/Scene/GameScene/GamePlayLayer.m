@@ -126,7 +126,7 @@
         
         backgroundTrack = [[NSString alloc] initWithString:[sceneObjects objectForKey:@"backgroundTrack"]];
                 
-        namePlayer = [sceneObjects objectForKey:@"name"];
+        namePlayer = [[GameManager sharedGameManager] formatPlayerNameTypeToString];
         
         NSDictionary* playerSettings = [sceneObjects objectForKey:@"player"];
                 
@@ -142,11 +142,11 @@
 
         [_player setDelegate:self];
                 
-        CGSize winSize = [[CCDirectorIOS sharedDirector]winSize];
+        CGSize size = [[CCDirectorIOS sharedDirector]winSize];
                                                               
         CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Ready" fntFile:FONTHIGHSCORES];
         [self addChild:label z:10 tag:300];
-        [label setPosition:ccp(winSize.width/2, winSize.height/2)];
+        [label setPosition:ccp(size.width/2, size.height/2)];
         
         
     }

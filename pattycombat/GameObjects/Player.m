@@ -419,7 +419,6 @@
         
     if( (self=[super initWithTexture:texture]))
 {
-        
         CCLOG(@"Inizializzazione Player");
         
         currentTime = 0;
@@ -430,7 +429,7 @@
         
         isLastPlayer = [[GameManager sharedGameManager] isLastLevel];
         
-        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        CGSize size = [[CCDirector sharedDirector] winSize];
         
         [self setName:[playerSettings objectForKey:@"name"]];
         
@@ -492,7 +491,7 @@
                 
         self.anchorPoint = CGPointMake(0.5, 0);
                 
-        self.position = CGPointMake(positionX/2, winSize.height - positionY/2);
+        self.position = CGPointMake(positionX/2, size.height - positionY/2);
                 
         NSString* leftName = [playerSettings objectForKey:@"leftHand"];
         
@@ -514,7 +513,7 @@
         leftHand.anchorPoint = CGPointMake(0, 0);
 
         leftHand.position = CGPointMake(positionLeftX/2 - self.position.x + (self.textureRect.size.width * self.anchorPoint.x), 
-                                        winSize.height - positionLeftY/2);
+                                        size.height - positionLeftY/2);
         
         
         [_leftHandBatchNode addChild:leftHand z:kLeftHandZvalue tag:kLeftHandTagValue];
@@ -528,7 +527,7 @@
 
         
         [rightHand setPosition:CGPointMake(positionRightX/2 - self.position.x + (self.textureRect.size.width * self.anchorPoint.x),
-                                           winSize.height - positionRightY/2)];
+                                           size.height - positionRightY/2)];
         
         [_rightHandBatchNode addChild:rightHand z:kRightHandZValue tag:kRightHandTagValue];
     

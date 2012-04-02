@@ -184,28 +184,28 @@ static GameManager* _sharedGameManager = nil;
             result = @"Johnny Denti";
             break;
         case 3:
-            result = @"Cin";
+            result = @"Cinziah";
             break;
         case 5:
-            result = @"MAA SALLO";
+            result = @"Maa Sallo";
             break;
         case 6:
-            result = @"JOCOPOCO";
+            result = @"Jocopoco";
             break;
         case 7:
-            result = @"JENNY LAVA";
+            result = @"Jenny Lava";
             break;
         case 8:
-            result = @"CHARLIE JUMBO";
+            result = @"Charlie Jumbo";
             break;
         case 10:
-            result = @"JEAN PAUL";
+            result = @"Jean Paul";
             break;
         case 11:
-            result = @"STEVEN";
+            result = @"Steven";
             break;
         case 12:
-            result = @"CHUCK";
+            result = @"Chuck";
             break;
         default:
             break;

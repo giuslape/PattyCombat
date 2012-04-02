@@ -519,7 +519,7 @@
         
         CCLayerColor* darkLayer = (CCLayerColor *)[self getChildByTag:kDarkLayerIntroTagValue];
         
-        [darkLayer runAction:[CCFadeIn actionWithDuration:1]];
+        [darkLayer runAction:[CCFadeIn actionWithDuration:0.5f]];
         
         for (CCSprite* item in feedHand) {
             
