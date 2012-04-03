@@ -57,30 +57,35 @@
     
     touchLocation = [[CCDirector sharedDirector]convertToGL:touchLocation];
     
-	CCSprite* tempSprite = (CCSprite*)[self getChildByTag:10];
-    CCSprite* tempRetry = (CCSprite *)[self getChildByTag:11];
+	CCSprite* menuBtn = (CCSprite*)[_spriteBatchNode getChildByTag:kMenuBtnTagValue];
+    CCSprite* nextLevel =  (CCSprite *)[_spriteBatchNode getChildByTag:kNextLevelTagValue];
+    CCSprite* tweetBtn = (CCSprite *)[_spriteBatchNode getChildByTag:kTweetBtnTagValue];
     
-    if (CGRectContainsPoint([tempSprite boundingBox], touchLocation)) {
+    if (CGRectContainsPoint([tweetBtn boundingBox], touchLocation)) {
         
-    self.isTouchEnabled = NO;
+        NSLog(@"Ho premuto tweet button");
         
-    BOOL isLastLevel = [[GameManager sharedGameManager]isLastLevel];
+    }else if (CGRectContainsPoint([nextLevel boundingBox], touchLocation)) {
         
-    (isLastLevel || !_playerIsDied) ? [[GameManager sharedGameManager]runSceneWithID:kMainMenuScene] : [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
+        self.isTouchEnabled = NO;
+        
+        BOOL isLastLevel = [[GameManager sharedGameManager]isLastLevel];
+        
+        (isLastLevel || !_playerIsDied) ? [[GameManager sharedGameManager]runSceneWithID:kGamelevel1] : [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
                         
-	return YES;
+        return YES;
         
-    }
-    else if(CGRectContainsPoint([tempRetry boundingBox], touchLocation)) {
+        }
+    else if(CGRectContainsPoint([menuBtn boundingBox], touchLocation)) {
         
-        [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
-        [[PattyCombatIAPHelper sharedHelper] coinWillUsed];
+        [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
+       // [[PattyCombatIAPHelper sharedHelper] coinWillUsed];
     
     }else{
         
-        if (_scoreUp <= _currentLevelScore) _scoreUp = _currentLevelScore;
-        else if(_scoreUpTimeBonus <= _timeBonus) _scoreUpTimeBonus = _timeBonus;
-        else if(_scoreUpTotalScore <= _totalGameScore)_scoreUpTotalScore = _totalGameScore;
+        if (_scoreUpTimeBonus <= _timeBonus) _scoreUpTimeBonus = _timeBonus;
+        else if(_scoreUp <= _currentLevelScore) _scoreUp = _currentLevelScore;
+        else if(_scoreUpTotalScore <= _totalGameScore) _scoreUpTotalScore = _totalGameScore;
                 
         return YES;
     }
@@ -96,56 +101,59 @@
 
 -(void) update:(ccTime)delta
 {
-    
-    CCSprite* nextMatch = nil;
-
-    
-        if (_scoreUp <= _currentLevelScore) {
-        
-            [labelScore setString:[NSString stringWithFormat:@"%d", _scoreUp]];
-            _scoreUp++;
-            return;
-        
-        }else if(_scoreUpTimeBonus <= _timeBonus){
+    if(_scoreUpTimeBonus <= _timeBonus){
         
         [labelTimeBonus setString:[NSString stringWithFormat:@"%d",_scoreUpTimeBonus]];
-        _scoreUpTimeBonus++;
-            return;
-            
-        }else if(_scoreUpTotalScore <= _totalGameScore){
+        _scoreUpTimeBonus += 10;
+        return;
+        
+    }else [labelTimeBonus setString:[NSString stringWithFormat:@"%d", _timeBonus]];
+    
+    
+    if (_scoreUp <= _currentLevelScore) {
+        
+        [labelScore setString:[NSString stringWithFormat:@"%d", _scoreUp]];
+        _scoreUp += 10;
+        return;
+        
+    }else [labelScore setString:[NSString stringWithFormat:@"%d", _currentLevelScore]];
+        
+    if(_scoreUpTotalScore <= _totalGameScore){
         
         [labelTotalScore setString:[NSString stringWithFormat:@"%d",_scoreUpTotalScore]];
-        _scoreUpTotalScore++;
+        _scoreUpTotalScore += 10;
             return;
             
-        }else {
+    }else [labelTotalScore setString:[NSString stringWithFormat:@"%d", _totalGameScore]];
+        
+    CCSprite* nextLevel = (CCSprite *)[_spriteBatchNode getChildByTag:kNextLevelTagValue];
+    CCSprite* tweetBtn = (CCSprite *)[_spriteBatchNode getChildByTag:kTweetBtnTagValue];
     
-            nextMatch =  (_playerIsDied) ? [CCSprite spriteWithFile:@"next_btn.png"] :[CCSprite spriteWithFile:@"menu_btn.png"];
-            [nextMatch setPosition:ccp (size.width - nextMatch.boundingBox.size.width , nextMatch.boundingBox.size.height)];
-            [nextMatch setAnchorPoint:ccp(0, 1)];
-            [self addChild:nextMatch z:0 tag:10];
+    tweetBtn.opacity = 255;
             
-            CCSprite* retry = [CCSprite spriteWithFile:@"menu_btn.png"];
-            [retry setPosition:ccp(size.width/2, size.height/2)];
-            [self addChild:retry z:1 tag:11];
+    nextLevel.opacity = 255;
+        
+    CCSprite* menuBtn = (CCSprite *)[_spriteBatchNode getChildByTag:kMenuBtnTagValue];
+
+            if (!_playerIsDied) menuBtn.opacity = 255;
+
+            else [menuBtn removeFromParentAndCleanup:YES];
             
+                       
             [self unscheduleUpdate];
             [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
 
+            
 
-        }
+        
     
     if (_bestScore < _totalGameScore) {
         
+        CCSprite* newRecord = (CCSprite *)[_spriteBatchNode getChildByTag:kNewRecordTagValue];
+        
+        newRecord.opacity = 255;
+        
         [[GameManager sharedGameManager] setBestScore:_totalGameScore];
-        
-        CCSprite * newBestScore = [CCSprite spriteWithFile:@"newRecord.png"];
-        
-        [newBestScore setAnchorPoint:ccp(0, 1)];
-        
-        [newBestScore setPosition:ccp(715/2, size.height - (150/2))];
-        
-        [self addChild:newBestScore z:1];
         
         int64_t score = (int64_t)(_totalGameScore * 1000.0f);
         
@@ -177,9 +185,9 @@
 
 }
 
--(void)sendAchievements{
+-(void)sendAchievementsForLevel:(int)currentLevel{
     
-    if (_currentLevel == 1 && _playerIsDied) {
+    if (currentLevel == 1 && _playerIsDied) {
         
         CCLOG(@"Finished level 1");
          
@@ -201,11 +209,17 @@
     
     if (self) {
         
+         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Feedback_default.plist"];
+        
+         _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"Feedback_default.png"];
+        
+        [self addChild:_spriteBatchNode z:2 tag:2];
+        
         size = [CCDirector sharedDirector].winSize;
         
         _playerIsDied = [[GameManager sharedGameManager] hasPlayerDied];
         
-        _currentLevel = [[GameManager sharedGameManager] currentLevel];
+        int _currentLevel = [[GameManager sharedGameManager] currentLevel];
         
         CCSprite* background = [CCSprite spriteWithFile:[[[GameManager sharedGameManager]dao]
                                                          loadBackgroundEnd:@"BackgroundEnd" 
@@ -232,9 +246,9 @@
             
             labelTimeBonus = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
             
-            [labelTimeBonus setAnchorPoint:ccp(0, 0)];
+            [labelTimeBonus setAnchorPoint:ccp(1, 0)];
             
-            [labelTimeBonus setPosition:ccp(696/2 , size.height - 170)];
+            [labelTimeBonus setPosition:ccp(size.width * 0.85f , size.height * 0.57f)];
             
             [self addChild:labelTimeBonus z:1];
             
@@ -244,19 +258,19 @@
         
         labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
         
-        [labelScore setAnchorPoint:ccp(0, 0)];
+        [labelScore setAnchorPoint:ccp(1, 0)];
         
-        [labelScore setPosition:ccp(696/2, size.height - 153)];
+        [labelScore setPosition:ccp(size.width * 0.85f, size.height * 0.51f)];
         
-        [self addChild:labelScore z:1];
+        [self addChild:labelScore z:kLabelLevelScoreZValue tag:kLabelLevelScoreTagValue];
         
         labelTotalScore = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", _totalGameScore] fntFile:FONTFEEDBACK];
         
-        [labelTotalScore setAnchorPoint:ccp(0, 0)];
+        [labelTotalScore setAnchorPoint:ccp(1, 0)];
         
-        [labelTotalScore setPosition:ccp(696/2,size.height - 203)];
+        [labelTotalScore setPosition:ccp(size.width * 0.85f,size.height* 0.4f)];
         
-        [self addChild:labelTotalScore z:1];
+        [self addChild:labelTotalScore z:kLabelTotalLevelScoreZValue tag:kLabelTotalLevelScoreTagValue];
         
         _totalGameScore += _currentLevelScore + _timeBonus;
         
@@ -268,8 +282,45 @@
         
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         
-        [self sendAchievements];
+        [self sendAchievementsForLevel:_currentLevel];
         
+        CCSprite* nextLevel =  (_playerIsDied) ? [CCSprite spriteWithSpriteFrameName:@"next_btn.png"] :[CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
+        
+        [nextLevel setPosition:ccp (size.width* 0.85f , size.height * 0.1f)];
+        [nextLevel setAnchorPoint:ccp(0, 0.5f)];
+        [_spriteBatchNode addChild:nextLevel z:kNextLevelZValue tag:kNextLevelTagValue];
+        
+        nextLevel.opacity = 0;
+        
+        CCSprite* menuBtn = [CCSprite spriteWithSpriteFrameName:@"menu_btn.png"];
+        [menuBtn setPosition:ccp(size.width * 0.08f, size.height * 0.1f)];
+        [_spriteBatchNode addChild:menuBtn z:kMenuBtnZValue tag:kMenuBtnTagValue];
+        
+        menuBtn.opacity = 0;
+        
+        if (_bestScore < _totalGameScore) {
+                    
+        CCSprite * newBestScore = [CCSprite spriteWithSpriteFrameName:@"record_label.png"];
+        
+        [newBestScore setAnchorPoint:ccp(0, 1)];
+        
+        [newBestScore setPosition:ccp(715/2, size.height - (150/2))];
+        
+        [_spriteBatchNode addChild:newBestScore z:kNewRecordZValue tag:kNewRecordTagValue];
+        
+        newBestScore.opacity = 0;
+            
+        }
+        
+        CCSprite* twitterBtn = [CCSprite spriteWithSpriteFrameName:@"tweet_btn.png"];
+        
+        [twitterBtn setPosition:ccp(size.width/2, size.height/2)];
+        
+        [_spriteBatchNode addChild:twitterBtn z:kTweetBtnZValue tag:kTweetBtnTagValue];
+        
+        twitterBtn.opacity = 0;
+        
+    
     }
     return self;
 }
