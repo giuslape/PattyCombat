@@ -115,6 +115,8 @@
 #define kPauseMenuZValue 1
 #define kLabelScoreTagValue 23
 #define kLabelScoreZValue 1
+#define kLabelReadyTagValue 24
+#define kLabelReadyZValue 1
 
 
 

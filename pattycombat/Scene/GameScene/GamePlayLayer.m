@@ -35,21 +35,16 @@
 @synthesize player = _player;
 @synthesize hudLayer = _hudLayer;
 
+
+
 #pragma mark -
-#pragma mark Update Methods
-
--(void) update:(ccTime)deltaTime
-{
-    [_player updateStateWithDeltaTime:deltaTime];
-    [_hudLayer updateStateWithDelta:deltaTime];
-    
-}
-
+#pragma mark ===  Dealloc  ===
 #pragma mark -
 
 - (void)dealloc {
     
     NSLog(@"%@ , %@",NSStringFromSelector(_cmd), self);
+    
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
@@ -74,87 +69,44 @@
     
 }
 
+// Handle Game Over 
 
 -(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score andPlayerIsDead:(BOOL)playerIsDead fromLayer:(id)layer{
     
 
-    NSLog(@"%@", NSStringFromSelector(_cmd));
+    self.isTouchEnabled = FALSE;
 
     CGSize size = [[CCDirectorIOS sharedDirector] winSize];
     
     [self unscheduleAllSelectors];
     
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-    [[GameManager sharedGameManager] setHasPlayerDied:playerIsDead];
-    [[GameManager sharedGameManager] setCurrentScore:[score intValue]];
-
+    [[GameManager sharedGameManager]  setHasPlayerDied:playerIsDead];
+    [[GameManager sharedGameManager]  setCurrentScore:[score intValue]];
     
-    self.isTouchEnabled = FALSE;
+    // Add Finish Label
     
     CCLabelBMFont* finishLabel = [CCLabelBMFont labelWithString:@"Finish" fntFile:FONTHIGHSCORES];
     
-    [self addChild:finishLabel z:100];
+    [self addChild:finishLabel z:3];
     
     finishLabel.position = ccp(size.width/2,size.height/2);
-    
     
     self.player = nil;
     self.hudLayer = nil;
     
+    
+    // Run Complete Scene
     [[GameManager sharedGameManager] runSceneWithID:kLevelCompleteScene];
   
 }
 
-#pragma mark Init Methods
 
 
-    
-- (id)init {
-    
-    self = [super init];
-    
-    if (self) {
-                                    
-        _countDown = 15;
-        
-        _currentTime = 0;
-        _count = 1;
-                
-        id dao = [GameManager sharedGameManager].dao;
-        
-        NSDictionary* sceneObjects = [dao loadScene:[[GameManager sharedGameManager] currentLevel]];
-        
-        backgroundTrack = [[NSString alloc] initWithString:[sceneObjects objectForKey:@"backgroundTrack"]];
-                
-        namePlayer = [[GameManager sharedGameManager] formatPlayerNameTypeToString];
-        
-        NSDictionary* playerSettings = [sceneObjects objectForKey:@"player"];
-                
-        _bpm = [[playerSettings objectForKey:@"bpm"] intValue];
 
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-
-        _player = [Player playerWithDictionary:playerSettings];
-        
-        [self addChild:_player z:kPlayerZValue tag:kPlayerTagValue];
-                
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-
-        [_player setDelegate:self];
-                
-        CGSize size = [[CCDirectorIOS sharedDirector]winSize];
-                                                              
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Ready" fntFile:FONTHIGHSCORES];
-        [self addChild:label z:10 tag:300];
-        [label setPosition:ccp(size.width/2, size.height/2)];
-        
-        
-    }
-    return self;
-}
-
-
-#pragma mark Touch Delegate
+#pragma mark -
+#pragma mark ===  Touch Handler  ===
+#pragma mark -
 
 -(void) registerWithTouchDispatcher
 {
@@ -239,7 +191,6 @@
     else {
         state = kStateNone;
         [[CCDirectorIOS sharedDirector]convertToGL:firstTouchLocInView];
-       // [tempChar handleHit:firstTouchLocInView];
         state = kStateOneTouchWaiting;
         
     }
@@ -263,13 +214,70 @@
     
 }
 
--(void)onEnterTransitionDidFinish{
+
+#pragma mark -
+#pragma mark ===  Init Methods  ===
+#pragma mark -
+
+
+- (id)init {
     
+    self = [super init];
+    
+    if (self) {
+        
+        _countDown = 15;
+        _currentTime = 0;
+        _count = 1;
+        
+        id dao = [GameManager sharedGameManager].dao;
+        
+        // Load Scene
+        
+        NSDictionary* sceneObjects = [dao loadScene:[[GameManager sharedGameManager] currentLevel]];
+        
+        // Set Background Track
+        
+        backgroundTrack = [[NSString alloc] initWithString:[sceneObjects objectForKey:@"backgroundTrack"]];
+        
+        namePlayer = [[GameManager sharedGameManager] formatPlayerNameTypeToString];
+        
+        // Add Player
+        
+        NSDictionary* playerSettings = [sceneObjects objectForKey:@"player"];
+        
+        _bpm = [[playerSettings objectForKey:@"bpm"] intValue];
+        
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+        
+        _player = [Player playerWithDictionary:playerSettings];
+        
+        [self addChild:_player z:kPlayerZValue tag:kPlayerTagValue];
+        
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        
+        [_player setDelegate:self];
+        
+        CGSize size = [[CCDirectorIOS sharedDirector]winSize];
+        
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Ready" fntFile:FONTHIGHSCORES];
+        [self addChild:label z:kLabelReadyZValue tag:kLabelReadyTagValue];
+        [label setPosition:ccp(size.width/2, size.height/2)];
+        
+        
+    }
+    return self;
+}
+
+-(void)onEnterTransitionDidFinish{
     
     [[GameManager sharedGameManager] playBackgroundTrack:backgroundTrack];
     [self schedule:@selector(countDown:) interval:0.01];
 
 }
+
+
+// Count Down
 
 -(void)countDown:(ccTime)delta{
     
@@ -281,7 +289,7 @@
         
     _countDown --;
     
-    CCLabelBMFont* label = (CCLabelBMFont*)[self getChildByTag:300];
+    CCLabelBMFont* label = (CCLabelBMFont*)[self getChildByTag:kLabelReadyTagValue];
    
      if(_countDown <= 3){
          
@@ -303,6 +311,17 @@
     }
 }
 
+#pragma mark -
+#pragma mark ===  Update Methods  ===
+#pragma mark -
+
+
+-(void) update:(ccTime)deltaTime
+{
+    [_player updateStateWithDeltaTime:deltaTime];
+    [_hudLayer updateStateWithDelta:deltaTime];
+    
+}
 
 
 @end

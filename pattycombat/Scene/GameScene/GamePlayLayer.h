@@ -25,7 +25,7 @@
     BOOL   _isTouchInTime;
 
     HUDLayer* _hudLayer;
-    Player* _player;
+    Player*   _player;
     
 }
 
