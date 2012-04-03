@@ -268,7 +268,7 @@
     
     if (objectType == kObjectTypeBell) {
         
-        Bell* bell = [Bell spriteWithSpriteFrameName:@"gong0001.png"];
+        Bell* bell = [Bell spriteWithSpriteFrameName:@"gong_0001.png"];
         
         [spriteBatchNode addChild:bell z:ZValue tag:kBellTagValue];
         

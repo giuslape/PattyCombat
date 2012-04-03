@@ -353,6 +353,7 @@
 		20E4EE1E152B27AE0048F031 /* miaghi_feedback_0002.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4EE09152B27AE0048F031 /* miaghi_feedback_0002.png */; };
 		20E4EE21152B2AE70048F031 /* Feedback_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4EE1F152B2AE70048F031 /* Feedback_default.png */; };
 		20E4EE22152B2AE70048F031 /* Feedback_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E4EE20152B2AE70048F031 /* Feedback_default.plist */; };
+		20E4EE24152B5CC50048F031 /* next_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4EE23152B5CC40048F031 /* next_btn.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -881,6 +882,7 @@
 		20E4EE09152B27AE0048F031 /* miaghi_feedback_0002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = miaghi_feedback_0002.png; sourceTree = "<group>"; };
 		20E4EE1F152B2AE70048F031 /* Feedback_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Feedback_default.png; sourceTree = "<group>"; };
 		20E4EE20152B2AE70048F031 /* Feedback_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Feedback_default.plist; sourceTree = "<group>"; };
+		20E4EE23152B5CC40048F031 /* next_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_btn.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1547,6 +1549,7 @@
 		2015CCDA1521B35400F3AE56 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				20E4EE23152B5CC40048F031 /* next_btn.png */,
 				20E4EDF4152B278F0048F031 /* End */,
 				20E4EDEF152B1FEE0048F031 /* intro_btn_dx_02.png */,
 				20E4EDF0152B1FEE0048F031 /* intro_btn_sx_02.png */,
@@ -2154,6 +2157,7 @@
 				20E4EE1E152B27AE0048F031 /* miaghi_feedback_0002.png in Resources */,
 				20E4EE21152B2AE70048F031 /* Feedback_default.png in Resources */,
 				20E4EE22152B2AE70048F031 /* Feedback_default.plist in Resources */,
+				20E4EE24152B5CC50048F031 /* next_btn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -73,6 +73,8 @@
     
     if (self) {
         
+        bool b = [[CCDirector sharedDirector].view isMultipleTouchEnabled];
+        NSLog(@"è attivo? %@", b);
         size = [[CCDirector sharedDirector] winSize];
         
         CCSprite* wall = [CCSprite spriteWithFile:@"muretto_0001.png"];
@@ -116,8 +118,15 @@
         totalScore = [[GameManager sharedGameManager] totalScore];
         
         scoreUp = totalScore;
-
         
+        CCSprite* handNext = [CCSprite spriteWithFile:@"next_btn.png"];
+        [handNext setPosition:ccp (size.width - handNext.boundingBox.size.width , handNext.boundingBox.size.height)];
+        [handNext setAnchorPoint:ccp(0, 1)];
+        
+        [self addChild:handNext z:3 tag:kHandNext];
+
+        handNext.opacity = 0;
+
         
     }
     return self;
@@ -290,12 +299,9 @@
         
         [self unschedule:_cmd];
         
-        CCSprite* handNext = [CCSprite spriteWithFile:@"next_btn.png"];
-        [handNext setPosition:ccp (size.width - handNext.boundingBox.size.width , handNext.boundingBox.size.height)];
-        [handNext setAnchorPoint:ccp(0, 1)];
+        CCSprite* nextBtn= (CCSprite *)[self getChildByTag:kHandNext];
         
-        [self addChild:handNext z:3 tag:kHandNext];
-        
+        nextBtn.opacity = 255;
         
         [[GameManager sharedGameManager] setTotalScore:scoreUp];
         
@@ -380,7 +386,7 @@
     
     if (objectType == kObjectTypeBell) {
         
-        Bell* bell = [Bell spriteWithSpriteFrameName:@"gong0001.png"];
+        Bell* bell = [Bell spriteWithSpriteFrameName:@"gong_0001.png"];
         
         [spriteBatchNode addChild:bell z:ZValue tag:kBellTagValue];
         
