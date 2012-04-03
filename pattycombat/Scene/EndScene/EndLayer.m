@@ -10,46 +10,16 @@
 #import "GameManager.h"
 #import "GCHelper.h"
 #import "GameState.h"
+#import <Twitter/Twitter.h>
 #import "PattyCombatIAPHelper.h"
 
 
-@interface EndLayer()
-
-@property (nonatomic, strong)CCLabelBMFont* labelScore;
-@property (nonatomic, strong)CCLabelBMFont* labelTimeBonus;
-@property (nonatomic, strong)CCLabelBMFont* labelTotalScore;
-@property (readonly) int totalGameScore;
-@property (readonly) int currentLevelScore;
-@property (readonly) int bestScore;
-@property (readonly) int timeBonus;
-@property (readonly) int elapsedTime;
-@property (readonly) int totalScore;
-@property (readonly) int currentLevel;
-@property int scoreUp;
-@property int scoreUpTimeBonus;
-@property int scoreUpTotalScore;
-@property (readonly)BOOL playerIsDied;
-
--(void)sendAchievements;
-
-@end
 
 @implementation EndLayer
 
 @synthesize labelScore;
-@synthesize currentLevel;
 @synthesize labelTimeBonus;
-@synthesize totalGameScore;
-@synthesize currentLevelScore;
-@synthesize bestScore;
-@synthesize scoreUp;
-@synthesize timeBonus;
-@synthesize elapsedTime;
 @synthesize labelTotalScore;
-@synthesize totalScore;
-@synthesize scoreUpTimeBonus;
-@synthesize scoreUpTotalScore;
-@synthesize playerIsDied;
 
 
 #pragma mark -
@@ -96,7 +66,7 @@
         
     BOOL isLastLevel = [[GameManager sharedGameManager]isLastLevel];
         
-    (isLastLevel || !playerIsDied) ? [[GameManager sharedGameManager]runSceneWithID:kMainMenuScene] : [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
+    (isLastLevel || !_playerIsDied) ? [[GameManager sharedGameManager]runSceneWithID:kMainMenuScene] : [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
                         
 	return YES;
         
@@ -108,9 +78,9 @@
     
     }else{
         
-        if (scoreUp <= currentLevelScore) scoreUp = currentLevelScore;
-        else if(scoreUpTimeBonus <= timeBonus) scoreUpTimeBonus = timeBonus;
-        else if(scoreUpTotalScore <= totalGameScore)scoreUpTotalScore = totalGameScore;
+        if (_scoreUp <= _currentLevelScore) _scoreUp = _currentLevelScore;
+        else if(_scoreUpTimeBonus <= _timeBonus) _scoreUpTimeBonus = _timeBonus;
+        else if(_scoreUpTotalScore <= _totalGameScore)_scoreUpTotalScore = _totalGameScore;
                 
         return YES;
     }
@@ -130,54 +100,54 @@
     CCSprite* nextMatch = nil;
 
     
-        if (scoreUp <= currentLevelScore) {
+        if (_scoreUp <= _currentLevelScore) {
         
-            [labelScore setString:[NSString stringWithFormat:@"%d", scoreUp]];
-            scoreUp++;
+            [labelScore setString:[NSString stringWithFormat:@"%d", _scoreUp]];
+            _scoreUp++;
             return;
         
-        }else if(scoreUpTimeBonus <= timeBonus){
+        }else if(_scoreUpTimeBonus <= _timeBonus){
         
-        [labelTimeBonus setString:[NSString stringWithFormat:@"%d",scoreUpTimeBonus]];
-        scoreUpTimeBonus++;
+        [labelTimeBonus setString:[NSString stringWithFormat:@"%d",_scoreUpTimeBonus]];
+        _scoreUpTimeBonus++;
             return;
             
-        }else if(scoreUpTotalScore <= totalGameScore){
+        }else if(_scoreUpTotalScore <= _totalGameScore){
         
-        [labelTotalScore setString:[NSString stringWithFormat:@"%d",scoreUpTotalScore]];
-        scoreUpTotalScore++;
+        [labelTotalScore setString:[NSString stringWithFormat:@"%d",_scoreUpTotalScore]];
+        _scoreUpTotalScore++;
             return;
             
         }else {
     
-            nextMatch =  (playerIsDied) ? [CCSprite spriteWithFile:@"next_btn.png"] :[CCSprite spriteWithFile:@"menu_btn.png"];
-            [nextMatch setPosition:ccp (screenSize.width - nextMatch.boundingBox.size.width , nextMatch.boundingBox.size.height)];
+            nextMatch =  (_playerIsDied) ? [CCSprite spriteWithFile:@"next_btn.png"] :[CCSprite spriteWithFile:@"menu_btn.png"];
+            [nextMatch setPosition:ccp (size.width - nextMatch.boundingBox.size.width , nextMatch.boundingBox.size.height)];
             [nextMatch setAnchorPoint:ccp(0, 1)];
             [self addChild:nextMatch z:0 tag:10];
             
             CCSprite* retry = [CCSprite spriteWithFile:@"menu_btn.png"];
-            [retry setPosition:ccp(screenSize.width/2, screenSize.height/2)];
+            [retry setPosition:ccp(size.width/2, size.height/2)];
             [self addChild:retry z:1 tag:11];
             
             [self unscheduleUpdate];
-            [[GameManager sharedGameManager] setTotalScore:totalGameScore];
+            [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
 
 
         }
     
-    if (bestScore < totalGameScore) {
+    if (_bestScore < _totalGameScore) {
         
-        [[GameManager sharedGameManager] setBestScore:totalGameScore];
+        [[GameManager sharedGameManager] setBestScore:_totalGameScore];
         
         CCSprite * newBestScore = [CCSprite spriteWithFile:@"newRecord.png"];
         
         [newBestScore setAnchorPoint:ccp(0, 1)];
         
-        [newBestScore setPosition:ccp(715/2, screenSize.height - (150/2))];
+        [newBestScore setPosition:ccp(715/2, size.height - (150/2))];
         
         [self addChild:newBestScore z:1];
         
-        int64_t score = (int64_t)(totalGameScore * 1000.0f);
+        int64_t score = (int64_t)(_totalGameScore * 1000.0f);
         
         [[GCHelper sharedInstance] reportScore:kPattyLeaderboard score:score];
         
@@ -209,7 +179,7 @@
 
 -(void)sendAchievements{
     
-    if (currentLevel == 1 && playerIsDied) {
+    if (_currentLevel == 1 && _playerIsDied) {
         
         CCLOG(@"Finished level 1");
          
@@ -231,44 +201,44 @@
     
     if (self) {
         
-        screenSize = [CCDirector sharedDirector].winSize;
+        size = [CCDirector sharedDirector].winSize;
         
-        playerIsDied = [[GameManager sharedGameManager] hasPlayerDied];
+        _playerIsDied = [[GameManager sharedGameManager] hasPlayerDied];
         
-        currentLevel = [[GameManager sharedGameManager] currentLevel];
+        _currentLevel = [[GameManager sharedGameManager] currentLevel];
         
         CCSprite* background = [CCSprite spriteWithFile:[[[GameManager sharedGameManager]dao]
                                                          loadBackgroundEnd:@"BackgroundEnd" 
-                                                         atLevel:currentLevel 
-                                                         andWin:playerIsDied]];
+                                                         atLevel:_currentLevel 
+                                                         andWin:_playerIsDied]];
         
-        elapsedTime = [[GameManager sharedGameManager] elapsedTime];
+        int _elapsedTime = [[GameManager sharedGameManager] elapsedTime];
         
-        currentLevelScore = [[GameManager sharedGameManager] currentScore];
+        _currentLevelScore = [[GameManager sharedGameManager] currentScore];
         
-        totalGameScore = [[GameManager sharedGameManager] totalScore];
+        _totalGameScore = [[GameManager sharedGameManager] totalScore];
         
-        bestScore = [[GameManager sharedGameManager] bestScore];
+        _bestScore = [[GameManager sharedGameManager] bestScore];
         
-        scoreUp = 0;
+        _scoreUp = 0;
         
-        scoreUpTotalScore = totalGameScore;
+        _scoreUpTotalScore = _totalGameScore;
         
-        if (playerIsDied) {
+        if (_playerIsDied) {
             
-            scoreUpTimeBonus = 0;
+            _scoreUpTimeBonus = 0;
             
-            timeBonus = lrint(roundf((GAMETIME - elapsedTime) * 20));
+            _timeBonus = lrint(roundf((GAMETIME - _elapsedTime) * 20));
             
             labelTimeBonus = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
             
             [labelTimeBonus setAnchorPoint:ccp(0, 0)];
             
-            [labelTimeBonus setPosition:ccp(696/2 , screenSize.height - 170)];
+            [labelTimeBonus setPosition:ccp(696/2 , size.height - 170)];
             
             [self addChild:labelTimeBonus z:1];
             
-            [[GameManager sharedGameManager] setLevelReached:currentLevel];
+            [[GameManager sharedGameManager] setLevelReached:_currentLevel];
             
         }
         
@@ -276,23 +246,23 @@
         
         [labelScore setAnchorPoint:ccp(0, 0)];
         
-        [labelScore setPosition:ccp(696/2, screenSize.height - 153)];
+        [labelScore setPosition:ccp(696/2, size.height - 153)];
         
         [self addChild:labelScore z:1];
         
-        labelTotalScore = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", totalGameScore] fntFile:FONTFEEDBACK];
+        labelTotalScore = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", _totalGameScore] fntFile:FONTFEEDBACK];
         
         [labelTotalScore setAnchorPoint:ccp(0, 0)];
         
-        [labelTotalScore setPosition:ccp(696/2,screenSize.height - 203)];
+        [labelTotalScore setPosition:ccp(696/2,size.height - 203)];
         
         [self addChild:labelTotalScore z:1];
         
-        totalGameScore += currentLevelScore + timeBonus;
+        _totalGameScore += _currentLevelScore + _timeBonus;
         
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
         
-        [background setPosition:ccp(screenSize.width/2, screenSize.height/2)];
+        [background setPosition:ccp(size.width/2, size.height/2)];
         
         [self addChild:background z:0];
         

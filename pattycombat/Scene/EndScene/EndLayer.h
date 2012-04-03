@@ -13,8 +13,25 @@
 
 @interface EndLayer : CCLayer {
     
-    CGSize screenSize;
+    CGSize size;
     
+    int _totalGameScore;
+    int _currentLevelScore;
+    int _bestScore;
+    int _timeBonus;
+    int _scoreUp;
+    int _scoreUpTimeBonus;
+    int _scoreUpTotalScore;
+    int _currentLevel;
+    
+    BOOL _playerIsDied;
 }
+
+@property (nonatomic, strong)CCLabelBMFont* labelScore;
+@property (nonatomic, strong)CCLabelBMFont* labelTimeBonus;
+@property (nonatomic, strong)CCLabelBMFont* labelTotalScore;
+
+
+-(void)sendAchievements;
 
 @end
