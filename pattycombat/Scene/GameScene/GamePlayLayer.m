@@ -59,6 +59,12 @@
 
 -(void)didPlayerChangeHands:(BOOL)handIsOpen{
     
+    CCSprite* leftHand = (CCSprite *)[self getChildByTag:kLeftHandHelpTagValue];
+    CCSprite* rightHand = (CCSprite *)[self getChildByTag:kRightHandHelpTagValue];
+
+    if (leftHand.opacity == 255)leftHand.opacity = 0;
+    if (rightHand.opacity == 255)rightHand.opacity = 0;
+    
     [_hudLayer updateHealthBar:handIsOpen];
     
 }
@@ -66,6 +72,26 @@
 -(void)didPlayerHasTouched:(BOOL)handsIsTouched{
     
     [_hudLayer updateHealthBar:handsIsTouched];
+    
+}
+
+-(void)didPlayerOpenHand:(CharacterStates)states{
+    
+    CCSprite* leftHand = (CCSprite *)[self getChildByTag:kLeftHandHelpTagValue];
+    CCSprite* rightHand = (CCSprite *)[self getChildByTag:kRightHandHelpTagValue];
+    
+    switch (states) {
+        case kStateLeftHandOpen:
+            
+            leftHand.opacity = 255;
+            
+            break;
+        case kStateRightHandOpen:
+            rightHand.opacity = 255;
+            
+        default:
+            break;
+    }
     
 }
 
@@ -260,9 +286,33 @@
         
         CGSize size = [[CCDirectorIOS sharedDirector]winSize];
         
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Ready" fntFile:FONTHIGHSCORES];
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Get the Rhythm" fntFile:FONTHIGHSCORES];
         [self addChild:label z:kLabelReadyZValue tag:kLabelReadyTagValue];
         [label setPosition:ccp(size.width/2, size.height/2)];
+        
+        // Check if Tutorial is active
+        
+        BOOL isTutorial = [[GameManager sharedGameManager] isTutorial];
+        
+        if(isTutorial){
+            
+            CCSprite* leftHand = [CCSprite spriteWithFile:@"intro_btn_sx_02.png"];
+            
+            [self addChild:leftHand z:kLeftHandHelpZValue tag:kLeftHandHelpTagValue];
+            
+            [leftHand setPosition:ccp(size.width * 0.76f, size.height * 0.40f)];
+            
+            leftHand.opacity = 0;
+            
+            CCSprite* rightHand = [CCSprite spriteWithFile:@"intro_btn_dx_02.png"];
+            
+            [self addChild:rightHand z:kRightHandHelpZValue tag:kRightHandHelpTagValue];
+            
+            [rightHand setPosition:ccp(size.width * 0.24f, size.height * 0.40f)];
+            
+            rightHand.opacity = 0;
+            
+        }
         
         
     }

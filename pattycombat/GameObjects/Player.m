@@ -129,6 +129,7 @@
             handIsOpen = FALSE;
         }else{
             [self changeState:[NSNumber numberWithInt:kStateRightHandOpen]];
+            [_delegate didPlayerOpenHand:kStateRightHandOpen];
             handIsOpen = TRUE;
         }
     }else if([indexPattern isEqualToString:@"sx"]){
@@ -139,6 +140,7 @@
         }
         else{
             [self changeState:[NSNumber numberWithInt:kStateLeftHandOpen]];
+            [_delegate didPlayerOpenHand:kStateLeftHandOpen];
             handIsOpen = TRUE;
         }
     }else if([indexPattern isEqualToString:@"sxCross"]){
@@ -516,7 +518,7 @@
                                         size.height - positionLeftY/2);
         
         
-        [_leftHandBatchNode addChild:leftHand z:kLeftHandZvalue tag:kLeftHandTagValue];
+        [_leftHandBatchNode addChild:leftHand z:kLeftHandZValue tag:kLeftHandTagValue];
                 
         NSString* rightName = [playerSettings objectForKey:@"rightHand"];
         

@@ -87,7 +87,7 @@
 #define kHandFeedLeftZValue 3
 #define kArrowFeedTagValue 13
 #define kLeftHandTagValue 14
-#define kLeftHandZvalue 1
+#define kLeftHandZValue 1
 #define kRightHandZValue 1
 #define kRightHandTagValue 15
 #define kFightButtonTagValue 16
@@ -117,6 +117,10 @@
 #define kLabelScoreZValue 1
 #define kLabelReadyTagValue 24
 #define kLabelReadyZValue 1
+#define kLeftHandHelpTagValue 25
+#define kLeftHandHelpZValue 0
+#define kRightHandHelpTagValue 26
+#define kRightHandHelpZValue 0
 
 
 

@@ -641,7 +641,7 @@
         _leftHand = [CCSprite spriteWithSpriteFrameName:
                     [NSString stringWithString:@"intro_btn_sx_01.png"]];
         
-        [_spriteBatchNode addChild:_leftHand z:kLeftHandZvalue tag:kLeftHandTagValue];
+        [_spriteBatchNode addChild:_leftHand z:kLeftHandZValue tag:kLeftHandTagValue];
         
         [_leftHand setPosition:ccp(size.width * 0.81f, size.height * 0.45f)];
         

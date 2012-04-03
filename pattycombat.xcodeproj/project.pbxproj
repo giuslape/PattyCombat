@@ -353,6 +353,8 @@
 		20239149152784E00002A6D1 /* IntroButtAndFeed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20239147152784E00002A6D1 /* IntroButtAndFeed.plist */; };
 		2092B2781529C384006CDE66 /* Common.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2092B2761529C384006CDE66 /* Common.plist */; };
 		2092B2791529C384006CDE66 /* Common.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092B2771529C384006CDE66 /* Common.png */; };
+		20E4EDF1152B1FEF0048F031 /* intro_btn_dx_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4EDEF152B1FEE0048F031 /* intro_btn_dx_02.png */; };
+		20E4EDF2152B1FEF0048F031 /* intro_btn_sx_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4EDF0152B1FEE0048F031 /* intro_btn_sx_02.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -895,6 +897,8 @@
 		20239147152784E00002A6D1 /* IntroButtAndFeed.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IntroButtAndFeed.plist; sourceTree = "<group>"; };
 		2092B2761529C384006CDE66 /* Common.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Common.plist; sourceTree = "<group>"; };
 		2092B2771529C384006CDE66 /* Common.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Common.png; sourceTree = "<group>"; };
+		20E4EDEF152B1FEE0048F031 /* intro_btn_dx_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_btn_dx_02.png; sourceTree = "<group>"; };
+		20E4EDF0152B1FEE0048F031 /* intro_btn_sx_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_btn_sx_02.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1561,6 +1565,8 @@
 		2015CCDA1521B35400F3AE56 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				20E4EDEF152B1FEE0048F031 /* intro_btn_dx_02.png */,
+				20E4EDF0152B1FEE0048F031 /* intro_btn_sx_02.png */,
 				2092B2751529C35A006CDE66 /* Common */,
 				20239119152781330002A6D1 /* Intro */,
 				209E7ADB15236A5B009869E7 /* Fonts */,
@@ -2206,6 +2212,8 @@
 				20239149152784E00002A6D1 /* IntroButtAndFeed.plist in Resources */,
 				2092B2781529C384006CDE66 /* Common.plist in Resources */,
 				2092B2791529C384006CDE66 /* Common.png in Resources */,
+				20E4EDF1152B1FEF0048F031 /* intro_btn_dx_02.png in Resources */,
+				20E4EDF2152B1FEF0048F031 /* intro_btn_sx_02.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

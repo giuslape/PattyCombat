@@ -77,7 +77,6 @@
     
     [tempBell changeState:[NSNumber numberWithInt:kStateBellGongFinish]];
     
-       
     [_delegate gameOverHandler:bar.characterState withScore:[NSNumber numberWithInt:_score] andPlayerIsDead:([bar progress] > _threshold ? YES : NO) fromLayer:self];
     
     }
@@ -182,6 +181,8 @@
         
         isPause = FALSE;
         
+        // Load Common Elements in Cache
+        
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Common.plist"];
         
         _commonElements = [CCSpriteBatchNode batchNodeWithFile:@"Common.png"];
@@ -200,6 +201,8 @@
                       atLocation:ccp(size.width * 0.98f, size.height * 0.92f)
                       withZValue:kLabelScoreZValue];
         
+        
+        // Add Pause Button
         _pauseButton = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"pause_btn.png"]];
         
         [_commonElements addChild:_pauseButton z:10 tag:11];
@@ -207,6 +210,8 @@
         _pauseButton.position = ccp(size.width * 0.96f, size.height * 0.0625f);
         
         _pauseButton.flipX = YES;
+        
+        // Add Menu pause
 
         CCMenuItemSprite* resume = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"resume_btn.png"] 
                                                            selectedSprite:[CCSprite spriteWithSpriteFrameName:@"resume_btn_over.png"] 

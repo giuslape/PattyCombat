@@ -67,6 +67,7 @@ typedef enum{
 
 -(void)didPlayerChangeHands:(BOOL)handIsTouched;
 -(void)didPlayerHasTouched:(BOOL)handsIsTouched;
+-(void)didPlayerOpenHand:(CharacterStates)states;
 
 @end
 

@@ -41,8 +41,6 @@
 @property (readwrite) int comboMoltiplicator;
 
 
-
-
 -(void)onPause:(id)sender;
 
 -(void)resumeGame:(id)sender;
