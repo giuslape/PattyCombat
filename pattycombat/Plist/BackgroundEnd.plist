@@ -12,9 +12,9 @@
 	<key>EndBackground2</key>
 	<dict>
 		<key>win</key>
-		<string>crocodile_feedback_0001.png</string>
+		<string>johnny_feedback_0001.png</string>
 		<key>loose</key>
-		<string>crocodile_feedback_0002.png</string>
+		<string>johnny_feedback_0002.png</string>
 	</dict>
 	<key>EndBackground3</key>
 	<dict>
@@ -33,30 +33,30 @@
 	<key>EndBackground6</key>
 	<dict>
 		<key>win</key>
-		<string>joco_feedback_0001.png</string>
+		<string>jocopoco_feedback_0001.png</string>
 		<key>loose</key>
-		<string>joco_feedback_0002.png</string>
+		<string>jocopoco_feedback_0002.png</string>
 	</dict>
 	<key>EndBackground7</key>
 	<dict>
 		<key>win</key>
-		<string>Jenny_feedback_0001.png</string>
+		<string>jenny_feedback_0001.png</string>
 		<key>loose</key>
-		<string>Jenny_feedback_0002.png</string>
+		<string>jenny_feedback_0002.png</string>
 	</dict>
 	<key>EndBackground8</key>
 	<dict>
 		<key>win</key>
-		<string>bud_feedback_0001.png</string>
+		<string>charlie_feedback_0001.png</string>
 		<key>loose</key>
-		<string>bud_feedback_0002.png</string>
+		<string>charlie_feedback_0002.png</string>
 	</dict>
 	<key>EndBackground10</key>
 	<dict>
 		<key>win</key>
-		<string>JeanPaul_feedback_0001.png</string>
+		<string>jeanpaul_feedback_0001.png</string>
 		<key>loose</key>
-		<string>JeanPaul_feedback_0002.png</string>
+		<string>jeanpaul_feedback_0002.png</string>
 	</dict>
 	<key>EndBackground11</key>
 	<dict>
