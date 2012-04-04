@@ -564,7 +564,6 @@
     
     
     NSLog(@"%@ %@", NSStringFromSelector(_cmd), self);
-
     
     [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFramesFromFile:[NSString stringWithFormat:@"%@Player.plist",name]];
     [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFramesFromFile:[NSString stringWithFormat:@"%@Left.plist",name]];

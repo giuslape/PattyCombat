@@ -12,6 +12,7 @@
 #import "GameState.h"
 #import <Twitter/Twitter.h>
 #import "PattyCombatIAPHelper.h"
+#import "MBProgressHUD.h"
 
 
 
@@ -63,7 +64,53 @@
     
     if (CGRectContainsPoint([tweetBtn boundingBox], touchLocation)) {
         
-        NSLog(@"Ho premuto tweet button");
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[CCDirectorIOS sharedDirector].view animated:YES];
+        hud.labelText = @"Loading";
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            // Do a taks in the background
+            if ([TWTweetComposeViewController canSendTweet])
+            {
+                
+                self.isTouchEnabled = NO;
+                TWTweetComposeViewController *tweetSheet =
+                [[TWTweetComposeViewController alloc] init];
+                tweetSheet.completionHandler = ^(TWTweetComposeViewControllerResult
+                                                 result){
+                    if (result == TWTweetComposeViewControllerResultCancelled)
+                    {
+                        NSLog(@"Cancelled the Tweet");
+                    }
+                    else
+                    {
+                        NSLog(@"Tweet sending");
+                    }
+                    [[CCDirectorIOS sharedDirector] dismissModalViewControllerAnimated:YES];
+                    self.isTouchEnabled = TRUE;
+                    
+                };
+                [tweetSheet setInitialText:[NSString stringWithFormat:@"I got %d points in Patty Combat Beat that!", _totalGameScore]];
+                // Hide the HUD in the main tread 
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:[CCDirectorIOS sharedDirector].view animated:YES];
+                    [[CCDirectorIOS sharedDirector] presentViewController:tweetSheet animated:YES completion:nil];
+                });
+                
+            }
+            else
+            {
+                UIAlertView *alertView = [[UIAlertView alloc]
+                                          initWithTitle:@"Sorry"
+                                          message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
+                                          delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+                [alertView show];
+            }
+            
+
+           
+        });       
         
     }else if (CGRectContainsPoint([nextLevel boundingBox], touchLocation)) {
         
@@ -78,6 +125,8 @@
         }
     else if(CGRectContainsPoint([menuBtn boundingBox], touchLocation)) {
         
+        self.isTouchEnabled = NO;
+
         [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
        // [[PattyCombatIAPHelper sharedHelper] coinWillUsed];
     
@@ -143,10 +192,7 @@
             [self unscheduleUpdate];
             [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
 
-            
-
-        
-    
+                
     if (_bestScore < _totalGameScore) {
         
         CCSprite* newRecord = (CCSprite *)[_spriteBatchNode getChildByTag:kNewRecordTagValue];
@@ -286,7 +332,7 @@
         
         CCSprite* nextLevel =  (_playerIsDied) ? [CCSprite spriteWithSpriteFrameName:@"next_btn.png"] :[CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
         
-        [nextLevel setPosition:ccp (size.width* 0.85f , size.height * 0.1f)];
+        [nextLevel setPosition:ccp (size.width* 0.87f , size.height * 0.1f)];
         [nextLevel setAnchorPoint:ccp(0, 0.5f)];
         [_spriteBatchNode addChild:nextLevel z:kNextLevelZValue tag:kNextLevelTagValue];
         
@@ -314,7 +360,7 @@
         
         CCSprite* twitterBtn = [CCSprite spriteWithSpriteFrameName:@"tweet_btn.png"];
         
-        [twitterBtn setPosition:ccp(size.width/2, size.height/2)];
+        [twitterBtn setPosition:ccp(size.width * 0.95f, size.height * 0.3f)];
         
         [_spriteBatchNode addChild:twitterBtn z:kTweetBtnZValue tag:kTweetBtnTagValue];
         

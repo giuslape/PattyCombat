@@ -506,7 +506,7 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            _currentLevel = 3;
+            _currentLevel = 0;
             _totalScore = 0;
             isLastLevel = FALSE;
             sceneToRun = [MenuScene node];

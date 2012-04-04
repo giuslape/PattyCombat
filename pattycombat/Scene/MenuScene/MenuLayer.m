@@ -1133,7 +1133,10 @@ viewController
         };
         [tweetSheet setInitialText:
          @"Tweeting from Patty Combat! :)"];
-        [[CCDirectorIOS sharedDirector] presentModalViewController:tweetSheet animated:YES];
+        [[CCDirectorIOS sharedDirector] presentViewController:tweetSheet animated:YES completion:^{
+            
+            NSLog(@"Completato");
+        }];
     }
     else
     {

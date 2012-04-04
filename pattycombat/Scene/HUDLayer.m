@@ -359,6 +359,7 @@
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.plist"];
 
+    [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
 }
 
 
