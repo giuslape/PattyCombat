@@ -26,8 +26,6 @@
 
 -(int)score{
     
-    NSLog(@"%@ %@",self, NSStringFromSelector(_cmd));
-
     int signValue = (_touchIsOk) ? 1: 0;
     int signValueProgress = (_touchIsOk) ? 1 : -2;
     int moltiplicator = self.comboMoltiplicator;
@@ -75,18 +73,28 @@
     
     Bell* tempBell = (Bell *)[_commonElements getChildByTag:kBellTagValue];
     
+    // The match is win and check if is Ko or Perfect for this level
+    
+    if ([[GameManager sharedGameManager] isPerfect]) [[GameManager sharedGameManager] updateGameState:kStatePerfect];
+        else [[GameManager sharedGameManager] updateGameState:kStateKo];
+    
+    // Change state of bell
+    
     [tempBell changeState:[NSNumber numberWithInt:kStateBellGongFinish]];
     
-    [_delegate gameOverHandler:bar.characterState withScore:[NSNumber numberWithInt:_score] andPlayerIsDead:([bar progress] > _threshold ? YES : NO) fromLayer:self];
+    [_delegate gameOverHandler:bar.characterState withScore:[NSNumber numberWithInt:_score]];
     
-    }
+}
 
 
 -(void)bellDidFinishTime:(Bell *)bell{
     
-    NSLog(@"%@", NSStringFromSelector(_cmd));
+    if (_barProgress == 100) [[GameManager sharedGameManager] updateGameState:kStateKo];
+        else if(_barProgress >= _threshold) [[GameManager sharedGameManager] updateGameState:kStateThresholdReached];
+            else [[GameManager sharedGameManager] updateGameState:kStateLose];
+
     
-    [_delegate gameOverHandler:bell.characterState withScore:[NSNumber numberWithInt:_score] andPlayerIsDead:(_barProgress > _threshold ? YES : NO) fromLayer:self];
+    [_delegate gameOverHandler:bell.characterState withScore:[NSNumber numberWithInt:_score]];
     
 }
 
@@ -105,8 +113,6 @@
 
 -(void)updateHealthBar:(BOOL)touch{
    
-    NSLog(@"%@ %@",self, NSStringFromSelector(_cmd));
-
     _touchIsOk = touch;
     
     GPBar* bar = (GPBar *)[self getChildByTag:kHealthTagValue];
@@ -132,7 +138,6 @@
     
     if (kObjectTypeBell == objectType) {
         
-        CCLOG(@"Creating the Bell");
         Bell* bell = [Bell spriteWithSpriteFrameName:@"gong_0001.png"];
         [bell setPosition:spawnLocation];
         [_commonElements addChild:bell z:ZValue tag:kBellTagValue];
@@ -283,9 +288,7 @@
     if (!isPause) {
         
     isPause = TRUE;
-            
-    NSLog(@"on pause");
-    
+                
     [[CDAudioManager sharedManager] pauseBackgroundMusic];
         
     [[CCDirectorIOS sharedDirector] pause];
@@ -304,8 +307,6 @@
     
     isPause = FALSE;
     
-    NSLog(@"Resume");
-
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
     
     pauseMenu.opacity = 0;
@@ -320,9 +321,7 @@
 -(void)mainMenu:(id)sender{
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
-    
-    NSLog(@"Give Up");
-    
+        
     pauseMenu.isTouchEnabled = FALSE;
         
     [self removeChild: pauseMenu cleanup:YES]; 

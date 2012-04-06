@@ -73,8 +73,6 @@
     
     if (self) {
         
-        bool b = [[CCDirector sharedDirector].view isMultipleTouchEnabled];
-        NSLog(@"è attivo? %@", b);
         size = [[CCDirector sharedDirector] winSize];
         
         CCSprite* wall = [CCSprite spriteWithFile:@"muretto_0001.png"];

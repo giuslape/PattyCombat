@@ -19,15 +19,18 @@
     BOOL isMusicON;
     BOOL isSoundEffectsON;
     BOOL _isTutorial;
+    BOOL _isPerfectForLevel;
     int  _totalScore;
     int  _currentScore;
     int  _currentLevel;
     int  _levelReached;
     
+    
     // Added for audio
     BOOL hasAudioBeenInitialized;
     GameManagerSoundState managerSoundState;
     SimpleAudioEngine *soundEngine;
+    GameStates _gameState;
     NSMutableDictionary *listOfSoundEffectFiles;
     NSMutableDictionary *soundEffectsState;  
     
@@ -40,6 +43,8 @@
 @property (readwrite) int totalScore;
 @property (readwrite, nonatomic) int bestScore;
 @property (readonly ,nonatomic) BOOL isTutorial;
+@property (readwrite, nonatomic)BOOL isPerfect;
+@property (readwrite, nonatomic) BOOL isPerfectForLevel;
 @property (readwrite) BOOL isMusicON;
 @property (readwrite) BOOL isSoundEffectsON;
 @property (readwrite) BOOL hasPlayerDied;
@@ -48,6 +53,7 @@
 @property (nonatomic, strong) NSString* namePlayer;
 @property (strong, readonly) id<SceneDao> dao;
 @property (readwrite) GameManagerSoundState managerSoundState;
+@property (readwrite) GameStates gameState;
 @property (nonatomic, strong) NSMutableDictionary *listOfSoundEffectFiles;
 @property (nonatomic, strong) NSMutableDictionary *soundEffectsState;
 @property (nonatomic, strong, readwrite) NSMutableArray* patternForLevel;
@@ -67,5 +73,6 @@
 -(void)pauseGame;
 -(NSString*)formatPlayerNameTypeToString;
 -(NSString *)formatAchievementTypeToString;
+-(void)updateGameState:(GameStates)newGameState;
 
 @end

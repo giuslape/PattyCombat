@@ -24,6 +24,9 @@ static GameManager* _sharedGameManager = nil;
 @synthesize currentScore = _currentScore;
 @synthesize totalScore   = _totalScore;
 @synthesize namePlayer   = _namePlayer;
+@synthesize gameState    = _gameState;
+@synthesize isPerfect;
+@synthesize isPerfectForLevel;
 @synthesize hasPlayerDied;
 @synthesize bestScore;
 @synthesize dao;
@@ -92,7 +95,7 @@ static GameManager* _sharedGameManager = nil;
         currentScene = kNoSceneUninitialized;
         elapsedTime = 0;  
         _namePlayer = nil;
-        
+        _gameState = kStateLose;
     }
     return self;
 }
@@ -509,11 +512,15 @@ static GameManager* _sharedGameManager = nil;
             _currentLevel = 0;
             _totalScore = 0;
             isLastLevel = FALSE;
+            self.isPerfect = TRUE;
             sceneToRun = [MenuScene node];
             break;
         case kIntroScene:
             _currentLevel++;
             hasPlayerDied = FALSE;
+            
+            _isPerfectForLevel = TRUE;
+            
             isLastLevel = (_currentLevel == 12) ? TRUE : FALSE;
             patternForLevel = nil;
             if (_currentLevel == 4) {
@@ -623,6 +630,69 @@ static GameManager* _sharedGameManager = nil;
     BOOL tutorial = (self.levelReached == 0) ? YES : NO;
     
     return tutorial;
+}
+
+#pragma mark -
+#pragma mark ===  Game State Update  ===
+#pragma mark -
+
+-(void)updateGameState:(GameStates)newGameState{
+    
+    _gameState = newGameState;
+    
+    switch (newGameState) {
+        
+        case kStateThresholdReached:
+            break;
+        case kStateKo:
+            self.isPerfect = NO;
+            break;
+        case kStatePerfect:
+            
+            if (self.isPerfect) {
+                
+            }
+            self.isPerfect = YES;
+            break;
+        case kStateLose:
+            self.isPerfect = NO;
+            break;
+        default:
+            break;
+    }
+    
+}
+
+#pragma mark -
+#pragma mark ===  Perfect For Game  ===
+#pragma mark -
+
+-(void)setIsPerfect:(BOOL)perfect{
+        
+    [[NSUserDefaults standardUserDefaults] setBool:perfect forKey:@"Perfect"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(BOOL)isPerfect{
+    
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"Perfect"];
+}
+
+#pragma mark -
+#pragma mark ===  Perfect For Level  ===
+#pragma mark -
+
+
+-(void)setIsPerfectForLevel:(BOOL)value{
+    
+    _isPerfectForLevel = value;
+    
+    if (self.isPerfect) self.isPerfect = FALSE;
+}
+
+-(BOOL)isPerfectForLevel{
+    
+    return _isPerfectForLevel;
 }
 
 @end

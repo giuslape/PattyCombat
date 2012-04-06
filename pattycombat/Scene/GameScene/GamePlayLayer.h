@@ -33,5 +33,5 @@
 @property (nonatomic, strong) HUDLayer* hudLayer;
 
 
--(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score andPlayerIsDead:(BOOL)playerIsDead fromLayer:(id)layer;
+-(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score;
 @end

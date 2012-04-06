@@ -10,9 +10,10 @@
 #import "Bell.h"
 #import "GPBar.h"
 
+
 @protocol HUDDelegate <NSObject>
 
--(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score andPlayerIsDead:(BOOL)playerIsDead fromLayer:(id)layer ;
+-(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score;
 
 @end
 

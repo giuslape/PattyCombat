@@ -19,7 +19,7 @@
     CGSize size;
 }
 
-@property(nonatomic, strong)CCAnimation* touchAnimation;
+@property(nonatomic, strong) CCAnimation* touchAnimation;
 
 
 

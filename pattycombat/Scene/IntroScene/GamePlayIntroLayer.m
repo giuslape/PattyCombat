@@ -678,7 +678,7 @@
     }
     else{
         
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"????" fntFile:@"Marker Felt"];
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"????" fntFile:FONTHIGHSCORES];
         
         [self addChild:label];
         
@@ -687,7 +687,6 @@
     }
     
     self.isTouchEnabled = TRUE;
-    
     
 }
 

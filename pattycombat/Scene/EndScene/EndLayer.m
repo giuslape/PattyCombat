@@ -118,7 +118,7 @@
         
         BOOL isLastLevel = [[GameManager sharedGameManager]isLastLevel];
         
-        (isLastLevel || !_playerIsDied) ? [[GameManager sharedGameManager]runSceneWithID:kGamelevel1] : [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
+        (isLastLevel || !_thresholdReached) ? [[GameManager sharedGameManager]runSceneWithID:kGamelevel1] : [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
                         
         return YES;
         
@@ -177,6 +177,9 @@
         
     CCSprite* nextLevel = (CCSprite *)[_spriteBatchNode getChildByTag:kNextLevelTagValue];
     CCSprite* tweetBtn = (CCSprite *)[_spriteBatchNode getChildByTag:kTweetBtnTagValue];
+    CCSprite* perfectOrKo = (CCSprite *)[_spriteBatchNode getChildByTag:kPerfectOrKoTagValue];
+    
+    perfectOrKo.opacity = 255;
     
     tweetBtn.opacity = 255;
             
@@ -184,7 +187,7 @@
         
     CCSprite* menuBtn = (CCSprite *)[_spriteBatchNode getChildByTag:kMenuBtnTagValue];
 
-            if (!_playerIsDied) menuBtn.opacity = 255;
+            if (!_thresholdReached) menuBtn.opacity = 255;
 
             else [menuBtn removeFromParentAndCleanup:YES];
             
@@ -213,6 +216,98 @@
 #pragma mark ===  Init Methods  ===
 #pragma mark -
 
+-(void)loadBackgroundAtLevel:(int)currentLevel andWin:(BOOL)win{
+    
+    
+    
+    CCSprite* background = [CCSprite spriteWithFile:[[[GameManager sharedGameManager]dao]
+                                                     loadBackgroundEnd:@"BackgroundEnd" 
+                                                     atLevel:currentLevel 
+                                                     andWin:win]];
+    
+    [background setPosition:ccp(size.width/2, size.height/2)];
+    
+    [self addChild:background z:0];
+    
+}
+
+
+-(void)detectState{
+    
+    GameStates gameState = [[GameManager sharedGameManager] gameState];
+    
+    switch (gameState) {
+            
+        case kStateKo:
+            _thresholdReached = YES;
+            _isKo = YES;
+            _isPerfect = NO;
+            break;
+        case kStatePerfect:
+            _isPerfect = YES;
+            _isKo = NO;
+            _thresholdReached = YES;
+            break;
+        case kStateThresholdReached:
+            _thresholdReached = YES;
+            _isPerfect = NO;
+            _isKo = NO;
+            break;
+        case kStateLose:
+            _thresholdReached = NO;
+            _isKo = NO;
+            _isPerfect = NO;
+            break;
+        default:
+            break;
+    }
+    
+    if (_thresholdReached) {
+        
+        int _elapsedTime = [[GameManager sharedGameManager] elapsedTime];
+        
+        _scoreUpTimeBonus = 0;
+        
+        _timeBonus = lrint(roundf((GAMETIME - _elapsedTime) * 20));
+        
+        labelTimeBonus = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
+        
+        [labelTimeBonus setAnchorPoint:ccp(1, 0)];
+        
+        [labelTimeBonus setPosition:ccp(size.width * 0.85f , size.height * 0.57f)];
+        
+        [self addChild:labelTimeBonus z:1];
+
+    }
+    
+    int currentLevel = [[GameManager sharedGameManager] currentLevel];
+
+    [[GameManager sharedGameManager] setLevelReached:currentLevel];
+    
+    [self loadBackgroundAtLevel:currentLevel andWin:_thresholdReached];
+    
+    [self sendAchievementsForLevel:currentLevel];
+    
+    if (_isPerfect || _isKo) {
+        
+        NSString* nameOfLabel = nil;
+        
+        if (_isKo) nameOfLabel = @"ko_label.png";
+        else if (_isPerfect) nameOfLabel = @"perfect_label.png";
+        
+        CCSprite* perfectOrKo = [CCSprite spriteWithSpriteFrameName:nameOfLabel];
+        
+        [perfectOrKo setPosition:ccp(size.width * 0.85f, size.height * 0.70f)];
+        
+        [_spriteBatchNode addChild:perfectOrKo z:kPerfectOrKoZValue tag:kPerfectOrKoTagValue];
+        
+        perfectOrKo.opacity = 0;
+    }
+
+    
+}
+
+
 
 -(void)onEnterTransitionDidFinish{
     
@@ -233,7 +328,7 @@
 
 -(void)sendAchievementsForLevel:(int)currentLevel{
     
-    if (currentLevel == 1 && _playerIsDied) {
+    if (currentLevel == 1) {
         
         CCLOG(@"Finished level 1");
          
@@ -262,17 +357,8 @@
         [self addChild:_spriteBatchNode z:2 tag:2];
         
         size = [CCDirector sharedDirector].winSize;
-        
-        _playerIsDied = [[GameManager sharedGameManager] hasPlayerDied];
-        
-        int _currentLevel = [[GameManager sharedGameManager] currentLevel];
-        
-        CCSprite* background = [CCSprite spriteWithFile:[[[GameManager sharedGameManager]dao]
-                                                         loadBackgroundEnd:@"BackgroundEnd" 
-                                                         atLevel:_currentLevel 
-                                                         andWin:_playerIsDied]];
-        
-        int _elapsedTime = [[GameManager sharedGameManager] elapsedTime];
+                
+        [self detectState];
         
         _currentLevelScore = [[GameManager sharedGameManager] currentScore];
         
@@ -283,24 +369,6 @@
         _scoreUp = 0;
         
         _scoreUpTotalScore = _totalGameScore;
-        
-        if (_playerIsDied) {
-            
-            _scoreUpTimeBonus = 0;
-            
-            _timeBonus = lrint(roundf((GAMETIME - _elapsedTime) * 20));
-            
-            labelTimeBonus = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
-            
-            [labelTimeBonus setAnchorPoint:ccp(1, 0)];
-            
-            [labelTimeBonus setPosition:ccp(size.width * 0.85f , size.height * 0.57f)];
-            
-            [self addChild:labelTimeBonus z:1];
-            
-            [[GameManager sharedGameManager] setLevelReached:_currentLevel];
-            
-        }
         
         labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
         
@@ -322,15 +390,10 @@
         
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
         
-        [background setPosition:ccp(size.width/2, size.height/2)];
-        
-        [self addChild:background z:0];
-        
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         
-        [self sendAchievementsForLevel:_currentLevel];
         
-        CCSprite* nextLevel =  (_playerIsDied) ? [CCSprite spriteWithSpriteFrameName:@"next_btn.png"] :[CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
+        CCSprite* nextLevel =  (_thresholdReached) ? [CCSprite spriteWithSpriteFrameName:@"next_btn.png"] :[CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
         
         [nextLevel setPosition:ccp (size.width* 0.87f , size.height * 0.1f)];
         [nextLevel setAnchorPoint:ccp(0, 0.5f)];
@@ -350,7 +413,7 @@
         
         [newBestScore setAnchorPoint:ccp(0, 1)];
         
-        [newBestScore setPosition:ccp(715/2, size.height - (150/2))];
+        [newBestScore setPosition:ccp(size.width * 0.75f, size.height * 0.3f)];
         
         [_spriteBatchNode addChild:newBestScore z:kNewRecordZValue tag:kNewRecordTagValue];
         
@@ -366,7 +429,7 @@
         
         twitterBtn.opacity = 0;
         
-    
+           
     }
     return self;
 }

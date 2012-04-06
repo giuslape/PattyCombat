@@ -57,15 +57,20 @@
 #pragma mark -
 
 
--(void)didPlayerChangeHands:(BOOL)handIsOpen{
+-(void)didPlayerChangeHands:(BOOL)touchOk{
     
     CCSprite* leftHand = (CCSprite *)[self getChildByTag:kLeftHandHelpTagValue];
     CCSprite* rightHand = (CCSprite *)[self getChildByTag:kRightHandHelpTagValue];
 
     if (leftHand.opacity == 255)leftHand.opacity = 0;
     if (rightHand.opacity == 255)rightHand.opacity = 0;
+        
+    [_hudLayer updateHealthBar:touchOk];
     
-    [_hudLayer updateHealthBar:handIsOpen];
+    if (!touchOk && [[GameManager sharedGameManager] isPerfectForLevel]) {
+        
+        [[GameManager sharedGameManager] setIsPerfectForLevel:NO];
+    }
     
 }
 
@@ -97,7 +102,7 @@
 
 // Handle Game Over 
 
--(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score andPlayerIsDead:(BOOL)playerIsDead fromLayer:(id)layer{
+-(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score{
     
 
     self.isTouchEnabled = FALSE;
@@ -107,7 +112,6 @@
     [self unscheduleAllSelectors];
     
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-    [[GameManager sharedGameManager]  setHasPlayerDied:playerIsDead];
     [[GameManager sharedGameManager]  setCurrentScore:[score intValue]];
     
     // Add Finish Label
@@ -120,7 +124,6 @@
     
     self.player = nil;
     self.hudLayer = nil;
-    
     
     // Run Complete Scene
     [[GameManager sharedGameManager] runSceneWithID:kLevelCompleteScene];

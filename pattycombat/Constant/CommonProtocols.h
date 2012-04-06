@@ -35,6 +35,15 @@ typedef enum{
 
 typedef enum{
     
+    kStateThresholdReached,
+    kStateKo,
+    kStatePerfect,
+    kStateLose,
+    
+}GameStates;
+
+typedef enum{
+    
     kStateBellUpdate,
     kStateBellGongFinish,
     kStateBellStart,

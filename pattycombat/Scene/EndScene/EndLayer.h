@@ -25,7 +25,9 @@
     int _scoreUpTimeBonus;
     int _scoreUpTotalScore;
     
-    BOOL _playerIsDied;
+    BOOL _thresholdReached;
+    BOOL _isKo;
+    BOOL _isPerfect;
 }
 
 @property (nonatomic, strong)CCLabelBMFont* labelScore;
