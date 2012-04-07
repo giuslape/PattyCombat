@@ -118,9 +118,7 @@
         });       
         
     }else if (CGRectContainsPoint([nextLevel boundingBox], touchLocation)) {
-        
-        //self.isTouchEnabled = NO;
-        
+                
         BOOL isLastLevel = [[GameManager sharedGameManager] isLastLevel];
         
         if (!_thresholdReached) {
@@ -141,6 +139,22 @@
             
             [[PattyCombatIAPHelper sharedHelper] coinWillUsed];
             
+            [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
+            
+            
+            if (_bestScore < _totalGameScore) {
+                
+                CCSprite* newRecord = (CCSprite *)[_spriteBatchNode getChildByTag:kNewRecordTagValue];
+                
+                newRecord.opacity = 255;
+                
+                [[GameManager sharedGameManager] setBestScore:_totalGameScore];
+                
+                int64_t score = (int64_t)(_totalGameScore * 1000.0f);
+                
+                [[GCHelper sharedInstance] reportScore:kPattyLeaderboard score:score];
+                
+            }
                                     
             if (isLastLevel) {
                 
@@ -222,23 +236,6 @@
             else [menuBtn removeFromParentAndCleanup:YES];
             
             [self unscheduleUpdate];
-            [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
-
-                
-    if (_bestScore < _totalGameScore) {
-        
-        CCSprite* newRecord = (CCSprite *)[_spriteBatchNode getChildByTag:kNewRecordTagValue];
-        
-        newRecord.opacity = 255;
-        
-        [[GameManager sharedGameManager] setBestScore:_totalGameScore];
-        
-        int64_t score = (int64_t)(_totalGameScore * 1000.0f);
-        
-        [[GCHelper sharedInstance] reportScore:kPattyLeaderboard score:score];
-        
-    }
-    
 }
 
 #pragma mark -
@@ -366,7 +363,6 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel1
                                          percentComplete:100.0];
-            
         }
     }
     
@@ -441,7 +437,7 @@
         
         [newBestScore setAnchorPoint:ccp(0, 1)];
         
-        [newBestScore setPosition:ccp(size.width * 0.75f, size.height * 0.3f)];
+        [newBestScore setPosition:ccp(size.width * 0.70f, size.height * 0.3f)];
         
         [_spriteBatchNode addChild:newBestScore z:kNewRecordZValue tag:kNewRecordTagValue];
         

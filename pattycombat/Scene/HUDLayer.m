@@ -9,6 +9,7 @@
 #import "SimpleAudioEngine.h"
 #import "Constant.h"
 #import "GameManager.h"
+#import "PattyCombatIAPHelper.h"
 
 
 @implementation HUDLayer
@@ -223,10 +224,17 @@
                                                                    target:self 
                                                                         selector:@selector(resumeGame:)];
         
-        CCMenuItemSprite* restart = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn.png"] 
+        CCMenuItemSprite* restart = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn.png"]
                                                             selectedSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn_over.png"] 
-                                                                    target:self
-                                                                        selector:@selector(restartTapped:)];
+                                                            disabledSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn_over.png"]
+                                                                    target:self selector:@selector(restartTapped:)];
+                                                                
+        // Check if there is coins 
+        if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0){
+            
+            restart.isEnabled = FALSE;
+            restart.opacity = 100;
+        }
         
         CCMenuItemSprite* mainMenu = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"giveup_btn.png"] 
                                                              selectedSprite:[CCSprite spriteWithSpriteFrameName:@"giveup_btn_over.png"] 
@@ -335,6 +343,8 @@
 -(void)restartTapped:(id)sender{
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+    
+    [[PattyCombatIAPHelper sharedHelper] coinWillUsed];
     
     self.isTouchEnabled = FALSE;
         
