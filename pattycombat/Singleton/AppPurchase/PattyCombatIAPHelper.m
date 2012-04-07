@@ -40,7 +40,7 @@ static PattyCombatIAPHelper * _sharedHelper;
 }
 
 
--(NSInteger)updateQuantityForProductIdentifier:(NSString *)productIdentifier{
+-(void)updateQuantityForProductIdentifier:(NSString *)productIdentifier{
     
     NSInteger quantity = 0;
     NSInteger constant = 0;
@@ -57,9 +57,7 @@ static PattyCombatIAPHelper * _sharedHelper;
     
     [[NSUserDefaults standardUserDefaults] setInteger:quantity forKey:kQuantityProductPurchased];  
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    return quantity;
-    
+        
 }
 
 -(void)coinWillUsed{
@@ -72,5 +70,7 @@ static PattyCombatIAPHelper * _sharedHelper;
         [[NSUserDefaults standardUserDefaults] setInteger:quantity forKey:kQuantityProductPurchased];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    
 }
+
 @end

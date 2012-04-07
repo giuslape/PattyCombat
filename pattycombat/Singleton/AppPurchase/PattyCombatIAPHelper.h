@@ -22,7 +22,7 @@
 + (PattyCombatIAPHelper *) sharedHelper;
 
 -(NSInteger)quantity;
--(NSInteger)updateQuantityForProductIdentifier:(NSString *)productIdentifier;
+-(void)updateQuantityForProductIdentifier:(NSString *)productIdentifier;
 -(void)coinWillUsed;
 
 @end

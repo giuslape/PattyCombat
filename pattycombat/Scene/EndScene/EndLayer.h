@@ -11,7 +11,8 @@
 #import "GameState.h"
 
 
-@interface EndLayer : CCLayer {
+@interface EndLayer : CCLayer <UIAlertViewDelegate>
+{
     
     CGSize size;
     

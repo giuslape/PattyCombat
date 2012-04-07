@@ -817,10 +817,10 @@ viewController
 
 -(void)updateLabelCoinsForProductIdentifier:(NSString *)productIdentifier{
     
-    NSInteger quantity = [[PattyCombatIAPHelper sharedHelper] updateQuantityForProductIdentifier:productIdentifier];
+    [[PattyCombatIAPHelper sharedHelper] updateQuantityForProductIdentifier:productIdentifier];
     CCLabelBMFont* label = (CCLabelBMFont *)[self getChildByTag:kLabelCoinsReachedTagValue];
     
-    [label setString:[NSString stringWithFormat:@"%d", quantity]];
+    [label setString:[NSString stringWithFormat:@"%d", [[PattyCombatIAPHelper sharedHelper] quantity]]];
     
 }
 
@@ -898,7 +898,7 @@ viewController
     CCMenuItem *buyButton = (CCMenuItem *)sender;
     
     if (buyButton.tag < [[PattyCombatIAPHelper sharedHelper].products count]) {
-        
+    
     SKProduct *product = [[PattyCombatIAPHelper sharedHelper].products objectAtIndex:buyButton.tag];
     
     NSLog(@"Buying %@...", product.productIdentifier);

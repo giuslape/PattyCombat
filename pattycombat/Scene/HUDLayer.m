@@ -75,7 +75,7 @@
     
     // The match is win and check if is Ko or Perfect for this level
     
-    if ([[GameManager sharedGameManager] isPerfect]) [[GameManager sharedGameManager] updateGameState:kStatePerfect];
+    if ([[GameManager sharedGameManager] isPerfectForLevel]) [[GameManager sharedGameManager] updateGameState:kStatePerfect];
         else [[GameManager sharedGameManager] updateGameState:kStateKo];
     
     // Change state of bell
@@ -91,7 +91,7 @@
     
     if (_barProgress == 100) [[GameManager sharedGameManager] updateGameState:kStateKo];
         else if(_barProgress >= _threshold) [[GameManager sharedGameManager] updateGameState:kStateThresholdReached];
-            else [[GameManager sharedGameManager] updateGameState:kStateLose];
+                else [[GameManager sharedGameManager] updateGameState:kStateLose];
 
     
     [_delegate gameOverHandler:bell.characterState withScore:[NSNumber numberWithInt:_score]];

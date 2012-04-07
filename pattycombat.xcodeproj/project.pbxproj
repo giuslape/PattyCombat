@@ -2323,8 +2323,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "504437E4-E40F-4F8A-8C48-6937596810B3";
-				"PROVISIONING_PROFILE[sdk=*]" = "504437E4-E40F-4F8A-8C48-6937596810B3";
+				PROVISIONING_PROFILE = "F8C1D354-79C8-4F72-A2F6-AA3799A792C6";
+				"PROVISIONING_PROFILE[sdk=*]" = "F8C1D354-79C8-4F72-A2F6-AA3799A792C6";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2345,8 +2345,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "504437E4-E40F-4F8A-8C48-6937596810B3";
-				"PROVISIONING_PROFILE[sdk=*]" = "504437E4-E40F-4F8A-8C48-6937596810B3";
+				PROVISIONING_PROFILE = "F8C1D354-79C8-4F72-A2F6-AA3799A792C6";
+				"PROVISIONING_PROFILE[sdk=*]" = "F8C1D354-79C8-4F72-A2F6-AA3799A792C6";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2406,6 +2406,55 @@
 			};
 			name = Release;
 		};
+		20442E5115307F4E00D67F06 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Giuseppe Lapenta";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Giuseppe Lapenta";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					"NS_BLOCK_ASSERTIONS=1",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "1357F21E-A7B4-4251-99D7-22F70021D535";
+				"PROVISIONING_PROFILE[sdk=*]" = "1357F21E-A7B4-4251-99D7-22F70021D535";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = AdHoc;
+		};
+		20442E5215307F4E00D67F06 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = pattycombat/Prefix.pch;
+				HEADER_SEARCH_PATHS = "\"pattycombat/libs/kazmath/include\"";
+				INFOPLIST_FILE = pattycombat/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/pattycombat/facebook-ios-sdk\"",
+				);
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SRCROOT)/pattycombat/facebook-ios-sdk\"";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = AdHoc;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2414,6 +2463,7 @@
 			buildConfigurations = (
 				2015C76B1521AB7900F3AE56 /* Debug */,
 				2015C76C1521AB7900F3AE56 /* Release */,
+				20442E5115307F4E00D67F06 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2423,6 +2473,7 @@
 			buildConfigurations = (
 				2015C76E1521AB7900F3AE56 /* Debug */,
 				2015C76F1521AB7900F3AE56 /* Release */,
+				20442E5215307F4E00D67F06 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

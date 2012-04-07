@@ -13,6 +13,7 @@
 #import <Twitter/Twitter.h>
 #import "PattyCombatIAPHelper.h"
 #import "MBProgressHUD.h"
+#import "Reachability.h"
 
 
 
@@ -36,6 +37,10 @@
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductsLoadedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchasedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchaseFailedNotification object:nil];
     
 }
 
@@ -114,11 +119,37 @@
         
     }else if (CGRectContainsPoint([nextLevel boundingBox], touchLocation)) {
         
-        self.isTouchEnabled = NO;
+        //self.isTouchEnabled = NO;
         
-        BOOL isLastLevel = [[GameManager sharedGameManager]isLastLevel];
+        BOOL isLastLevel = [[GameManager sharedGameManager] isLastLevel];
         
-        (isLastLevel || !_thresholdReached) ? [[GameManager sharedGameManager]runSceneWithID:kGamelevel1] : [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
+        if (!_thresholdReached) {
+            
+            if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0) {
+                            
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Patty Coins"
+                                                            message:@"Non hai Patty coins"
+                                                            delegate:self
+                                                            cancelButtonTitle:@"Cancel" 
+                                                            otherButtonTitles:@"Compra", nil];
+            
+            [alert show];
+                
+            return YES;
+                
+            }
+            
+            [[PattyCombatIAPHelper sharedHelper] coinWillUsed];
+            
+                                    
+            if (isLastLevel) {
+                
+                NSLog(@"Va alla schermata Finale");
+                
+            }else [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
+
+            
+        } else [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
                         
         return YES;
         
@@ -128,7 +159,6 @@
         self.isTouchEnabled = NO;
 
         [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
-       // [[PattyCombatIAPHelper sharedHelper] coinWillUsed];
     
     }else{
         
@@ -191,7 +221,6 @@
 
             else [menuBtn removeFromParentAndCleanup:YES];
             
-                       
             [self unscheduleUpdate];
             [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
 
@@ -303,7 +332,6 @@
         
         perfectOrKo.opacity = 0;
     }
-
     
 }
 
@@ -429,9 +457,144 @@
         
         twitterBtn.opacity = 0;
         
+        // Add Observer for Purchase Notification
+        
+        [[NSNotificationCenter defaultCenter]    addObserver:self
+                                                    selector:@selector(productPurchased:)
+                                                        name:kProductPurchasedNotification
+                                                      object:nil];
+        
+        [[NSNotificationCenter defaultCenter]       addObserver:self 
+                                                    selector: @selector(productPurchaseFailed:)
+                                                    name:kProductPurchaseFailedNotification 
+                                                    object: nil];
+        
+        [[NSNotificationCenter defaultCenter]    addObserver:self
+                                                 selector:@selector(productsLoaded:)
+                                                        name:kProductsLoadedNotification 
+                                                      object:nil];  
+
            
     }
     return self;
+}
+
+#pragma mark -
+#pragma mark ===  Alert View Delegate  ===
+#pragma mark -
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+    
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"Cancel");
+            break;
+        case 1:
+        { // Check if internet connection is available 
+            
+            Reachability *reach = [Reachability reachabilityForInternetConnection];	
+            NetworkStatus netStatus = [reach currentReachabilityStatus];    
+            if (netStatus == NotReachable) { 
+                
+                NSLog(@"No internet connection!");
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
+                                                                message:@"No internet Connection" 
+                                                               delegate:nil 
+                                                      cancelButtonTitle:nil 
+                                                      otherButtonTitles:@"OK", nil];
+                [alert show];
+                
+            } else if ([PattyCombatIAPHelper sharedHelper].products == nil) {
+                    
+                    [[PattyCombatIAPHelper sharedHelper] requestProducts];
+                    MBProgressHUD* _hud = [MBProgressHUD showHUDAddedTo:[CCDirector sharedDirector].view animated:YES];
+                    _hud.labelText = @"Loading coins...";
+                    [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
+            }else {
+                
+                SKProduct* product = [[[PattyCombatIAPHelper sharedHelper] products] objectAtIndex:kFirstPurchaseItemTagValue];
+                
+                [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
+            }
+                
+}
+            NSLog(@"Compra");
+            break;
+        default:
+            break;
+    }
+    
+}
+
+#pragma mark -
+#pragma mark ===  App Purchase  ===
+#pragma mark -
+
+// Notification CallBack when product is purchased
+
+- (void)productPurchased:(NSNotification *)notification {
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
+    
+    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    
+    
+    NSString *productIdentifier = (NSString *) notification.object;
+    
+    [[PattyCombatIAPHelper sharedHelper] updateQuantityForProductIdentifier:productIdentifier];
+    
+    NSLog(@"Purchased: %@", productIdentifier);
+    
+    
+}
+
+// Notification Callback when purchase is failed
+
+- (void)productPurchaseFailed:(NSNotification *)notification {
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
+    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    
+    SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;    
+    if (transaction.error.code != SKErrorPaymentCancelled) {    
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
+                                                        message:transaction.error.localizedDescription 
+                                                       delegate:nil 
+                                              cancelButtonTitle:nil 
+                                              otherButtonTitles:@"OK", nil];
+        
+        [alert show];
+    }
+    
+}
+
+- (void)dismissHUD:(id)arg {
+    
+    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    
+}
+
+//Callback when products are loaded
+
+- (void)productsLoaded:(NSNotification *)notification {
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
+    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    
+    NSArray* array = notification.object;
+    
+    SKProduct* product = [array objectAtIndex:kFirstPurchaseItemTagValue];
+    
+    [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
+}
+
+
+- (void)timeout:(id)arg {
+    
+    [self performSelector:@selector(dismissHUD:) withObject:nil afterDelay:3.0];
+    
 }
 
 @end
