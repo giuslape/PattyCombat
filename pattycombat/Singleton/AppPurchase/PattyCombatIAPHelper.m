@@ -49,7 +49,7 @@ static PattyCombatIAPHelper * _sharedHelper;
     value = [self quantity];
     
     if ([productIdentifier isEqualToString:kProductPurchaseFacebookCoins]) constant = 3;
-        else if ([productIdentifier isEqualToString:kProductPurchase25coins])constant = 25;
+        else if ([productIdentifier isEqualToString:kProductPurchase25coins])constant = 1;
             else if([productIdentifier isEqualToString:kProductPurchse75coins]) constant = 75;
                     else if ([productIdentifier isEqualToString:kProductPurchase200coins])constant = 200;
     

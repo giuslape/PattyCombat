@@ -133,15 +133,14 @@
             
             [alert show];
                 
+                [[GameManager sharedGameManager] setTotalScore:(_totalGameScore - _currentLevelScore)];
+                
             return YES;
                 
             }
             
             [[PattyCombatIAPHelper sharedHelper] coinWillUsed];
-            
-            [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
-            
-            
+                        
             if (_bestScore < _totalGameScore) {
                 
                 CCSprite* newRecord = (CCSprite *)[_spriteBatchNode getChildByTag:kNewRecordTagValue];
@@ -288,6 +287,8 @@
             break;
     }
     
+    int currentLevel = [[GameManager sharedGameManager] currentLevel];
+
     if (_thresholdReached) {
         
         int _elapsedTime = [[GameManager sharedGameManager] elapsedTime];
@@ -303,17 +304,19 @@
         [labelTimeBonus setPosition:ccp(size.width * 0.85f , size.height * 0.57f)];
         
         [self addChild:labelTimeBonus z:1];
+        
+        [self sendAchievementsForLevel:currentLevel];
+        
+        [[GameManager sharedGameManager] setLevelReached:currentLevel];
+        
+        [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
 
     }
     
-    int currentLevel = [[GameManager sharedGameManager] currentLevel];
 
-    [[GameManager sharedGameManager] setLevelReached:currentLevel];
     
     [self loadBackgroundAtLevel:currentLevel andWin:_thresholdReached];
-    
-    [self sendAchievementsForLevel:currentLevel];
-    
+        
     if (_isPerfect || _isKo) {
         
         NSString* nameOfLabel = nil;
