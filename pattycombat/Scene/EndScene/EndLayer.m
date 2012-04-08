@@ -119,47 +119,26 @@
         
     }else if (CGRectContainsPoint([nextLevel boundingBox], touchLocation)) {
                 
-        BOOL isLastLevel = [[GameManager sharedGameManager] isLastLevel];
+       // BOOL isLastLevel = [[GameManager sharedGameManager] isLastLevel];
         
         if (!_thresholdReached) {
             
             if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0) {
                             
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Patty Coins"
-                                                            message:@"Non hai Patty coins"
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Patty Coins esauriti"
+                                                            message:@"Compra altri Patty Coins per continuare"
                                                             delegate:self
                                                             cancelButtonTitle:@"Cancel" 
                                                             otherButtonTitles:@"Compra", nil];
             
             [alert show];
-                
-                [[GameManager sharedGameManager] setTotalScore:(_totalGameScore - _currentLevelScore)];
-                
+            
             return YES;
                 
             }
-            
-            [[PattyCombatIAPHelper sharedHelper] coinWillUsed];
-                        
-            if (_bestScore < _totalGameScore) {
-                
-                CCSprite* newRecord = (CCSprite *)[_spriteBatchNode getChildByTag:kNewRecordTagValue];
-                
-                newRecord.opacity = 255;
-                
-                [[GameManager sharedGameManager] setBestScore:_totalGameScore];
-                
-                int64_t score = (int64_t)(_totalGameScore * 1000.0f);
-                
-                [[GCHelper sharedInstance] reportScore:kPattyLeaderboard score:score];
-                
-            }
-                                    
-            if (isLastLevel) {
-                
-                NSLog(@"Va alla schermata Finale");
-                
-            }else [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
+             
+            [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
+            [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
 
             
         } else [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
@@ -309,7 +288,7 @@
         
         [[GameManager sharedGameManager] setLevelReached:currentLevel];
         
-    }else [[GameManager sharedGameManager] setTotalScore:(_totalGameScore - _currentLevelScore - _timeBonus)];
+    }
     
     _totalGameScore += _currentLevelScore + _timeBonus;
 
@@ -485,34 +464,7 @@
             NSLog(@"Cancel");
             break;
         case 1:
-        { // Check if internet connection is available 
-            
-            Reachability *reach = [Reachability reachabilityForInternetConnection];	
-            NetworkStatus netStatus = [reach currentReachabilityStatus];    
-            if (netStatus == NotReachable) { 
-                
-                NSLog(@"No internet connection!");
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
-                                                                message:@"No internet Connection" 
-                                                               delegate:nil 
-                                                      cancelButtonTitle:nil 
-                                                      otherButtonTitles:@"OK", nil];
-                [alert show];
-                
-            } else if ([PattyCombatIAPHelper sharedHelper].products == nil) {
-                    
-                    [[PattyCombatIAPHelper sharedHelper] requestProducts];
-                    MBProgressHUD* _hud = [MBProgressHUD showHUDAddedTo:[CCDirector sharedDirector].view animated:YES];
-                    _hud.labelText = @"Loading coins...";
-                    [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
-            }else {
-                
-                SKProduct* product = [[[PattyCombatIAPHelper sharedHelper] products] objectAtIndex:kFirstPurchaseItemTagValue];
-                
-                [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
-            }
-                
-}
+            [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
             NSLog(@"Compra");
             break;
         default:
@@ -590,10 +542,5 @@
 }
 
 
-- (void)timeout:(id)arg {
-    
-    [self performSelector:@selector(dismissHUD:) withObject:nil afterDelay:3.0];
-    
-}
 
 @end

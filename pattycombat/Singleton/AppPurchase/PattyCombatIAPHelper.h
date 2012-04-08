@@ -2,7 +2,7 @@
 //  PattyCombatIAPHelper.h
 //  PattyCombat
 //
-//  Created by Vincenzo Lapenta on 15/03/12.
+//  Created by Giuseppe Lapenta on 15/03/12.
 //  Copyright (c) 2012 Fratello. All rights reserved.
 //
 
@@ -23,6 +23,6 @@
 
 -(NSInteger)quantity;
 -(void)updateQuantityForProductIdentifier:(NSString *)productIdentifier;
--(void)coinWillUsed;
+-(void)coinWillUsedinView:(UIView *)view;
 
 @end

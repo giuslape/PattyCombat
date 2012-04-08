@@ -45,6 +45,9 @@
     
     NSLog(@"%@ , %@",NSStringFromSelector(_cmd), self);
     
+    self.player = nil;
+    self.hudLayer = nil;
+    
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
@@ -123,9 +126,6 @@
     [self addChild:finishLabel z:3];
     
     finishLabel.position = ccp(size.width/2,size.height/2);
-    
-    self.player = nil;
-    self.hudLayer = nil;
     
     // Run Complete Scene
     [[GameManager sharedGameManager] runSceneWithID:kLevelCompleteScene];

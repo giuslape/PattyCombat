@@ -17,7 +17,7 @@
 
 @end
 
-@interface HUDLayer : CCLayer  <BellDelegate, GPBarDelegate>{
+@interface HUDLayer : CCLayer  <BellDelegate, GPBarDelegate, UIAlertViewDelegate>{
     
     CCSprite* _pauseButton;
     CCLabelBMFont* _scoreLabel;

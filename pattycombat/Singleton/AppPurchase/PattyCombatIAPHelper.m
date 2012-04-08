@@ -7,6 +7,8 @@
 //
 
 #import "PattyCombatIAPHelper.h"
+#import "Reachability.h"
+#import "MBProgressHUD.h"
 
 @implementation PattyCombatIAPHelper
 
@@ -60,7 +62,7 @@ static PattyCombatIAPHelper * _sharedHelper;
         
 }
 
--(void)coinWillUsed{
+-(void)coinWillUsedinView:(UIView *)view{
     
     int quantity = [self quantity];
     
@@ -69,7 +71,56 @@ static PattyCombatIAPHelper * _sharedHelper;
         quantity--;
         [[NSUserDefaults standardUserDefaults] setInteger:quantity forKey:kQuantityProductPurchased];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        return;
     }
+    
+    if (quantity <= 0) {
+        
+        quantity = 0;
+        // Check if internet connection is available 
+        
+            Reachability *reach = [Reachability reachabilityForInternetConnection];	
+            NetworkStatus netStatus = [reach currentReachabilityStatus];    
+            if (netStatus == NotReachable) { 
+                
+                NSLog(@"No internet connection!");
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
+                                                                message:@"No internet Connection" 
+                                                               delegate:nil 
+                                                      cancelButtonTitle:nil 
+                                                      otherButtonTitles:@"OK", nil];
+                [alert show];
+                
+            } else if (self.products == nil) {
+                
+                [self requestProducts];
+                MBProgressHUD* _hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+                _hud.labelText = @"Loading coins...";
+                [self performSelector:@selector(timeout:) withObject:view afterDelay:30.0];
+                
+            }else {
+                
+                SKProduct* product  = [self.products objectAtIndex:1];
+                MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+                hud.labelText = @"Buying Coins";
+                [self buyProductIdentifier:product];
+            }
+
+        
+    }
+    
+}
+
+- (void)dismissHUD:(id)arg {
+    
+    [MBProgressHUD hideHUDForView:arg animated:YES];
+    
+}
+
+- (void)timeout:(id)arg {
+    
+    arg = (UIView *)arg;
+    [self performSelector:@selector(dismissHUD:) withObject:arg afterDelay:3.0];
     
 }
 

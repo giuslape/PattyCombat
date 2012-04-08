@@ -10,6 +10,7 @@
 #import "Constant.h"
 #import "GameManager.h"
 #import "PattyCombatIAPHelper.h"
+#import "MBProgressHUD.h"
 
 
 @implementation HUDLayer
@@ -226,15 +227,8 @@
         
         CCMenuItemSprite* restart = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn.png"]
                                                             selectedSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn_over.png"] 
-                                                            disabledSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn_over.png"]
                                                                     target:self selector:@selector(restartTapped:)];
-                                                                
-        // Check if there is coins 
-        if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0){
-            
-            restart.isEnabled = FALSE;
-            restart.opacity = 100;
-        }
+                                                                       
         
         CCMenuItemSprite* mainMenu = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"giveup_btn.png"] 
                                                              selectedSprite:[CCSprite spriteWithSpriteFrameName:@"giveup_btn_over.png"] 
@@ -255,6 +249,23 @@
         
         self.isTouchEnabled = YES;
         
+        
+        // Add Observer for Purchase Notification
+        
+        [[NSNotificationCenter defaultCenter]    addObserver:self
+                                                    selector:@selector(productPurchased:)
+                                                        name:kProductPurchasedNotification
+                                                      object:nil];
+        
+        [[NSNotificationCenter defaultCenter]       addObserver:self 
+                                                       selector: @selector(productPurchaseFailed:)
+                                                           name:kProductPurchaseFailedNotification 
+                                                         object: nil];
+        
+        [[NSNotificationCenter defaultCenter]    addObserver:self
+                                                    selector:@selector(productsLoaded:)
+                                                        name:kProductsLoadedNotification 
+                                                      object:nil];  
     }
     return self;
 }
@@ -344,10 +355,23 @@
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
     
-    [[PattyCombatIAPHelper sharedHelper] coinWillUsed];
-    
-    self.isTouchEnabled = FALSE;
+  //  pauseMenu.isTouchEnabled = FALSE;
         
+    if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0) {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Patty Coins esauriti"
+                                                        message:@"Compra altri Patty Coins per continuare"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel" 
+                                              otherButtonTitles:@"Compra", nil];
+        
+        [alert show];
+        
+        return;
+    }
+    
+    [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
+           
     [self removeChild: pauseMenu cleanup:YES];     
     
     [[CCDirectorIOS sharedDirector] resume];
@@ -369,8 +393,101 @@
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.plist"];
 
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductsLoadedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchasedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchaseFailedNotification object:nil];
+
 }
 
+#pragma mark -
+#pragma mark ===  App Purchase  ===
+#pragma mark -
+
+// Notification CallBack when product is purchased
+
+- (void)productPurchased:(NSNotification *)notification {
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
+    
+    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[CCDirector sharedDirector].view animated:YES];
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+	hud.mode = MBProgressHUDModeCustomView;
+	hud.labelText = @"Completed";
+    [hud hide:YES afterDelay:1];
+    
+    NSString *productIdentifier = (NSString *) notification.object;
+    
+    [[PattyCombatIAPHelper sharedHelper] updateQuantityForProductIdentifier:productIdentifier];
+    
+    NSLog(@"Purchased: %@", productIdentifier);
+    
+    [[CCDirector sharedDirector] pause];
+    
+}
+
+// Notification Callback when purchase is failed
+
+- (void)productPurchaseFailed:(NSNotification *)notification {
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
+    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    
+    SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;    
+    if (transaction.error.code != SKErrorPaymentCancelled) {    
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
+                                                        message:transaction.error.localizedDescription 
+                                                       delegate:nil 
+                                              cancelButtonTitle:nil 
+                                              otherButtonTitles:@"OK", nil];
+        
+        [alert show];
+    }
+    
+}
+
+- (void)dismissHUD:(id)arg {
+    
+    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    
+}
+
+//Callback when products are loaded
+
+- (void)productsLoaded:(NSNotification *)notification {
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
+    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    
+    NSArray* array = notification.object;
+    
+    SKProduct* product = [array objectAtIndex:kFirstPurchaseItemTagValue];
+    
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[CCDirector sharedDirector].view animated:YES];
+    hud.labelText = @"Buying Coins";
+    [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
+}
+
+
+#pragma mark -
+#pragma mark ===  Alert View Delegate  ===
+#pragma mark -
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
+    
+    switch (buttonIndex) {
+        case 0:
+            break;
+        case 1:
+            [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
+            break;
+        default:
+            break;
+    }
+}
 
 
 @end
