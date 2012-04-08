@@ -110,8 +110,6 @@
 
 - (void)buyProductIdentifier:(SKProduct *)product {
     
-    NSLog(@"Buying %@...", product);
-        
     SKPayment *payment = [SKPayment paymentWithProduct:product];
         
     [[SKPaymentQueue defaultQueue] addPayment:payment];

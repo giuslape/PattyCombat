@@ -29,7 +29,7 @@
 #define kFirstPurchaseItemZValue 3
 #define kSecondPurchaseItemTagValue 2
 #define kSecondPurchaseItemZValue 3
-#define kThirdPurchaseItemTagValue 3
+#define kThirdPurchaseItemTagValue 0
 #define kThirdPurchaseItemZValue 3
 #define kLabelCoinsReachedTagValue 25
 #define kLabelCoinsReachedZValue 3
@@ -107,7 +107,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define GAMETIME 6
+#define GAMETIME 43
 #define GAMETIMEBONUSLEVEL 10
 #define DELAY 12
 #define INTERVAL 0.50f

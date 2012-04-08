@@ -309,11 +309,13 @@
         
         [[GameManager sharedGameManager] setLevelReached:currentLevel];
         
-        [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
-
-    }
+    }else [[GameManager sharedGameManager] setTotalScore:(_totalGameScore - _currentLevelScore - _timeBonus)];
     
+    _totalGameScore += _currentLevelScore + _timeBonus;
 
+    _scoreUpTotalScore = _totalGameScore;
+    
+    [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
     
     [self loadBackgroundAtLevel:currentLevel andWin:_thresholdReached];
         
@@ -351,7 +353,6 @@
 
     [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
 
-
 }
 
 -(void)sendAchievementsForLevel:(int)currentLevel{
@@ -367,6 +368,8 @@
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel1
                                          percentComplete:100.0];
         }
+        
+        
     }
     
 }
@@ -385,8 +388,6 @@
         
         size = [CCDirector sharedDirector].winSize;
                 
-        [self detectState];
-        
         _currentLevelScore = [[GameManager sharedGameManager] currentScore];
         
         _totalGameScore = [[GameManager sharedGameManager] totalScore];
@@ -395,8 +396,8 @@
         
         _scoreUp = 0;
         
-        _scoreUpTotalScore = _totalGameScore;
-        
+        [self detectState];
+
         labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
         
         [labelScore setAnchorPoint:ccp(1, 0)];
@@ -405,21 +406,14 @@
         
         [self addChild:labelScore z:kLabelLevelScoreZValue tag:kLabelLevelScoreTagValue];
         
-        labelTotalScore = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d", _totalGameScore] fntFile:FONTFEEDBACK];
+        labelTotalScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
         
         [labelTotalScore setAnchorPoint:ccp(1, 0)];
         
         [labelTotalScore setPosition:ccp(size.width * 0.85f,size.height* 0.4f)];
         
         [self addChild:labelTotalScore z:kLabelTotalLevelScoreZValue tag:kLabelTotalLevelScoreTagValue];
-        
-        _totalGameScore += _currentLevelScore + _timeBonus;
-        
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
-        
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-        
-        
+                        
         CCSprite* nextLevel =  (_thresholdReached) ? [CCSprite spriteWithSpriteFrameName:@"next_btn.png"] :[CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
         
         [nextLevel setPosition:ccp (size.width* 0.87f , size.height * 0.1f)];
@@ -538,7 +532,11 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[CCDirector sharedDirector].view animated:YES];
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+	hud.mode = MBProgressHUDModeCustomView;
+	hud.labelText = @"Completed";
+    [hud hide:YES afterDelay:1];
     
     NSString *productIdentifier = (NSString *) notification.object;
     
@@ -555,7 +553,7 @@
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    
+       
     SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;    
     if (transaction.error.code != SKErrorPaymentCancelled) {    
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
@@ -586,6 +584,8 @@
     
     SKProduct* product = [array objectAtIndex:kFirstPurchaseItemTagValue];
     
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[CCDirector sharedDirector].view animated:YES];
+    hud.labelText = @"Buying Coins";
     [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
 }
 

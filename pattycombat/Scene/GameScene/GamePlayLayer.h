@@ -18,6 +18,7 @@
 {
     
     double _currentTime;
+    double _elapsedTime;
     int    _bpm;
     int    _count;
     int    _countDown;

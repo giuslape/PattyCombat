@@ -111,8 +111,10 @@
     
     [self unscheduleAllSelectors];
     
+    
     [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     [[GameManager sharedGameManager]  setCurrentScore:[score intValue]];
+    [[GameManager sharedGameManager]  setElapsedTime:_elapsedTime];
     
     // Add Finish Label
     
@@ -258,6 +260,7 @@
         _countDown = 15;
         _currentTime = 0;
         _count = 1;
+        _elapsedTime = 0;
         
         id dao = [GameManager sharedGameManager].dao;
         
@@ -371,6 +374,7 @@
 
 -(void) update:(ccTime)deltaTime
 {
+    _elapsedTime += deltaTime;
     [_player updateStateWithDeltaTime:deltaTime];
     [_hudLayer updateStateWithDelta:deltaTime];
     

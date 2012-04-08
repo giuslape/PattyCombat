@@ -57,7 +57,7 @@
 @property (nonatomic, strong) NSMutableDictionary *listOfSoundEffectFiles;
 @property (nonatomic, strong) NSMutableDictionary *soundEffectsState;
 @property (nonatomic, strong, readwrite) NSMutableArray* patternForLevel;
-@property (readwrite) int elapsedTime;
+@property (readwrite) double elapsedTime;
 @property (readwrite) BOOL isLastLevel;
 
 
