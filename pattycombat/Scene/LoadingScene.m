@@ -29,11 +29,8 @@
 	CCLOG(@"===========================================");
 	CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
     
-	// This creates an autorelease object of self (the current class: LoadingScene)
-	return [[self alloc] initWithTargetScene:targetScene];
+    return [[self alloc] initWithTargetScene:targetScene];
 	
-	// Note: this does the exact same, it only replaced self with LoadingScene. The above is much more common.
-	//return [[[LoadingScene alloc] initWithTargetScene:targetScene] autorelease];
 }
 
 -(id)initWithTargetScene:(SceneTypes)targetScene
@@ -45,7 +42,7 @@
 		CCLabelBMFont* loading = [CCLabelBMFont labelWithString:@"Loading..." fntFile:FONTHIGHSCORES];
 		CGSize size = [[CCDirector sharedDirector] winSize];
 		loading.position = CGPointMake(size.width / 2, size.height * 0.6f);
-		[self addChild:loading];
+		[self addChild:loading z:1 tag:1];
 		
         [self scheduleOnce:@selector(loadScene:) delay:0.1];
 	}
@@ -73,7 +70,14 @@
 
         }
             break;
-        case kMainMenuScene:
+        case kMainMenuScene:{
+            
+            CGSize size = [[CCDirector sharedDirector] winSize];
+            
+            CCLabelBMFont* loading = (CCLabelBMFont *)[self getChildByTag:1];
+            
+            [loading setPosition:ccp(size.width /2, size.height /2)];
+        }
             break;
         default:
             NSAssert2(nil, @"%@: unsupported TargetScene %i",
@@ -204,7 +208,7 @@
 
 - (void)dealloc
 {
-    
+    _spriteBatchNode = nil;
 }
 
 

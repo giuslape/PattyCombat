@@ -43,6 +43,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchasedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchaseFailedNotification object:nil];
     
+    _spriteBatchNode = nil;
 }
 
 
@@ -277,13 +278,7 @@
     int currentLevel = [[GameManager sharedGameManager] currentLevel];
 
     if (_thresholdReached) {
-        
-        int _elapsedTime = [[GameManager sharedGameManager] elapsedTime];
-        
-        _scoreUpTimeBonus = 0;
-        
-        _timeBonus = lrint(roundf((GAMETIME - _elapsedTime) * 20));
-        
+                
         labelTimeBonus = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
         
         [labelTimeBonus setAnchorPoint:ccp(1, 0)];
@@ -297,13 +292,7 @@
         [[GameManager sharedGameManager] setLevelReached:currentLevel];
         
     }
-    
-    _totalGameScore += _currentLevelScore + _timeBonus;
-
-    _scoreUpTotalScore = _totalGameScore;
-    
-    [[GameManager sharedGameManager] setTotalScore:_totalGameScore];
-    
+        
     [self loadBackgroundAtLevel:currentLevel andWin:_thresholdReached];
         
     if (_isPerfect || _isKo) {
@@ -361,6 +350,31 @@
     
 }
 
+-(void)updatePoints{
+    
+    _currentLevelScore = [[GameManager sharedGameManager] currentScore];
+
+    _totalGameScore = [[GameManager sharedGameManager] totalScore];
+
+    _bestScore = [[GameManager sharedGameManager] bestScore];
+    
+    _scoreUp = 0;
+    
+    _scoreUpTimeBonus = 0;
+    
+    int _elapsedTime = [[GameManager sharedGameManager] elapsedTime];
+    
+    _timeBonus = lrint(roundf((GAMETIME - _elapsedTime) * 20));
+
+    _totalGameScore += _currentLevelScore + _timeBonus;
+    
+    _scoreUpTotalScore = _totalGameScore;
+        
+    int score = (_thresholdReached) ? _totalGameScore: _totalGameScore - _currentLevelScore - _timeBonus;
+    
+    [[GameManager sharedGameManager] setTotalScore:score];
+}
+
 - (id)init {
     
     self = [super init];
@@ -374,15 +388,9 @@
         [self addChild:_spriteBatchNode z:2 tag:2];
         
         size = [CCDirector sharedDirector].winSize;
+        
+        [self updatePoints];
                 
-        _currentLevelScore = [[GameManager sharedGameManager] currentScore];
-        
-        _totalGameScore = [[GameManager sharedGameManager] totalScore];
-        
-        _bestScore = [[GameManager sharedGameManager] bestScore];
-        
-        _scoreUp = 0;
-        
         [self detectState];
 
         labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
@@ -426,6 +434,8 @@
         [_spriteBatchNode addChild:newBestScore z:kNewRecordZValue tag:kNewRecordTagValue];
         
         newBestScore.opacity = 0;
+            
+        [[GameManager sharedGameManager] setBestScore:_totalGameScore];
             
         }
         

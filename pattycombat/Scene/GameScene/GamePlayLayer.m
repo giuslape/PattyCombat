@@ -375,6 +375,7 @@
 -(void) update:(ccTime)deltaTime
 {
     _elapsedTime += deltaTime;
+    
     [_player updateStateWithDeltaTime:deltaTime];
     [_hudLayer updateStateWithDelta:deltaTime];
     
