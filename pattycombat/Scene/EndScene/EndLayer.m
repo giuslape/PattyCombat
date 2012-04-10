@@ -519,26 +519,13 @@
     
 }
 
-- (void)dismissHUD:(id)arg {
-    
-    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    
-}
-
 //Callback when products are loaded
 
 - (void)productsLoaded:(NSNotification *)notification {
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    
-    NSArray* array = notification.object;
-    
-    SKProduct* product = [array objectAtIndex:kFirstPurchaseItemTagValue];
-    
-    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[CCDirector sharedDirector].view animated:YES];
-    hud.labelText = @"Buying Coins";
-    [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
+    [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirectorIOS sharedDirector].view];
 }
 
 

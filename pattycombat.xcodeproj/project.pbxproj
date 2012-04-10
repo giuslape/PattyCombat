@@ -327,6 +327,7 @@
 		20239148152784E00002A6D1 /* IntroButtAndFeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 20239146152784E00002A6D1 /* IntroButtAndFeed.png */; };
 		20239149152784E00002A6D1 /* IntroButtAndFeed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20239147152784E00002A6D1 /* IntroButtAndFeed.plist */; };
 		20442E581530C85800D67F06 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 20442E571530C85800D67F06 /* 37x-Checkmark.png */; };
+		20442E6015343CD900D67F06 /* LoadingScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 20442E5F15343CD800D67F06 /* LoadingScene.m */; };
 		2092B2781529C384006CDE66 /* Common.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2092B2761529C384006CDE66 /* Common.plist */; };
 		2092B2791529C384006CDE66 /* Common.png in Resources */ = {isa = PBXBuildFile; fileRef = 2092B2771529C384006CDE66 /* Common.png */; };
 		20E4EDF1152B1FEF0048F031 /* intro_btn_dx_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4EDEF152B1FEE0048F031 /* intro_btn_dx_02.png */; };
@@ -857,6 +858,8 @@
 		20239146152784E00002A6D1 /* IntroButtAndFeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IntroButtAndFeed.png; sourceTree = "<group>"; };
 		20239147152784E00002A6D1 /* IntroButtAndFeed.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IntroButtAndFeed.plist; sourceTree = "<group>"; };
 		20442E571530C85800D67F06 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
+		20442E5E15343CD800D67F06 /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
+		20442E5F15343CD800D67F06 /* LoadingScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingScene.m; sourceTree = "<group>"; };
 		2092B2761529C384006CDE66 /* Common.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Common.plist; sourceTree = "<group>"; };
 		2092B2771529C384006CDE66 /* Common.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Common.png; sourceTree = "<group>"; };
 		20E4EDEF152B1FEE0048F031 /* intro_btn_dx_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_btn_dx_02.png; sourceTree = "<group>"; };
@@ -1411,6 +1414,8 @@
 				2015C7CC1521AE4C00F3AE56 /* HUDLayer.m */,
 				2015C7CD1521AE4C00F3AE56 /* IntroScene */,
 				2015C7D41521AE4C00F3AE56 /* MenuScene */,
+				20442E5E15343CD800D67F06 /* LoadingScene.h */,
+				20442E5F15343CD800D67F06 /* LoadingScene.m */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -2304,6 +2309,7 @@
 				2015C82B1521AE4C00F3AE56 /* GameManager.m in Sources */,
 				2015C9AF1521AED000F3AE56 /* AppDelegate.m in Sources */,
 				200E57051521D30100698A18 /* CCMenuItemSpriteIndependent.m in Sources */,
+				20442E6015343CD900D67F06 /* LoadingScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

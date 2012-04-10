@@ -906,7 +906,7 @@ viewController
     
     self.hud = [MBProgressHUD showHUDAddedTo:[CCDirectorIOS sharedDirector].view animated:YES];
     _hud.labelText = @"Buying Coins...";
-        [self performSelector:@selector(timeout:) withObject:nil afterDelay:60*5];
+        [self performSelector:@selector(timeout:) withObject:nil afterDelay:60];
     
     }
     
