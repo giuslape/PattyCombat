@@ -308,7 +308,7 @@
         
     isPause = TRUE;
                 
-    [[CDAudioManager sharedManager] pauseBackgroundMusic];
+    [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
         
     [[CCDirectorIOS sharedDirector] pause];
         
@@ -332,7 +332,7 @@
             
     pauseMenu.isTouchEnabled = FALSE;
     
-    [[CCDirectorIOS sharedDirector] resume];
+    [[CCDirectorIOS sharedDirector]   resume];
     [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
     
 }
@@ -345,8 +345,8 @@
         
     [self removeChild: pauseMenu cleanup:YES]; 
     
-    [[CCDirectorIOS sharedDirector] resume];
-    [[CDAudioManager sharedManager] stopBackgroundMusic];
+    [[CCDirectorIOS sharedDirector]  resume];
+    [[GameManager sharedGameManager] stopBackgroundMusic];
     [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
     
 }
@@ -374,8 +374,8 @@
            
     [self removeChild: pauseMenu cleanup:YES];     
     
-    [[CCDirectorIOS sharedDirector] resume];
-    [[CDAudioManager sharedManager] stopBackgroundMusic];
+    [[CCDirectorIOS sharedDirector]  resume];
+    [[GameManager sharedGameManager] stopBackgroundMusic];
     [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
 }
 
@@ -422,9 +422,7 @@
     [[PattyCombatIAPHelper sharedHelper] updateQuantityForProductIdentifier:productIdentifier];
     
     NSLog(@"Purchased: %@", productIdentifier);
-    
-    [[CCDirector sharedDirector] pause];
-    
+        
 }
 
 // Notification Callback when purchase is failed

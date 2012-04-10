@@ -136,12 +136,19 @@
             return YES;
                 
             }
-             
+            
+            // Threshold is Reached and the button is next!
+            
+            self.isTouchEnabled = FALSE;
             [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
             [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
 
             
-        } else [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
+        } else{
+            
+            self.isTouchEnabled = FALSE;
+            [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
+        }
                         
         return YES;
         

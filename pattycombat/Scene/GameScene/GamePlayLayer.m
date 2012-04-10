@@ -115,7 +115,7 @@
     [self unscheduleAllSelectors];
     
     
-    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    [[GameManager sharedGameManager]  stopBackgroundMusic];
     [[GameManager sharedGameManager]  setCurrentScore:[score intValue]];
     [[GameManager sharedGameManager]  setElapsedTime:_elapsedTime];
     

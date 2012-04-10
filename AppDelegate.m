@@ -167,8 +167,8 @@ static NSString* kAppId = @"321845184543524";
 // call got rejected
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ resume];
+	//if( [navController_ visibleViewController] == director_ )
+		//[director_ resume];
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application
