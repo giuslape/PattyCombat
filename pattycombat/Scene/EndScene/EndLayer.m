@@ -14,6 +14,7 @@
 #import "PattyCombatIAPHelper.h"
 #import "MBProgressHUD.h"
 #import "Reachability.h"
+#import "LoadingScene.h"
 
 
 
@@ -141,9 +142,10 @@
             
             self.isTouchEnabled = FALSE;
             [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
-            [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
+            LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+            [[CCDirectorIOS sharedDirector] replaceScene:scene];
 
-            
+
         } else{
             
             self.isTouchEnabled = FALSE;
@@ -156,9 +158,8 @@
     else if(CGRectContainsPoint([menuBtn boundingBox], touchLocation)) {
         
         self.isTouchEnabled = NO;
-
-        [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
-    
+        LoadingScene* scene = [LoadingScene sceneWithTargetScene:kMainMenuScene];
+        [[CCDirectorIOS sharedDirector] replaceScene:scene];
     }else{
         
         if (_scoreUpTimeBonus <= _timeBonus) _scoreUpTimeBonus = _timeBonus;

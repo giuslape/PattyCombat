@@ -6,8 +6,19 @@
 //  Copyright (c) 2012 Fratello. All rights reserved.
 //
 
-#import "CCLayer.h"
+#import "cocos2d.h"
+#import "Constant.h"
 
-@interface LoadingScene : CCLayer
+@interface LoadingScene : CCScene
+{
+    
+    SceneTypes _scene;
+    
+    CCSpriteBatchNode* _spriteBatchNode;
+}
+
++(id) sceneWithTargetScene:(SceneTypes)targetScene;
+-(id) initWithTargetScene:(SceneTypes)targetScene;
+
 
 @end
