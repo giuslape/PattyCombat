@@ -25,6 +25,7 @@ static GameManager* _sharedGameManager = nil;
 @synthesize totalScore   = _totalScore;
 @synthesize namePlayer   = _namePlayer;
 @synthesize gameState    = _gameState;
+@synthesize gameTime     = _gameTime;
 @synthesize isPerfect;
 @synthesize isPerfectForLevel = _isPerfectForLevel;
 @synthesize isKoForLevel = _isKoForLevel;
@@ -97,6 +98,7 @@ static GameManager* _sharedGameManager = nil;
         currentScene = kNoSceneUninitialized;
         elapsedTime = 0;  
         _namePlayer = nil;
+        _gameTime = 0;
         _gameState = kStateLose;
     }
     return self;
@@ -217,6 +219,45 @@ static GameManager* _sharedGameManager = nil;
     }
     
     return result;
+}
+
+-(void)formatGameTime{
+    
+    switch (_currentLevel) {
+            
+        case 1:
+            _gameTime = 10;
+            break;
+        case 2:
+            _gameTime = 43;
+            break;
+        case 3:
+            _gameTime = 43;
+            break;
+        case 5:
+            _gameTime = 43;
+            break;
+        case 6:
+            _gameTime = 43;
+            break;
+        case 7:
+            _gameTime = 43;
+            break;
+        case 8:
+            _gameTime = 43;
+            break;
+        case 10:
+            _gameTime = 43;
+            break;
+        case 11:
+            _gameTime = 43;
+            break;
+        case 12:
+            _gameTime = 43;
+            break;
+        default:
+            break;
+    }
 }
 
 -(NSString *)formatAchievementTypeToString{
@@ -539,6 +580,7 @@ static GameManager* _sharedGameManager = nil;
             }
             patternForLevel = [[NSMutableArray alloc] initWithArray:[self.dao loadPlistForPatternWithLevel:_currentLevel]];
             self.namePlayer = [self formatPlayerTypeToString:_currentLevel];
+            [self formatGameTime];
             sceneToRun = [IntroScene node];
             break;
         case kLevelCompleteScene:            

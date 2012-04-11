@@ -492,7 +492,9 @@
     
     int _elapsedTime = [[GameManager sharedGameManager] elapsedTime];
     
-    _timeBonus = lrint(roundf((GAMETIME - _elapsedTime) * 20));
+    int gameTime     = [[GameManager sharedGameManager] gameTime];
+    
+    _timeBonus = lrint(roundf((gameTime - _elapsedTime) * 20));
 
     _totalGameScore += _currentLevelScore + _timeBonus;
     

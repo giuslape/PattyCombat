@@ -25,7 +25,8 @@
     int  _currentScore;
     int  _currentLevel;
     int  _levelReached;
-    
+    int  _gameTime;
+
     
     // Added for audio
     BOOL hasAudioBeenInitialized;
@@ -48,6 +49,7 @@
 @property (readwrite, nonatomic) BOOL isKo;
 @property (readwrite, nonatomic) BOOL isPerfectForLevel;
 @property (readwrite, nonatomic) BOOL isKoForLevel;
+@property (readwrite) int gameTime;
 @property (readwrite) BOOL isMusicON;
 @property (readwrite) BOOL isSoundEffectsON;
 @property (readwrite) BOOL hasPlayerDied;

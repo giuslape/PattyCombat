@@ -2373,7 +2373,6 @@
 				GCC_PREFIX_HEADER = pattycombat/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"pattycombat/libs/kazmath/include\"";
 				INFOPLIST_FILE = pattycombat/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/pattycombat/facebook-ios-sdk\"",
@@ -2399,7 +2398,6 @@
 				GCC_PREFIX_HEADER = pattycombat/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"pattycombat/libs/kazmath/include\"";
 				INFOPLIST_FILE = pattycombat/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/pattycombat/facebook-ios-sdk\"",
@@ -2448,7 +2446,6 @@
 				GCC_PREFIX_HEADER = pattycombat/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"pattycombat/libs/kazmath/include\"";
 				INFOPLIST_FILE = pattycombat/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/pattycombat/facebook-ios-sdk\"",

@@ -124,8 +124,9 @@
         _elapsedTime = 0;
         _currentFrame = 0;
         _oldElapsedTime = 0;
+        int gameTimeForLevel = [[GameManager sharedGameManager] gameTime];
         _isBonusLevel = [[GameManager sharedGameManager] isBonusLevel];
-        _gameTime = (_isBonusLevel) ? GAMETIMEBONUSLEVEL : GAMETIME;
+        _gameTime = (_isBonusLevel) ? GAMETIMEBONUSLEVEL : gameTimeForLevel;
         _delayBetweenFrames = (float)_gameTime /[[_bellAnimation frames] count];
     }
     return self;
