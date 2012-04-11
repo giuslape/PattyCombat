@@ -40,8 +40,7 @@
 		_scene = targetScene;
         
 		CCLabelBMFont* loading = [CCLabelBMFont labelWithString:@"Loading..." fntFile:FONTHIGHSCORES];
-		CGSize size = [[CCDirector sharedDirector] winSize];
-		loading.position = CGPointMake(size.width / 2, size.height * 0.6f);
+		
 		[self addChild:loading z:1 tag:1];
 		
         [self scheduleOnce:@selector(loadScene:) delay:0.1];
@@ -53,6 +52,10 @@
 
 -(void)loadScene:(ccTime)delta
 {	
+    CCLabelBMFont* loading = (CCLabelBMFont *)[self getChildByTag:1];
+
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
     switch (_scene) {
         case kIntroScene:
             break;
@@ -67,6 +70,8 @@
             [self feedPattern];
             
             [self scheduleOnce:@selector(changeScene:) delay:4];
+            
+            loading.position = CGPointMake(size.width / 2, size.height * 0.6f);
 
         }
             break;
@@ -74,9 +79,7 @@
         case kMainMenuScene:{
             
             CGSize size = [[CCDirector sharedDirector] winSize];
-            
-            CCLabelBMFont* loading = (CCLabelBMFont *)[self getChildByTag:1];
-            
+                        
             [loading setPosition:ccp(size.width /2, size.height /2)];
             
             [self scheduleOnce:@selector(changeScene:) delay:2];

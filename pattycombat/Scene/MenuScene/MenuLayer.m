@@ -863,6 +863,9 @@ viewController
 
 - (void)dismissHUD:(id)arg {
     
+   self.isTouchEnabled = YES;
+    _purchaseMenu.isTouchEnabled = YES;
+    
    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
     self.hud = nil;
     
@@ -894,6 +897,10 @@ viewController
 }
 
 - (void)buyButtonTapped:(id)sender {
+    
+    self.isTouchEnabled = FALSE;
+    
+    _purchaseMenu.isTouchEnabled = FALSE;
     
     CCMenuItem *buyButton = (CCMenuItem *)sender;
     
@@ -976,7 +983,7 @@ viewController
 
     [self storeAuthData:[[delegate facebook] accessToken] expiresAt:[[delegate facebook] expirationDate]];
     
- //   [self postToFacebook:nil];
+    [self postToFacebook:self];
     
 }
 -(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
@@ -1096,11 +1103,14 @@ viewController
 
 - (void)dialogDidNotComplete:(FBDialog *)dialog {
     
+    self.isTouchEnabled = TRUE;
+
     NSLog(@"Dialog dismissed.");
 }
 
 - (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error {
     NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
+    self.isTouchEnabled = TRUE;
     //[self showMessage:@"Oops, something went haywire."];
 }
 

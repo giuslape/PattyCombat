@@ -135,11 +135,11 @@ static GameManager* _sharedGameManager = nil;
     return result;
 }
 
--(NSString*)formatPlayerTypeToString:(int)level{
+-(NSString*)formatPlayerTypeToString{
     
     NSString* result = nil;
     
-    switch (level) {
+    switch (_currentLevel) {
             
         case 1:
             result = @"myagi";
@@ -226,7 +226,7 @@ static GameManager* _sharedGameManager = nil;
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 10;
+            _gameTime = 43;
             break;
         case 2:
             _gameTime = 43;
@@ -579,7 +579,7 @@ static GameManager* _sharedGameManager = nil;
                 break;
             }
             patternForLevel = [[NSMutableArray alloc] initWithArray:[self.dao loadPlistForPatternWithLevel:_currentLevel]];
-            self.namePlayer = [self formatPlayerTypeToString:_currentLevel];
+            self.namePlayer = [self formatPlayerTypeToString];
             [self formatGameTime];
             sceneToRun = [IntroScene node];
             break;

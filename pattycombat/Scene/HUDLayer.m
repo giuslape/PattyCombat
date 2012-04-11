@@ -82,9 +82,12 @@
 
 -(void)bellDidFinishTime:(Bell *)bell{
     
-    if ([[GameManager sharedGameManager] isPerfectForLevel]) [[GameManager sharedGameManager] updateGameState:kStatePerfect];
-    else if (_barProgress >= 100) [[GameManager sharedGameManager] updateGameState:kStateKo];
-        else if(_barProgress >= _threshold) [[GameManager sharedGameManager] updateGameState:kStateThresholdReached];
+    if ([[GameManager sharedGameManager] isPerfectForLevel] && _barProgress >= 100)
+        [[GameManager sharedGameManager] updateGameState:kStatePerfect];
+    else if (_barProgress >= 100) 
+            [[GameManager sharedGameManager] updateGameState:kStateKo];
+        else if(_barProgress >= _threshold)
+                [[GameManager sharedGameManager] updateGameState:kStateThresholdReached];
                 else [[GameManager sharedGameManager] updateGameState:kStateLose];
     
     [_delegate gameOverHandler:bell.characterState withScore:[NSNumber numberWithInt:_score]];

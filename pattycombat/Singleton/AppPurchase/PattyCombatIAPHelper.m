@@ -104,7 +104,7 @@ static PattyCombatIAPHelper * _sharedHelper;
                 MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
                 hud.labelText = @"Buying Coins";
                 [self buyProductIdentifier:product];
-                [self performSelector:@selector(timeout:) withObject:nil afterDelay:60];
+                [self performSelector:@selector(timeout:) withObject:view afterDelay:60];
             }
 
         
