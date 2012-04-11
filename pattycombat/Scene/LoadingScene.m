@@ -70,6 +70,7 @@
 
         }
             break;
+            
         case kMainMenuScene:{
             
             CGSize size = [[CCDirector sharedDirector] winSize];
@@ -77,8 +78,12 @@
             CCLabelBMFont* loading = (CCLabelBMFont *)[self getChildByTag:1];
             
             [loading setPosition:ccp(size.width /2, size.height /2)];
+            
+            [self scheduleOnce:@selector(changeScene:) delay:2];
+            
         }
-            break;
+        
+        break;
         default:
             NSAssert2(nil, @"%@: unsupported TargetScene %i",
                       NSStringFromSelector(_cmd), _scene);
@@ -134,7 +139,6 @@
                           [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_dx_01.png"]];
             twoHandSprite = [CCSprite spriteWithSpriteFrame: 
                              [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_sx_01.png"]];
-            
             
             [handSprite setTag:kHandFeedRightTagValue];
             [twoHandSprite setTag:kHandFeedLeftTagValue];
@@ -209,6 +213,7 @@
 - (void)dealloc
 {
     _spriteBatchNode = nil;
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
 }
 
 

@@ -23,6 +23,7 @@
 @synthesize completedLevel9;
 @synthesize completedLevel10;
 @synthesize perfect;
+@synthesize ko;
 @synthesize timesFell;
 
 
@@ -73,6 +74,7 @@ static GameState * sharedInstance = nil;
     [encoder encodeBool:completedLevel9 forKey:@"CompletedLevel9"];
     [encoder encodeBool:completedLevel10 forKey:@"CompletedLevel10"];
     [encoder encodeBool:perfect forKey:@"Perfect"];
+    [encoder encodeBool:ko forKey:@"KO"];
     
     [encoder encodeInt:timesFell forKey:@"TimesFell"];
 }
@@ -103,6 +105,8 @@ static GameState * sharedInstance = nil;
         perfect = [decoder
                    decodeBoolForKey:@"Perfect"];
         
+        ko      = [decoder decodeBoolForKey:@"KO"];
+        
         timesFell = [decoder decodeIntForKey:@"TimesFell"];
     }
     return self;
@@ -121,6 +125,8 @@ static GameState * sharedInstance = nil;
     completedLevel8 = FALSE;
     completedLevel9 = FALSE;
     completedLevel10 = FALSE;
+    perfect = FALSE;
+    ko = FALSE;
     
     [self save];
 }

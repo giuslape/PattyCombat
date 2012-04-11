@@ -11,6 +11,7 @@
 #import "GameManager.h"
 #import "PattyCombatIAPHelper.h"
 #import "MBProgressHUD.h"
+#import "LoadingScene.h"
 
 
 @implementation HUDLayer
@@ -74,27 +75,17 @@
 -(void)barDidEmpty:(GPBar *)bar{
     
     Bell* tempBell = (Bell *)[_commonElements getChildByTag:kBellTagValue];
-    
-    // The match is win and check if is Ko or Perfect for this level
-    
-    if ([[GameManager sharedGameManager] isPerfectForLevel]) [[GameManager sharedGameManager] updateGameState:kStatePerfect];
-        else [[GameManager sharedGameManager] updateGameState:kStateKo];
-    
-    // Change state of bell
-    
     [tempBell changeState:[NSNumber numberWithInt:kStateBellGongFinish]];
-    
-    [_delegate gameOverHandler:bar.characterState withScore:[NSNumber numberWithInt:_score]];
-    
+        
 }
 
 
 -(void)bellDidFinishTime:(Bell *)bell{
     
-    if (_barProgress == 100) [[GameManager sharedGameManager] updateGameState:kStateKo];
+    if ([[GameManager sharedGameManager] isPerfectForLevel]) [[GameManager sharedGameManager] updateGameState:kStatePerfect];
+    else if (_barProgress >= 100) [[GameManager sharedGameManager] updateGameState:kStateKo];
         else if(_barProgress >= _threshold) [[GameManager sharedGameManager] updateGameState:kStateThresholdReached];
                 else [[GameManager sharedGameManager] updateGameState:kStateLose];
-
     
     [_delegate gameOverHandler:bell.characterState withScore:[NSNumber numberWithInt:_score]];
     
@@ -347,8 +338,8 @@
     
     [[CCDirectorIOS sharedDirector]  resume];
     [[GameManager sharedGameManager] stopBackgroundMusic];
-    [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
-    
+    LoadingScene* scene = [LoadingScene sceneWithTargetScene:kMainMenuScene];
+    [[CCDirector sharedDirector] replaceScene:scene];
 }
 
 -(void)restartTapped:(id)sender{
@@ -376,8 +367,8 @@
     
     [[CCDirectorIOS sharedDirector]  resume];
     [[GameManager sharedGameManager] stopBackgroundMusic];
-    [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
-}
+    LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+    [[CCDirector sharedDirector] replaceScene:scene];}
 
 #pragma mark -
 #pragma mark ===  Dealloc  ===

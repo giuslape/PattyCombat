@@ -20,6 +20,7 @@
     BOOL isSoundEffectsON;
     BOOL _isTutorial;
     BOOL _isPerfectForLevel;
+    BOOL _isKoForLevel;
     int  _totalScore;
     int  _currentScore;
     int  _currentLevel;
@@ -42,9 +43,11 @@
 @property (readwrite) int currentScore;
 @property (readwrite) int totalScore;
 @property (readwrite, nonatomic) int bestScore;
-@property (readonly ,nonatomic) BOOL isTutorial;
-@property (readwrite, nonatomic)BOOL isPerfect;
+@property (readonly , nonatomic) BOOL isTutorial;
+@property (readwrite, nonatomic) BOOL isPerfect;
+@property (readwrite, nonatomic) BOOL isKo;
 @property (readwrite, nonatomic) BOOL isPerfectForLevel;
+@property (readwrite, nonatomic) BOOL isKoForLevel;
 @property (readwrite) BOOL isMusicON;
 @property (readwrite) BOOL isSoundEffectsON;
 @property (readwrite) BOOL hasPlayerDied;

@@ -26,7 +26,9 @@ static GameManager* _sharedGameManager = nil;
 @synthesize namePlayer   = _namePlayer;
 @synthesize gameState    = _gameState;
 @synthesize isPerfect;
-@synthesize isPerfectForLevel;
+@synthesize isPerfectForLevel = _isPerfectForLevel;
+@synthesize isKoForLevel = _isKoForLevel;
+@synthesize isKo;
 @synthesize hasPlayerDied;
 @synthesize bestScore;
 @synthesize dao;
@@ -645,17 +647,10 @@ static GameManager* _sharedGameManager = nil;
         case kStateThresholdReached:
             break;
         case kStateKo:
-            self.isPerfect = NO;
             break;
         case kStatePerfect:
-            
-            if (self.isPerfect) {
-                
-            }
-            self.isPerfect = YES;
             break;
         case kStateLose:
-            self.isPerfect = NO;
             break;
         default:
             break;
@@ -693,6 +688,33 @@ static GameManager* _sharedGameManager = nil;
 -(BOOL)isPerfectForLevel{
     
     return _isPerfectForLevel;
+}
+
+#pragma mark -
+#pragma mark ===  Ko for Game  ===
+#pragma mark -
+
+-(void)setIsKo:(BOOL)value{
+    
+    [[NSUserDefaults standardUserDefaults] setBool:value forKey:@"Ko"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(BOOL)isKo{
+    
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"Ko"];
+}
+
+#pragma mark -
+#pragma mark ===  Ko for Level  ===
+#pragma mark -
+
+
+-(void)setIsKoForLevel:(BOOL)isKoForLevel{
+    
+    _isKoForLevel = isKoForLevel;
+    
+    if (self.isKo) self.isKo = FALSE;
 }
 
 @end

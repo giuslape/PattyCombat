@@ -31,6 +31,9 @@
 
 - (void)dealloc {
     
+    
+    _spriteBatchNode = nil;
+    
     [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
@@ -43,7 +46,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchasedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchaseFailedNotification object:nil];
     
-    _spriteBatchNode = nil;
 }
 
 
@@ -275,7 +277,6 @@
             break;
     }
     
-    int currentLevel = [[GameManager sharedGameManager] currentLevel];
 
     if (_thresholdReached) {
                 
@@ -286,15 +287,9 @@
         [labelTimeBonus setPosition:ccp(size.width * 0.85f , size.height * 0.57f)];
         
         [self addChild:labelTimeBonus z:1];
-        
-        [self sendAchievementsForLevel:currentLevel];
-        
-        [[GameManager sharedGameManager] setLevelReached:currentLevel];
-        
+                        
     }
-        
-    [self loadBackgroundAtLevel:currentLevel andWin:_thresholdReached];
-        
+                
     if (_isPerfect || _isKo) {
         
         NSString* nameOfLabel = nil;
@@ -337,26 +332,159 @@
         
         CCLOG(@"Finished level 1");
          
-        if (![GameState sharedInstance].completedLevel1) {
+        if (![GameState sharedInstance].completedLevel1 && _thresholdReached) {
             
             [GameState sharedInstance].completedLevel1 = true;
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel1
                                          percentComplete:100.0];
+        }        
+    }else if (currentLevel == 2) {
+        
+        CCLOG(@"Finished level 2");
+        
+        if (![GameState sharedInstance].completedLevel2 && _thresholdReached) {
+            
+            [GameState sharedInstance].completedLevel2 = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementLevel2
+                                         percentComplete:100.0];
+        }        
+
+    }else if (currentLevel == 3) {
+        
+        CCLOG(@"Finished level 3");
+        
+        if (![GameState sharedInstance].completedLevel3 && _thresholdReached) {
+            
+            [GameState sharedInstance].completedLevel3 = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementLevel3
+                                         percentComplete:100.0];
+        }        
+        
+    }else if (currentLevel == 5) {
+        
+        CCLOG(@"Finished level 4");
+        
+        if (![GameState sharedInstance].completedLevel4 && _thresholdReached) {
+            
+            [GameState sharedInstance].completedLevel4 = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementLevel4
+                                         percentComplete:100.0];
+        }        
+        
+    }else if (currentLevel == 6) {
+        
+        CCLOG(@"Finished level 5");
+        
+        if (![GameState sharedInstance].completedLevel5 && _thresholdReached) {
+            
+            [GameState sharedInstance].completedLevel5 = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementLevel5
+                                         percentComplete:100.0];
+        }        
+        
+    }else if (currentLevel == 7) {
+        
+        CCLOG(@"Finished level 6");
+        
+        if (![GameState sharedInstance].completedLevel6 && _thresholdReached) {
+            
+            [GameState sharedInstance].completedLevel6 = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementLevel6
+                                         percentComplete:100.0];
+        }        
+        
+    }else if (currentLevel == 8) {
+        
+        CCLOG(@"Finished level 7");
+        
+        if (![GameState sharedInstance].completedLevel7 && _thresholdReached) {
+            
+            [GameState sharedInstance].completedLevel7 = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementLevel7
+                                         percentComplete:100.0];
+        }        
+        
+    }else if (currentLevel == 10) {
+        
+        CCLOG(@"Finished level 8");
+        
+        if (![GameState sharedInstance].completedLevel8 && _thresholdReached) {
+            
+            [GameState sharedInstance].completedLevel8 = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementLevel8
+                                         percentComplete:100.0];
+        }        
+        
+    }else if (currentLevel == 11) {
+        
+        CCLOG(@"Finished level 9");
+        
+        if (![GameState sharedInstance].completedLevel9 && _thresholdReached) {
+            
+            [GameState sharedInstance].completedLevel9 = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementLevel9
+                                         percentComplete:100.0];
+        }        
+        
+    }else if (currentLevel == 12) {
+        
+        CCLOG(@"Finished level 10");
+        
+        if (![GameState sharedInstance].completedLevel10 && _thresholdReached) {
+            
+            [GameState sharedInstance].completedLevel10 = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementLevel10
+                                         percentComplete:100.0];
         }
         
+        if (![GameState sharedInstance].perfect && [GameManager sharedGameManager].isPerfect) {
+            
+            [GameState sharedInstance].perfect = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementPerfect
+                                         percentComplete:100.0];
+            
+        }
+        
+        if (![GameState sharedInstance].ko && [GameManager sharedGameManager].isKo) {
+            
+            [GameState sharedInstance].ko = true;
+            [[GameState sharedInstance] save];
+            [[GCHelper sharedInstance] reportAchievement:kAchievementKO
+                                         percentComplete:100.0];
+
+        }
         
     }
-    
+
+
 }
 
 -(void)updatePoints{
     
     _currentLevelScore = [[GameManager sharedGameManager] currentScore];
 
-    _totalGameScore = [[GameManager sharedGameManager] totalScore];
+    _totalGameScore    = [[GameManager sharedGameManager] totalScore];
 
-    _bestScore = [[GameManager sharedGameManager] bestScore];
+    _bestScore         = [[GameManager sharedGameManager] bestScore];
+    
+    labelTotalScore    = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",_totalGameScore] fntFile:FONTFEEDBACK];
+    
+    [labelTotalScore setAnchorPoint:ccp(1, 0)];
+    
+    [labelTotalScore setPosition:ccp(size.width * 0.85f,size.height* 0.4f)];
+    
+    [self addChild:labelTotalScore z:kLabelTotalLevelScoreZValue tag:kLabelTotalLevelScoreTagValue];
     
     _scoreUp = 0;
     
@@ -370,7 +498,7 @@
     
     _scoreUpTotalScore = _totalGameScore;
         
-    int score = (_thresholdReached) ? _totalGameScore: _totalGameScore - _currentLevelScore - _timeBonus;
+    int score = (_thresholdReached) ? _totalGameScore : _totalGameScore - _currentLevelScore - _timeBonus;
     
     [[GameManager sharedGameManager] setTotalScore:score];
 }
@@ -388,10 +516,18 @@
         [self addChild:_spriteBatchNode z:2 tag:2];
         
         size = [CCDirector sharedDirector].winSize;
-        
-        [self updatePoints];
-                
+                        
         [self detectState];
+
+        [self updatePoints];
+        
+        int currentLevel = [[GameManager sharedGameManager] currentLevel];
+        
+        [[GameManager sharedGameManager] setLevelReached:currentLevel];
+        
+        [self sendAchievementsForLevel:currentLevel];
+        
+        [self loadBackgroundAtLevel:currentLevel andWin:_thresholdReached];
 
         labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
         
@@ -401,14 +537,6 @@
         
         [self addChild:labelScore z:kLabelLevelScoreZValue tag:kLabelLevelScoreTagValue];
         
-        labelTotalScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
-        
-        [labelTotalScore setAnchorPoint:ccp(1, 0)];
-        
-        [labelTotalScore setPosition:ccp(size.width * 0.85f,size.height* 0.4f)];
-        
-        [self addChild:labelTotalScore z:kLabelTotalLevelScoreZValue tag:kLabelTotalLevelScoreTagValue];
-                        
         CCSprite* nextLevel =  (_thresholdReached) ? [CCSprite spriteWithSpriteFrameName:@"next_btn.png"] :[CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
         
         [nextLevel setPosition:ccp (size.width* 0.87f , size.height * 0.1f)];
