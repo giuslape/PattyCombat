@@ -728,7 +728,7 @@
     // Disabled Touch for Main Menu
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     mainMenu.isTouchEnabled = FALSE;
-    
+        
 }
 
 // Return to the Main Menu
@@ -830,8 +830,7 @@ viewController
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     
-    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    
+    [self dismissHUD:self];    
     
     NSString *productIdentifier = (NSString *) notification.object;
     [self updateLabelCoinsForProductIdentifier:productIdentifier];
@@ -846,7 +845,7 @@ viewController
 - (void)productPurchaseFailed:(NSNotification *)notification {
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
-    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    [self dismissHUD:self];    
     
     SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;    
     if (transaction.error.code != SKErrorPaymentCancelled) {    
@@ -876,9 +875,8 @@ viewController
 - (void)productsLoaded:(NSNotification *)notification {
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
-    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    _purchaseMenu.isTouchEnabled = YES;
-
+    [self dismissHUD:self];
+    
     for (CCMenuItemSprite* item in _purchaseMenu.children) {
         
         item.opacity = 255;

@@ -337,7 +337,7 @@
         
     pauseMenu.isTouchEnabled = FALSE;
         
-    [self removeChild: pauseMenu cleanup:YES]; 
+    [self removeChild:pauseMenu cleanup:YES]; 
     
     [[CCDirectorIOS sharedDirector]  resume];
     [[GameManager sharedGameManager] stopBackgroundMusic];
@@ -349,7 +349,7 @@
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
     
-  //  pauseMenu.isTouchEnabled = FALSE;
+   // pauseMenu.isTouchEnabled = FALSE;
         
     if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0) {
         
