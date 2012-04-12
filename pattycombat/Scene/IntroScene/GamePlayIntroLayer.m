@@ -511,7 +511,7 @@
         
         CGSize size = [CCDirectorIOS sharedDirector].winSize;
 
-        CCLabelBMFont* labelEnd = [CCLabelBMFont labelWithString:@"Don't forget the pattern" fntFile:FONTHIGHSCORES];
+        CCLabelBMFont* labelEnd = [CCLabelBMFont labelWithString:@"Don't forget the sequence" fntFile:FONTHIGHSCORES];
         
         [self addChild:labelEnd z:4];
         

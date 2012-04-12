@@ -179,6 +179,7 @@ typedef enum{
     kGamelevel8 = 108,
     kGamelevel9 = 109,
     kGamelevel10 = 110,
+    kGamelevelFinal = 111,
 } SceneTypes;
 
 

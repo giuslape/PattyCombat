@@ -121,7 +121,7 @@ static PattyCombatIAPHelper * _sharedHelper;
 - (void)timeout:(id)arg {
     
     arg = (UIView *)arg;
-    [self performSelector:@selector(dismissHUD:) withObject:arg afterDelay:3.0];
+    [self performSelector:@selector(dismissHUD:) withObject:arg afterDelay:1];
     
 }
 

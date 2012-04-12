@@ -348,9 +348,7 @@
 -(void)restartTapped:(id)sender{
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
-    
-   // pauseMenu.isTouchEnabled = FALSE;
-        
+            
     if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0) {
         
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Patty Coins esauriti"
@@ -364,6 +362,7 @@
         return;
     }
     
+
     [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
            
     [self removeChild: pauseMenu cleanup:YES];     
@@ -371,7 +370,8 @@
     [[CCDirectorIOS sharedDirector]  resume];
     [[GameManager sharedGameManager] stopBackgroundMusic];
     LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
-    [[CCDirector sharedDirector] replaceScene:scene];}
+    [[CCDirector sharedDirector] replaceScene:scene];
+}
 
 #pragma mark -
 #pragma mark ===  Dealloc  ===
@@ -403,6 +403,9 @@
 - (void)productPurchased:(NSNotification *)notification {
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
+    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+    
+    pauseMenu.isTouchEnabled = TRUE;
     
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:[CCDirector sharedDirector].view animated:YES];
@@ -425,6 +428,10 @@
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    
+    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+    
+    pauseMenu.isTouchEnabled = TRUE;
     
     SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;    
     if (transaction.error.code != SKErrorPaymentCancelled) {    
@@ -458,10 +465,13 @@
     
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
     
+    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+    
     switch (buttonIndex) {
         case 0:
             break;
         case 1:
+            pauseMenu.isTouchEnabled = FALSE;
             [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
             break;
         default:

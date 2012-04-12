@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Fratello. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Constant.h"
 

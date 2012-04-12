@@ -13,6 +13,7 @@
 #import "EndScene.h"
 #import "WallScene.h"
 #import "CarScene.h"
+#import "FinalScene.h"
 
 
 
@@ -128,6 +129,8 @@ static GameManager* _sharedGameManager = nil;
             break;
         case kBonusLevel2:
             result = @"kBonusLevel2";
+            break;
+        case kGamelevelFinal:
             break;
         default:
             [NSException raise:NSGenericException format:@"Unexpected SceneType."];
@@ -552,7 +555,7 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            _currentLevel = 0;
+            _currentLevel = 11;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;
@@ -597,6 +600,9 @@ static GameManager* _sharedGameManager = nil;
         case kBonusLevel2:
             break;
         case kBonusLevel3:
+            break;
+        case kGamelevelFinal:
+            sceneToRun = [FinalScene node];
             break;
         default:
             CCLOG(@"Unknown ID, cannot switch scenes");

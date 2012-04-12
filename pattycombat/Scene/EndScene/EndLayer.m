@@ -123,7 +123,6 @@
         
     }else if (CGRectContainsPoint([nextLevel boundingBox], touchLocation)) {
                 
-       // BOOL isLastLevel = [[GameManager sharedGameManager] isLastLevel];
         
         if (!_thresholdReached) {
             
@@ -150,6 +149,14 @@
 
 
         } else{
+            
+            BOOL isLastLevel = [[GameManager sharedGameManager] isLastLevel];
+            if (isLastLevel)   {
+                
+            [[GameManager sharedGameManager] runSceneWithID:kGamelevelFinal];
+            return YES;
+                
+            }
             
             self.isTouchEnabled = FALSE;
             [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
