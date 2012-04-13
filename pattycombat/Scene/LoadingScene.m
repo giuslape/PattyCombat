@@ -111,27 +111,25 @@
     
     //Load Pattern for current Level
     
-    NSArray* patternArray = [[NSArray alloc] initWithArray:[gameManager patternForLevel]];
+    NSMutableArray* patternArray = [[NSMutableArray alloc] initWithArray:[gameManager patternForLevel]];
     
     // Insert each item of PatternArray in feedHand array with check if is dx, sx or two
     
     for (NSString* hand in patternArray) {
         
         CCSprite* handSprite = nil;
-        CCSprite* twoHandSprite = nil;
-        CCSprite* arrow = nil;
         
         if ([hand isEqualToString:@"dx"] || [hand isEqualToString:@"dxCross"]) {
             
             handSprite = [CCSprite spriteWithSpriteFrame: 
-                          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_dx_01.png"]];
+                          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_dx_02.png"]];
             
             [handSprite setTag:kHandFeedRightTagValue];
             
         }else if([hand isEqualToString:@"sx"] || [hand isEqualToString:@"sxCross"]){
             
             handSprite = [CCSprite spriteWithSpriteFrame:
-                          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_sx_01.png"]];
+                          [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_sx_02.png"]];
             
             
             [handSprite setTag:kHandFeedLeftTagValue];
@@ -139,40 +137,16 @@
         }else if([hand isEqualToString:@"two"]){
             
             handSprite = [CCSprite spriteWithSpriteFrame: 
-                          [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_dx_01.png"]];
-            twoHandSprite = [CCSprite spriteWithSpriteFrame: 
-                             [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_sx_01.png"]];
+                          [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_both_02.png"]];
             
-            [handSprite setTag:kHandFeedRightTagValue];
-            [twoHandSprite setTag:kHandFeedLeftTagValue];
+            
+            [handSprite setTag:kHandFeedBothTagValue];
             
         }else CCLOG(@"Pattern non riconosciuto");
         
         
-        if (handSprite != nil && twoHandSprite != nil) {
-            
-            arrow = [CCSprite spriteWithSpriteFrame: 
-                     [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_arrow.png"]];
-            
-            [arrow setTag:kArrowFeedTagValue];
-            
-            [feedHand addObject:handSprite];
-            [feedHand addObject:twoHandSprite];
-            [feedHand addObject:arrow];
-            
-        }else if (handSprite != nil) {
-            
-            arrow = [CCSprite spriteWithSpriteFrame: 
-                     [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_arrow.png"]];
-            
-            [arrow setTag:kArrowFeedTagValue];
-            
-            [feedHand addObject:handSprite];
-            [feedHand addObject:arrow];
-        }
-        
-    } 
-    [feedHand removeLastObject];
+        if (handSprite != nil)[feedHand addObject:handSprite];
+    }
     
     // Align elements of array feedhand
     
@@ -207,6 +181,7 @@
     
     
 }
+
 
 
 #pragma mark -

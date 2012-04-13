@@ -30,6 +30,7 @@
 @synthesize animationHandRightErr;
 @synthesize animationFeedLeft;
 @synthesize animationFeedRight;
+@synthesize animationFeedBoth;
 
 
 
@@ -81,7 +82,7 @@
         
     [self scheduleOnce:@selector(showButtonAndFeed) delay:0.5f];
     
-    [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
+    [[GameManager sharedGameManager] playBackgroundTrack:WAITINGTHEME];
     
 }
 
@@ -90,7 +91,7 @@
     
     id gameManager = [GameManager sharedGameManager];
     
-    float padding = 2;
+    float padding = 4;
     
     feedHand = [[NSMutableArray alloc] init];       
     
@@ -104,8 +105,6 @@
     for (NSString* hand in patternArray) {
         
         CCSprite* handSprite = nil;
-        CCSprite* twoHandSprite = nil;
-        CCSprite* arrow = nil;
         
         if ([hand isEqualToString:@"dx"] || [hand isEqualToString:@"dxCross"]) {
             
@@ -125,42 +124,17 @@
         }else if([hand isEqualToString:@"two"]){
             
             handSprite = [CCSprite spriteWithSpriteFrame: 
-                                [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_dx_01.png"]];
-            twoHandSprite = [CCSprite spriteWithSpriteFrame: 
-                                [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_sx_01.png"]];
+                                [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_both_01.png"]];
+                        
             
-            
-            [handSprite setTag:kHandFeedRightTagValue];
-            [twoHandSprite setTag:kHandFeedLeftTagValue];
+            [handSprite setTag:kHandFeedBothTagValue];
             
         }else CCLOG(@"Pattern non riconosciuto");
         
         
-        if (handSprite != nil && twoHandSprite != nil) {
+        if (handSprite != nil)[feedHand addObject:handSprite];
+    }
             
-            arrow = [CCSprite spriteWithSpriteFrame: 
-                     [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_arrow.png"]];
-            
-            [arrow setTag:kArrowFeedTagValue];
-            
-            [feedHand addObject:handSprite];
-            [feedHand addObject:twoHandSprite];
-            [feedHand addObject:arrow];
-            
-        }else if (handSprite != nil) {
-            
-            arrow = [CCSprite spriteWithSpriteFrame: 
-                     [[CCSpriteFrameCache sharedSpriteFrameCache]spriteFrameByName:@"intro_feed_arrow.png"]];
-            
-            [arrow setTag:kArrowFeedTagValue];
-            
-            [feedHand addObject:handSprite];
-            [feedHand addObject:arrow];
-        }
-        
-    } 
-    [feedHand removeLastObject];
-    
     // Align elements of array feedhand
     
     [self alignHandsWithPadding:padding];
@@ -187,6 +161,7 @@
     for (CCSprite* item in feedHand) {
         
         [_spriteBatchNode addChild:item];
+        [item setScale:1.2f];
         CGSize itemSize = item.textureRect.size;
         [item setPosition:ccp(x + itemSize.width * item.scaleX / 2.0f, size.height * 0.95f - itemSize.height * item.scaleY /2.0f)];
         x += itemSize.width * item.scaleX + padding;
@@ -224,6 +199,10 @@
                                 [NSArray arrayWithObjects:
                                  [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_dx_01.png"],
                                  [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_dx_02.png"], nil] delay:0.08]];
+    [self setAnimationFeedBoth:[CCAnimation animationWithSpriteFrames:
+                                [NSArray arrayWithObjects:
+                                 [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_both_01.png"],
+                                 [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"intro_feed_both_02.png"],nil]delay:0.08]];
 
 }
 #pragma mark -
@@ -345,7 +324,7 @@
 
             [[feedHand objectAtIndex:_feedIndex] setDisplayFrame:frame];
             
-            _feedIndex += 2;
+            _feedIndex++;
             
         }else if(nodeHit == kStateRightHandHit && 
            ([patternDescription isEqualToString:@"dx"] ||
@@ -358,7 +337,7 @@
 
                 [[feedHand objectAtIndex:_feedIndex] setDisplayFrame:frame];
 
-                _feedIndex += 2;
+                _feedIndex++;
             
                 } else [self resetPatternWithNodeTouched:nodeHit];
     
@@ -392,19 +371,10 @@
         {
 
             [[feedHand objectAtIndex:_feedIndex] 
-             setDisplayFrame:[[[animationFeedRight frames] objectAtIndex:1]spriteFrame]];
-
+             setDisplayFrame:[[[animationFeedBoth frames] objectAtIndex:1]spriteFrame]];
             
             _feedIndex++;
-            
-            CCSpriteFrame* frame = [[[animationFeedLeft frames] objectAtIndex:1] spriteFrame];
-            
-            [[feedHand objectAtIndex:_feedIndex]        
-             setDisplayFrame:frame];
 
-            
-            _feedIndex += 2;
-            
             [_leftHand stopAllActions];
             [_leftHand runAction:
               [CCAnimate actionWithAnimation:animationHandLeftOk]];
@@ -462,6 +432,9 @@
             
             [pat setDisplayFrame:[[[animationFeedRight frames]objectAtIndex:0]spriteFrame]];
         
+        else if(pat.tag == kHandFeedBothTagValue)
+        
+            [pat setDisplayFrame:[[[animationFeedBoth frames] objectAtIndex:0] spriteFrame]];
         }
 }
     
@@ -656,7 +629,7 @@
         
         if ([[GameManager sharedGameManager] isTutorial]) {
             
-            CCLabelBMFont* labelHelp = [CCLabelBMFont labelWithString:@"Follow the sequence by tapping on the hands buttons" fntFile:FONTFEEDBACK];
+            CCLabelBMFont* labelHelp = [CCLabelBMFont labelWithString:@"Follow the sequence above by tapping on the hands buttons" fntFile:FONTFEEDBACK];
             
             [self addChild:labelHelp z:kLabelTutorialZValue tag:kLabelTutorialTagValue];
             

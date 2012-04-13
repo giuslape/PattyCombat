@@ -35,6 +35,7 @@
 @property (nonatomic, strong) CCAnimation* animationHandLeftErr;
 @property (nonatomic, strong) CCAnimation* animationFeedLeft;
 @property (nonatomic, strong) CCAnimation* animationFeedRight;
+@property (nonatomic, strong) CCAnimation* animationFeedBoth;
 
 
 -(void)handleHitWithTouch:(CGPoint)location;

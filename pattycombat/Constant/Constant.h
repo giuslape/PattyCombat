@@ -85,7 +85,8 @@
 #define kHandFeedRightZValue 3
 #define kHandFeedLeftTagValue 12
 #define kHandFeedLeftZValue 3
-#define kArrowFeedTagValue 13
+#define kHandFeedBothTagValue 13
+#define kHandFeedBothZValue 1
 #define kLeftHandTagValue 14
 #define kLeftHandZValue 1
 #define kRightHandZValue 1
@@ -234,7 +235,7 @@ typedef enum {
 
 
 #define BACKGROUND_TRACK_MAIN_MENU @"MainTheme.mp3"
-
+#define WAITINGTHEME @"loop_memorize.mp3"
 // Audio Constants
 #define SFX_NOTLOADED NO
 #define SFX_LOADED YES

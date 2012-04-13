@@ -16,7 +16,6 @@
 #pragma mark -
 
 
-
 - (id)init
 {
     self = [super init];
@@ -26,23 +25,33 @@
         CGSize size = [[CCDirectorIOS sharedDirector] winSize];
         
         CCSprite* background = [CCSprite spriteWithFile:@"end.png"];
-        
+                
         [self addChild:background];
         
         [background setPosition:ccp(size.width/2, size.height/2)];
-        
-        [self scheduleUpdate];
+                        
+        [self scheduleOnce:@selector(showDarkLayer:) delay:2];
         
     }
     return self;
 }
 
--(void)update:(ccTime)delta{
+
+#pragma mark -
+#pragma mark ===  Show Dark Layer  ===
+#pragma mark -
+
+-(void)showDarkLayer:(ccTime)delta{
     
-    NSLog(@"%f", delta);
+    CCLayerColor* layerColor = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];
+    
+    [self addChild:layerColor];
+    
+    CCFadeTo* fade = [CCFadeTo actionWithDuration:0.5f opacity:180];
+    
+    [layerColor runAction:fade];
     
 }
-
 
 #pragma mark -
 #pragma mark ===  Touch Handler  ===

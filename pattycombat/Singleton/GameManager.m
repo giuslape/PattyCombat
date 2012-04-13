@@ -229,7 +229,7 @@ static GameManager* _sharedGameManager = nil;
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 43;
+            _gameTime = 10;
             break;
         case 2:
             _gameTime = 43;
@@ -555,7 +555,7 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            _currentLevel = 11;
+            _currentLevel = 0;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;

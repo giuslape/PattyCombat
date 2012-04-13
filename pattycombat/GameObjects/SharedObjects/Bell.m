@@ -77,7 +77,7 @@
     
     if (_elapsedTime == 0) {
         
-        [self changeState:[NSNumber numberWithInt:kStateBellStart]];
+        //[self changeState:[NSNumber numberWithInt:kStateBellStart]];
     }
     
     // Check how time is elapsed

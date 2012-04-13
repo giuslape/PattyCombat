@@ -65,8 +65,8 @@
     CCSprite* leftHand = (CCSprite *)[self getChildByTag:kLeftHandHelpTagValue];
     CCSprite* rightHand = (CCSprite *)[self getChildByTag:kRightHandHelpTagValue];
 
-    if (leftHand.opacity == 255)leftHand.opacity = 0;
-    if (rightHand.opacity == 255)rightHand.opacity = 0;
+    if (leftHand.opacity == 100)leftHand.opacity = 0;
+    if (rightHand.opacity == 100)rightHand.opacity = 0;
         
     [_hudLayer updateHealthBar:touchOk];
     
@@ -91,11 +91,11 @@
     switch (states) {
         case kStateLeftHandOpen:
             
-            leftHand.opacity = 255;
+            leftHand.opacity = 100;
             
             break;
         case kStateRightHandOpen:
-            rightHand.opacity = 255;
+            rightHand.opacity = 100;
             
         default:
             break;

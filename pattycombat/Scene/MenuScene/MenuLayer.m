@@ -72,7 +72,7 @@
     
     //Label Coins Purchased
     
-    CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins Hield" fntFile:FONTHIGHSCORES];
+    CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins Held" fntFile:FONTHIGHSCORES];
     [labelCoinsPurchased setPosition:ccp(-size.width + size.width * 0.8, size.height * 0.4)];
     [self addChild:labelCoinsPurchased z:3];
     
@@ -896,10 +896,6 @@ viewController
 
 - (void)buyButtonTapped:(id)sender {
     
-    self.isTouchEnabled = FALSE;
-    
-    _purchaseMenu.isTouchEnabled = FALSE;
-    
     CCMenuItem *buyButton = (CCMenuItem *)sender;
     
     if (buyButton.tag < [[PattyCombatIAPHelper sharedHelper].products count]) {
@@ -912,6 +908,10 @@ viewController
     self.hud = [MBProgressHUD showHUDAddedTo:[CCDirectorIOS sharedDirector].view animated:YES];
     _hud.labelText = @"Buying Coins...";
     [self performSelector:@selector(timeout:) withObject:nil afterDelay:60];
+        
+    self.isTouchEnabled = FALSE;
+        
+    _purchaseMenu.isTouchEnabled = FALSE;
     
     }
     
@@ -1067,7 +1067,7 @@ viewController
                                    @"Patty Combat.", @"caption",
                                    @"Test Patty Combat", @"description",
                                    @"http://www.facebook.com/pages/Patty-Combat/269975746417125", @"link",
-                                   @"http://fbcdn-sphotos-a.akamaihd.net/hphotos-ak-ash4/420383_269975969750436_269975746417125_608460_1762786580_n.jpg", @"picture",
+                                   @"http://www.balzo.eu/wp-content/uploads/2012/04/iTunesArtwork.png", @"picture",
                                    actionLinksStr, @"actions",
                                    nil];
     
