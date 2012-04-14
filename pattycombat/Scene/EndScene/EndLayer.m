@@ -218,12 +218,15 @@
     CCSprite* nextLevel = (CCSprite *)[_spriteBatchNode getChildByTag:kNextLevelTagValue];
     CCSprite* tweetBtn = (CCSprite *)[_spriteBatchNode getChildByTag:kTweetBtnTagValue];
     CCSprite* perfectOrKo = (CCSprite *)[_spriteBatchNode getChildByTag:kPerfectOrKoTagValue];
+    CCSprite* newBestRecord = (CCSprite *)[_spriteBatchNode getChildByTag:kNewRecordTagValue];
     
     perfectOrKo.opacity = 255;
     
     tweetBtn.opacity = 255;
             
     nextLevel.opacity = 255;
+    
+    newBestRecord.opacity = 255;
         
     CCSprite* menuBtn = (CCSprite *)[_spriteBatchNode getChildByTag:kMenuBtnTagValue];
 
@@ -510,6 +513,24 @@
     int score = (_thresholdReached) ? _totalGameScore : _totalGameScore - _currentLevelScore - _timeBonus;
     
     [[GameManager sharedGameManager] setTotalScore:score];
+    
+    // Check if is new record
+    
+    if (_bestScore < _totalGameScore) {
+        
+        CCSprite * newBestScore = [CCSprite spriteWithSpriteFrameName:@"record_label.png"];
+        
+        [newBestScore setAnchorPoint:ccp(0, 1)];
+        
+        [newBestScore setPosition:ccp(size.width * 0.68f, size.height * 0.35f)];
+        
+        [_spriteBatchNode addChild:newBestScore z:kNewRecordZValue tag:kNewRecordTagValue];
+        
+        newBestScore.opacity = 0;
+        
+        [[GameManager sharedGameManager] setBestScore:_totalGameScore];
+        
+    }
 }
 
 - (id)init {
@@ -526,17 +547,27 @@
         
         size = [CCDirector sharedDirector].winSize;
                         
+        // Detect the state of Game
+        
         [self detectState];
 
+        // Update Points in game
+        
         [self updatePoints];
         
         int currentLevel = [[GameManager sharedGameManager] currentLevel];
         
-        [[GameManager sharedGameManager] setLevelReached:currentLevel];
+        if (_thresholdReached)[[GameManager sharedGameManager] setLevelReached:currentLevel];
+        
+        // Find out the achievement is active 
         
         [self sendAchievementsForLevel:currentLevel];
         
+        // Load background for level
+        
         [self loadBackgroundAtLevel:currentLevel andWin:_thresholdReached];
+        
+        // Add label score
 
         labelScore = [CCLabelBMFont labelWithString:@"0" fntFile:FONTFEEDBACK];
         
@@ -546,6 +577,8 @@
         
         [self addChild:labelScore z:kLabelLevelScoreZValue tag:kLabelLevelScoreTagValue];
         
+        // Add button next or retry
+        
         CCSprite* nextLevel =  (_thresholdReached) ? [CCSprite spriteWithSpriteFrameName:@"next_btn.png"] :[CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
         
         [nextLevel setPosition:ccp (size.width* 0.87f , size.height * 0.1f)];
@@ -554,27 +587,16 @@
         
         nextLevel.opacity = 0;
         
+        // Add menu button
+        
         CCSprite* menuBtn = [CCSprite spriteWithSpriteFrameName:@"menu_btn.png"];
         [menuBtn setPosition:ccp(size.width * 0.08f, size.height * 0.1f)];
         [_spriteBatchNode addChild:menuBtn z:kMenuBtnZValue tag:kMenuBtnTagValue];
         
         menuBtn.opacity = 0;
         
-        if (_bestScore < _totalGameScore) {
-                    
-        CCSprite * newBestScore = [CCSprite spriteWithSpriteFrameName:@"record_label.png"];
         
-        [newBestScore setAnchorPoint:ccp(0, 1)];
-        
-        [newBestScore setPosition:ccp(size.width * 0.70f, size.height * 0.3f)];
-        
-        [_spriteBatchNode addChild:newBestScore z:kNewRecordZValue tag:kNewRecordTagValue];
-        
-        newBestScore.opacity = 0;
-            
-        [[GameManager sharedGameManager] setBestScore:_totalGameScore];
-            
-        }
+        // Add twitter button
         
         CCSprite* twitterBtn = [CCSprite spriteWithSpriteFrameName:@"tweet_btn.png"];
         

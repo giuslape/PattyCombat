@@ -229,7 +229,7 @@ static GameManager* _sharedGameManager = nil;
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 10;
+            _gameTime = 43;
             break;
         case 2:
             _gameTime = 43;
