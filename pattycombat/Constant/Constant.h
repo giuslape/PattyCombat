@@ -127,6 +127,25 @@
 #define kRightHandHelpTagValue 26
 #define kRightHandHelpZValue 0
 
+#define kHitRightUnderZValue 0
+#define kHitRightUnderTagValue 27
+#define kHitRightOverZValue 20
+#define kHitRightOverTagValue 28
+#define kHitLeftUnderZValue 0
+#define kHitLeftUnderTagValue 29
+#define kHitLeftOverZValue 20
+#define kHitLeftOverTagValue 30
+#define kHitRightCrossUnderZValue 0
+#define kHitRightCrossUnderTagValue 31
+#define kHitRightCrossOverZValue 2
+#define kHitRightCrossOverTagValue 32
+#define kHitLeftCrossUnderZValue 0
+#define kHitLeftCrossUnderTagValue 33
+#define kHitLeftCrossOverZValue 2
+#define kHitLeftCrossOverTagValue 34
+
+
+
 #define kPlayerTagValue 0
 #define kPlayerZValue 1
 

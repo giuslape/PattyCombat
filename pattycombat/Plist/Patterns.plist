@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Scena1</key>
-	<string>dx,sx</string>
+	<string>dx,sx,two</string>
 	<key>Scena2</key>
 	<string>sx,dx,two</string>
 	<key>Scena3</key>

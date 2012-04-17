@@ -16,7 +16,11 @@
 
 #import "GCHelper.h"
 
+#import "TestFlight.h"
+
 static NSString* kAppId = @"321845184543524";
+
+static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyLTA0LTEwIDA0OjM3OjQ1LjE4OTQ1MQ";
 
 
 @implementation AppController
@@ -25,6 +29,9 @@ static NSString* kAppId = @"321845184543524";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [TestFlight takeOff:kTokenFlight];
+
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
@@ -99,7 +106,9 @@ static NSString* kAppId = @"321845184543524";
 	director_.wantsFullScreenLayout = YES;
 
 	// Display FSP and SPF
-	[director_ setDisplayStats:NO];
+	[director_ setDisplayStats:YES];
+    
+    [TestFlight openFeedbackView];
 
 	// set FPS at 60
 	[director_ setAnimationInterval:1.0/60];

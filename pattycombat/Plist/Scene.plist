@@ -10,34 +10,38 @@
 		<dict>
 			<key>bpm</key>
 			<integer>120</integer>
-			<key>leftHand</key>
-			<string>miaghi_sx_0001.png</string>
-			<key>leftPositionX</key>
-			<integer>476</integer>
-			<key>leftPositionY</key>
-			<integer>575</integer>
-			<key>leftRectPositionX</key>
-			<integer>662</integer>
-			<key>leftRectPositionY</key>
-			<integer>294</integer>
+			<key>leftPosition</key>
+			<string>{484, 574}</string>
+			<key>leftRectPosition</key>
+			<string>{664, 282}</string>
 			<key>name</key>
 			<string>Miaghi</string>
-			<key>positionX</key>
-			<integer>472</integer>
-			<key>positionY</key>
-			<integer>640</integer>
-			<key>rightHand</key>
-			<string>miaghi_dx_0001.png</string>
-			<key>rightPositionX</key>
-			<integer>79</integer>
-			<key>rightPositionY</key>
-			<integer>575</integer>
-			<key>rightRectPositionX</key>
-			<integer>129</integer>
-			<key>rightRectPositionY</key>
-			<integer>294</integer>
-			<key>texture</key>
-			<string>miaghi_body_0001.png</string>
+			<key>position</key>
+			<string>{480,250}</string>
+			<key>handName</key>
+			<string>miaghi_arm_0001.png</string>
+			<key>rightPosition</key>
+			<string>{88,574}</string>
+			<key>rightRectPosition</key>
+			<string>{150,282}</string>
+			<key>headName</key>
+			<string>miaghi_head_0001.png</string>
+			<key>hitNameDxUnder</key>
+			<string>miaghi_hit1_0001.png</string>
+			<key>hitNameSxUnder</key>
+			<string>miaghi_hit1_0003.png</string>
+			<key>hitNameDxOver</key>
+			<string>miaghi_hit2_0001.png</string>
+			<key>hitNameSxOver</key>
+			<string>miaghi_hit2_0003.png</string>
+			<key>leftPositionUnder</key>
+			<string>{,}</string>
+			<key>leftPositionOver</key>
+			<string>{,}</string>
+			<key>rightPositionUnder</key>
+			<string>{,}</string>
+			<key>rightPositionOver</key>
+			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena2</key>
@@ -48,34 +52,38 @@
 		<dict>
 			<key>bpm</key>
 			<integer>120</integer>
-			<key>leftHand</key>
-			<string>crocodile_sx_0001.png</string>
-			<key>leftPositionX</key>
-			<integer>472</integer>
-			<key>leftPositionY</key>
-			<integer>516</integer>
-			<key>leftRectPositionX</key>
-			<integer>672</integer>
-			<key>leftRectPositionY</key>
-			<integer>230</integer>
+			<key>leftPosition</key>
+			<string>{472, 516}</string>
+			<key>leftRectPosition</key>
+			<string>{672,230}</string>
 			<key>name</key>
 			<string>Crocodile</string>
-			<key>positionX</key>
-			<integer>474</integer>
-			<key>positionY</key>
-			<integer>640</integer>
-			<key>rightHand</key>
-			<string>crocodile_dx_0001.png</string>
-			<key>rightPositionX</key>
-			<integer>64</integer>
-			<key>rightPositionY</key>
-			<integer>516</integer>
-			<key>rightRectPositionX</key>
-			<integer>114</integer>
-			<key>rightRectPositionY</key>
-			<integer>230</integer>
-			<key>texture</key>
-			<string>crocodile_body_0001.png</string>
+			<key>position</key>
+			<string>{474, 640}</string>
+			<key>handName</key>
+			<string>crocodile_arm_0001.png</string>
+			<key>rightPosition</key>
+			<string>{64,516}</string>
+			<key>rightRectPosition</key>
+			<string>{114,230}</string>
+			<key>headName</key>
+			<string>crocodile_head_0001.png</string>
+			<key>hitNameDxUnder</key>
+			<string>crocodile_hit1_0001.png</string>
+			<key>hitNameSxUnder</key>
+			<string>crocodile_hit1_0003.png</string>
+			<key>hitNameDxOver</key>
+			<string>crocodile_hit2_0001.png</string>
+			<key>hitNameSxOver</key>
+			<string>crocodile_hit2_0003.png</string>
+			<key>leftPositionUnder</key>
+			<string>{,}</string>
+			<key>leftPositionOver</key>
+			<string>{,}</string>
+			<key>rightPositionUnder</key>
+			<string>{,}</string>
+			<key>rightPositionOver</key>
+			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena3</key>
@@ -86,42 +94,58 @@
 		<dict>
 			<key>bpm</key>
 			<integer>120</integer>
-			<key>leftHand</key>
-			<string>cinziah_sx_0001.png</string>
-			<key>leftPositionX</key>
-			<integer>326</integer>
-			<key>leftPositionY</key>
-			<integer>524</integer>
-			<key>leftRectPositionX</key>
-			<integer>674</integer>
-			<key>leftRectPositionY</key>
-			<integer>266</integer>
+			<key>leftPosition</key>
+			<string>{326,524}</string>
+			<key>leftRectPosition</key>
+			<string>{674,266}</string>
 			<key>name</key>
 			<string>ChunLi</string>
-			<key>positionX</key>
-			<integer>478</integer>
-			<key>positionY</key>
-			<integer>640</integer>
-			<key>rightHand</key>
-			<string>cinziah_dx_0001.png</string>
-			<key>rightPositionX</key>
-			<integer>100</integer>
-			<key>rightPositionY</key>
-			<integer>524</integer>
-			<key>rightRectPositionX</key>
-			<integer>120</integer>
-			<key>rightRectPositionY</key>
-			<integer>266</integer>
-			<key>texture</key>
-			<string>cinziah_body_0001.png</string>
-			<key>rightRectCrossPositionX</key>
-			<integer>471</integer>
-			<key>rightRectCrossPositionY</key>
-			<integer>330</integer>
-			<key>leftRectCrossPositionX</key>
-			<integer>312</integer>
-			<key>leftRectCrossPositionY</key>
-			<string>330</string>
+			<key>position</key>
+			<string>{478,640}</string>
+			<key>handName</key>
+			<string>cinziah_arm_0001.png</string>
+			<key>rightPosition</key>
+			<string>{100,524}</string>
+			<key>rightRectPosition</key>
+			<string>{120,266}</string>
+			<key>headName</key>
+			<string>cinziah_head_0001.png</string>
+			<key>rightRectCrossPosition</key>
+			<string>{471,330}</string>
+			<key>leftRectCrossPosition</key>
+			<string>{312,330}</string>
+			<key>hitNameDxUnder</key>
+			<string>cinziah_hit1_0001.png</string>
+			<key>hitNameSxUnder</key>
+			<string>cinziah_hit1_0003.png</string>
+			<key>hitNameDxOver</key>
+			<string>cinziah_hit2_0001.png</string>
+			<key>hitNameSxOver</key>
+			<string>cinziah_hit2_0003.png</string>
+			<key>hitNameDxCrossUnder</key>
+			<string>cinziah_hit1_0005.png</string>
+			<key>hitNameSxCrossUnder</key>
+			<string>cinziah_hit1_0007.png</string>
+			<key>hitNameDxCrossOver</key>
+			<string>cinziah_hit2_0005.png</string>
+			<key>hitNameSxCrossOver</key>
+			<string>cinziah_hit2_0007.png</string>
+			<key>leftPositionUnder</key>
+			<string>{,}</string>
+			<key>leftPositionOver</key>
+			<string>{,}</string>
+			<key>rightPositionUnder</key>
+			<string>{,}</string>
+			<key>rightPositionOver</key>
+			<string>{,}</string>
+			<key>rightCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>rightCrossOverPosition</key>
+			<string>{,}</string>
+			<key>leftCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>leftCrossOverPosition</key>
+			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena5</key>
@@ -132,42 +156,58 @@
 		<dict>
 			<key>bpm</key>
 			<integer>140</integer>
-			<key>leftHand</key>
-			<string>maa_sx_0001.png</string>
-			<key>leftPositionX</key>
-			<integer>486</integer>
-			<key>leftPositionY</key>
-			<integer>524</integer>
-			<key>leftRectPositionX</key>
-			<integer>694</integer>
-			<key>leftRectPositionY</key>
-			<integer>116</integer>
+			<key>leftPosition</key>
+			<string>{486,524}</string>
+			<key>leftRectPosition</key>
+			<string>{694, 116}</string>
 			<key>name</key>
 			<string>Masai</string>
-			<key>positionX</key>
-			<integer>496</integer>
-			<key>positionY</key>
-			<integer>640</integer>
-			<key>rightHand</key>
-			<string>maa_dx_0001.png</string>
-			<key>rightPositionX</key>
-			<integer>110</integer>
-			<key>rightPositionY</key>
-			<integer>524</integer>
-			<key>rightRectPositionX</key>
-			<integer>124</integer>
-			<key>rightRectPositionY</key>
-			<integer>116</integer>
-			<key>texture</key>
-			<string>maa_body_0001.png</string>
-			<key>rightRectCrossPositionX</key>
-			<integer>124</integer>
-			<key>rightRectCrossPositionY</key>
-			<integer>342</integer>
-			<key>leftRectCrossPositionX</key>
-			<integer>694</integer>
-			<key>leftRectCrossPositionY</key>
-			<string>342</string>
+			<key>position</key>
+			<string>{496,640}</string>
+			<key>handName</key>
+			<string>maa_arm_0001.png</string>
+			<key>rightPosition</key>
+			<string>{110, 524}</string>
+			<key>rightRectPosition</key>
+			<string>{124,116}</string>
+			<key>headName</key>
+			<string>maa_head_0001.png</string>
+			<key>rightRectCrossPosition</key>
+			<string>{124,342}</string>
+			<key>leftRectCrossPosition</key>
+			<string>{694,342}</string>
+			<key>hitNameDxUnder</key>
+			<string>maa_hit1_0001.png</string>
+			<key>hitNameSxUnder</key>
+			<string>maa_hit1_0003.png</string>
+			<key>hitNameDxOver</key>
+			<string>maa_hit2_0001.png</string>
+			<key>hitNameSxOver</key>
+			<string>maa_hit2_0003.png</string>
+			<key>hitNameDxCrossUnder</key>
+			<string>maa_hit1_0005.png</string>
+			<key>hitNameSxCrossUnder</key>
+			<string>maa_hit1_0007.png</string>
+			<key>hitNameDxCrossOver</key>
+			<string>maa_hit2_0005.png</string>
+			<key>hitNameSxCrossOver</key>
+			<string>maa_hit2_0007.png</string>
+			<key>leftPositionUnder</key>
+			<string>{,}</string>
+			<key>leftPositionOver</key>
+			<string>{,}</string>
+			<key>rightPositionUnder</key>
+			<string>{,}</string>
+			<key>rightPositionOver</key>
+			<string>{,}</string>
+			<key>rightCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>rightCrossOverPosition</key>
+			<string>{,}</string>
+			<key>leftCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>leftCrossOverPosition</key>
+			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena6</key>
@@ -178,34 +218,38 @@
 		<dict>
 			<key>bpm</key>
 			<integer>140</integer>
-			<key>leftHand</key>
-			<string>joco_sx_0001.png</string>
-			<key>leftPositionX</key>
-			<integer>483</integer>
-			<key>leftPositionY</key>
-			<integer>514</integer>
-			<key>leftRectPositionX</key>
-			<integer>684</integer>
-			<key>leftRectPositionY</key>
-			<integer>316</integer>
+			<key>leftPosition</key>
+			<string>{483,514}</string>
+			<key>leftRectPosition</key>
+			<string>{684,316}</string>
 			<key>name</key>
 			<string>Jocopoco</string>
-			<key>positionX</key>
-			<integer>480</integer>
-			<key>positionY</key>
-			<integer>640</integer>
-			<key>rightHand</key>
-			<string>joco_dx_0001.png</string>
-			<key>rightPositionX</key>
-			<integer>90</integer>
-			<key>rightPositionY</key>
-			<integer>514</integer>
+			<key>position</key>
+			<string>{480, 640}</string>
+			<key>handName</key>
+			<string>joco_arm_0001.png</string>
+			<key>rightPosition</key>
+			<string>{90,514}</string>
 			<key>rightRectPositionX</key>
-			<integer>116</integer>
-			<key>rightRectPositionY</key>
-			<integer>316</integer>
-			<key>texture</key>
-			<string>joco_body_0001.png</string>
+			<string>{116,316}</string>
+			<key>headName</key>
+			<string>joco_head_0001.png</string>
+			<key>hitNameDxUnder</key>
+			<string>joco_hit1_0001.png</string>
+			<key>hitNameSxUnder</key>
+			<string>joco_hit1_0003.png</string>
+			<key>hitNameDxOver</key>
+			<string>joco_hit2_0001.png</string>
+			<key>hitNameSxOver</key>
+			<string>joco_hit2_0003.png</string>
+			<key>leftPositionUnder</key>
+			<string>{,}</string>
+			<key>leftPositionOver</key>
+			<string>{,}</string>
+			<key>rightPositionUnder</key>
+			<string>{,}</string>
+			<key>rightPositionOver</key>
+			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena7</key>
@@ -216,42 +260,58 @@
 		<dict>
 			<key>bpm</key>
 			<integer>140</integer>
-			<key>leftHand</key>
-			<string>Jenny_sx_0001.png</string>
-			<key>leftPositionX</key>
-			<integer>314</integer>
-			<key>leftPositionY</key>
-			<integer>516</integer>
-			<key>leftRectPositionX</key>
-			<integer>684</integer>
-			<key>leftRectPositionY</key>
-			<integer>230</integer>
+			<key>leftPosition</key>
+			<string>{314,516}</string>
+			<key>leftRectPosition</key>
+			<string>{684,230}</string>
 			<key>name</key>
 			<string>Jenny</string>
-			<key>positionX</key>
-			<integer>474</integer>
-			<key>positionY</key>
-			<integer>640</integer>
-			<key>rightHand</key>
-			<string>Jenny_dx_0001.png</string>
-			<key>rightPositionX</key>
-			<integer>96</integer>
-			<key>rightPositionY</key>
-			<integer>516</integer>
-			<key>rightRectPositionX</key>
-			<integer>124</integer>
-			<key>rightRectPositionY</key>
-			<integer>230</integer>
-			<key>texture</key>
-			<string>Jenny_body_0001.png</string>
-			<key>rightRectCrossPositionX</key>
-			<integer>488</integer>
-			<key>rightRectCrossPositionY</key>
-			<integer>296</integer>
-			<key>leftRectCrossPositionX</key>
-			<integer>326</integer>
-			<key>leftRectCrossPositionY</key>
-			<string>296</string>
+			<key>position</key>
+			<string>{474, 640}</string>
+			<key>handName</key>
+			<string>jenny_arm_0001.png</string>
+			<key>rightPosition</key>
+			<string>{96,516]</string>
+			<key>rightRectPosition</key>
+			<string>{124,230}</string>
+			<key>headName</key>
+			<string>jenny_head_0001.png</string>
+			<key>rightRectCrossPosition</key>
+			<string>{488,296}</string>
+			<key>leftRectCrossPosition</key>
+			<string>{326,296}</string>
+			<key>hitNameDxUnder</key>
+			<string>jenny_hit1_0001.png</string>
+			<key>hitNameSxUnder</key>
+			<string>jenny_hit1_0003.png</string>
+			<key>hitNameDxOver</key>
+			<string>jenny_hit2_0001.png</string>
+			<key>hitNameSxOver</key>
+			<string>jenny_hit2_0003.png</string>
+			<key>hitNameDxCrossUnder</key>
+			<string>jenny_hit1_0005.png</string>
+			<key>hitNameSxCrossUnder</key>
+			<string>jenny_hit1_0007.png</string>
+			<key>hitNameDxCrossOver</key>
+			<string>jenny_hit2_0005.png</string>
+			<key>hitNameSxCrossOver</key>
+			<string>jenny_hit2_0007.png</string>
+			<key>leftPositionUnder</key>
+			<string>{,}</string>
+			<key>leftPositionOver</key>
+			<string>{,}</string>
+			<key>rightPositionUnder</key>
+			<string>{,}</string>
+			<key>rightPositionOver</key>
+			<string>{,}</string>
+			<key>rightCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>rightCrossOverPosition</key>
+			<string>{,}</string>
+			<key>leftCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>leftCrossOverPosition</key>
+			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena8</key>
@@ -262,42 +322,58 @@
 		<dict>
 			<key>bpm</key>
 			<integer>160</integer>
-			<key>leftHand</key>
-			<string>bud_sx_0001.png</string>
-			<key>leftPositionX</key>
-			<integer>470</integer>
-			<key>leftPositionY</key>
-			<integer>606</integer>
-			<key>leftRectPositionX</key>
-			<integer>700</integer>
-			<key>leftRectPositionY</key>
-			<integer>170</integer>
+			<key>leftPosition</key>
+			<string>{470,606}</string>
+			<key>leftRectPosition</key>
+			<string>{700,170}</string>
 			<key>name</key>
 			<string>Bud</string>
-			<key>positionX</key>
-			<integer>482</integer>
-			<key>positionY</key>
-			<integer>640</integer>
-			<key>rightHand</key>
-			<string>bud_dx_0001.png</string>
-			<key>rightPositionX</key>
-			<integer>48</integer>
-			<key>rightPositionY</key>
-			<integer>606</integer>
-			<key>rightRectPositionX</key>
-			<integer>100</integer>
-			<key>rightRectPositionY</key>
-			<integer>170</integer>
-			<key>texture</key>
-			<string>bud_body_0001.png</string>
-			<key>rightRectCrossPositionX</key>
-			<integer>132</integer>
-			<key>rightRectCrossPositionY</key>
-			<integer>358</integer>
-			<key>leftRectCrossPositionX</key>
-			<integer>670</integer>
-			<key>leftRectCrossPositionY</key>
-			<string>358</string>
+			<key>position</key>
+			<string>{482,640}</string>
+			<key>handName</key>
+			<string>bud_arm_0001.png</string>
+			<key>rightPosition</key>
+			<string>{48,606}</string>
+			<key>rightRectPosition</key>
+			<string>{100,170}</string>
+			<key>headName</key>
+			<string>bud_head_0001.png</string>
+			<key>rightRectCrossPosition</key>
+			<string>{132,358}</string>
+			<key>leftRectCrossPosition</key>
+			<string>{670,358}</string>
+			<key>hitNameDxUnder</key>
+			<string>bud_hit1_0001.png</string>
+			<key>hitNameSxUnder</key>
+			<string>bud_hit1_0003.png</string>
+			<key>hitNameDxOver</key>
+			<string>bud_hit2_0001.png</string>
+			<key>hitNameSxOver</key>
+			<string>bud_hit2_0003.png</string>
+			<key>hitNameDxCrossUnder</key>
+			<string>bud_hit1_0005.png</string>
+			<key>hitNameSxCrossUnder</key>
+			<string>bud_hit1_0007.png</string>
+			<key>hitNameDxCrossOver</key>
+			<string>bud_hit2_0005.png</string>
+			<key>hitNameSxCrossOver</key>
+			<string>bud_hit2_0007.png</string>
+			<key>leftPositionUnder</key>
+			<string>{,}</string>
+			<key>leftPositionOver</key>
+			<string>{,}</string>
+			<key>rightPositionUnder</key>
+			<string>{,}</string>
+			<key>rightPositionOver</key>
+			<string>{,}</string>
+			<key>rightCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>rightCrossOverPosition</key>
+			<string>{,}</string>
+			<key>leftCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>leftCrossOverPosition</key>
+			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena10</key>
@@ -308,42 +384,58 @@
 		<dict>
 			<key>bpm</key>
 			<integer>160</integer>
-			<key>leftHand</key>
-			<string>JeanPaul_sx_0001.png</string>
-			<key>leftPositionX</key>
-			<integer>286</integer>
-			<key>leftPositionY</key>
-			<integer>531</integer>
-			<key>leftRectPositionX</key>
-			<integer>672</integer>
-			<key>leftRectPositionY</key>
-			<integer>250</integer>
+			<key>leftPosition</key>
+			<string>{286,531}</string>
+			<key>leftRectPosition</key>
+			<string>{672,250}</string>
 			<key>name</key>
 			<string>JeanPaul</string>
-			<key>positionX</key>
-			<integer>466</integer>
-			<key>positionY</key>
-			<integer>640</integer>
-			<key>rightHand</key>
-			<string>JeanPaul_dx_0001.png</string>
-			<key>rightPositionX</key>
-			<integer>46</integer>
-			<key>rightPositionY</key>
-			<integer>531</integer>
-			<key>rightRectPositionX</key>
-			<integer>94</integer>
-			<key>rightRectPositionY</key>
-			<integer>250</integer>
-			<key>texture</key>
-			<string>JeanPaul_body_0001.png</string>
-			<key>rightRectCrossPositionX</key>
-			<integer>480</integer>
-			<key>rightRectCrossPositionY</key>
-			<integer>360</integer>
+			<key>position</key>
+			<string>{466,640}</string>
+			<key>handName</key>
+			<string>jeanPaul_arm_0001.png</string>
+			<key>rightPosition</key>
+			<string>{46,531}</string>
+			<key>rightRectPosition</key>
+			<string>{94,250}</string>
+			<key>headName</key>
+			<string>jeanPaul_head_0001.png</string>
+			<key>rightRectCrossPosition</key>
+			<string>{480,360}</string>
 			<key>leftRectCrossPositionX</key>
-			<integer>288</integer>
-			<key>leftRectCrossPositionY</key>
-			<string>360</string>
+			<string>{288,360}</string>
+			<key>hitNameDxUnder</key>
+			<string>jeanPaul_hit1_0001.png</string>
+			<key>hitNameSxUnder</key>
+			<string>jeanPaul_hit1_0003.png</string>
+			<key>hitNameDxOver</key>
+			<string>jeanPaul_hit2_0001.png</string>
+			<key>hitNameSxOver</key>
+			<string>jeanPaul_hit2_0003.png</string>
+			<key>hitNameDxCrossUnder</key>
+			<string>jeanPaul_hit1_0005.png</string>
+			<key>hitNameSxCrossUnder</key>
+			<string>jeanPaul_hit1_0007.png</string>
+			<key>hitNameDxCrossOver</key>
+			<string>jeanPaul_hit2_0005.png</string>
+			<key>hitNameSxCrossOver</key>
+			<string>jeanPaul_hit2_0007.png</string>
+			<key>leftPositionUnder</key>
+			<string>{,}</string>
+			<key>leftPositionOver</key>
+			<string>{,}</string>
+			<key>rightPositionUnder</key>
+			<string>{,}</string>
+			<key>rightPositionOver</key>
+			<string>{,}</string>
+			<key>rightCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>rightCrossOverPosition</key>
+			<string>{,}</string>
+			<key>leftCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>leftCrossOverPosition</key>
+			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena11</key>
@@ -354,42 +446,58 @@
 		<dict>
 			<key>bpm</key>
 			<integer>160</integer>
-			<key>leftHand</key>
-			<string>steven_sx_0001.png</string>
-			<key>leftPositionX</key>
-			<integer>476</integer>
-			<key>leftPositionY</key>
-			<integer>600</integer>
-			<key>leftRectPositionX</key>
-			<integer>690</integer>
-			<key>leftRectPositionY</key>
-			<integer>354</integer>
+			<key>leftPosition</key>
+			<string>{476,600}</string>
+			<key>leftRectPosition</key>
+			<string>{690,354}</string>
 			<key>name</key>
 			<string>Bitonti</string>
-			<key>positionX</key>
-			<integer>483</integer>
-			<key>positionY</key>
-			<integer>640</integer>
-			<key>rightHand</key>
-			<string>steven_dx_0001.png</string>
-			<key>rightPositionX</key>
-			<integer>48</integer>
-			<key>rightPositionY</key>
-			<integer>600</integer>
-			<key>rightRectPositionX</key>
-			<integer>116</integer>
-			<key>rightRectPositionY</key>
-			<integer>354</integer>
-			<key>texture</key>
-			<string>steven_body_0001.png</string>
-			<key>rightRectCrossPositionX</key>
-			<integer>116</integer>
-			<key>rightRectCrossPositionY</key>
-			<integer>162</integer>
-			<key>leftRectCrossPositionX</key>
-			<integer>690</integer>
-			<key>leftRectCrossPositionY</key>
-			<string>162</string>
+			<key>position</key>
+			<string>{483,640}</string>
+			<key>handName</key>
+			<string>steven_arm_0001.png</string>
+			<key>rightPosition</key>
+			<string>{48,600}</string>
+			<key>rightRectPosition</key>
+			<string>{116,354}</string>
+			<key>headName</key>
+			<string>steven_head_0001.png</string>
+			<key>rightRectCrossPosition</key>
+			<string>{116,162}</string>
+			<key>leftRectCrossPosition</key>
+			<string>{690,162}</string>
+			<key>hitNameDxUnder</key>
+			<string>steven_hit1_0001.png</string>
+			<key>hitNameSxUnder</key>
+			<string>steven_hit1_0003.png</string>
+			<key>hitNameDxOver</key>
+			<string>steven_hit2_0001.png</string>
+			<key>hitNameSxOver</key>
+			<string>steven_hit2_0003.png</string>
+			<key>hitNameDxCrossUnder</key>
+			<string>steven_hit1_0005.png</string>
+			<key>hitNameSxCrossUnder</key>
+			<string>steven_hit1_0007.png</string>
+			<key>hitNameDxCrossOver</key>
+			<string>steven_hit2_0005.png</string>
+			<key>hitNameSxCrossOver</key>
+			<string>steven_hit2_0007.png</string>
+			<key>leftPositionUnder</key>
+			<string>{,}</string>
+			<key>leftPositionOver</key>
+			<string>{,}</string>
+			<key>rightPositionUnder</key>
+			<string>{,}</string>
+			<key>rightPositionOver</key>
+			<string>{,}</string>
+			<key>rightCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>rightCrossOverPosition</key>
+			<string>{,}</string>
+			<key>leftCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>leftCrossOverPosition</key>
+			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena12</key>
@@ -400,42 +508,58 @@
 		<dict>
 			<key>bpm</key>
 			<integer>180</integer>
-			<key>leftHand</key>
-			<string>chuck_sx_0001.png</string>
-			<key>leftPositionX</key>
-			<integer>128</integer>
-			<key>leftPositionY</key>
-			<integer>705</integer>
-			<key>leftRectPositionX</key>
-			<integer>560</integer>
-			<key>leftRectPositionY</key>
-			<integer>66</integer>
+			<key>leftPosition</key>
+			<string>{128,705}</string>
+			<key>leftRectPosition</key>
+			<string>{560,66}</string>
 			<key>name</key>
 			<string>Chuck</string>
-			<key>positionX</key>
-			<integer>514</integer>
-			<key>positionY</key>
-			<integer>576</integer>
-			<key>rightHand</key>
-			<string>chuck_dx_0001.png</string>
-			<key>rightPositionX</key>
-			<integer>240</integer>
-			<key>rightPositionY</key>
-			<integer>705</integer>
-			<key>rightRectPositionX</key>
-			<integer>302</integer>
-			<key>rightRectPositionY</key>
-			<integer>66</integer>
-			<key>texture</key>
-			<string>chuck_body_0001.png</string>
-			<key>rightRectCrossPositionX</key>
-			<integer>664</integer>
-			<key>rightRectCrossPositionY</key>
-			<integer>174</integer>
-			<key>leftRectCrossPositionX</key>
-			<integer>198</integer>
-			<key>leftRectCrossPositionY</key>
-			<string>174</string>
+			<key>position</key>
+			<string>{514,576}</string>
+			<key>handName</key>
+			<string>chuck_arm_0001.png</string>
+			<key>rightPosition</key>
+			<string>{240,705}</string>
+			<key>rightRectPosition</key>
+			<string>{302,66}</string>
+			<key>headName</key>
+			<string>chuck_head_0001.png</string>
+			<key>rightRectCrossPosition</key>
+			<string>{664,174}</string>
+			<key>leftRectCrossPosition</key>
+			<string>{198,174}</string>
+			<key>hitNameDxUnder</key>
+			<string>chuck_hit1_0001.png</string>
+			<key>hitNameSxUnder</key>
+			<string>chuck_hit1_0003.png</string>
+			<key>hitNameDxOver</key>
+			<string>chuck_hit2_0001.png</string>
+			<key>hitNameSxOver</key>
+			<string>chuck_hit2_0003.png</string>
+			<key>hitNameDxCrossUnder</key>
+			<string>chuck_hit1_0005.png</string>
+			<key>hitNameSxCrossUnder</key>
+			<string>chuck_hit1_0007.png</string>
+			<key>hitNameDxCrossOver</key>
+			<string>chuck_hit2_0005.png</string>
+			<key>hitNameSxCrossOver</key>
+			<string>chuck_hit2_0007.png</string>
+			<key>leftPositionUnder</key>
+			<string>{,}</string>
+			<key>leftPositionOver</key>
+			<string>{,}</string>
+			<key>rightPositionUnder</key>
+			<string>{,}</string>
+			<key>rightPositionOver</key>
+			<string>{,}</string>
+			<key>rightCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>rightCrossOverPosition</key>
+			<string>{,}</string>
+			<key>leftCrossUnderPosition</key>
+			<string>{,}</string>
+			<key>leftCrossOverPosition</key>
+			<string>{,}</string>
 		</dict>
 	</dict>
 </dict>

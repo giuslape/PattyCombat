@@ -322,6 +322,8 @@
 
 -(void)onEnterTransitionDidFinish{
     
+    [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
+
     id delay = [CCDelayTime actionWithDuration:0.5];
     
     id func = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
@@ -331,9 +333,6 @@
     [self runAction:seq];
     
     self.isTouchEnabled = TRUE;
-
-    [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
-
 }
 
 -(void)sendAchievementsForLevel:(int)currentLevel{
@@ -488,6 +487,8 @@
 
     _bestScore         = [[GameManager sharedGameManager] bestScore];
     
+    // Add Label total score
+    
     labelTotalScore    = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",_totalGameScore] fntFile:FONTFEEDBACK];
     
     [labelTotalScore setAnchorPoint:ccp(1, 0)];
@@ -495,6 +496,8 @@
     [labelTotalScore setPosition:ccp(size.width * 0.85f,size.height* 0.4f)];
     
     [self addChild:labelTotalScore z:kLabelTotalLevelScoreZValue tag:kLabelTotalLevelScoreTagValue];
+    
+    // Variables to scroll the score 
     
     _scoreUp = 0;
     
@@ -504,11 +507,15 @@
     
     int gameTime     = [[GameManager sharedGameManager] gameTime];
     
+    // Time bonus (also 0)
+    
     _timeBonus = lrint(roundf((gameTime - _elapsedTime) * 20));
 
     _totalGameScore += _currentLevelScore + _timeBonus;
     
     _scoreUpTotalScore = _totalGameScore;
+    
+    //  Total Game Score
         
     int score = (_thresholdReached) ? _totalGameScore : _totalGameScore - _currentLevelScore - _timeBonus;
     

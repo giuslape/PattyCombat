@@ -43,7 +43,6 @@
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];    
-    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
     
     _spriteBatchNode = nil;
     

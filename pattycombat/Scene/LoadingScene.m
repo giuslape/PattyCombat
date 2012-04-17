@@ -44,6 +44,8 @@
 		[self addChild:loading z:1 tag:1];
 		
         [self scheduleOnce:@selector(loadScene:) delay:0.1];
+        
+        [loading setPosition:ccp(-loading.contentSize.width, -loading.contentSize.height)];
 	}
 	
 	return self;

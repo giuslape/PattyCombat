@@ -47,7 +47,7 @@
     
     self.player = nil;
     self.hudLayer = nil;
-    
+        
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
@@ -107,13 +107,11 @@
 
 -(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score{
     
-
     self.isTouchEnabled = FALSE;
 
     CGSize size = [[CCDirectorIOS sharedDirector] winSize];
     
     [self unscheduleAllSelectors];
-    
     
     [[GameManager sharedGameManager]  stopBackgroundMusic];
     [[GameManager sharedGameManager]  setCurrentScore:[score intValue]];
@@ -264,6 +262,8 @@
         
         id dao = [GameManager sharedGameManager].dao;
         
+        CGSize size = [[CCDirectorIOS sharedDirector]winSize];
+
         // Load Scene
         
         NSDictionary* sceneObjects = [dao loadScene:[[GameManager sharedGameManager] currentLevel]];
@@ -279,19 +279,13 @@
         NSDictionary* playerSettings = [sceneObjects objectForKey:@"player"];
         
         _bpm = [[playerSettings objectForKey:@"bpm"] intValue];
-        
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-        
+                
         _player = [Player playerWithDictionary:playerSettings];
         
         [self addChild:_player z:kPlayerZValue tag:kPlayerTagValue];
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-        
         [_player setDelegate:self];
-        
-        CGSize size = [[CCDirectorIOS sharedDirector]winSize];
-        
+
         CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Get the Rhythm" fntFile:FONTHIGHSCORES];
         [self addChild:label z:kLabelReadyZValue tag:kLabelReadyTagValue];
         [label setPosition:ccp(size.width/2, size.height/2)];
@@ -320,18 +314,20 @@
             
         }
         
+        [self scheduleOnce:@selector(startBackgroundMusic:) delay:0.5f];
         
     }
     return self;
 }
 
--(void)onEnterTransitionDidFinish{
+
+-(void)startBackgroundMusic:(ccTime)delta{
     
+    [self unschedule:_cmd];
     [[GameManager sharedGameManager] playBackgroundTrack:backgroundTrack];
-    [self schedule:@selector(countDown:) interval:0.01];
-
+    [self schedule:@selector(countDown:) interval:0.001];
+    
 }
-
 
 // Count Down
 

@@ -22,14 +22,11 @@
         
         if (backgroundName) {
             
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
-        CCSprite* background = [CCSprite spriteWithFile:backgroundName];
-        
-        background.position = CGPointMake(size.width/2, size.height/2);
-        [self addChild:background z:1 tag:10];
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+            CCSprite* background = [CCSprite spriteWithFile:backgroundName];
+            background.position = CGPointMake(size.width/2, size.height/2);
+            [self addChild:background z:1 tag:10];
              
-    }
+        }
     }
     return self;
 }

@@ -200,7 +200,7 @@ static GameManager* _sharedGameManager = nil;
             result = @"Maa Sallo";
             break;
         case 6:
-            result = @"Jocopoco";
+            result = @"Jocopoco Majoco";
             break;
         case 7:
             result = @"Jenny Lava";
@@ -212,7 +212,7 @@ static GameManager* _sharedGameManager = nil;
             result = @"Jean Paul";
             break;
         case 11:
-            result = @"Steven";
+            result = @"Steven Bitonti";
             break;
         case 12:
             result = @"Chuck";
@@ -229,34 +229,34 @@ static GameManager* _sharedGameManager = nil;
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 43;
+            _gameTime = 66;
             break;
         case 2:
-            _gameTime = 43;
+            _gameTime = 74;
             break;
         case 3:
-            _gameTime = 43;
+            _gameTime = 75;
             break;
         case 5:
-            _gameTime = 43;
+            _gameTime = 64;
             break;
         case 6:
-            _gameTime = 43;
+            _gameTime = 64;
             break;
         case 7:
-            _gameTime = 43;
+            _gameTime = 65;
             break;
         case 8:
-            _gameTime = 43;
+            _gameTime = 56;
             break;
         case 10:
-            _gameTime = 43;
+            _gameTime = 57;
             break;
         case 11:
-            _gameTime = 43;
+            _gameTime = 56;
             break;
         case 12:
-            _gameTime = 43;
+            _gameTime = 50;
             break;
         default:
             break;

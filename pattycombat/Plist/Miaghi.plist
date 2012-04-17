@@ -9,7 +9,7 @@
 		<key>delay</key>
 		<real>0.3</real>
 		<key>filenamePrefix</key>
-		<string>miaghi_body_00</string>
+		<string>miaghi_head_00</string>
 	</dict>
 	<key>bodyFeedErr</key>
 	<dict>
@@ -18,61 +18,70 @@
 		<key>delay</key>
 		<real>0.3</real>
 		<key>filenamePrefix</key>
-		<string>miaghi_body_00</string>
+		<string>miaghi_head_00</string>
 	</dict>
-	<key>manoDestraApre</key>
+	<key>manoApre</key>
 	<dict>
 		<key>animationFrames</key>
 		<string>01,02,03</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>miaghi_dx_00</string>
+		<string>miaghi_arm_00</string>
 	</dict>
-	<key>manoDestraChiude</key>
+	<key>manoChiude</key>
 	<dict>
 		<key>animationFrames</key>
 		<string>04,01</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>miaghi_dx_00</string>
+		<string>miaghi_arm_00</string>
 	</dict>
-	<key>manoDestraColpita</key>
+	<key>manoColpita</key>
 	<dict>
 		<key>animationFrames</key>
 		<string>05,06</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>miaghi_dx_00</string>
+		<string>miaghi_arm_00</string>
 	</dict>
-	<key>manoSinistraApre</key>
+	<key>manoDestraHitUnder</key>
 	<dict>
 		<key>animationFrames</key>
-		<string>01,02,03</string>
+		<string>01,02</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>miaghi_sx_00</string>
+		<string>miaghi_hit1_00</string>
 	</dict>
-	<key>manoSinistraChiude</key>
+	<key>manoDestraHitOver</key>
 	<dict>
 		<key>animationFrames</key>
-		<string>04,01</string>
+		<string>01,02</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>miaghi_sx_00</string>
+		<string>miaghi_hit2_00</string>
 	</dict>
-	<key>manoSinistraColpita</key>
+	<key>manoSinistraHitUnder</key>
 	<dict>
 		<key>animationFrames</key>
-		<string>05,06</string>
+		<string>03,04</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>miaghi_sx_00</string>
+		<string>miaghi_hit1_00</string>
+	</dict>
+	<key>manoSinistraHitOver</key>
+	<dict>
+		<key>animationFrames</key>
+		<string>03,04</string>
+		<key>delay</key>
+		<real>0.08</real>
+		<key>filenamePrefix</key>
+		<string>miaghi_hit2_00</string>
 	</dict>
 </dict>
 </plist>
