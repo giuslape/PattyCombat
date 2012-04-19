@@ -272,8 +272,6 @@
 		2061002E15400B82002A9D04 /* JennyPlayer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2061002C15400B82002A9D04 /* JennyPlayer.plist */; };
 		2061003015400CDC002A9D04 /* bud_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061002F15400CDC002A9D04 /* bud_bg.png */; };
 		2061003215400E9D002A9D04 /* bud_head_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061003115400E9D002A9D04 /* bud_head_0001.png */; };
-		2061003515400ECD002A9D04 /* BudPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061003315400ECD002A9D04 /* BudPlayer.png */; };
-		2061003615400ECD002A9D04 /* BudPlayer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2061003415400ECD002A9D04 /* BudPlayer.plist */; };
 		2061003915400F45002A9D04 /* BudHit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061003715400F45002A9D04 /* BudHit.png */; };
 		2061003A15400F45002A9D04 /* BudHit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2061003815400F45002A9D04 /* BudHit.plist */; };
 		2061FF2A1539BBDE002A9D04 /* MiaghiPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061FF281539BBDE002A9D04 /* MiaghiPlayer.png */; };
@@ -314,6 +312,8 @@
 		20B695EB1538706A004B1DFE /* loop_memorize.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 20B695EA1538706A004B1DFE /* loop_memorize.mp3 */; };
 		20B695F215387EE9004B1DFE /* IntroButtAndFeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B695F015387EE9004B1DFE /* IntroButtAndFeed.png */; };
 		20B695F315387EE9004B1DFE /* IntroButtAndFeed.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20B695F115387EE9004B1DFE /* IntroButtAndFeed.plist */; };
+		20B7BAC1154011DC00C34021 /* BudPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BABF154011DC00C34021 /* BudPlayer.png */; };
+		20B7BAC2154011DC00C34021 /* BudPlayer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BAC0154011DC00C34021 /* BudPlayer.plist */; };
 		20C6147D1537312C0053E4FF /* FinalScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C6147C1537312B0053E4FF /* FinalScene.m */; };
 		20C614801537314C0053E4FF /* FinalSceneLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C6147F1537314B0053E4FF /* FinalSceneLayer.m */; };
 		20E4EDF1152B1FEF0048F031 /* intro_btn_dx_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E4EDEF152B1FEE0048F031 /* intro_btn_dx_02.png */; };
@@ -790,8 +790,6 @@
 		2061002C15400B82002A9D04 /* JennyPlayer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JennyPlayer.plist; sourceTree = "<group>"; };
 		2061002F15400CDC002A9D04 /* bud_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bud_bg.png; sourceTree = "<group>"; };
 		2061003115400E9D002A9D04 /* bud_head_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bud_head_0001.png; sourceTree = "<group>"; };
-		2061003315400ECD002A9D04 /* BudPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BudPlayer.png; sourceTree = "<group>"; };
-		2061003415400ECD002A9D04 /* BudPlayer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BudPlayer.plist; sourceTree = "<group>"; };
 		2061003715400F45002A9D04 /* BudHit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BudHit.png; sourceTree = "<group>"; };
 		2061003815400F45002A9D04 /* BudHit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BudHit.plist; sourceTree = "<group>"; };
 		2061FF281539BBDE002A9D04 /* MiaghiPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiaghiPlayer.png; sourceTree = "<group>"; };
@@ -837,6 +835,8 @@
 		20B695EA1538706A004B1DFE /* loop_memorize.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = loop_memorize.mp3; sourceTree = "<group>"; };
 		20B695F015387EE9004B1DFE /* IntroButtAndFeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IntroButtAndFeed.png; sourceTree = "<group>"; };
 		20B695F115387EE9004B1DFE /* IntroButtAndFeed.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IntroButtAndFeed.plist; sourceTree = "<group>"; };
+		20B7BABF154011DC00C34021 /* BudPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BudPlayer.png; sourceTree = "<group>"; };
+		20B7BAC0154011DC00C34021 /* BudPlayer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BudPlayer.plist; sourceTree = "<group>"; };
 		20C6147B1537312A0053E4FF /* FinalScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalScene.h; sourceTree = "<group>"; };
 		20C6147C1537312B0053E4FF /* FinalScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalScene.m; sourceTree = "<group>"; };
 		20C6147E1537314A0053E4FF /* FinalSceneLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalSceneLayer.h; sourceTree = "<group>"; };
@@ -1733,10 +1733,10 @@
 		2015CD851521B35400F3AE56 /* Scena7 */ = {
 			isa = PBXGroup;
 			children = (
+				20B7BABF154011DC00C34021 /* BudPlayer.png */,
+				20B7BAC0154011DC00C34021 /* BudPlayer.plist */,
 				2061003715400F45002A9D04 /* BudHit.png */,
 				2061003815400F45002A9D04 /* BudHit.plist */,
-				2061003315400ECD002A9D04 /* BudPlayer.png */,
-				2061003415400ECD002A9D04 /* BudPlayer.plist */,
 				2061003115400E9D002A9D04 /* bud_head_0001.png */,
 				2061002F15400CDC002A9D04 /* bud_bg.png */,
 			);
@@ -2131,10 +2131,10 @@
 				2061002E15400B82002A9D04 /* JennyPlayer.plist in Resources */,
 				2061003015400CDC002A9D04 /* bud_bg.png in Resources */,
 				2061003215400E9D002A9D04 /* bud_head_0001.png in Resources */,
-				2061003515400ECD002A9D04 /* BudPlayer.png in Resources */,
-				2061003615400ECD002A9D04 /* BudPlayer.plist in Resources */,
 				2061003915400F45002A9D04 /* BudHit.png in Resources */,
 				2061003A15400F45002A9D04 /* BudHit.plist in Resources */,
+				20B7BAC1154011DC00C34021 /* BudPlayer.png in Resources */,
+				20B7BAC2154011DC00C34021 /* BudPlayer.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
