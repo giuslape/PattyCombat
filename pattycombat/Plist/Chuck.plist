@@ -77,7 +77,7 @@
 	<key>manoSinistraHitUnder</key>
 	<dict>
 		<key>animationFrames</key>
-		<string>03,04</string>
+		<string>05,06</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
@@ -86,7 +86,7 @@
 	<key>manoSinistraHitOver</key>
 	<dict>
 		<key>animationFrames</key>
-		<string>03,04</string>
+		<string>05,06</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
@@ -95,7 +95,7 @@
 	<key>manoDestraCrossHitUnder</key>
 	<dict>
 		<key>animationFrames</key>
-		<string>05,06</string>
+		<string>03,04</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
@@ -104,7 +104,7 @@
 	<key>manoDestraCrossHitOver</key>
 	<dict>
 		<key>animationFrames</key>
-		<string>05,06</string>
+		<string>03,04</string>
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>

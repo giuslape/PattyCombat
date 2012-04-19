@@ -311,7 +311,7 @@
 			<key>name</key>
 			<string>JeanPaul</string>
 			<key>position</key>
-			<string>{466,640}</string>
+			<string>{466,170}</string>
 			<key>handName</key>
 			<string>jeanPaul_arm_0001.png</string>
 			<key>rightPosition</key>
@@ -322,7 +322,7 @@
 			<string>jeanPaul_head_0001.png</string>
 			<key>rightRectCrossPosition</key>
 			<string>{480,360}</string>
-			<key>leftRectCrossPositionX</key>
+			<key>leftRectCrossPosition</key>
 			<string>{288,360}</string>
 			<key>hitNameDxUnder</key>
 			<string>jeanPaul_hit1_0001.png</string>
@@ -357,7 +357,7 @@
 			<key>name</key>
 			<string>Bitonti</string>
 			<key>position</key>
-			<string>{483,640}</string>
+			<string>{483,176}</string>
 			<key>handName</key>
 			<string>steven_arm_0001.png</string>
 			<key>rightPosition</key>

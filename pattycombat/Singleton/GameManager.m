@@ -554,7 +554,7 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            _currentLevel = 8;
+            _currentLevel = 10;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;
@@ -572,14 +572,14 @@ static GameManager* _sharedGameManager = nil;
             if (_currentLevel == 8) {
                 
                 isBonusLevel = TRUE;
-                sceneToRun = [CarScene node];
+                sceneToRun = [TvScene node];
                 currentScene = kBonusLevel2;
                 break;
             }
             if (_currentLevel == 12) {
                 
                 isBonusLevel = TRUE;
-                sceneToRun = [TvScene  node];
+                sceneToRun = [CarScene  node];
                 currentScene = kBonusLevel3;
                 break;
             }
