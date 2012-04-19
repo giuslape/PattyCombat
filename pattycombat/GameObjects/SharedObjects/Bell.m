@@ -17,6 +17,7 @@
 
 - (void)dealloc 
 {
+    _delegate = nil;
     NSLog(@"%@", NSStringFromSelector(_cmd)); 
 }
 

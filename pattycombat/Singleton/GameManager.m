@@ -129,6 +129,9 @@ static GameManager* _sharedGameManager = nil;
         case kBonusLevel2:
             result = @"kBonusLevel2";
             break;
+        case kBonusLevel3:
+            result = @"kBonusLevel3";
+            break;
         case kGamelevelFinal:
             break;
         default:
@@ -554,7 +557,7 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            _currentLevel = 12;
+            _currentLevel = 0;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;

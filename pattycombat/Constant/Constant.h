@@ -177,6 +177,8 @@
 #define kScore 1
 #define kWallTagValue 1
 #define kWallZValue 1
+#define kTvZValue 1
+#define kTvTagValue 1
 #define kTapForProgress 20
 #define MaxZOrder 100
 #define MinZOrder 2

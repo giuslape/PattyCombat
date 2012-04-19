@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "BonusLevel.h"
 
-@interface TvScene : BonusLevel {
+@interface TvScene : CCScene {
     
 }
 

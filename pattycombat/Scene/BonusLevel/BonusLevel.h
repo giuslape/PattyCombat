@@ -10,12 +10,13 @@
 #import "cocos2d.h"
 #import "CommonProtocols.h"
 #import "Constant.h"
+#import "Bell.h"
 
 #define kAnimationTouch 100
 #define kHandNext 103
 #define kLabelCountDown 300
 
-@interface BonusLevel : CCLayer <GameplayLayerDelegate> {
+@interface BonusLevel : CCLayer <GameplayLayerDelegate, BellDelegate> {
  
     CCSpriteBatchNode* spriteBatchNode;
     

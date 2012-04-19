@@ -7,9 +7,7 @@
 //
 
 #import "WallLayer.h"
-#import "Constant.h"
 #import "GameManager.h"
-#import "GameCharacter.h"
 
 
 
@@ -120,16 +118,12 @@
     
     CGRect myBoundingBox = [self adjustBoundingBox];
     
-    CCSprite* hand = (CCSprite *)[self getChildByTag:kHandNext];
-    
-    if(CGRectContainsPoint([hand boundingBox], location)){ 
+    if (isFinish){
         
-        self.isTouchEnabled = FALSE;
-        [[GameManager sharedGameManager]stopBackgroundMusic];
-        [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
+        scoreUp = totalScore + score - 1;
         return YES;
     }
-        
+
     if (CGRectContainsPoint(myBoundingBox, location) && !isFinish) {
         
         [self updateWall:location];
@@ -137,9 +131,7 @@
         return YES;
         
     } 
-    
-    if (isFinish)scoreUp = totalScore + score - 1;
-    
+        
     return NO;
 }
 
@@ -176,12 +168,16 @@
     
     CCSprite * temp = [CCSprite spriteWithFile:@"muretto_touch_0001.png"];
 
-    [temp runAction:[CCAnimate actionWithAnimation:touchAnimation]];
+    [self addChild:temp z:2 tag:kAnimationTouch];
     
     [temp setPosition:location];
     
-    [self addChild:temp z:2 tag:kAnimationTouch];
+    CCCallBlock * block = [CCCallBlock actionWithBlock:^{
+        
+        [self removeChild:temp cleanup:YES];
+    }];
     
+    [temp runAction:[CCSequence actionOne:[CCAnimate actionWithAnimation:touchAnimation] two:block]];    
 }
 
 

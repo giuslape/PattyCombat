@@ -7,7 +7,6 @@
 //
 
 #import "BonusLevel.h"
-#import "Bell.h"
 #import "GameManager.h"
 
 
@@ -42,7 +41,7 @@
                       atLocation:ccp(410, 295)
                       withZValue:kLabelScoreZValue];
         
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Ready" fntFile:FONTHIGHSCORES];
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Destroy!!!" fntFile:FONTHIGHSCORES];
         [self addChild:label z:2 tag:kLabelCountDown];
         [label setPosition:ccp(size.width/2, size.height/2)];
         
@@ -61,12 +60,15 @@
         scoreUp = totalScore;
         
         CCSprite* handNext = [CCSprite spriteWithFile:@"next_btn.png"];
-        [handNext setPosition:ccp (size.width - handNext.boundingBox.size.width , handNext.boundingBox.size.height)];
-        [handNext setAnchorPoint:ccp(0, 1)];
+        CCMenuItemSprite* itemHand = [CCMenuItemSprite itemWithNormalSprite:handNext selectedSprite:nil target:self selector:@selector(runNewScene)];
+        CCMenu* menu = [CCMenu menuWithItems:itemHand, nil];
+        [menu setPosition:ccp (size.width - handNext.boundingBox.size.width , handNext.boundingBox.size.height)];
+        [menu setAnchorPoint:ccp(0, 1)];
         
-        [self addChild:handNext z:3 tag:kHandNext];
+        [self addChild:menu z:3 tag:kHandNext];
         
-        handNext.opacity = 0;
+        menu.opacity = 0;
+        menu.enabled = FALSE;
         
     }
     return self;
@@ -108,6 +110,8 @@
         [spriteBatchNode addChild:bell z:ZValue tag:kBellTagValue];
         
         [bell setPosition:spawnLocation];
+        
+        [bell setDelegate:self];
     }
     
     if (objectType == kObjectTypeScoreLabel) {
@@ -141,13 +145,11 @@
         
         [self unschedule:_cmd];
         
-        CCSprite* handNext = [CCSprite spriteWithFile:@"next_btn.png"];
-        [handNext setPosition:ccp (size.width - handNext.boundingBox.size.width , handNext.boundingBox.size.height)];
-        [handNext setAnchorPoint:ccp(0, 1)];
+        CCMenu* menu = (CCMenu *)[self getChildByTag:kHandNext];
         
-        [self addChild:handNext z:3 tag:kHandNext];
-        
-        
+        menu.opacity = 255;
+        menu.enabled = YES;
+                
         [[GameManager sharedGameManager] setTotalScore:scoreUp];
         
     }
@@ -158,63 +160,8 @@
 {
     
     GameCharacter* tempChar = (GameCharacter *)[spriteBatchNode getChildByTag:kBellTagValue];
-    
-    CCSprite* sprite = (CCSprite *)[self getChildByTag:kAnimationTouch];
-    
+        
     [tempChar updateStateWithDeltaTime:delta];
-    
-    if ([sprite numberOfRunningActions] == 0) {
-        
-        [sprite stopAllActions];
-        [sprite removeFromParentAndCleanup:YES];
-    }
-    
-    
-    if (tempChar.characterState == kStateBellFinish)
-    {
-        
-        [self unscheduleUpdate];
-        
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Finish" fntFile:FONTHIGHSCORES];
-        
-        [self addChild:label z:2];
-        
-        [label setPosition:ccp(240,160)];
-        
-        CCArray* arraytemp = [self children];
-        
-        for (CCSprite* temp in arraytemp) {
-            
-            if ([temp tag] == kAnimationTouch ) {
-                
-                [temp stopAllActions];
-                [temp removeFromParentAndCleanup:YES];
-            }
-        }
-        
-        [self removeChildByTag:kLabelScoreTagValue cleanup:YES];
-        
-        CCLabelBMFont* labelFinal = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",score] fntFile:FONTHIGHSCORES];
-        
-        [self addChild:labelFinal z:2 tag:102];
-        
-        [labelFinal setPosition:ccp(240, 220)];
-        
-        CCLabelBMFont * totalScoreLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",totalScore] fntFile:FONTHIGHSCORES];
-        
-        [self addChild:totalScoreLabel z:2 tag:101];
-        
-        [totalScoreLabel setPosition:ccp(240, 190)];
-        
-        id delay = [CCDelayTime actionWithDuration:1];
-        
-        id callFunc = [CCCallBlock actionWithBlock:(^{[self schedule:@selector(updateScore:)];})];
-        
-        id block = [CCCallBlock actionWithBlock:(^{isFinish = TRUE;})];
-        
-        [self runAction:[CCSequence actions:delay,callFunc,block, nil]];
-        
-    }
     
     if (indexSprite >= 6) {
         
@@ -223,6 +170,19 @@
     }
     
 }
+
+#pragma mark -
+#pragma mark ===  Start new Game  ===
+#pragma mark -
+
+-(void)runNewScene{
+    
+    self.isTouchEnabled = FALSE;
+    [[GameManager sharedGameManager]stopBackgroundMusic];
+    [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
+
+}
+
 
 #pragma mark -
 #pragma mark ===  Dealloc  ===
@@ -237,5 +197,38 @@
 
 }
 
+#pragma mark -
+#pragma mark ===  Bell Delegate  ===
+#pragma mark -
+
+-(void)bellDidFinishTime:(Bell *)bell{
+    
+    [self unscheduleUpdate];
+    
+    isFinish = TRUE;
+    
+    CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Finish" fntFile:FONTHIGHSCORES];
+    
+    [self addChild:label z:2];
+    
+    [label setPosition:ccp(240,160)];
+    
+    [self removeChildByTag:kLabelScoreTagValue cleanup:YES];
+    
+    CCLabelBMFont* labelFinal = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",score] fntFile:FONTHIGHSCORES];
+    
+    [self addChild:labelFinal z:2 tag:102];
+    
+    [labelFinal setPosition:ccp(240, 220)];
+    
+    CCLabelBMFont * totalScoreLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",totalScore] fntFile:FONTHIGHSCORES];
+    
+    [self addChild:totalScoreLabel z:2 tag:101];
+    
+    [totalScoreLabel setPosition:ccp(240, 190)];
+        
+    [self schedule:@selector(updateScore:) interval:0.01f repeat:-1 delay:1];
+    
+}
 
 @end

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "Constant.h"
 #import "BonusLevel.h"
 
 @interface CarGamePlayLayer : BonusLevel

@@ -18,7 +18,7 @@
 		<key>WRONGTAP</key>
 		<string>tap_sbagliato.aif</string>
 		<key>PERFECT_TAP</key>
-		<string>tap_3.aif</string>
+		<string>tap_2.aif</string>
 	</dict>
 	<key>kBonusLevel2</key>
 	<dict>
@@ -27,7 +27,16 @@
 		<key>WRONGTAP</key>
 		<string>tap_sbagliato.aif</string>
 		<key>PERFECT_TAP</key>
-		<string>tap_2.mp3</string>
+		<string>tap_2.aif</string>
+	</dict>
+	<key>kBonusLevel3</key>
+	<dict>
+		<key>BELL</key>
+		<string>bell.aif</string>
+		<key>WRONGTAP</key>
+		<string>tap_sbagliato.aif</string>
+		<key>PERFECT_TAP</key>
+		<string>tap_2.aif</string>
 	</dict>
 </dict>
 </plist>

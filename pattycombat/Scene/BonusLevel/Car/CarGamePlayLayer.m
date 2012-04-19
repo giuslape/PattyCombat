@@ -8,7 +8,6 @@
 
 #import "CarGamePlayLayer.h"
 #import "GameManager.h"
-#import "Bell.h"
 
 
 @implementation CarGamePlayLayer
@@ -36,8 +35,6 @@
     
 }
 
-
-
 - (id)init {
     
     self = [super init];
@@ -48,12 +45,9 @@
         CCSprite* pickup = [CCSprite spriteWithFile:@"pickup_0001.png"];
         
         [self addChild:pickup z:kWallZValue tag:kWallTagValue];
-        
-        [pickup setAnchorPoint:ccp(0.5, 0.5)];
-        
+                
         [pickup setPosition:ccp(size.width/2, size.height/2)];
         
-            
         [self initAnimation];
         
     }
@@ -131,12 +125,16 @@
     
     CCSprite * temp = [CCSprite spriteWithFile:@"pickup_touch_0001.png"];
     
-    [temp runAction:[CCAnimate actionWithAnimation:touchAnimation]];
+    [self addChild:temp z:2 tag:kAnimationTouch];
     
     [temp setPosition:location];
     
-    [self addChild:temp z:2 tag:kAnimationTouch];
+    CCCallBlock * block = [CCCallBlock actionWithBlock:^{
+        
+        [self removeChild:temp cleanup:YES];
+    }];
     
+    [temp runAction:[CCSequence actionOne:[CCAnimate actionWithAnimation:touchAnimation] two:block]];    
 }
 
 
@@ -152,17 +150,13 @@
     CGPoint location = [touch locationInView:[touch view]];
     location = [[CCDirector sharedDirector]convertToGL:location];
     
-    CGRect myBoundingBox = [self adjustBoundingBox];
-    
-    CCSprite* hand = (CCSprite *)[self getChildByTag:kHandNext];
-    
-    if(CGRectContainsPoint([hand boundingBox], location)){ 
+    if (isFinish){
         
-        self.isTouchEnabled = FALSE;
-        [[GameManager sharedGameManager]stopBackgroundMusic];
-        [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
+        scoreUp = totalScore + score - 1;
         return YES;
     }
+
+    CGRect myBoundingBox = [self adjustBoundingBox];
     
     if (CGRectContainsPoint(myBoundingBox, location) && !isFinish) {
         
@@ -171,9 +165,7 @@
         return YES;
         
     } 
-    
-    if (isFinish)scoreUp = totalScore + score - 1;
-    
+
     return NO;
 	
 }
