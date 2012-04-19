@@ -72,7 +72,7 @@
             
             [self feedPattern];
             
-            [self scheduleOnce:@selector(changeScene:) delay:4];
+            [self scheduleOnce:@selector(changeScene:) delay:2];
             
             loading.position = CGPointMake(size.width / 2, size.height * 0.6f);
 

@@ -165,7 +165,7 @@ static GameManager* _sharedGameManager = nil;
             result = @"bud";
             break;
         case 10:
-            result = @"JeanPaul";
+            result = @"jeanPaul";
             break;
         case 11:
             result = @"steven";
@@ -554,7 +554,7 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            _currentLevel = 3;
+            _currentLevel = 5;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;
@@ -584,7 +584,7 @@ static GameManager* _sharedGameManager = nil;
                 break;
             }
             _isPerfectForLevel = TRUE;
-            isLastLevel = (_currentLevel == 12) ? TRUE : FALSE;
+            isLastLevel = (_currentLevel == 13) ? TRUE : FALSE;
             patternForLevel = nil;
             patternForLevel = [[NSMutableArray alloc] initWithArray:
                                [self.dao loadPlistForPatternWithLevel:_currentLevel]];

@@ -269,6 +269,10 @@
     
     [leftHand stopAllActions];
     [rightHand stopAllActions];
+    [leftHitOver stopAllActions];
+    [leftHitUnder stopAllActions];
+    [rightHitOver stopAllActions];
+    [rightHitUnder stopAllActions];
 
     NSLog(@"%@", NSStringFromSelector(_cmd));
 
@@ -465,6 +469,7 @@
         [hitAnimationUnderDouble    runAction:actionHitUnderDouble];
         [hitAnimationOver           runAction:actionHitOver];
         [hitAnimationOverDouble     runAction:actionHitOverDouble];
+        
     }else {
         
         [hitAnimationUnder          runAction:actionHitUnder];

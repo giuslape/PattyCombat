@@ -185,12 +185,12 @@
 			<key>name</key>
 			<string>Jocopoco</string>
 			<key>position</key>
-			<string>{480, 640}</string>
+			<string>{474, 176}</string>
 			<key>handName</key>
 			<string>joco_arm_0001.png</string>
 			<key>rightPosition</key>
 			<string>{90,514}</string>
-			<key>rightRectPositionX</key>
+			<key>rightRectPosition</key>
 			<string>{116,316}</string>
 			<key>headName</key>
 			<string>joco_head_0001.png</string>
