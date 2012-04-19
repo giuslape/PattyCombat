@@ -331,6 +331,18 @@
 		20B7BB911540201300C34021 /* BitontiPlayer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BB8F1540201200C34021 /* BitontiPlayer.plist */; };
 		20B7BB94154020AC00C34021 /* BitontiHit.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BB92154020AC00C34021 /* BitontiHit.png */; };
 		20B7BB95154020AC00C34021 /* BitontiHit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BB93154020AC00C34021 /* BitontiHit.plist */; };
+		20B7BB981540247900C34021 /* ChuckPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BB961540247900C34021 /* ChuckPlayer.png */; };
+		20B7BB991540247900C34021 /* ChuckPlayer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BB971540247900C34021 /* ChuckPlayer.plist */; };
+		20B7BB9B1540248200C34021 /* chuck_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BB9A1540248200C34021 /* chuck_bg.png */; };
+		20B7BB9E1540262A00C34021 /* ChuckHit.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BB9C1540262A00C34021 /* ChuckHit.png */; };
+		20B7BB9F1540262A00C34021 /* ChuckHit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BB9D1540262A00C34021 /* ChuckHit.plist */; };
+		20B7BBA1154027C900C34021 /* chuck_arm_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BBA0154027C900C34021 /* chuck_arm_0001.png */; };
+		20B7BBA315402E5900C34021 /* miaghi_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20B7BBA215402E5900C34021 /* miaghi_bg.png */; };
+		20B7BBA415402E8A00C34021 /* miaghi_head_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061FF301539D51A002A9D04 /* miaghi_head_0001.png */; };
+		20B7BBA515402E9100C34021 /* MiaghiHit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061FF321539E7D0002A9D04 /* MiaghiHit.png */; };
+		20B7BBA615402E9100C34021 /* MiaghiHit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2061FF331539E7D0002A9D04 /* MiaghiHit.plist */; };
+		20B7BBA715402E9100C34021 /* MiaghiPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061FF281539BBDE002A9D04 /* MiaghiPlayer.png */; };
+		20B7BBA815402E9100C34021 /* MiaghiPlayer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2061FF291539BBDE002A9D04 /* MiaghiPlayer.plist */; };
 		20C6147D1537312C0053E4FF /* FinalScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C6147C1537312B0053E4FF /* FinalScene.m */; };
 		20C614801537314C0053E4FF /* FinalSceneLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C6147F1537314B0053E4FF /* FinalSceneLayer.m */; };
 /* End PBXBuildFile section */
@@ -774,7 +786,6 @@
 		2061003815400F45002A9D04 /* BudHit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BudHit.plist; sourceTree = "<group>"; };
 		2061FF281539BBDE002A9D04 /* MiaghiPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiaghiPlayer.png; sourceTree = "<group>"; };
 		2061FF291539BBDE002A9D04 /* MiaghiPlayer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MiaghiPlayer.plist; sourceTree = "<group>"; };
-		2061FF2E1539C245002A9D04 /* miaghi_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = miaghi_bg.png; sourceTree = "<group>"; };
 		2061FF301539D51A002A9D04 /* miaghi_head_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = miaghi_head_0001.png; sourceTree = "<group>"; };
 		2061FF321539E7D0002A9D04 /* MiaghiHit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiaghiHit.png; sourceTree = "<group>"; };
 		2061FF331539E7D0002A9D04 /* MiaghiHit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MiaghiHit.plist; sourceTree = "<group>"; };
@@ -829,6 +840,13 @@
 		20B7BB8F1540201200C34021 /* BitontiPlayer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BitontiPlayer.plist; sourceTree = "<group>"; };
 		20B7BB92154020AC00C34021 /* BitontiHit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BitontiHit.png; sourceTree = "<group>"; };
 		20B7BB93154020AC00C34021 /* BitontiHit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BitontiHit.plist; sourceTree = "<group>"; };
+		20B7BB961540247900C34021 /* ChuckPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChuckPlayer.png; sourceTree = "<group>"; };
+		20B7BB971540247900C34021 /* ChuckPlayer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ChuckPlayer.plist; sourceTree = "<group>"; };
+		20B7BB9A1540248200C34021 /* chuck_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chuck_bg.png; sourceTree = "<group>"; };
+		20B7BB9C1540262A00C34021 /* ChuckHit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChuckHit.png; sourceTree = "<group>"; };
+		20B7BB9D1540262A00C34021 /* ChuckHit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ChuckHit.plist; sourceTree = "<group>"; };
+		20B7BBA0154027C900C34021 /* chuck_arm_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chuck_arm_0001.png; sourceTree = "<group>"; };
+		20B7BBA215402E5900C34021 /* miaghi_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = miaghi_bg.png; sourceTree = "<group>"; };
 		20C6147B1537312A0053E4FF /* FinalScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalScene.h; sourceTree = "<group>"; };
 		20C6147C1537312B0053E4FF /* FinalScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalScene.m; sourceTree = "<group>"; };
 		20C6147E1537314A0053E4FF /* FinalSceneLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalSceneLayer.h; sourceTree = "<group>"; };
@@ -1805,10 +1823,10 @@
 		2061FF271539BBC6002A9D04 /* Scena1 */ = {
 			isa = PBXGroup;
 			children = (
+				20B7BBA215402E5900C34021 /* miaghi_bg.png */,
 				2061FF321539E7D0002A9D04 /* MiaghiHit.png */,
 				2061FF331539E7D0002A9D04 /* MiaghiHit.plist */,
 				2061FF301539D51A002A9D04 /* miaghi_head_0001.png */,
-				2061FF2E1539C245002A9D04 /* miaghi_bg.png */,
 				2061FF281539BBDE002A9D04 /* MiaghiPlayer.png */,
 				2061FF291539BBDE002A9D04 /* MiaghiPlayer.plist */,
 			);
@@ -1862,6 +1880,12 @@
 		20B7BB8715401DD400C34021 /* Scena10 */ = {
 			isa = PBXGroup;
 			children = (
+				20B7BBA0154027C900C34021 /* chuck_arm_0001.png */,
+				20B7BB9C1540262A00C34021 /* ChuckHit.png */,
+				20B7BB9D1540262A00C34021 /* ChuckHit.plist */,
+				20B7BB9A1540248200C34021 /* chuck_bg.png */,
+				20B7BB961540247900C34021 /* ChuckPlayer.png */,
+				20B7BB971540247900C34021 /* ChuckPlayer.plist */,
 			);
 			path = Scena10;
 			sourceTree = "<group>";
@@ -2119,6 +2143,18 @@
 				20B7BB911540201300C34021 /* BitontiPlayer.plist in Resources */,
 				20B7BB94154020AC00C34021 /* BitontiHit.png in Resources */,
 				20B7BB95154020AC00C34021 /* BitontiHit.plist in Resources */,
+				20B7BB981540247900C34021 /* ChuckPlayer.png in Resources */,
+				20B7BB991540247900C34021 /* ChuckPlayer.plist in Resources */,
+				20B7BB9B1540248200C34021 /* chuck_bg.png in Resources */,
+				20B7BB9E1540262A00C34021 /* ChuckHit.png in Resources */,
+				20B7BB9F1540262A00C34021 /* ChuckHit.plist in Resources */,
+				20B7BBA1154027C900C34021 /* chuck_arm_0001.png in Resources */,
+				20B7BBA315402E5900C34021 /* miaghi_bg.png in Resources */,
+				20B7BBA415402E8A00C34021 /* miaghi_head_0001.png in Resources */,
+				20B7BBA515402E9100C34021 /* MiaghiHit.png in Resources */,
+				20B7BBA615402E9100C34021 /* MiaghiHit.plist in Resources */,
+				20B7BBA715402E9100C34021 /* MiaghiPlayer.png in Resources */,
+				20B7BBA815402E9100C34021 /* MiaghiPlayer.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2389,8 +2425,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "1357F21E-A7B4-4251-99D7-22F70021D535";
-				"PROVISIONING_PROFILE[sdk=*]" = "1357F21E-A7B4-4251-99D7-22F70021D535";
+				PROVISIONING_PROFILE = "7B829AB2-C60B-4ED3-97C9-83592A916ECD";
+				"PROVISIONING_PROFILE[sdk=*]" = "7B829AB2-C60B-4ED3-97C9-83592A916ECD";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

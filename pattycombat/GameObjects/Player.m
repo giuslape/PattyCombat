@@ -269,10 +269,10 @@
     
     [leftHand stopAllActions];
     [rightHand stopAllActions];
-    [leftHitOver stopAllActions];
-    [leftHitUnder stopAllActions];
-    [rightHitOver stopAllActions];
-    [rightHitUnder stopAllActions];
+    leftHitOver.opacity   = 0;
+    leftHitUnder.opacity  = 0;
+    rightHitOver.opacity  = 0;
+    rightHitUnder.opacity = 0;
 
     NSLog(@"%@", NSStringFromSelector(_cmd));
 

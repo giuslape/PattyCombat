@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>chuck_arm_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{173, 536}, {98, 98}}</string>
+			<key>spriteOffset</key>
+			<string>{-106, -268}</string>
+			<key>spriteSize</key>
+			<string>{98, 98}</string>
+			<key>spriteSourceSize</key>
+			<string>{656, 634}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{496, 382}, {98, 98}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>chuck_arm_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{82, 52}, {178, 576}}</string>
+			<key>spriteOffset</key>
+			<string>{-157, -23}</string>
+			<key>spriteSize</key>
+			<string>{178, 576}</string>
+			<key>spriteSourceSize</key>
+			<string>{656, 634}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {178, 576}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>chuck_arm_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{104, 52}, {156, 512}}</string>
+			<key>spriteOffset</key>
+			<string>{-146, 9}</string>
+			<key>spriteSize</key>
+			<string>{156, 512}</string>
+			<key>spriteSourceSize</key>
+			<string>{656, 634}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{180, 0}, {156, 512}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>chuck_arm_0004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{128, 314}, {132, 314}}</string>
+			<key>spriteOffset</key>
+			<string>{-134, -154}</string>
+			<key>spriteSize</key>
+			<string>{132, 314}</string>
+			<key>spriteSourceSize</key>
+			<string>{656, 634}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{870, 0}, {132, 314}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>chuck_arm_0005.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{104, 66}, {156, 498}}</string>
+			<key>spriteOffset</key>
+			<string>{-146, 2}</string>
+			<key>spriteSize</key>
+			<string>{156, 498}</string>
+			<key>spriteSourceSize</key>
+			<string>{656, 634}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{338, 0}, {156, 498}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>chuck_arm_0007.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{44, 185}, {502, 444}}</string>
+			<key>spriteOffset</key>
+			<string>{-33, -90}</string>
+			<key>spriteSize</key>
+			<string>{502, 444}</string>
+			<key>spriteSourceSize</key>
+			<string>{656, 634}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 578}, {502, 444}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>chuck_arm_0008.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{174, 186}, {372, 380}}</string>
+			<key>spriteOffset</key>
+			<string>{32, -59}</string>
+			<key>spriteSize</key>
+			<string>{372, 380}</string>
+			<key>spriteSourceSize</key>
+			<string>{656, 634}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{496, 0}, {372, 380}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>chuck_arm_0009.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{44, 317}, {226, 312}}</string>
+			<key>spriteOffset</key>
+			<string>{-171, -156}</string>
+			<key>spriteSize</key>
+			<string>{226, 312}</string>
+			<key>spriteSourceSize</key>
+			<string>{656, 634}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{870, 316}, {226, 312}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>chuck_arm_0010.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{174, 188}, {364, 378}}</string>
+			<key>spriteOffset</key>
+			<string>{28, -60}</string>
+			<key>spriteSize</key>
+			<string>{364, 378}</string>
+			<key>spriteSourceSize</key>
+			<string>{656, 634}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{504, 482}, {364, 378}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.5.3</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{2048, 1024}</string>
+		<key>name</key>
+		<string>ChuckPlayer</string>
+		<key>premultipliedAlpha</key>
+		<false/>
+		<key>target</key>
+		<dict>
+			<key>name</key>
+			<string>default</string>
+			<key>textureFileName</key>
+			<string>ChuckPlayer</string>
+			<key>textureFileExtension</key>
+			<string>.png</string>
+			<key>coordinatesFileName</key>
+			<string>ChuckPlayer</string>
+			<key>coordinatesFileExtension</key>
+			<string>.plist</string>
+			<key>premultipliedAlpha</key>
+			<false/>
+		</dict>
+	</dict>
+</dict>
+</plist>

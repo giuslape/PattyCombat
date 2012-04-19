@@ -397,21 +397,21 @@
 			<key>bpm</key>
 			<integer>180</integer>
 			<key>leftPosition</key>
-			<string>{128,705}</string>
+			<string>{92,640}</string>
 			<key>leftRectPosition</key>
 			<string>{560,66}</string>
 			<key>name</key>
 			<string>Chuck</string>
 			<key>position</key>
-			<string>{514,576}</string>
+			<string>{206,640}</string>
 			<key>handName</key>
 			<string>chuck_arm_0001.png</string>
 			<key>rightPosition</key>
-			<string>{240,705}</string>
+			<string>{206,640}</string>
 			<key>rightRectPosition</key>
 			<string>{302,66}</string>
 			<key>headName</key>
-			<string>chuck_head_0001.png</string>
+			<string>chuck_arm_0001.png</string>
 			<key>rightRectCrossPosition</key>
 			<string>{664,174}</string>
 			<key>leftRectCrossPosition</key>

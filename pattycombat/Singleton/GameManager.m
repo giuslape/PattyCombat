@@ -554,7 +554,7 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            _currentLevel = 10;
+            _currentLevel = 12;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;
