@@ -53,19 +53,19 @@
 			<key>bpm</key>
 			<integer>120</integer>
 			<key>leftPosition</key>
-			<string>{472, 516}</string>
+			<string>{476, 514}</string>
 			<key>leftRectPosition</key>
-			<string>{672,230}</string>
+			<string>{678,230}</string>
 			<key>name</key>
 			<string>Crocodile</string>
 			<key>position</key>
-			<string>{474, 640}</string>
+			<string>{480, 154}</string>
 			<key>handName</key>
 			<string>crocodile_arm_0001.png</string>
 			<key>rightPosition</key>
-			<string>{64,516}</string>
+			<string>{70,514}</string>
 			<key>rightRectPosition</key>
-			<string>{114,230}</string>
+			<string>{116,230}</string>
 			<key>headName</key>
 			<string>crocodile_head_0001.png</string>
 			<key>hitNameDxUnder</key>
@@ -76,14 +76,6 @@
 			<string>crocodile_hit2_0001.png</string>
 			<key>hitNameSxOver</key>
 			<string>crocodile_hit2_0003.png</string>
-			<key>leftPositionUnder</key>
-			<string>{,}</string>
-			<key>leftPositionOver</key>
-			<string>{,}</string>
-			<key>rightPositionUnder</key>
-			<string>{,}</string>
-			<key>rightPositionOver</key>
-			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena3</key>
@@ -101,7 +93,7 @@
 			<key>name</key>
 			<string>ChunLi</string>
 			<key>position</key>
-			<string>{478,640}</string>
+			<string>{478,187}</string>
 			<key>handName</key>
 			<string>cinziah_arm_0001.png</string>
 			<key>rightPosition</key>
@@ -130,22 +122,6 @@
 			<string>cinziah_hit2_0005.png</string>
 			<key>hitNameSxCrossOver</key>
 			<string>cinziah_hit2_0007.png</string>
-			<key>leftPositionUnder</key>
-			<string>{,}</string>
-			<key>leftPositionOver</key>
-			<string>{,}</string>
-			<key>rightPositionUnder</key>
-			<string>{,}</string>
-			<key>rightPositionOver</key>
-			<string>{,}</string>
-			<key>rightCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>rightCrossOverPosition</key>
-			<string>{,}</string>
-			<key>leftCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>leftCrossOverPosition</key>
-			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena5</key>
@@ -157,13 +133,13 @@
 			<key>bpm</key>
 			<integer>140</integer>
 			<key>leftPosition</key>
-			<string>{486,524}</string>
+			<string>{485,524}</string>
 			<key>leftRectPosition</key>
 			<string>{694, 116}</string>
 			<key>name</key>
 			<string>Masai</string>
 			<key>position</key>
-			<string>{496,640}</string>
+			<string>{481,132}</string>
 			<key>handName</key>
 			<string>maa_arm_0001.png</string>
 			<key>rightPosition</key>
@@ -192,22 +168,6 @@
 			<string>maa_hit2_0005.png</string>
 			<key>hitNameSxCrossOver</key>
 			<string>maa_hit2_0007.png</string>
-			<key>leftPositionUnder</key>
-			<string>{,}</string>
-			<key>leftPositionOver</key>
-			<string>{,}</string>
-			<key>rightPositionUnder</key>
-			<string>{,}</string>
-			<key>rightPositionOver</key>
-			<string>{,}</string>
-			<key>rightCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>rightCrossOverPosition</key>
-			<string>{,}</string>
-			<key>leftCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>leftCrossOverPosition</key>
-			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena6</key>
@@ -242,14 +202,6 @@
 			<string>joco_hit2_0001.png</string>
 			<key>hitNameSxOver</key>
 			<string>joco_hit2_0003.png</string>
-			<key>leftPositionUnder</key>
-			<string>{,}</string>
-			<key>leftPositionOver</key>
-			<string>{,}</string>
-			<key>rightPositionUnder</key>
-			<string>{,}</string>
-			<key>rightPositionOver</key>
-			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena7</key>
@@ -296,25 +248,9 @@
 			<string>jenny_hit2_0005.png</string>
 			<key>hitNameSxCrossOver</key>
 			<string>jenny_hit2_0007.png</string>
-			<key>leftPositionUnder</key>
-			<string>{,}</string>
-			<key>leftPositionOver</key>
-			<string>{,}</string>
-			<key>rightPositionUnder</key>
-			<string>{,}</string>
-			<key>rightPositionOver</key>
-			<string>{,}</string>
-			<key>rightCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>rightCrossOverPosition</key>
-			<string>{,}</string>
-			<key>leftCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>leftCrossOverPosition</key>
-			<string>{,}</string>
 		</dict>
 	</dict>
-	<key>Scena8</key>
+	<key>Scena9</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>160_bud_music.mp3</string>
@@ -358,22 +294,6 @@
 			<string>bud_hit2_0005.png</string>
 			<key>hitNameSxCrossOver</key>
 			<string>bud_hit2_0007.png</string>
-			<key>leftPositionUnder</key>
-			<string>{,}</string>
-			<key>leftPositionOver</key>
-			<string>{,}</string>
-			<key>rightPositionUnder</key>
-			<string>{,}</string>
-			<key>rightPositionOver</key>
-			<string>{,}</string>
-			<key>rightCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>rightCrossOverPosition</key>
-			<string>{,}</string>
-			<key>leftCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>leftCrossOverPosition</key>
-			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena10</key>
@@ -420,22 +340,6 @@
 			<string>jeanPaul_hit2_0005.png</string>
 			<key>hitNameSxCrossOver</key>
 			<string>jeanPaul_hit2_0007.png</string>
-			<key>leftPositionUnder</key>
-			<string>{,}</string>
-			<key>leftPositionOver</key>
-			<string>{,}</string>
-			<key>rightPositionUnder</key>
-			<string>{,}</string>
-			<key>rightPositionOver</key>
-			<string>{,}</string>
-			<key>rightCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>rightCrossOverPosition</key>
-			<string>{,}</string>
-			<key>leftCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>leftCrossOverPosition</key>
-			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena11</key>
@@ -482,25 +386,9 @@
 			<string>steven_hit2_0005.png</string>
 			<key>hitNameSxCrossOver</key>
 			<string>steven_hit2_0007.png</string>
-			<key>leftPositionUnder</key>
-			<string>{,}</string>
-			<key>leftPositionOver</key>
-			<string>{,}</string>
-			<key>rightPositionUnder</key>
-			<string>{,}</string>
-			<key>rightPositionOver</key>
-			<string>{,}</string>
-			<key>rightCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>rightCrossOverPosition</key>
-			<string>{,}</string>
-			<key>leftCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>leftCrossOverPosition</key>
-			<string>{,}</string>
 		</dict>
 	</dict>
-	<key>Scena12</key>
+	<key>Scena13</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>180_chuck_music.mp3</string>
@@ -544,22 +432,6 @@
 			<string>chuck_hit2_0005.png</string>
 			<key>hitNameSxCrossOver</key>
 			<string>chuck_hit2_0007.png</string>
-			<key>leftPositionUnder</key>
-			<string>{,}</string>
-			<key>leftPositionOver</key>
-			<string>{,}</string>
-			<key>rightPositionUnder</key>
-			<string>{,}</string>
-			<key>rightPositionOver</key>
-			<string>{,}</string>
-			<key>rightCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>rightCrossOverPosition</key>
-			<string>{,}</string>
-			<key>leftCrossUnderPosition</key>
-			<string>{,}</string>
-			<key>leftCrossOverPosition</key>
-			<string>{,}</string>
 		</dict>
 	</dict>
 </dict>

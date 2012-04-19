@@ -15,7 +15,7 @@
 	<key>Scena7</key>
 	<string>sx,dx,sxCross,dxCross,two</string>
 	<key>Scena8</key>
-	<string>sx,dx,sxCross,dxCross,two,two</string>
+	<string>sx,dx,sxCross,dxCross,two,two,sx,dx,two,sxCross</string>
 	<key>Scena10</key>
 	<string>sx,dx,dx,sxCross,dxCross,two,two</string>
 	<key>Scena11</key>

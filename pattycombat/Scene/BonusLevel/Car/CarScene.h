@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface CarScene : CCScene {
-    
-}
+@interface CarScene : CCScene
 
 @end

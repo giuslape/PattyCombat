@@ -389,22 +389,22 @@
             break;
         case kStateRightCrossHandClose:
             action = [CCAnimate actionWithAnimation:manoDestraCrossChiude];
-            [self reorderChild:rightHand z:MinZOrder];
+            [_spriteBatchNode reorderChild:rightHand z:MinZOrder];
             handAnimation = rightHand;
             break;
         case kStateRightCrossHandOpen:
             action = [CCAnimate actionWithAnimation:manoDestraCrossApre];
-            [self reorderChild:rightHand z:MaxZOrder];
+            [_spriteBatchNode reorderChild:rightHand z:MaxZOrder];
             handAnimation = rightHand;
             break;
         case kStateLeftCrossHandClose:
             action = [CCAnimate actionWithAnimation:manoSinistraCrossChiude];
-            [self reorderChild:leftHand z:MinZOrder];
+            [_spriteBatchNode reorderChild:leftHand z:MinZOrder];
             handAnimation = leftHand;
             break;
         case kStateLeftCrossHandOpen:
             action = [CCAnimate actionWithAnimation:manoSinistraCrossApre];
-            [self reorderChild:leftHand z:MaxZOrder];
+            [_spriteBatchNode reorderChild:leftHand z:MaxZOrder];
             handAnimation = leftHand;
             break;
         case kStateRightCrossHandHit:
@@ -484,36 +484,12 @@
 }
 
 
-
 #pragma mark -
 
 -(void)loadHitSpriteWithDictionary:(NSDictionary *)playerSettings{
     
-    // Get position from dictionary
-    
-    CGPoint positionLeftUnder =
-    CGPointFromString([playerSettings objectForKey:@"leftPositionUnder"]);
-    
-    CGPoint positionLeftOver =
-    CGPointFromString([playerSettings objectForKey:@"leftPositionOver"]);
-    
-    CGPoint positionRightUnder = 
-    CGPointFromString([playerSettings objectForKey:@"rightPositionUnder"]);
-    
-    CGPoint positionRightOver =
-    CGPointFromString([playerSettings objectForKey:@"rightPositionOver"]);
-    
-    CGPoint positionRightCrossUnder =
-    CGPointFromString([playerSettings objectForKey:@"rightCrossUnderPosition"]);
-    
-    CGPoint positionRightCrossOver = 
-    CGPointFromString([playerSettings objectForKey:@"rightCrossOverPosition"]);
-    
-    CGPoint positionLeftCrossUnder =
-    CGPointFromString([playerSettings objectForKey:@"leftCrossUnderPosition"]);
-    
-    CGPoint positionLeftCrossOver =
-    CGPointFromString([playerSettings objectForKey:@"leftCrossOverPosition"]);
+    CCSprite* rightHand = (CCSprite *)[_spriteBatchNode getChildByTag:kRightHandTagValue];
+    CCSprite* leftHand  = (CCSprite *)[_spriteBatchNode getChildByTag:kLeftHandTagValue];
     
     // Get name of sprite from dictionary
     
@@ -538,17 +514,17 @@
         
     // Set Position
     
-    [rightHitUnder setPosition:ccp(positionRightUnder.x, positionRightUnder.y)];
-    [rightHitOver  setPosition:ccp(positionRightUnder.x, positionRightOver.y)];
-    [leftHitUnder  setPosition:ccp(positionLeftUnder.x , positionLeftUnder.y)];
-    [leftHitOver   setPosition:ccp(positionLeftOver.x,  positionLeftOver.y)];
+    [rightHitUnder setPosition:rightHand.position];
+    [rightHitOver  setPosition:rightHand.position];
+    [leftHitUnder  setPosition:leftHand.position];
+    [leftHitOver   setPosition:leftHand.position];
     
     // Set anchor point
     
-    [rightHitUnder setAnchorPoint:ccp(1 , 1)];
-    [rightHitOver  setAnchorPoint:ccp(1 , 1)];
-    [leftHitUnder  setAnchorPoint:ccp(1,  1)];
-    [leftHitOver   setAnchorPoint:ccp(1,  1)];
+    [rightHitUnder setAnchorPoint:ccp(0 , 0)];
+    [rightHitOver  setAnchorPoint:ccp(0 , 0)];
+    [leftHitUnder  setAnchorPoint:ccp(0,  0)];
+    [leftHitOver   setAnchorPoint:ccp(0,  0)];
     
     // Add to batchnode
     
@@ -570,11 +546,14 @@
         rightCrossHitUnder.opacity = 0;
         rightCrossHitOver.opacity  = 0;
         
+        rightCrossHitUnder.flipX = YES;
+        rightCrossHitOver.flipX  = YES;
+        
         [_spriteHitUnderBatchNode addChild:rightCrossHitUnder z:kHitRightCrossUnderZValue tag:kHitRightCrossUnderTagValue];
         [_spriteHitOverBatchNode addChild:rightCrossHitOver z:kHitRightCrossOverZValue tag:kHitRightCrossOverTagValue];
         
-        [rightCrossHitUnder setPosition:ccp(positionRightCrossUnder.x, positionRightCrossUnder.y)];
-        [rightCrossHitOver setPosition:ccp(positionRightCrossOver.x, positionRightCrossOver.y)];
+        [rightCrossHitUnder setPosition:rightHand.position];
+        [rightCrossHitOver  setPosition:rightHand.position];
     }
     
     if (manoSinistraCrossApre != nil) {
@@ -588,11 +567,14 @@
         leftCrossHitUnder.opacity = 0;
         leftCrossHitOver.opacity  = 0;
         
+        leftCrossHitUnder.flipX = YES;
+        leftCrossHitOver.flipX  = YES;
+        
         [_spriteHitUnderBatchNode addChild:leftCrossHitUnder z:kHitLeftCrossUnderZValue tag:kHitLeftCrossUnderTagValue];
         [_spriteHitOverBatchNode addChild:leftCrossHitOver z:kHitLeftCrossOverZValue tag:kHitLeftCrossOverTagValue];
         
-        [leftCrossHitUnder setPosition:ccp(positionLeftCrossUnder.x, positionLeftCrossUnder.y)];
-        [leftCrossHitOver  setPosition:ccp(positionLeftCrossOver.x, positionLeftCrossOver.y)];
+        [leftCrossHitUnder setPosition:leftHand.position];
+        [leftCrossHitOver  setPosition:leftHand.position];
         
     }
     
@@ -742,6 +724,7 @@
     
         CCSprite* rightHand =  [CCSprite spriteWithSpriteFrame:
                                 [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:nameHand]];
+        
         rightHand.anchorPoint = ccp(0, 0);
         
         rightHand.isRelativeAnchorPoint = YES;

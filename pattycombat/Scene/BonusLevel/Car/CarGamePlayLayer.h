@@ -9,19 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Constant.h"
-#import "CommonProtocols.h"
+#import "BonusLevel.h"
 
-@interface CarGamePlayLayer : CCLayer <GameplayLayerDelegate>{
-    
-    CCSpriteBatchNode* spriteBatchNode;
-    
-    CCAnimation* touchAnimation;
-    
-    CGSize size;
-    
-}
-
-@property(nonatomic, strong)CCAnimation* touchAnimation;
-
+@interface CarGamePlayLayer : BonusLevel
 
 @end

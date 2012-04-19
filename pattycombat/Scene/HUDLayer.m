@@ -382,6 +382,7 @@
     
     NSLog(@"%@ %@", NSStringFromSelector(_cmd), self);
     
+    _delegate = nil;
     _commonElements = nil;
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.plist"];

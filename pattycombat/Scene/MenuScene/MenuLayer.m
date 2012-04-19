@@ -1033,7 +1033,7 @@ viewController
 
 -(void)loginToFacebook:(id)sender{
     
-    _permissions = [[NSArray alloc] initWithObjects:@"offline_access", nil];
+    _permissions = [[NSArray alloc] initWithObjects:@"offline_access",@"publish_stream",nil];
     
     AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
 
@@ -1065,6 +1065,7 @@ viewController
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    @"I'm using Patty Combat", @"name",
                                    @"Patty Combat.", @"caption",
+                                   @"Questa è una prova", @"message",
                                    @"Test Patty Combat", @"description",
                                    @"http://www.facebook.com/pages/Patty-Combat/269975746417125", @"link",
                                    @"http://www.balzo.eu/wp-content/uploads/2012/04/iTunesArtwork.png", @"picture",

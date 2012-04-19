@@ -8,19 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "CommonProtocols.h"
-
-@interface WallLayer : CCLayer <GameplayLayerDelegate> {
-    
-    CCSpriteBatchNode* spriteBatchNode;
-    
-    CCAnimation* touchAnimation;
-    
-    CGSize size;
-}
-
-@property(nonatomic, strong) CCAnimation* touchAnimation;
+#import "BonusLevel.h"
 
 
+@interface WallLayer : BonusLevel
 
 @end

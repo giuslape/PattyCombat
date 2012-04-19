@@ -14,6 +14,7 @@
 #import "WallScene.h"
 #import "CarScene.h"
 #import "FinalScene.h"
+#import "TvScene.h"
 
 
 
@@ -31,7 +32,6 @@ static GameManager* _sharedGameManager = nil;
 @synthesize isPerfectForLevel = _isPerfectForLevel;
 @synthesize isKoForLevel = _isKoForLevel;
 @synthesize isKo;
-@synthesize hasPlayerDied;
 @synthesize bestScore;
 @synthesize dao;
 @synthesize managerSoundState;
@@ -92,7 +92,6 @@ static GameManager* _sharedGameManager = nil;
         CCLOG(@"Game Manager Singleton, init");
         isMusicON = YES;
         isSoundEffectsON = YES;
-        hasPlayerDied = NO;
         hasAudioBeenInitialized = NO;
         soundEngine = nil;
         managerSoundState = kAudioManagerUninitialized;
@@ -162,7 +161,7 @@ static GameManager* _sharedGameManager = nil;
         case 7:
             result = @"jenny";
             break;
-        case 8:
+        case 9:
             result = @"bud";
             break;
         case 10:
@@ -171,7 +170,7 @@ static GameManager* _sharedGameManager = nil;
         case 11:
             result = @"steven";
             break;
-        case 12:
+        case 13:
             result = @"chuck";
             break;
         default:
@@ -194,7 +193,7 @@ static GameManager* _sharedGameManager = nil;
             result = @"Johnny Denti";
             break;
         case 3:
-            result = @"Cinziah";
+            result = @"Cin Ziah";
             break;
         case 5:
             result = @"Maa Sallo";
@@ -205,7 +204,7 @@ static GameManager* _sharedGameManager = nil;
         case 7:
             result = @"Jenny Lava";
             break;
-        case 8:
+        case 9:
             result = @"Charlie Jumbo";
             break;
         case 10:
@@ -214,7 +213,7 @@ static GameManager* _sharedGameManager = nil;
         case 11:
             result = @"Steven Bitonti";
             break;
-        case 12:
+        case 13:
             result = @"Chuck";
             break;
         default:
@@ -246,7 +245,7 @@ static GameManager* _sharedGameManager = nil;
         case 7:
             _gameTime = 65;
             break;
-        case 8:
+        case 9:
             _gameTime = 56;
             break;
         case 10:
@@ -255,7 +254,7 @@ static GameManager* _sharedGameManager = nil;
         case 11:
             _gameTime = 56;
             break;
-        case 12:
+        case 13:
             _gameTime = 50;
             break;
         default:
@@ -555,7 +554,7 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            _currentLevel = 0;
+            _currentLevel = 3;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;
@@ -563,25 +562,32 @@ static GameManager* _sharedGameManager = nil;
             break;
         case kIntroScene:
             _currentLevel++;
-            hasPlayerDied = FALSE;
-            
-            _isPerfectForLevel = TRUE;
-            
-            isLastLevel = (_currentLevel == 12) ? TRUE : FALSE;
-            patternForLevel = nil;
             if (_currentLevel == 4) {
+                
                 isBonusLevel = TRUE;
                 sceneToRun = [WallScene node];
                 currentScene = kBonusLevel1;
                 break;
             }
-            if (_currentLevel == 9) {
+            if (_currentLevel == 8) {
+                
                 isBonusLevel = TRUE;
                 sceneToRun = [CarScene node];
                 currentScene = kBonusLevel2;
                 break;
             }
-            patternForLevel = [[NSMutableArray alloc] initWithArray:[self.dao loadPlistForPatternWithLevel:_currentLevel]];
+            if (_currentLevel == 12) {
+                
+                isBonusLevel = TRUE;
+                sceneToRun = [TvScene  node];
+                currentScene = kBonusLevel3;
+                break;
+            }
+            _isPerfectForLevel = TRUE;
+            isLastLevel = (_currentLevel == 12) ? TRUE : FALSE;
+            patternForLevel = nil;
+            patternForLevel = [[NSMutableArray alloc] initWithArray:
+                               [self.dao loadPlistForPatternWithLevel:_currentLevel]];
             self.namePlayer = [self formatPlayerTypeToString];
             [self formatGameTime];
             sceneToRun = [IntroScene node];
@@ -594,8 +600,6 @@ static GameManager* _sharedGameManager = nil;
             sceneToRun = [GameScene node];
             break;
         case kBonusLevel1:
-            isBonusLevel = TRUE;
-            sceneToRun = [WallScene node];
             break;
         case kBonusLevel2:
             break;
@@ -629,7 +633,6 @@ static GameManager* _sharedGameManager = nil;
         
         [[CCDirectorIOS sharedDirector] replaceScene:sceneToRun];
     }
-    
     
     [self performSelectorInBackground:
      @selector(loadAudioForSceneWithID:)

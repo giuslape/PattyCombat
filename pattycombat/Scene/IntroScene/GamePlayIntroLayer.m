@@ -138,7 +138,6 @@
     
     [self alignHandsWithPadding:padding];
     
-    
 }
 
 -(void)alignHandsWithPadding:(float)padding{
@@ -149,6 +148,8 @@
     
     for (CCSprite* item in feedHand) {
         
+        [item setScale:1.2f];
+
         width += item.textureRect.size.width * item.scaleX +padding; 
         
     }
@@ -160,7 +161,6 @@
     for (CCSprite* item in feedHand) {
         
         [_spriteBatchNode addChild:item];
-        [item setScale:1.2f];
         CGSize itemSize = item.textureRect.size;
         [item setPosition:ccp(x + itemSize.width * item.scaleX / 2.0f, size.height * 0.95f - itemSize.height * item.scaleY /2.0f)];
         x += itemSize.width * item.scaleX + padding;
