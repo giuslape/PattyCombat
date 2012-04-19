@@ -218,8 +218,6 @@
 		2015CE191521B35400F3AE56 /* JeanPaulPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 2015CD4B1521B35400F3AE56 /* JeanPaulPlayer.png */; };
 		2015CE1A1521B35400F3AE56 /* JeanPaulRight.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2015CD4C1521B35400F3AE56 /* JeanPaulRight.plist */; };
 		2015CE1B1521B35400F3AE56 /* JeanPaulRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 2015CD4D1521B35400F3AE56 /* JeanPaulRight.png */; };
-		2015CE4B1521B35400F3AE56 /* steven_body_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2015CD821521B35400F3AE56 /* steven_body_0001.png */; };
-		2015CE4F1521B35400F3AE56 /* Jenny_body_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2015CD871521B35400F3AE56 /* Jenny_body_0001.png */; };
 		2015CE591521B35400F3AE56 /* bud_body_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2015CD921521B35400F3AE56 /* bud_body_0001.png */; };
 		2015CE631521B35400F3AE56 /* chuck_body_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2015CD9D1521B35400F3AE56 /* chuck_body_0001.png */; };
 		2015CE6A1521B35400F3AE56 /* bell.aif in Resources */ = {isa = PBXBuildFile; fileRef = 2015CDA61521B35400F3AE56 /* bell.aif */; };
@@ -266,6 +264,18 @@
 		2061000E153FFF90002A9D04 /* JocopocoHit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2061000C153FFF90002A9D04 /* JocopocoHit.plist */; };
 		2061001015400113002A9D04 /* joco_head_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061000F15400113002A9D04 /* joco_head_0001.png */; };
 		2061001215400126002A9D04 /* joco_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061001115400126002A9D04 /* joco_bg.png */; };
+		206100211540077B002A9D04 /* JennyHit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061001F1540077B002A9D04 /* JennyHit.png */; };
+		206100221540077B002A9D04 /* JennyHit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 206100201540077B002A9D04 /* JennyHit.plist */; };
+		2061002815400B08002A9D04 /* jenny_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061002715400B07002A9D04 /* jenny_bg.png */; };
+		2061002A15400B15002A9D04 /* jenny_head_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061002915400B15002A9D04 /* jenny_head_0001.png */; };
+		2061002D15400B82002A9D04 /* JennyPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061002B15400B81002A9D04 /* JennyPlayer.png */; };
+		2061002E15400B82002A9D04 /* JennyPlayer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2061002C15400B82002A9D04 /* JennyPlayer.plist */; };
+		2061003015400CDC002A9D04 /* bud_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061002F15400CDC002A9D04 /* bud_bg.png */; };
+		2061003215400E9D002A9D04 /* bud_head_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061003115400E9D002A9D04 /* bud_head_0001.png */; };
+		2061003515400ECD002A9D04 /* BudPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061003315400ECD002A9D04 /* BudPlayer.png */; };
+		2061003615400ECD002A9D04 /* BudPlayer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2061003415400ECD002A9D04 /* BudPlayer.plist */; };
+		2061003915400F45002A9D04 /* BudHit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061003715400F45002A9D04 /* BudHit.png */; };
+		2061003A15400F45002A9D04 /* BudHit.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2061003815400F45002A9D04 /* BudHit.plist */; };
 		2061FF2A1539BBDE002A9D04 /* MiaghiPlayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061FF281539BBDE002A9D04 /* MiaghiPlayer.png */; };
 		2061FF2B1539BBDE002A9D04 /* MiaghiPlayer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2061FF291539BBDE002A9D04 /* MiaghiPlayer.plist */; };
 		2061FF2F1539C245002A9D04 /* miaghi_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 2061FF2E1539C245002A9D04 /* miaghi_bg.png */; };
@@ -725,8 +735,6 @@
 		2015CD4B1521B35400F3AE56 /* JeanPaulPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JeanPaulPlayer.png; sourceTree = "<group>"; };
 		2015CD4C1521B35400F3AE56 /* JeanPaulRight.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JeanPaulRight.plist; sourceTree = "<group>"; };
 		2015CD4D1521B35400F3AE56 /* JeanPaulRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JeanPaulRight.png; sourceTree = "<group>"; };
-		2015CD821521B35400F3AE56 /* steven_body_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steven_body_0001.png; sourceTree = "<group>"; };
-		2015CD871521B35400F3AE56 /* Jenny_body_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Jenny_body_0001.png; sourceTree = "<group>"; };
 		2015CD921521B35400F3AE56 /* bud_body_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bud_body_0001.png; sourceTree = "<group>"; };
 		2015CD9D1521B35400F3AE56 /* chuck_body_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chuck_body_0001.png; sourceTree = "<group>"; };
 		2015CDA61521B35400F3AE56 /* bell.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.aif; sourceTree = "<group>"; };
@@ -774,6 +782,18 @@
 		2061000C153FFF90002A9D04 /* JocopocoHit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JocopocoHit.plist; sourceTree = "<group>"; };
 		2061000F15400113002A9D04 /* joco_head_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joco_head_0001.png; sourceTree = "<group>"; };
 		2061001115400126002A9D04 /* joco_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joco_bg.png; sourceTree = "<group>"; };
+		2061001F1540077B002A9D04 /* JennyHit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JennyHit.png; sourceTree = "<group>"; };
+		206100201540077B002A9D04 /* JennyHit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JennyHit.plist; sourceTree = "<group>"; };
+		2061002715400B07002A9D04 /* jenny_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jenny_bg.png; sourceTree = "<group>"; };
+		2061002915400B15002A9D04 /* jenny_head_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jenny_head_0001.png; sourceTree = "<group>"; };
+		2061002B15400B81002A9D04 /* JennyPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JennyPlayer.png; sourceTree = "<group>"; };
+		2061002C15400B82002A9D04 /* JennyPlayer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JennyPlayer.plist; sourceTree = "<group>"; };
+		2061002F15400CDC002A9D04 /* bud_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bud_bg.png; sourceTree = "<group>"; };
+		2061003115400E9D002A9D04 /* bud_head_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bud_head_0001.png; sourceTree = "<group>"; };
+		2061003315400ECD002A9D04 /* BudPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BudPlayer.png; sourceTree = "<group>"; };
+		2061003415400ECD002A9D04 /* BudPlayer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BudPlayer.plist; sourceTree = "<group>"; };
+		2061003715400F45002A9D04 /* BudHit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BudHit.png; sourceTree = "<group>"; };
+		2061003815400F45002A9D04 /* BudHit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BudHit.plist; sourceTree = "<group>"; };
 		2061FF281539BBDE002A9D04 /* MiaghiPlayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MiaghiPlayer.png; sourceTree = "<group>"; };
 		2061FF291539BBDE002A9D04 /* MiaghiPlayer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MiaghiPlayer.plist; sourceTree = "<group>"; };
 		2061FF2E1539C245002A9D04 /* miaghi_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = miaghi_bg.png; sourceTree = "<group>"; };
@@ -1700,7 +1720,12 @@
 		2015CD7A1521B35400F3AE56 /* Scena6 */ = {
 			isa = PBXGroup;
 			children = (
-				2015CD821521B35400F3AE56 /* steven_body_0001.png */,
+				2061002B15400B81002A9D04 /* JennyPlayer.png */,
+				2061002C15400B82002A9D04 /* JennyPlayer.plist */,
+				2061002715400B07002A9D04 /* jenny_bg.png */,
+				2061001F1540077B002A9D04 /* JennyHit.png */,
+				206100201540077B002A9D04 /* JennyHit.plist */,
+				2061002915400B15002A9D04 /* jenny_head_0001.png */,
 			);
 			path = Scena6;
 			sourceTree = "<group>";
@@ -1708,7 +1733,12 @@
 		2015CD851521B35400F3AE56 /* Scena7 */ = {
 			isa = PBXGroup;
 			children = (
-				2015CD871521B35400F3AE56 /* Jenny_body_0001.png */,
+				2061003715400F45002A9D04 /* BudHit.png */,
+				2061003815400F45002A9D04 /* BudHit.plist */,
+				2061003315400ECD002A9D04 /* BudPlayer.png */,
+				2061003415400ECD002A9D04 /* BudPlayer.plist */,
+				2061003115400E9D002A9D04 /* bud_head_0001.png */,
+				2061002F15400CDC002A9D04 /* bud_bg.png */,
 			);
 			path = Scena7;
 			sourceTree = "<group>";
@@ -1989,8 +2019,6 @@
 				2015CE191521B35400F3AE56 /* JeanPaulPlayer.png in Resources */,
 				2015CE1A1521B35400F3AE56 /* JeanPaulRight.plist in Resources */,
 				2015CE1B1521B35400F3AE56 /* JeanPaulRight.png in Resources */,
-				2015CE4B1521B35400F3AE56 /* steven_body_0001.png in Resources */,
-				2015CE4F1521B35400F3AE56 /* Jenny_body_0001.png in Resources */,
 				2015CE591521B35400F3AE56 /* bud_body_0001.png in Resources */,
 				2015CE631521B35400F3AE56 /* chuck_body_0001.png in Resources */,
 				2015CE6A1521B35400F3AE56 /* bell.aif in Resources */,
@@ -2095,6 +2123,18 @@
 				2061000E153FFF90002A9D04 /* JocopocoHit.plist in Resources */,
 				2061001015400113002A9D04 /* joco_head_0001.png in Resources */,
 				2061001215400126002A9D04 /* joco_bg.png in Resources */,
+				206100211540077B002A9D04 /* JennyHit.png in Resources */,
+				206100221540077B002A9D04 /* JennyHit.plist in Resources */,
+				2061002815400B08002A9D04 /* jenny_bg.png in Resources */,
+				2061002A15400B15002A9D04 /* jenny_head_0001.png in Resources */,
+				2061002D15400B82002A9D04 /* JennyPlayer.png in Resources */,
+				2061002E15400B82002A9D04 /* JennyPlayer.plist in Resources */,
+				2061003015400CDC002A9D04 /* bud_bg.png in Resources */,
+				2061003215400E9D002A9D04 /* bud_head_0001.png in Resources */,
+				2061003515400ECD002A9D04 /* BudPlayer.png in Resources */,
+				2061003615400ECD002A9D04 /* BudPlayer.plist in Resources */,
+				2061003915400F45002A9D04 /* BudHit.png in Resources */,
+				2061003A15400F45002A9D04 /* BudHit.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,13 +14,13 @@
 	<string>sx,dx,two,sx,dx,dx</string>
 	<key>Scena7</key>
 	<string>sx,dx,sxCross,dxCross,two</string>
-	<key>Scena8</key>
+	<key>Scena9</key>
 	<string>sx,dx,sxCross,dxCross,two,two,sx,dx,two,sxCross</string>
 	<key>Scena10</key>
 	<string>sx,dx,dx,sxCross,dxCross,two,two</string>
 	<key>Scena11</key>
 	<string>sx,sxCross,sx,dx,dxCross,dxCross,two</string>
-	<key>Scena12</key>
+	<key>Scena13</key>
 	<string>dx,sx,sxCross,dxCross,two</string>
 </dict>
 </plist>

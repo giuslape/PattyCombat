@@ -44,7 +44,7 @@
 		<key>loose</key>
 		<string>jenny_feedback_0002.png</string>
 	</dict>
-	<key>EndBackground8</key>
+	<key>EndBackground9</key>
 	<dict>
 		<key>win</key>
 		<string>charlie_feedback_0001.png</string>
@@ -65,7 +65,7 @@
 		<key>loose</key>
 		<string>steven_feedback_0002.png</string>
 	</dict>
-	<key>EndBackground12</key>
+	<key>EndBackground13</key>
 	<dict>
 		<key>win</key>
 		<string>chuck_feedback_0001.png</string>

@@ -219,7 +219,7 @@
 			<key>name</key>
 			<string>Jenny</string>
 			<key>position</key>
-			<string>{474, 640}</string>
+			<string>{474, 168}</string>
 			<key>handName</key>
 			<string>jenny_arm_0001.png</string>
 			<key>rightPosition</key>
@@ -265,7 +265,7 @@
 			<key>name</key>
 			<string>Bud</string>
 			<key>position</key>
-			<string>{482,640}</string>
+			<string>{482,142}</string>
 			<key>handName</key>
 			<string>bud_arm_0001.png</string>
 			<key>rightPosition</key>
