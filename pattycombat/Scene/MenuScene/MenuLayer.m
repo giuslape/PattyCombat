@@ -108,7 +108,7 @@
     
     [layerMenuPurchase setPosition:ccp(- size.width + 15, size.height * 0.11f)];
     
-    CCLabelTTF* labelDescription = [CCLabelTTF labelWithString:@"Coins are useful if you want to retry a level without restarting from the beginning.\n\n By buying coins you are also funding our work and helping us to come up with new games in the future!" dimensions:CGSizeMake(210, 110) alignment:UITextAlignmentCenter fontName:@"Helvetica" fontSize:12];
+      CCLabelTTF* labelDescription = [CCLabelTTF labelWithString:@"Coins are useful if you want to retry a level without restarting from the beginning.\n\n By buying coins you are also funding our work and helping us to come up with new games in the future!" dimensions:CGSizeMake(210, 110) hAlignment:UITextAlignmentCenter fontName:@"Helvetica" fontSize:12];
     
     [labelDescription setPosition:ccp(-size.width + size.width * 0.70f, size.height * 0.55f)];
     
@@ -606,7 +606,7 @@
 
 -(void) registerWithTouchDispatcher
 {
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:-1
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0
      
                                               swallowsTouches:YES];
 }
@@ -620,9 +620,7 @@
     touchLocation = [self convertToNodeSpace:touchLocation];
     
     CCSprite* mainMenuBackground = (CCSprite *)[self getChildByTag:kMainMenuBackgroundTagValue];
-    
-    CCSprite* creditsBackground = (CCSprite *)[self getChildByTag:kCreditsBackgroundTagValue];
-    
+        
     CGRect boundingBox = CGRectMake(2*size.width * 0.9f, size.height * 0.03f, 80, 60);
     
     CCLOG(@"Touch: %@",NSStringFromCGPoint(touchLocation));
@@ -650,26 +648,14 @@
         [levelReachedValue setString:@"0"];
         [highscoreValue setString:@"0"];
         
-    }  else if (CGRectContainsPoint([creditsBackground boundingBox], touchLocation) && creditsBackground.opacity == 255) {
+        return YES;
         
-        // Fade Out of Credits Background and enable main menu
-        
-        CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
-        
-        CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:1];
-        
-        [creditsBackground runAction:[CCSequence actionOne:fadeOut two:[CCCallBlock actionWithBlock:^{
-            
-            mainMenu.isTouchEnabled = YES;
-
-        }]]];  
-        
-    }else if (!CGRectContainsPoint([mainMenuBackground boundingBox], touchLocation)) {
+    }  else if (!CGRectContainsPoint([mainMenuBackground boundingBox], touchLocation)) {
         
         [self goBack];
-        
+        return YES;
     }  
-    return YES;
+    return NO;
     
 }
 
@@ -739,17 +725,16 @@
 
 -(void) itemCreditsTouched{
     
-    CreditsLayer* creditsLayer = [CreditsLayer layerWithColor:ccc4(255, 255, 255, 0) width:size.width height:size.height];
+    CreditsLayer* creditsLayer = [CreditsLayer layerWithColor:ccc4(0, 0, 0, 0) width:size.width height:size.height];
     
     [self addChild:creditsLayer z:kCreditsBackgroundZValue tag:kCreditsBackgroundTagValue];
     
     CCFadeTo* fade = [CCFadeTo actionWithDuration:1 opacity:170];
     [creditsLayer runAction:fade];
     
-    
     // Disabled Touch for Main Menu
-    CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
-    mainMenu.isTouchEnabled = FALSE;
+  /*  CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
+    mainMenu.isTouchEnabled = FALSE;*/
         
 }
 

@@ -51,7 +51,7 @@
 #define kItemCreditsTagValue 16
 #define kItemCreditsZValue 3
 #define kMainMenuTagValue 18
-#define kMainMenuZValue 3
+#define kMainMenuZValue 2
 #define kPattyCombatLogoTagValue 19
 #define kPattyCombatLogoZValue 3
 

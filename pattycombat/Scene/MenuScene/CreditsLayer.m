@@ -11,14 +11,31 @@
 
 @implementation CreditsLayer
 
-- (id)init
+
+-(id)initWithColor:(ccColor4B)color width:(GLfloat)w height:(GLfloat)h{
+
+        if( (self=[super initWithColor:color width:w height:h]) ) {
+            
+            self.isTouchEnabled = YES;
+        }
+        return self;
+
+}
+
+-(void) registerWithTouchDispatcher
 {
-    self = [super init];
-    if (self) {
+    [[CCDirectorIOS sharedDirector].touchDispatcher addTargetedDelegate:self priority:-1
      
-        
-    }
-    return self;
+                                              swallowsTouches:YES];
+}
+
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
+    
+    NSLog(@"%@ %@", NSStringFromSelector(_cmd),self);
+    
+    [self removeFromParentAndCleanup:YES];
+
+    return YES;
 }
 
 @end
