@@ -184,7 +184,8 @@
         
         // Load Common Elements in Cache
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Common.plist"];
+        
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Common.plist" textureFilename:@"Common.png"];
         
         _commonElements = [CCSpriteBatchNode batchNodeWithFile:@"Common.png"];
         

@@ -134,7 +134,7 @@
     
     if (indexSprite >= 6)return;
     
-    PLAYSOUNDEFFECT(PERFECT_TAP);
+    PLAYSOUNDEFFECT(TouchTv);
     
     score+= 5;
     
@@ -145,6 +145,8 @@
     touchCount++;
     
     if (touchCount % kTapForProgress == 0) {
+        
+        PLAYSOUNDEFFECT(DestroyTv);
         
         indexSprite++;
         

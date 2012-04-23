@@ -2,8 +2,8 @@
 //  TvBackgroundLayer.h
 //  pattycombat
 //
-//  Created by Vincenzo Lapenta on 18/04/12.
-//  Copyright 2012 Fratello. All rights reserved.
+//  Created by Giuseppe Lapenta on 18/04/12.
+//  Copyright 2012 All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

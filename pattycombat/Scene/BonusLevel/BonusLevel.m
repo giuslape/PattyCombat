@@ -62,7 +62,7 @@
         CCSprite* handNext = [CCSprite spriteWithFile:@"next_btn.png"];
         CCMenuItemSprite* itemHand = [CCMenuItemSprite itemWithNormalSprite:handNext selectedSprite:nil target:self selector:@selector(runNewScene)];
         CCMenu* menu = [CCMenu menuWithItems:itemHand, nil];
-        [menu setPosition:ccp (size.width - handNext.boundingBox.size.width , handNext.boundingBox.size.height)];
+        [menu setPosition:ccp (size.width* 0.87f , size.height * 0.1f)];
         [menu setAnchorPoint:ccp(0, 1)];
         
         [self addChild:menu z:3 tag:kHandNext];
@@ -191,7 +191,6 @@
 - (void)dealloc
 {
     spriteBatchNode = nil;
-    [[[CCDirector sharedDirector] touchDispatcher]removeDelegate:self];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.plist"];
     NSLog(@"%@ %@", NSStringFromSelector(_cmd), self);
 

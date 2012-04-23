@@ -47,7 +47,8 @@
     
     self.player = nil;
     self.hudLayer = nil;
-        
+    
+    [self unscheduleAllSelectors];
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
@@ -313,17 +314,14 @@
             rightHand.opacity = 0;
             
         }
-        
-        [self scheduleOnce:@selector(startBackgroundMusic:) delay:0.5f];
-        
+                
     }
     return self;
 }
 
 
--(void)startBackgroundMusic:(ccTime)delta{
+-(void)onEnterTransitionDidFinish{
     
-    [self unschedule:_cmd];
     [[GameManager sharedGameManager] playBackgroundTrack:backgroundTrack];
     [self schedule:@selector(countDown:) interval:0.001];
     
@@ -350,13 +348,22 @@
         
     }
     
-    if (_countDown == 0) {
+    if (_countDown == 1) {
         
-        [self removeChild:label cleanup:YES];
         [self unschedule:_cmd];
-        id delay = [CCDelayTime actionWithDuration:0.2f];
-        id func = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
-        [self runAction:[CCSequence actionOne:delay two:func]];
+        id delay  = [CCDelayTime actionWithDuration:0.2f];
+        id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
+        id change = [CCCallBlock actionWithBlock:^{
+            [label setString:@"Go!"];
+        }];
+        
+        id d2 = [CCDelayTime actionWithDuration:0.2f];
+        id delete = [CCCallBlock actionWithBlock:^{
+            
+            [self removeChild:label cleanup:YES];
+        }];
+        
+        [self runAction:[CCSequence actions:delay,func,d2,change,d2,delete, nil]];
         self.isTouchEnabled = TRUE;
         
         }

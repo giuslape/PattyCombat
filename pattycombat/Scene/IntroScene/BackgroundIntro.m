@@ -36,6 +36,7 @@
 
 - (void)dealloc {
     
+    //[self removeChildByTag:10 cleanup:YES];
     NSLog(@"%@ %@", NSStringFromSelector(_cmd), self);
 
 }

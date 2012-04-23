@@ -34,6 +34,8 @@
     
     _spriteBatchNode = nil;
     
+    [self removeChildByTag:9 cleanup:YES];
+    
     [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
@@ -244,7 +246,6 @@
 -(void)loadBackgroundAtLevel:(int)currentLevel andWin:(BOOL)win{
     
     
-    
     CCSprite* background = [CCSprite spriteWithFile:[[[GameManager sharedGameManager]dao]
                                                      loadBackgroundEnd:@"BackgroundEnd" 
                                                      atLevel:currentLevel 
@@ -252,8 +253,7 @@
     
     [background setPosition:ccp(size.width/2, size.height/2)];
     
-    [self addChild:background z:0];
-    
+    [self addChild:background z:0 tag:9];
 }
 
 

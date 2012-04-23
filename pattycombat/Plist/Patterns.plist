@@ -9,7 +9,7 @@
 	<key>Scena3</key>
 	<string>sxCross,dxCross,two</string>
 	<key>Scena5</key>
-	<string>sx,dx,dxCross,sxCross</string>
+	<string>sx,dxCross,dx,sxCross</string>
 	<key>Scena6</key>
 	<string>sx,dx,two,sx,dx,dx</string>
 	<key>Scena7</key>

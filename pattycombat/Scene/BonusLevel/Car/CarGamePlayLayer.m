@@ -16,7 +16,7 @@
 - (void)dealloc {
     
     CCLOG(@"%@, %@",NSStringFromSelector(_cmd), self);
-
+    [[[CCDirector sharedDirector] touchDispatcher]removeDelegate:self];
     
 }
 
@@ -98,7 +98,7 @@
     
     if (indexSprite > 7)return;
     
-    PLAYSOUNDEFFECT(PERFECT_TAP);
+    PLAYSOUNDEFFECT(TouchCar);
     
     score+= 5;
     
@@ -111,6 +111,7 @@
     
     if (touchCount % kTapForProgress == 0) {
         
+        PLAYSOUNDEFFECT(DestroyCar);
         
         indexSprite++;
         

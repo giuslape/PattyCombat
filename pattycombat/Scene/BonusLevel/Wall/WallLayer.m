@@ -140,7 +140,7 @@
     
     if (indexSprite >= 6)return;
     
-    PLAYSOUNDEFFECT(PERFECT_TAP);
+    PLAYSOUNDEFFECT(TouchWall);
     
     score+= 5;
     
@@ -154,6 +154,7 @@
 
     if (touchCount % kTapForProgress == 0) {
         
+        PLAYSOUNDEFFECT(DestroyWall);
         
         indexSprite++;
         

@@ -40,12 +40,10 @@
 
 - (void)dealloc {
     
-    [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
+    _spriteBatchNode = nil;
+    [[[CCDirectorIOS sharedDirector] touchDispatcher] removeAllDelegates];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];    
-    
-    _spriteBatchNode = nil;
-    
         
     NSLog(@"%@ %@", NSStringFromSelector(_cmd), self);
 
@@ -446,6 +444,7 @@
             
         CCLOG(@"Intro complete, asking Game Manager to start the Game play");
         
+        [self unschedule:_cmd];
         [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
         
         self.isTouchEnabled = FALSE;
@@ -584,7 +583,7 @@
     
     if (!_isLastLevel) {
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"IntroButtAndFeed.plist"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"IntroButtAndFeed.plist" textureFilename:@"IntroButtAndFeed.png"];
         
         _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"IntroButtAndFeed.png"];
         

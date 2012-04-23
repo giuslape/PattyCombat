@@ -16,8 +16,6 @@
 
 #import "GCHelper.h"
 
-#import "TestFlight.h"
-
 static NSString* kAppId = @"321845184543524";
 
 static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyLTA0LTEwIDA0OjM3OjQ1LjE4OTQ1MQ";
@@ -108,8 +106,6 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 	// Display FSP and SPF
 	[director_ setDisplayStats:NO];
     
-    [TestFlight openFeedbackView];
-
 	// set FPS at 60
 	[director_ setAnimationInterval:1.0/60];
 

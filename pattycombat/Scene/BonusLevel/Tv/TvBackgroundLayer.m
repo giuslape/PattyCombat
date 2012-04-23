@@ -2,8 +2,8 @@
 //  TvBackgroundLayer.m
 //  pattycombat
 //
-//  Created by Vincenzo Lapenta on 18/04/12.
-//  Copyright 2012 Fratello. All rights reserved.
+//  Created by Giuseppe Lapenta on 18/04/12.
+//  Copyright 2012 All rights reserved.
 //
 
 #import "TvBackgroundLayer.h"
@@ -25,9 +25,7 @@
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
         CCSprite * background = [CCSprite spriteWithFile:@"tv_bg.png"];
-        
         [self addChild:background z:0];
-        
         [background setPosition:ccp(winSize.width/2, winSize.height/2)];
         
     }

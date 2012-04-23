@@ -266,9 +266,12 @@
     CCSprite* rightHitUnder= (CCSprite *)[_spriteHitUnderBatchNode getChildByTag:kHitRightUnderTagValue];
     CCSprite* rightHitOver = (CCSprite *)[_spriteHitOverBatchNode getChildByTag:kHitRightOverTagValue];
 
-    
     [leftHand stopAllActions];
     [rightHand stopAllActions];
+    [leftHitUnder stopAllActions];
+    [leftHitOver stopAllActions];
+    [rightHitUnder stopAllActions];
+    [rightHitOver stopAllActions];
     leftHitOver.opacity   = 0;
     leftHitUnder.opacity  = 0;
     rightHitOver.opacity  = 0;
@@ -333,14 +336,14 @@
             
              action             = [CCAnimate actionWithAnimation:manoDestraColpita];
              actionHitUnder     = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoDestraHitUnder],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
             
              actionHitOver      = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoDestraHitOver],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
             
              hitAnimationUnder  = rightHitUnder;
              hitAnimationOver   = rightHitOver;
@@ -351,28 +354,27 @@
             doubleAction        = [CCAnimate actionWithAnimation:manoSinistraColpita];
             
              actionHitUnder     = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoDestraHitUnder],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
             
              actionHitOver      = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoDestraHitOver],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
             
        actionHitUnderDouble     = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoSinistraHitUnder],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
             
        actionHitOverDouble      = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoSinistraHitOver],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
             
        hitAnimationUnderDouble  = leftHitUnder;
        hitAnimationOverDouble   = leftHitOver;
-
 
             hitAnimationUnder   = rightHitUnder;
             hitAnimationOver    = rightHitOver;            
@@ -645,7 +647,7 @@
 {    
     [self setName:[playerSettings objectForKey:@"name"]];
 
-    [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Player.plist",name]];
+    [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Player.plist",name] textureFilename:[NSString stringWithFormat:@"%@Player.png",name]];
     
     CCTexture2D* texture = [[CCTextureCache sharedTextureCache] addImage:[playerSettings objectForKey:@"headName"]];
     
@@ -698,7 +700,7 @@
         
         // I use CCSpriteBatchNode as a layer: Under ---> Hand ----> Over (ZOrder)
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Hit.plist", name]];
+        [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Hit.plist", name] textureFilename:[NSString stringWithFormat:@"%@Hit.png", name]];
         
         _spriteHitUnderBatchNode = [CCSpriteBatchNode batchNodeWithFile:[NSString stringWithFormat:@"%@Hit.png", name]];
         

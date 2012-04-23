@@ -195,6 +195,7 @@
 {
     _spriteBatchNode = nil;
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
+    [[CCTextureCache sharedTextureCache] removeUnusedTextures];
 }
 
 
