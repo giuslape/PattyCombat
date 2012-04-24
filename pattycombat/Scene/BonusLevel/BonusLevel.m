@@ -25,9 +25,13 @@
     self = [super init];
     if (self) {
         
+        [[CCDirector sharedDirector].view setMultipleTouchEnabled:NO];
+        
 #if DEBUG
-        [[CCDirectorIOS sharedDirector].view setMultipleTouchEnabled:NO];
+    
+        [[CCDirectorIOS sharedDirector].view setMultipleTouchEnabled:YES];        
 #endif
+        
         size = [[CCDirector sharedDirector] winSize];
 
         [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithString:@"Common.plist"]];
@@ -65,7 +69,7 @@
         CCSprite* handNext = [CCSprite spriteWithFile:@"next_btn.png"];
         CCMenuItemSprite* itemHand = [CCMenuItemSprite itemWithNormalSprite:handNext selectedSprite:nil target:self selector:@selector(runNewScene)];
         CCMenu* menu = [CCMenu menuWithItems:itemHand, nil];
-        [menu setPosition:ccp (size.width* 0.87f , size.height * 0.1f)];
+        [menu setPosition:ccp(size.width* 0.93f , size.height * 0.1f)];
         [menu setAnchorPoint:ccp(0, 1)];
         
         [self addChild:menu z:3 tag:kHandNext];
