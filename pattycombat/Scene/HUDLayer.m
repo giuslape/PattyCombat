@@ -343,7 +343,7 @@
     [[CCDirectorIOS sharedDirector]  resume];
     [[GameManager sharedGameManager] stopBackgroundMusic];
     LoadingScene* scene = [LoadingScene sceneWithTargetScene:kMainMenuScene];
-    [[CCDirector sharedDirector] replaceScene:scene];
+    [[CCDirectorIOS sharedDirector] replaceScene:scene];
 }
 
 -(void)restartTapped:(id)sender{

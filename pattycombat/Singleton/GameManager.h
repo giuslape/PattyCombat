@@ -20,6 +20,7 @@
     BOOL _isTutorial;
     BOOL _isPerfectForLevel;
     BOOL _isKoForLevel;
+    BOOL _isExtreme;
     int  _totalScore;
     int  _currentScore;
     int  _currentLevel;
@@ -52,6 +53,7 @@
 @property (readwrite) BOOL isMusicON;
 @property (readwrite) BOOL isSoundEffectsON;
 @property (readwrite) BOOL isBonusLevel;
+@property (nonatomic,readwrite) BOOL isExtreme;
 @property (readwrite, nonatomic) int levelReached;
 @property (nonatomic, strong) NSString* namePlayer;
 @property (strong, readonly) id<SceneDao> dao;

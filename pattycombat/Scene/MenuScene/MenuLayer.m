@@ -327,9 +327,9 @@
     
     //Play button
     
-    CCSprite* play = [CCSprite spriteWithSpriteFrameName:@"play_btn.png"];
+    CCSprite* play = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn.png"] : [CCSprite spriteWithFile:@"playExtreme_btn.png"] ;
     play.anchorPoint = ccp(0.5f,0);
-    CCSprite* playSelected = [CCSprite spriteWithSpriteFrameName:@"play_btn_over.png"];
+    CCSprite* playSelected = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn_over.png"] :[CCSprite spriteWithFile:@"playExtreme_btn_over.png"];
     playSelected.anchorPoint = ccp(0.5f,0);
     CCNode* nodePlay = [CCNode node];
     nodePlay.contentSize = play.contentSize;
@@ -495,9 +495,11 @@
         [self buildStats];
         
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+        
         // Add Logo
         
-        CCSprite* logo = [CCSprite spriteWithFile:@"logo.png"];
+        CCSprite* logo = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithFile:@"logo.png"] : [CCSprite spriteWithFile:@"logoExtreme.png"];
+        
         [logo setAnchorPoint:ccp(0.5f, 1)];
         [logo setPosition:ccp(size.width * 0.7f, size.height * 0.97f)];
         [self addChild:logo z:3];
@@ -518,6 +520,8 @@
                                                     selector:@selector(productsLoaded:)
                                                         name:kProductsLoadedNotification 
                                                             object:nil];  
+        
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         
 	}
 	return self;

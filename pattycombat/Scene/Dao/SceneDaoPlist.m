@@ -157,7 +157,7 @@
 #pragma mark Load Pattern
 
 
--(NSMutableArray*)loadPlistForPatternWithLevel:(int)sceneId{
+-(NSMutableArray*)loadPlistForPatternWithLevel:(int)sceneId andIsExtreme:(BOOL)isExtreme{
     
     NSMutableArray *patternToReturn = nil;
     NSString *fullFileName = 
@@ -183,7 +183,11 @@
         return nil; // Non trova il dizionario
     }
     
-    NSString* pattern = [plistDictionary objectForKey:className];
+    NSArray* patternArray = [plistDictionary objectForKey:className];
+    
+    int index = (isExtreme) ? 1 : 0;
+    
+    NSString* pattern = [patternArray objectAtIndex:index];
     
     patternToReturn = (NSMutableArray*)[pattern componentsSeparatedByString:@","];
     

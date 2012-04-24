@@ -32,6 +32,7 @@ static GameManager* _sharedGameManager = nil;
 @synthesize isPerfectForLevel = _isPerfectForLevel;
 @synthesize isKoForLevel = _isKoForLevel;
 @synthesize isKo;
+@synthesize isExtreme = _isExtreme;
 @synthesize bestScore;
 @synthesize dao;
 @synthesize managerSoundState;
@@ -100,6 +101,9 @@ static GameManager* _sharedGameManager = nil;
         _namePlayer = nil;
         _gameTime = 0;
         _gameState = kStateLose;
+#if DEBUG
+       self.isExtreme = FALSE;
+#endif
     }
     return self;
 }
@@ -557,7 +561,7 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            _currentLevel = 11;
+            _currentLevel = 0;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;
@@ -590,7 +594,7 @@ static GameManager* _sharedGameManager = nil;
             isLastLevel = (_currentLevel == 13) ? TRUE : FALSE;
             patternForLevel = nil;
             patternForLevel = [[NSMutableArray alloc] initWithArray:
-                               [self.dao loadPlistForPatternWithLevel:_currentLevel]];
+                               [self.dao loadPlistForPatternWithLevel:_currentLevel andIsExtreme:self.isExtreme]];
             self.namePlayer = [self formatPlayerTypeToString];
             [self formatGameTime];
             sceneToRun = [IntroScene node];
@@ -769,6 +773,27 @@ static GameManager* _sharedGameManager = nil;
     _isKoForLevel = isKoForLevel;
     
     if (self.isKo) self.isKo = FALSE;
+}
+
+
+#pragma mark -
+#pragma mark ===  Extreme  ===
+#pragma mark -
+
+-(BOOL)isExtreme{
+    
+    _isExtreme = [[NSUserDefaults standardUserDefaults] boolForKey:@"Extreme"];
+    
+    return _isExtreme; 
+    
+}
+
+-(void)setIsExtreme:(BOOL)isExtreme{
+    
+    _isExtreme = isExtreme;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isExtreme forKey:@"Extreme"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

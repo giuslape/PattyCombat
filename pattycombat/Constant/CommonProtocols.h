@@ -85,7 +85,7 @@ typedef enum{
 
 -(NSDictionary *)loadScene:(int)sceneNumber;
 -(id)loadPlistForAnimationWithName:(NSString*)animationName andClassName:(NSString*)className;
--(NSMutableArray*)loadPlistForPatternWithLevel:(int)sceneId;
+-(NSMutableArray*)loadPlistForPatternWithLevel:(int)sceneId andIsExtreme:(BOOL)isExtreme;
 -(NSDictionary *)loadPlayerWithName:(NSString *)name;
 
 @optional

@@ -8,6 +8,7 @@
 
 #import "FinalSceneLayer.h"
 #import "GameManager.h"
+#import "LoadingScene.h"
 
 @implementation FinalSceneLayer
 
@@ -33,6 +34,10 @@
                         
         [self scheduleOnce:@selector(showDarkLayer:) delay:2];
         
+        if(![[GameManager sharedGameManager] isExtreme]){
+            
+            [[GameManager sharedGameManager] setIsExtreme:YES];
+        }
         
     }
     return self;
@@ -83,7 +88,10 @@
 -(void)creditsLayerDidClose:(CreditsLayer *)layer{
     
     [self removeChild:layer cleanup:YES];
-    [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
+    
+    CCScene* scene = [LoadingScene sceneWithTargetScene:kMainMenuScene];
+    
+    [[CCDirectorIOS sharedDirector] replaceScene:scene];
 }
 
 

@@ -365,6 +365,8 @@
 		20C6147D1537312C0053E4FF /* FinalScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C6147C1537312B0053E4FF /* FinalScene.m */; };
 		20C614801537314C0053E4FF /* FinalSceneLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C6147F1537314B0053E4FF /* FinalSceneLayer.m */; };
 		20E33C9915469F9300265DA9 /* pickup_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E33C9815469F9300265DA9 /* pickup_bg.png */; };
+		20E33CB41546D09900265DA9 /* playExtreme_btn_over.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E33CB31546D09900265DA9 /* playExtreme_btn_over.png */; };
+		20E33CB71546D0A100265DA9 /* playExtreme_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E33CB61546D0A100265DA9 /* playExtreme_btn.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -919,6 +921,8 @@
 		20C6147E1537314A0053E4FF /* FinalSceneLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinalSceneLayer.h; sourceTree = "<group>"; };
 		20C6147F1537314B0053E4FF /* FinalSceneLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinalSceneLayer.m; sourceTree = "<group>"; };
 		20E33C9815469F9300265DA9 /* pickup_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickup_bg.png; sourceTree = "<group>"; };
+		20E33CB31546D09900265DA9 /* playExtreme_btn_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playExtreme_btn_over.png; sourceTree = "<group>"; };
+		20E33CB61546D0A100265DA9 /* playExtreme_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playExtreme_btn.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1461,6 +1465,8 @@
 		205B2A8B1545ECDF00C8C61E /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				20E33CB61546D0A100265DA9 /* playExtreme_btn.png */,
+				20E33CB31546D09900265DA9 /* playExtreme_btn_over.png */,
 				205F2B0615460B3F00EF170B /* MenuAtlas.png */,
 				205F2B0715460B3F00EF170B /* myagi.png */,
 				205F2B0815460B3F00EF170B /* logo.png */,
@@ -2238,6 +2244,8 @@
 				202AE192154612E90061E0E4 /* muro_2.mp3 in Resources */,
 				202AE193154612E90061E0E4 /* muro_1.mp3 in Resources */,
 				20E33C9915469F9300265DA9 /* pickup_bg.png in Resources */,
+				20E33CB41546D09900265DA9 /* playExtreme_btn_over.png in Resources */,
+				20E33CB71546D0A100265DA9 /* playExtreme_btn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

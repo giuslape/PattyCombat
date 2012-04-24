@@ -99,11 +99,15 @@ static PattyCombatIAPHelper * _sharedHelper;
                 
             }else {
                 
+                if ([self.products count] > 0) {
+                    
                 SKProduct* product  = [self.products objectAtIndex:1];
                 MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
                 hud.labelText = @"Buying Coins";
                 [self buyProductIdentifier:product];
                 [self performSelector:@selector(timeout:) withObject:view afterDelay:60];
+                    
+                }
             }
 
         
