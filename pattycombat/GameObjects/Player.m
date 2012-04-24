@@ -29,6 +29,14 @@
 @synthesize handsAreOpen;
 @synthesize manoDestraColpita;
 @synthesize manoSinistraColpita;
+@synthesize manoDestraHitUnder;
+@synthesize manoDestraHitOver;
+@synthesize manoSinistraHitUnder;
+@synthesize manoSinistraHitOver;
+@synthesize manoDestraCrossHitUnder;
+@synthesize manoDestraCrossHitOver;
+@synthesize manoSinistraCrossHitUnder;
+@synthesize manoSinistraCrossHitOver;
 @synthesize feedBody;
 @synthesize name;
 @synthesize touchOk;
@@ -43,9 +51,10 @@
 @synthesize manoSinistraCrossChiude;
 @synthesize manoSinistraCrossColpita;
 @synthesize feedBodyErr;
-@synthesize rightHandBatchNode = _rightHandBatchNode;
-@synthesize leftHandBatchNode = _leftHandBatchNode;
-@synthesize bodyBatchNode = _bodyBatchNode;
+@synthesize spriteBatchNode = _spriteBatchNode;
+@synthesize spriteHitUnderBatchNode = _spriteHitUnderBatchNode;
+@synthesize spriteHitOverBatchNode  = _spriteHitOverBatchNode;
+
 
 
 #pragma mark -
@@ -55,14 +64,7 @@
     
     if (self.characterState == kStateDead){
         
-        [self stopAllActions];
-        
-        for (CCSprite* hand in [_leftHandBatchNode children]) {
-            
-            [hand stopAllActions];
-        }   
-        
-        for (CCSprite* hand in [_rightHandBatchNode children]) {
+        for (CCSprite* hand in [_spriteBatchNode children]) {
             
             [hand stopAllActions];
         }
@@ -167,9 +169,9 @@
 
 -(void)handleHit:(CGPoint)location {
     
-    CCSprite* rightHand = (CCSprite *)[_rightHandBatchNode getChildByTag:kRightHandTagValue];
+    CCSprite* rightHand = (CCSprite *)[_spriteBatchNode getChildByTag:kRightHandTagValue];
     
-    CCSprite* leftHand = (CCSprite *)[_leftHandBatchNode getChildByTag:kLeftHandTagValue];
+    CCSprite* leftHand = (CCSprite *)[_spriteBatchNode getChildByTag:kLeftHandTagValue];
     
     if (handIsOpen) {
         
@@ -220,8 +222,8 @@
     
     CGPoint firstLocation = [[touches objectAtIndex:0] CGPointValue];
     CGPoint secondLocation = [[touches objectAtIndex:1] CGPointValue];
-    CCSprite* leftHand = (CCSprite *)[_leftHandBatchNode getChildByTag:kLeftHandTagValue];
-    CCSprite* rightHand = (CCSprite *)[_rightHandBatchNode getChildByTag:kRightHandTagValue];
+    CCSprite* leftHand = (CCSprite *)[_spriteBatchNode getChildByTag:kLeftHandTagValue];
+    CCSprite* rightHand = (CCSprite *)[_spriteBatchNode getChildByTag:kRightHandTagValue];
     
     if (handsAreOpen) {
         
@@ -256,18 +258,40 @@
 -(void)changeState:(NSNumber *)newState {
     
     CharacterStates state = (CharacterStates)[newState intValue];
-    CCSprite* leftHand = (CCSprite *)[_leftHandBatchNode getChildByTag:kLeftHandTagValue];
-    CCSprite* rightHand = (CCSprite *)[_rightHandBatchNode getChildByTag:kRightHandTagValue];
     
+    CCSprite* leftHand     = (CCSprite *)[_spriteBatchNode getChildByTag:kLeftHandTagValue];
+    CCSprite* rightHand    = (CCSprite *)[_spriteBatchNode getChildByTag:kRightHandTagValue];
+    CCSprite* leftHitUnder = (CCSprite *)[_spriteHitUnderBatchNode getChildByTag:kHitLeftUnderTagValue];
+    CCSprite* leftHitOver  = (CCSprite *)[_spriteHitOverBatchNode getChildByTag:kHitLeftOverTagValue];
+    CCSprite* rightHitUnder= (CCSprite *)[_spriteHitUnderBatchNode getChildByTag:kHitRightUnderTagValue];
+    CCSprite* rightHitOver = (CCSprite *)[_spriteHitOverBatchNode getChildByTag:kHitRightOverTagValue];
+
     [leftHand stopAllActions];
     [rightHand stopAllActions];
+    [leftHitUnder stopAllActions];
+    [leftHitOver stopAllActions];
+    [rightHitUnder stopAllActions];
+    [rightHitOver stopAllActions];
+    leftHitOver.opacity   = 0;
+    leftHitUnder.opacity  = 0;
+    rightHitOver.opacity  = 0;
+    rightHitUnder.opacity = 0;
 
     NSLog(@"%@", NSStringFromSelector(_cmd));
 
-    id action = nil;
-    id doubleAction = nil;
-    id handAnimation = nil;
-    id handAnimationDouble = nil;
+    id action                  = nil;
+    id doubleAction            = nil;
+    
+    id actionHitUnder          = nil;
+    id actionHitUnderDouble    = nil;
+    id actionHitOver           = nil;
+    id actionHitOverDouble     = nil;
+    id handAnimation           = nil;
+    id handAnimationDouble     = nil;
+    id hitAnimationUnder       = nil;
+    id hitAnimationOver        = nil;
+    id hitAnimationUnderDouble = nil;
+    id hitAnimationOverDouble  = nil;
     
     [self setCharacterState:state];
     
@@ -292,17 +316,69 @@
             handAnimation = rightHand;
             break;
         case kStateLeftHandHit:
-            action = [CCAnimate actionWithAnimation:manoSinistraColpita];
-            handAnimation = leftHand;
-            break;
+            
+             action             = [CCAnimate actionWithAnimation:manoSinistraColpita];
+             actionHitUnder     = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCAnimate actionWithAnimation:manoSinistraHitUnder],
+                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+
+             actionHitOver      = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCAnimate actionWithAnimation:manoSinistraHitOver],
+                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+
+             hitAnimationUnder  = leftHitUnder;
+             hitAnimationOver   = leftHitOver;
+             handAnimation      = leftHand;
+             break;
         case kStateRightHandHit:
-            action = [CCAnimate actionWithAnimation:manoDestraColpita];
-            handAnimation = rightHand;
-            break;
+            
+             action             = [CCAnimate actionWithAnimation:manoDestraColpita];
+             actionHitUnder     = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.001f],
+                                  [CCAnimate actionWithAnimation:manoDestraHitUnder],
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
+            
+             actionHitOver      = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.001f],
+                                  [CCAnimate actionWithAnimation:manoDestraHitOver],
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
+            
+             hitAnimationUnder  = rightHitUnder;
+             hitAnimationOver   = rightHitOver;
+             handAnimation      = rightHand;
+             break;
         case kStateTwoHandsHit:
-            action = [CCAnimate actionWithAnimation:manoDestraColpita];
-            doubleAction = [CCAnimate actionWithAnimation:manoSinistraColpita];
-            handAnimation = rightHand;
+            action              = [CCAnimate actionWithAnimation:manoDestraColpita];
+            doubleAction        = [CCAnimate actionWithAnimation:manoSinistraColpita];
+            
+             actionHitUnder     = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.001f],
+                                  [CCAnimate actionWithAnimation:manoDestraHitUnder],
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
+            
+             actionHitOver      = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.001f],
+                                  [CCAnimate actionWithAnimation:manoDestraHitOver],
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
+            
+       actionHitUnderDouble     = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.001f],
+                                  [CCAnimate actionWithAnimation:manoSinistraHitUnder],
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
+            
+       actionHitOverDouble      = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.001f],
+                                  [CCAnimate actionWithAnimation:manoSinistraHitOver],
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
+            
+       hitAnimationUnderDouble  = leftHitUnder;
+       hitAnimationOverDouble   = leftHitOver;
+
+            hitAnimationUnder   = rightHitUnder;
+            hitAnimationOver    = rightHitOver;            
+            handAnimation       = rightHand;
             handAnimationDouble = leftHand;
             break;
         case kStateTwoHandsAreOpen:
@@ -319,30 +395,57 @@
             break;
         case kStateRightCrossHandClose:
             action = [CCAnimate actionWithAnimation:manoDestraCrossChiude];
-            [self reorderChild:_rightHandBatchNode z:MinZOrder];
+            [_spriteBatchNode reorderChild:rightHand z:MinZOrder];
             handAnimation = rightHand;
             break;
         case kStateRightCrossHandOpen:
             action = [CCAnimate actionWithAnimation:manoDestraCrossApre];
-            [self reorderChild:_rightHandBatchNode z:MaxZOrder];
+            [_spriteBatchNode reorderChild:rightHand z:MaxZOrder];
             handAnimation = rightHand;
             break;
         case kStateLeftCrossHandClose:
             action = [CCAnimate actionWithAnimation:manoSinistraCrossChiude];
-            [self reorderChild:_leftHandBatchNode z:MinZOrder];
+            [_spriteBatchNode reorderChild:leftHand z:MinZOrder];
             handAnimation = leftHand;
             break;
         case kStateLeftCrossHandOpen:
             action = [CCAnimate actionWithAnimation:manoSinistraCrossApre];
-            [self reorderChild:_leftHandBatchNode z:MaxZOrder];
+            [_spriteBatchNode reorderChild:leftHand z:MaxZOrder];
             handAnimation = leftHand;
             break;
         case kStateRightCrossHandHit:
             action = [CCAnimate actionWithAnimation:manoDestraCrossColpita];
+            
+            actionHitUnder     = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCAnimate actionWithAnimation:manoDestraCrossHitUnder],
+                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+            
+            actionHitOver      = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCAnimate actionWithAnimation:manoDestraCrossHitOver],
+                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+            
+            hitAnimationUnder  = rightHitUnder;
+            hitAnimationOver   = rightHitOver;
             handAnimation = rightHand;
             break;
         case kStateLeftCrossHandHit:
+            
             action = [CCAnimate actionWithAnimation:manoSinistraCrossColpita];
+            actionHitUnder     = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCAnimate actionWithAnimation:manoSinistraCrossHitUnder],
+                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+            
+            actionHitOver      = [CCSequence actions:
+                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCAnimate actionWithAnimation:manoSinistraCrossHitOver],
+                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+            
+            hitAnimationUnder  = leftHitUnder;
+            hitAnimationOver   = leftHitOver;
+
             handAnimation = leftHand;
             break;
         case kStateDead:
@@ -357,19 +460,30 @@
     
     if (action != nil && handAnimationDouble != nil) {
                 
-        [handAnimation runAction:action],
-        [handAnimationDouble runAction:doubleAction];
+        [handAnimation              runAction:action],
+        [handAnimationDouble        runAction:doubleAction];
                        
-    }else [handAnimation runAction:action];
+    }else [handAnimation            runAction:action];
     
+    if (hitAnimationUnder != nil && hitAnimationUnderDouble != nil) {
+        
+        [hitAnimationUnder          runAction:actionHitUnder];
+        [hitAnimationUnderDouble    runAction:actionHitUnderDouble];
+        [hitAnimationOver           runAction:actionHitOver];
+        [hitAnimationOverDouble     runAction:actionHitOverDouble];
+        
+    }else {
+        
+        [hitAnimationUnder          runAction:actionHitUnder];
+        [hitAnimationOver           runAction:actionHitOver];
+    }
     
 }
 
 #pragma mark -
-
-
-#pragma mark Init Methods
+#pragma mark ===  Init Methods  ===
 #pragma mark -
+
 
 +(id)playerWithDictionary:(NSDictionary *)playerSettings{
         
@@ -379,48 +493,167 @@
 
 #pragma mark -
 
+-(void)loadHitSpriteWithDictionary:(NSDictionary *)playerSettings{
+    
+    CCSprite* rightHand = (CCSprite *)[_spriteBatchNode getChildByTag:kRightHandTagValue];
+    CCSprite* leftHand  = (CCSprite *)[_spriteBatchNode getChildByTag:kLeftHandTagValue];
+    
+    // Get name of sprite from dictionary
+    
+    NSString* hitNameDxUnder = [playerSettings objectForKey:@"hitNameDxUnder"];
+    NSString* hitNameDxOver  = [playerSettings objectForKey:@"hitNameDxOver"];
+    NSString* hitNameSxUnder = [playerSettings objectForKey:@"hitNameSxUnder"];
+    NSString* hitNameSxOver  = [playerSettings objectForKey:@"hitNameSxOver"];
+    
+    // Creation of Sprite
+    
+    CCSprite* leftHitUnder   = [CCSprite spriteWithSpriteFrameName:hitNameSxUnder];
+    CCSprite* leftHitOver    = [CCSprite spriteWithSpriteFrameName:hitNameSxOver];
+    CCSprite* rightHitUnder  = [CCSprite spriteWithSpriteFrameName:hitNameDxUnder];
+    CCSprite* rightHitOver   = [CCSprite spriteWithSpriteFrameName:hitNameDxOver];
+    
+    leftHitUnder.flipX = YES;
+    leftHitOver.flipX = YES;
+    leftHitUnder.opacity  = 0;
+    leftHitOver.opacity   = 0;
+    rightHitUnder.opacity = 0;
+    rightHitOver.opacity  = 0;
+        
+    // Set Position
+    
+    [rightHitUnder setPosition:rightHand.position];
+    [rightHitOver  setPosition:rightHand.position];
+    [leftHitUnder  setPosition:leftHand.position];
+    [leftHitOver   setPosition:leftHand.position];
+    
+    // Set anchor point
+    
+    [rightHitUnder setAnchorPoint:ccp(0 , 0)];
+    [rightHitOver  setAnchorPoint:ccp(0 , 0)];
+    [leftHitUnder  setAnchorPoint:ccp(0,  0)];
+    [leftHitOver   setAnchorPoint:ccp(0,  0)];
+    
+    // Add to batchnode
+    
+    [_spriteHitUnderBatchNode addChild:leftHitUnder z:kHitLeftUnderZValue tag:kHitLeftUnderTagValue];
+    [_spriteHitOverBatchNode  addChild:leftHitOver  z:kHitLeftOverZValue tag:kHitLeftOverTagValue];
+    [_spriteHitUnderBatchNode addChild:rightHitUnder z:kHitRightUnderZValue tag:kHitRightUnderTagValue];
+    [_spriteHitOverBatchNode  addChild:rightHitOver z:kHitRightOverZValue tag:kHitRightOverTagValue];
+    
+    // Add Cross sprite if available
+    
+    if (manoDestraCrossApre != nil) {
+        
+        NSString* hitNameDxCrossUnder = [playerSettings objectForKey:@"hitNameDxCrossUnder"];
+        NSString* hitNameDxCrossOver  = [playerSettings objectForKey:@"hitNameDxCrossOver"];
+        
+        CCSprite* rightCrossHitUnder  = [CCSprite spriteWithSpriteFrameName:hitNameDxCrossUnder];
+        CCSprite* rightCrossHitOver   = [CCSprite spriteWithSpriteFrameName:hitNameDxCrossOver];
+        
+        rightCrossHitUnder.opacity = 0;
+        rightCrossHitOver.opacity  = 0;
+        
+        rightCrossHitUnder.flipX = YES;
+        rightCrossHitOver.flipX  = YES;
+        
+        [_spriteHitUnderBatchNode addChild:rightCrossHitUnder z:kHitRightCrossUnderZValue tag:kHitRightCrossUnderTagValue];
+        [_spriteHitOverBatchNode addChild:rightCrossHitOver z:kHitRightCrossOverZValue tag:kHitRightCrossOverTagValue];
+        
+        [rightCrossHitUnder setPosition:rightHand.position];
+        [rightCrossHitOver  setPosition:rightHand.position];
+    }
+    
+    if (manoSinistraCrossApre != nil) {
+        
+        NSString* hitNameSxCrossUnder = [playerSettings objectForKey:@"hitNameSxCrossUnder"];
+        NSString* hitNameSxCrossOver  = [playerSettings objectForKey:@"hitNameSxCrossOver"];
+        
+        CCSprite* leftCrossHitUnder  = [CCSprite spriteWithSpriteFrameName:hitNameSxCrossUnder];
+        CCSprite* leftCrossHitOver   = [CCSprite spriteWithSpriteFrameName:hitNameSxCrossOver];
+        
+        leftCrossHitUnder.opacity = 0;
+        leftCrossHitOver.opacity  = 0;
+        
+        leftCrossHitUnder.flipX = YES;
+        leftCrossHitOver.flipX  = YES;
+        
+        [_spriteHitUnderBatchNode addChild:leftCrossHitUnder z:kHitLeftCrossUnderZValue tag:kHitLeftCrossUnderTagValue];
+        [_spriteHitOverBatchNode addChild:leftCrossHitOver z:kHitLeftCrossOverZValue tag:kHitLeftCrossOverTagValue];
+        
+        [leftCrossHitUnder setPosition:leftHand.position];
+        [leftCrossHitOver  setPosition:leftHand.position];
+        
+    }
+    
+    
+}
+#pragma mark -
+
 -(void)initAnimations {
     
     id dao = [[GameManager sharedGameManager] dao];
     
-    [self setManoDestraApre:[dao loadPlistForAnimationWithName:@"manoDestraApre" 
+    [self setManoDestraApre:[dao loadPlistForAnimationWithName:@"manoApre" 
                                                    andClassName:name]];
-    [self setManoDestraChiude:[dao loadPlistForAnimationWithName:@"manoDestraChiude" 
+    [self setManoDestraChiude:[dao loadPlistForAnimationWithName:@"manoChiude" 
                                                      andClassName:name]];
-    [self setManoSinistraApre:[dao loadPlistForAnimationWithName:@"manoSinistraApre" 
+    [self setManoSinistraApre:[dao loadPlistForAnimationWithName:@"manoApre" 
                                                      andClassName:name]];
-    [self setManoSinistraChiude:[dao loadPlistForAnimationWithName:@"manoSinistraChiude"
+    [self setManoSinistraChiude:[dao loadPlistForAnimationWithName:@"manoChiude"
                                                        andClassName:name]];
-    [self setManoSinistraColpita:[dao loadPlistForAnimationWithName:@"manoSinistraColpita"
+    [self setManoSinistraColpita:[dao loadPlistForAnimationWithName:@"manoColpita"
                                                         andClassName:name]];
-    [self setManoDestraColpita:[dao loadPlistForAnimationWithName:@"manoDestraColpita"
+    [self setManoDestraColpita:[dao loadPlistForAnimationWithName:@"manoColpita"
                                                       andClassName:name]];
     [self setFeedBody:[dao loadPlistForAnimationWithName:@"bodyFeed"
                                              andClassName:name]];
-    [self setManoDestraCrossApre:[dao loadPlistForAnimationWithName:@"manoDestraCrossApre"
+    [self setManoDestraCrossApre:[dao loadPlistForAnimationWithName:@"manoCrossApre"
                                                        andClassName:name]];
-    [self setManoDestraCrossChiude:[dao loadPlistForAnimationWithName:@"manoDestraCrossChiude"
+    [self setManoDestraCrossChiude:[dao loadPlistForAnimationWithName:@"manoCrossChiude"
                                                          andClassName:name]];
-    [self setManoSinistraCrossApre:[dao loadPlistForAnimationWithName:@"manoSinistraCrossApre" 
+    [self setManoSinistraCrossApre:[dao loadPlistForAnimationWithName:@"manoCrossApre" 
                                                          andClassName:name]];
-    [self setManoSinistraCrossChiude:[dao loadPlistForAnimationWithName:@"manoSinistraCrossChiude"
+    [self setManoSinistraCrossChiude:[dao loadPlistForAnimationWithName:@"manoCrossChiude"
                                                            andClassName:name]];
-    [self setManoDestraCrossColpita:[dao loadPlistForAnimationWithName:@"manoDestraCrossColpita" 
+    [self setManoDestraCrossColpita:[dao loadPlistForAnimationWithName:@"manoCrossColpita" 
                                                           andClassName:name]];
-    [self setManoSinistraCrossColpita:[dao loadPlistForAnimationWithName:@"manoSinistraCrossColpita" 
+    [self setManoSinistraCrossColpita:[dao loadPlistForAnimationWithName:@"manoCrossColpita" 
                                                             andClassName:name]];
     [self setFeedBodyErr:[dao loadPlistForAnimationWithName:@"bodyFeedErr" 
                                                andClassName:name]];
+    [self setManoDestraHitUnder:[dao loadPlistForAnimationWithName:@"manoDestraHitUnder" 
+                                                 andClassName:name]];
+    [self setManoDestraHitOver:[dao loadPlistForAnimationWithName:@"manoDestraHitOver" 
+                                                 andClassName:name]];
+    [self setManoSinistraHitUnder:[dao loadPlistForAnimationWithName:@"manoSinistraHitUnder" 
+                                                   andClassName:name]];
+    [self setManoSinistraHitOver:[dao loadPlistForAnimationWithName:@"manoSinistraHitOver" 
+                                                   andClassName:name]];
+    [self setManoDestraCrossHitUnder:[dao loadPlistForAnimationWithName:@"manoDestraCrossHitUnder"
+                                                      andClassName:name]];
+    [self setManoDestraCrossHitOver:[dao loadPlistForAnimationWithName:@"manoDestraCrossHitOver"
+                                                      andClassName:name]];
+    [self setManoSinistraCrossHitUnder:[dao loadPlistForAnimationWithName:@"manoSinistraCrossHitUnder" 
+                                                        andClassName:name]];
+    [self setManoSinistraCrossHitOver:[dao loadPlistForAnimationWithName:@"manoSinistraCrossHitOver" 
+                                                        andClassName:name]];
 
 }
 
 #pragma mark -
+
+
 -(id) initWithDictionary:(NSMutableDictionary*)playerSettings
-{
-    CCTexture2D* texture = [[CCTextureCache sharedTextureCache] addImage:[playerSettings objectForKey:@"texture"]];
-        
+{    
+    [self setName:[playerSettings objectForKey:@"name"]];
+
+    [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Player.plist",name] textureFilename:[NSString stringWithFormat:@"%@Player.png",name]];
+    
+    CCTexture2D* texture = [[CCTextureCache sharedTextureCache] addImage:[playerSettings objectForKey:@"headName"]];
+    
     if( (self=[super initWithTexture:texture]))
-{
+        
+    {
         CCLOG(@"Inizializzazione Player");
         
         currentTime = 0;
@@ -432,142 +665,139 @@
         isLastPlayer = [[GameManager sharedGameManager] isLastLevel];
         
         CGSize size = [[CCDirector sharedDirector] winSize];
-        
-        [self setName:[playerSettings objectForKey:@"name"]];
-        
+                
         bpm = [[playerSettings objectForKey:@"bpm"] intValue];
         
         frameForDoubleTouch = (bpm == 180) ? 1 : 2;
-
-        float positionX = 
-        [[playerSettings objectForKey:@"positionX"] floatValue];
         
-        float positionY =
-        [[playerSettings objectForKey:@"positionY"]floatValue];
+        CGPoint positionLeft = 
+        CGPointFromString([playerSettings objectForKey:@"leftPosition"]);
         
-        float positionLeftX = 
-        [[playerSettings objectForKey:@"leftPositionX"] floatValue];
+        CGPoint positionRight = 
+        CGPointFromString([playerSettings objectForKey:@"rightPosition"]);
         
-        float positionLeftY = 
-        [[playerSettings objectForKey:@"leftPositionY"] floatValue];
+        CGPoint rectLeftPosition = 
+        CGPointFromString([playerSettings objectForKey:@"leftRectPosition"]);
         
-        float positionRightX = 
-        [[playerSettings objectForKey:@"rightPositionX"] floatValue];
+        CGPoint rectRightPosition =
+        CGPointFromString([playerSettings objectForKey:@"rightRectPosition"]);
         
-        float positionRightY = 
-        [[playerSettings objectForKey:@"rightPositionY"] floatValue];
+        CGPoint rectRightCrossPosition = 
+        CGPointFromString([playerSettings objectForKey:@"rightRectCrossPosition"]);
         
-        float rectLeftPositionX = 
-        [[playerSettings objectForKey:@"leftRectPositionX"]floatValue];
+        CGPoint leftRectCrossPosition = 
+        CGPointFromString([playerSettings objectForKey:@"leftRectCrossPosition"]);
         
-        float rectLeftPositionY = 
-        [[playerSettings objectForKey:@"leftRectPositionY"]floatValue];
+        rectLeft = CGRectMake(rectLeftPosition.x/2, rectLeftPosition.y/2, 80, 80);
         
-        float rectRightPositionX =
-        [[playerSettings objectForKey:@"rightRectPositionX"]floatValue];
-        
-        float rectRightPositionY =
-        [[playerSettings objectForKey:@"rightRectPositionY"]floatValue];
-        
-        float rectRightCrossPositionX = 
-        [[playerSettings objectForKey:@"rightRectCrossPositionX"]floatValue];
-        
-        float rectRightCrossPositionY = 
-        [[playerSettings objectForKey:@"rightRectCrossPositionY"]floatValue];
-        
-        float leftRectCrossPositionX = 
-        [[playerSettings objectForKey:@"leftRectCrossPositionX"]floatValue];
-        
-        float leftRectCrossPositionY = 
-        [[playerSettings objectForKey:@"leftRectCrossPositionY"]floatValue];
-        
-        rectLeft = CGRectMake(rectLeftPositionX/2, rectLeftPositionY/2, 80, 80);
-        
-        rectRight = CGRectMake(rectRightPositionX/2, rectRightPositionY/2, 80, 80); 
+        rectRight = CGRectMake(rectRightPosition.x/2, rectRightPosition.y/2, 80, 80); 
                 
-        rectLeftCross = CGRectMake(leftRectCrossPositionX/2, leftRectCrossPositionY/2, 80, 80);
+        rectLeftCross = CGRectMake(leftRectCrossPosition.x/2, leftRectCrossPosition.y/2, 80, 80);
         
-        rectRightCross = CGRectMake(rectRightCrossPositionX/2, rectRightCrossPositionY/2, 80, 80);
+        rectRightCross = CGRectMake(rectRightCrossPosition.x/2, rectRightCrossPosition.y/2, 80, 80);
         
         NSLog(@"Rect Cross Right: %@ \n Rect Cross Left: %@", NSStringFromCGRect(rectRightCross), NSStringFromCGRect(rectLeftCross));
-                
-        self.anchorPoint = CGPointMake(0.5, 0);
-                
-        self.position = CGPointMake(positionX/2, size.height - positionY/2);
-                
-        NSString* leftName = [playerSettings objectForKey:@"leftHand"];
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Left.plist",name]];
+        // I use CCSpriteBatchNode as a layer: Under ---> Hand ----> Over (ZOrder)
         
-        _leftHandBatchNode = [CCSpriteBatchNode batchNodeWithFile:[NSString stringWithFormat:@"%@Left.png",name]];
+        [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Hit.plist", name] textureFilename:[NSString stringWithFormat:@"%@Hit.png", name]];
         
-        [self addChild:_leftHandBatchNode];
+        _spriteHitUnderBatchNode = [CCSpriteBatchNode batchNodeWithFile:[NSString stringWithFormat:@"%@Hit.png", name]];
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Right.plist",name]];
+        [self addChild:_spriteHitUnderBatchNode];
+                    
+        // Add Batch Node Hand
         
-        _rightHandBatchNode = [CCSpriteBatchNode batchNodeWithFile:[NSString stringWithFormat:@"%@Right.png",name]];
-        
-        [self addChild:_rightHandBatchNode];
-        
-        CCSprite* leftHand = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] 
-                                                          spriteFrameByName:leftName]];
-        
-        leftHand.anchorPoint = CGPointMake(0, 0);
-
-        leftHand.position = CGPointMake(positionLeftX/2 - self.position.x + (self.textureRect.size.width * self.anchorPoint.x), 
-                                        size.height - positionLeftY/2);
-        
-        
-        [_leftHandBatchNode addChild:leftHand z:kLeftHandZValue tag:kLeftHandTagValue];
-                
-        NSString* rightName = [playerSettings objectForKey:@"rightHand"];
-        
-        CCSprite* rightHand = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]
-                                                     spriteFrameByName:rightName]];
-        
-        rightHand.anchorPoint = CGPointMake(0, 0);
-
-        
-        [rightHand setPosition:CGPointMake(positionRightX/2 - self.position.x + (self.textureRect.size.width * self.anchorPoint.x),
-                                           size.height - positionRightY/2)];
-        
-        [_rightHandBatchNode addChild:rightHand z:kRightHandZValue tag:kRightHandTagValue];
+        _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:[NSString stringWithFormat:@"%@Player.png",name]];
     
-        if (!isLastPlayer) {    
+        [self addChild:_spriteBatchNode]; 
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Player.plist",name]];
+        // Add Batch Node Over
         
-        _bodyBatchNode = [CCSpriteBatchNode batchNodeWithFile:[NSString stringWithFormat:@"%@Player.png",name]];
+        _spriteHitOverBatchNode  = [CCSpriteBatchNode batchNodeWithTexture:_spriteHitUnderBatchNode.texture];
         
-        [self addChild:_bodyBatchNode];
+        [self addChild:_spriteHitOverBatchNode];
         
-        }
+        // Set position of head
+        
+        CGPoint position = 
+        CGPointFromString([playerSettings objectForKey:@"position"]);
+        
+        self.position    = ccp(size.width * (position.x/2 / size.width), size.height - size.height * (position.y/2 / size.height));
+        
+        // Add Right Hand
+                
+        NSString* nameHand = [playerSettings objectForKey:@"handName"];
     
+        CCSprite* rightHand =  [CCSprite spriteWithSpriteFrame:
+                                [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:nameHand]];
+        
+        rightHand.anchorPoint = ccp(0, 0);
+        
+        rightHand.isRelativeAnchorPoint = YES;
+                    
+        [rightHand setPosition:ccp(- self.position.x + (self.contentSize.width * self.anchorPoint.x) + size.width * (positionRight.x/2 / size.width), size.height - self.position.y + (self.contentSize.height * self.anchorPoint.y) - positionRight.y/2)];
+    
+        [_spriteBatchNode addChild:rightHand z:kRightHandZValue tag:kRightHandTagValue];
+        
+        [rightHand setVertexZ:40];
+
+        
+        // Add Left hand
+        
+        CCSprite* leftHand =  [CCSprite spriteWithSpriteFrame:
+                               [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:nameHand]];
+    
+        leftHand.flipX = YES;
+            
+        leftHand.anchorPoint = ccp(0, 0);
+                
+        leftHand.position = ccp(- self.position.x + (self.contentSize.width * self.anchorPoint.x) + positionLeft.x/2, size.height - self.position.y + (self.contentSize.height * self.anchorPoint.y) - positionLeft.y/2);
+        
+        [_spriteBatchNode addChild:leftHand z:kLeftHandZValue tag:kLeftHandTagValue];
+        
+        [leftHand setVertexZ:1];
+        
+        // get pattern from Game Manager
+        
         pattern = [[GameManager sharedGameManager] patternForLevel];
         
+        // Load animation
+            
         [self initAnimations];
         
+        // Add sprite for Hit Animation
+        
+        [self loadHitSpriteWithDictionary:playerSettings];
+                
         [self setCharacterState:kStateNone];
         
         currentItem = -1;
-                
+            
         handIsOpen = FALSE;
         
         handsAreOpen = FALSE;
-                        
         
     }
     return self;
 }
 
+#pragma mark -
+#pragma mark ===  Dealloc  ===
+#pragma mark -
+
+
 - (void)dealloc {
     
+    _spriteBatchNode = nil;
+    _spriteHitOverBatchNode = nil;
+    _spriteHitUnderBatchNode= nil;
+    _delegate = nil;
     
     NSLog(@"%@ %@", NSStringFromSelector(_cmd), self);
     
-    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFramesFromFile:[NSString stringWithFormat:@"%@Player.plist",name]];
-    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFramesFromFile:[NSString stringWithFormat:@"%@Left.plist",name]];
-    [[CCSpriteFrameCache sharedSpriteFrameCache]removeSpriteFramesFromFile:[NSString stringWithFormat:@"%@Right.plist",name]];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:[NSString stringWithFormat:@"%@Player.plist",name]];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:[NSString stringWithFormat:@"%@Hit.plist", name]];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
 }

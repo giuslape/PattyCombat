@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>cinziah_arm_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{201, 114}, {180, 180}}</string>
+			<key>spriteOffset</key>
+			<string>{26, -46}</string>
+			<key>spriteSize</key>
+			<string>{180, 180}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{822, 0}, {180, 180}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_arm_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{25, 1}, {324, 302}}</string>
+			<key>spriteOffset</key>
+			<string>{-78, 6}</string>
+			<key>spriteSize</key>
+			<string>{324, 302}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {324, 302}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_arm_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{25, 68}, {278, 236}}</string>
+			<key>spriteOffset</key>
+			<string>{-101, -28}</string>
+			<key>spriteSize</key>
+			<string>{278, 236}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{326, 0}, {278, 236}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_arm_0004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{189, 1}, {114, 292}}</string>
+			<key>spriteOffset</key>
+			<string>{-19, 11}</string>
+			<key>spriteSize</key>
+			<string>{114, 292}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{276, 304}, {114, 292}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_arm_0005.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{29, 65}, {274, 238}}</string>
+			<key>spriteOffset</key>
+			<string>{-99, -26}</string>
+			<key>spriteSize</key>
+			<string>{274, 238}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 304}, {274, 238}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_arm_0006.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{27, 67}, {276, 236}}</string>
+			<key>spriteOffset</key>
+			<string>{-100, -27}</string>
+			<key>spriteSize</key>
+			<string>{276, 236}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{276, 598}, {276, 236}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_arm_0007.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{242, 92}, {272, 224}}</string>
+			<key>spriteOffset</key>
+			<string>{113, -46}</string>
+			<key>spriteSize</key>
+			<string>{272, 224}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 714}, {272, 224}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_arm_0008.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{242, 112}, {272, 168}}</string>
+			<key>spriteOffset</key>
+			<string>{113, -38}</string>
+			<key>spriteSize</key>
+			<string>{272, 168}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{554, 464}, {272, 168}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_arm_0009.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{264, 92}, {172, 224}}</string>
+			<key>spriteOffset</key>
+			<string>{85, -46}</string>
+			<key>spriteSize</key>
+			<string>{172, 224}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{392, 238}, {172, 224}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_arm_0010.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{240, 112}, {272, 166}}</string>
+			<key>spriteOffset</key>
+			<string>{111, -37}</string>
+			<key>spriteSize</key>
+			<string>{272, 166}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{554, 634}, {272, 166}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_arm_0011.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{241, 112}, {274, 168}}</string>
+			<key>spriteOffset</key>
+			<string>{113, -38}</string>
+			<key>spriteSize</key>
+			<string>{274, 168}</string>
+			<key>spriteSourceSize</key>
+			<string>{530, 316}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 544}, {274, 168}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_head_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{15, 2}, {214, 222}}</string>
+			<key>spriteOffset</key>
+			<string>{4, -1}</string>
+			<key>spriteSize</key>
+			<string>{214, 222}</string>
+			<key>spriteSourceSize</key>
+			<string>{236, 224}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{606, 0}, {214, 222}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_head_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{15, 2}, {214, 222}}</string>
+			<key>spriteOffset</key>
+			<string>{4, -1}</string>
+			<key>spriteSize</key>
+			<string>{214, 222}</string>
+			<key>spriteSourceSize</key>
+			<string>{236, 224}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{782, 224}, {214, 222}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>cinziah_head_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{15, 26}, {214, 198}}</string>
+			<key>spriteOffset</key>
+			<string>{4, -13}</string>
+			<key>spriteSize</key>
+			<string>{214, 198}</string>
+			<key>spriteSourceSize</key>
+			<string>{236, 224}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{566, 238}, {214, 198}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.5.3</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+		<key>name</key>
+		<string>ChunLiPlayer</string>
+		<key>premultipliedAlpha</key>
+		<false/>
+		<key>target</key>
+		<dict>
+			<key>name</key>
+			<string>default</string>
+			<key>textureFileName</key>
+			<string>ChunLiPlayer</string>
+			<key>textureFileExtension</key>
+			<string>.png</string>
+			<key>coordinatesFileName</key>
+			<string>ChunLiPlayer</string>
+			<key>coordinatesFileExtension</key>
+			<string>.plist</string>
+			<key>premultipliedAlpha</key>
+			<false/>
+		</dict>
+	</dict>
+</dict>
+</plist>

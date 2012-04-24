@@ -40,13 +40,10 @@
 
 - (void)dealloc {
     
-    [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
+    _spriteBatchNode = nil;
+    [[[CCDirectorIOS sharedDirector] touchDispatcher] removeAllDelegates];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];    
-    [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
-    
-    _spriteBatchNode = nil;
-    
         
     NSLog(@"%@ %@", NSStringFromSelector(_cmd), self);
 
@@ -139,7 +136,6 @@
     
     [self alignHandsWithPadding:padding];
     
-    
 }
 
 -(void)alignHandsWithPadding:(float)padding{
@@ -150,6 +146,8 @@
     
     for (CCSprite* item in feedHand) {
         
+        [item setScale:1.2f];
+
         width += item.textureRect.size.width * item.scaleX +padding; 
         
     }
@@ -161,7 +159,6 @@
     for (CCSprite* item in feedHand) {
         
         [_spriteBatchNode addChild:item];
-        [item setScale:1.2f];
         CGSize itemSize = item.textureRect.size;
         [item setPosition:ccp(x + itemSize.width * item.scaleX / 2.0f, size.height * 0.95f - itemSize.height * item.scaleY /2.0f)];
         x += itemSize.width * item.scaleX + padding;
@@ -447,6 +444,7 @@
             
         CCLOG(@"Intro complete, asking Game Manager to start the Game play");
         
+        [self unschedule:_cmd];
         [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
         
         self.isTouchEnabled = FALSE;
@@ -585,7 +583,7 @@
     
     if (!_isLastLevel) {
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"IntroButtAndFeed.plist"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"IntroButtAndFeed.plist" textureFilename:@"IntroButtAndFeed.png"];
         
         _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"IntroButtAndFeed.png"];
         

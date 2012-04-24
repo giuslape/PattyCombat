@@ -15,19 +15,28 @@
 	<dict>
 		<key>BELL</key>
 		<string>bell.aif</string>
-		<key>WRONGTAP</key>
-		<string>tap_sbagliato.aif</string>
-		<key>PERFECT_TAP</key>
-		<string>tap_3.aif</string>
+		<key>TouchWall</key>
+		<string>muro_1.mp3</string>
+		<key>DestroyWall</key>
+		<string>muro_2.mp3</string>
 	</dict>
 	<key>kBonusLevel2</key>
 	<dict>
 		<key>BELL</key>
 		<string>bell.aif</string>
-		<key>WRONGTAP</key>
-		<string>tap_sbagliato.aif</string>
-		<key>PERFECT_TAP</key>
-		<string>tap_2.mp3</string>
+		<key>TouchTv</key>
+		<string>hit_car_1.mp3</string>
+		<key>DestroyTv</key>
+		<string>hit_car_3.mp3</string>
+	</dict>
+	<key>kBonusLevel3</key>
+	<dict>
+		<key>BELL</key>
+		<string>bell.aif</string>
+		<key>TouchCar</key>
+		<string>hit_car_1.mp3</string>
+		<key>DestroyCar</key>
+		<string>hit_car_3.mp3</string>
 	</dict>
 </dict>
 </plist>

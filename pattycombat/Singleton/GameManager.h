@@ -15,7 +15,6 @@
 @interface GameManager : NSObject {
     
     SceneTypes currentScene;
-    BOOL hasPlayerDied;
     BOOL isMusicON;
     BOOL isSoundEffectsON;
     BOOL _isTutorial;
@@ -52,7 +51,6 @@
 @property (readwrite) int gameTime;
 @property (readwrite) BOOL isMusicON;
 @property (readwrite) BOOL isSoundEffectsON;
-@property (readwrite) BOOL hasPlayerDied;
 @property (readwrite) BOOL isBonusLevel;
 @property (readwrite, nonatomic) int levelReached;
 @property (nonatomic, strong) NSString* namePlayer;

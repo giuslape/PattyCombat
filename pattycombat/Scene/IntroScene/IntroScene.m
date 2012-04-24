@@ -29,6 +29,12 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[CCTextureCache sharedTextureCache] removeUnusedTextures];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
+
+}
 
 
 @end

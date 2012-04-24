@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>bud_arm_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{169, 220}, {266, 268}}</string>
+			<key>spriteOffset</key>
+			<string>{82, -89}</string>
+			<key>spriteSize</key>
+			<string>{266, 268}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{993, 0}, {266, 268}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_arm_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{19, 62}, {394, 396}}</string>
+			<key>spriteOffset</key>
+			<string>{-4, 5}</string>
+			<key>spriteSize</key>
+			<string>{394, 396}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {394, 396}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_arm_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{19, 62}, {258, 396}}</string>
+			<key>spriteOffset</key>
+			<string>{-72, 5}</string>
+			<key>spriteSize</key>
+			<string>{258, 396}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 397}, {258, 396}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_arm_0004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{182, 123}, {160, 324}}</string>
+			<key>spriteOffset</key>
+			<string>{42, -20}</string>
+			<key>spriteSize</key>
+			<string>{160, 324}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{510, 395}, {160, 324}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_arm_0005.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{38, 62}, {240, 394}}</string>
+			<key>spriteOffset</key>
+			<string>{-62, 6}</string>
+			<key>spriteSize</key>
+			<string>{240, 394}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{395, 0}, {240, 394}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_arm_0006.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{27, 62}, {250, 396}}</string>
+			<key>spriteOffset</key>
+			<string>{-68, 5}</string>
+			<key>spriteSize</key>
+			<string>{250, 396}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{259, 397}, {250, 396}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_arm_0007.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{62, 220}, {356, 308}}</string>
+			<key>spriteOffset</key>
+			<string>{20, -109}</string>
+			<key>spriteSize</key>
+			<string>{356, 308}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{636, 0}, {356, 308}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_arm_0008.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{62, 220}, {226, 308}}</string>
+			<key>spriteOffset</key>
+			<string>{-45, -109}</string>
+			<key>spriteSize</key>
+			<string>{226, 308}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{898, 309}, {226, 308}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_arm_0009.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{173, 220}, {222, 288}}</string>
+			<key>spriteOffset</key>
+			<string>{64, -99}</string>
+			<key>spriteSize</key>
+			<string>{222, 288}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{510, 720}, {222, 288}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_arm_0010.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{62, 221}, {226, 308}}</string>
+			<key>spriteOffset</key>
+			<string>{-45, -110}</string>
+			<key>spriteSize</key>
+			<string>{226, 308}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{733, 618}, {226, 308}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_arm_0011.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{62, 221}, {226, 308}}</string>
+			<key>spriteOffset</key>
+			<string>{-45, -110}</string>
+			<key>spriteSize</key>
+			<string>{226, 308}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{671, 309}, {226, 308}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_head_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{51, 0}, {342, 232}}</string>
+			<key>spriteOffset</key>
+			<string>{-5, -0}</string>
+			<key>spriteSize</key>
+			<string>{342, 232}</string>
+			<key>spriteSourceSize</key>
+			<string>{454, 232}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{1260, 0}, {342, 232}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_head_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{51, 0}, {342, 232}}</string>
+			<key>spriteOffset</key>
+			<string>{-5, -0}</string>
+			<key>spriteSize</key>
+			<string>{342, 232}</string>
+			<key>spriteSourceSize</key>
+			<string>{454, 232}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{960, 618}, {342, 232}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_head_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{51, 0}, {342, 232}}</string>
+			<key>spriteOffset</key>
+			<string>{-5, -0}</string>
+			<key>spriteSize</key>
+			<string>{342, 232}</string>
+			<key>spriteSourceSize</key>
+			<string>{454, 232}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{1125, 269}, {342, 232}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.5.3</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{2048, 1024}</string>
+		<key>name</key>
+		<string>BudPlayer</string>
+		<key>premultipliedAlpha</key>
+		<false/>
+		<key>target</key>
+		<dict>
+			<key>name</key>
+			<string>default</string>
+			<key>textureFileName</key>
+			<string>BudPlayer</string>
+			<key>textureFileExtension</key>
+			<string>.png</string>
+			<key>coordinatesFileName</key>
+			<string>BudPlayer</string>
+			<key>coordinatesFileExtension</key>
+			<string>.plist</string>
+			<key>premultipliedAlpha</key>
+			<false/>
+		</dict>
+	</dict>
+</dict>
+</plist>

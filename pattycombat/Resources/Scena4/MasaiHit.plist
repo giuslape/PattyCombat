@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>maa_hit1_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{4, 1}, {202, 200}}</string>
+			<key>spriteOffset</key>
+			<string>{-85, 111}</string>
+			<key>spriteSize</key>
+			<string>{202, 200}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 202}, {202, 200}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit1_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{17, 22}, {160, 170}}</string>
+			<key>spriteOffset</key>
+			<string>{-93, 105}</string>
+			<key>spriteSize</key>
+			<string>{160, 170}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{162, 816}, {160, 170}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit1_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{2, 220}, {190, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{-93, -110}</string>
+			<key>spriteSize</key>
+			<string>{190, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 610}, {190, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit1_0004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{21, 248}, {158, 166}}</string>
+			<key>spriteOffset</key>
+			<string>{-90, -119}</string>
+			<key>spriteSize</key>
+			<string>{158, 166}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{192, 404}, {158, 166}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit1_0005.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{4, 1}, {202, 200}}</string>
+			<key>spriteOffset</key>
+			<string>{-85, 111}</string>
+			<key>spriteSize</key>
+			<string>{202, 200}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {202, 200}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit1_0006.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{17, 22}, {160, 170}}</string>
+			<key>spriteOffset</key>
+			<string>{-93, 105}</string>
+			<key>spriteSize</key>
+			<string>{160, 170}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 816}, {160, 170}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit1_0007.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{2, 220}, {190, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{-93, -110}</string>
+			<key>spriteSize</key>
+			<string>{190, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 404}, {190, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit1_0008.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{21, 248}, {158, 166}}</string>
+			<key>spriteOffset</key>
+			<string>{-90, -119}</string>
+			<key>spriteSize</key>
+			<string>{158, 166}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{192, 572}, {158, 166}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit2_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{31, 17}, {140, 146}}</string>
+			<key>spriteOffset</key>
+			<string>{-89, 122}</string>
+			<key>spriteSize</key>
+			<string>{140, 146}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{324, 878}, {140, 146}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit2_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{29, 18}, {140, 146}}</string>
+			<key>spriteOffset</key>
+			<string>{-91, 121}</string>
+			<key>spriteSize</key>
+			<string>{140, 146}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{352, 274}, {140, 146}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit2_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{18, 252}, {144, 134}}</string>
+			<key>spriteOffset</key>
+			<string>{-100, -107}</string>
+			<key>spriteSize</key>
+			<string>{144, 134}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{346, 138}, {144, 134}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit2_0004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{16, 252}, {146, 136}}</string>
+			<key>spriteOffset</key>
+			<string>{-101, -108}</string>
+			<key>spriteSize</key>
+			<string>{146, 136}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{204, 0}, {146, 136}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit2_0005.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{31, 17}, {140, 146}}</string>
+			<key>spriteOffset</key>
+			<string>{-89, 122}</string>
+			<key>spriteSize</key>
+			<string>{140, 146}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{352, 422}, {140, 146}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit2_0006.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{29, 18}, {140, 146}}</string>
+			<key>spriteOffset</key>
+			<string>{-91, 121}</string>
+			<key>spriteSize</key>
+			<string>{140, 146}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{204, 138}, {140, 146}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit2_0007.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{18, 252}, {144, 134}}</string>
+			<key>spriteOffset</key>
+			<string>{-100, -107}</string>
+			<key>spriteSize</key>
+			<string>{144, 134}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{352, 0}, {144, 134}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>maa_hit2_0008.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{16, 252}, {146, 136}}</string>
+			<key>spriteOffset</key>
+			<string>{-101, -108}</string>
+			<key>spriteSize</key>
+			<string>{146, 136}</string>
+			<key>spriteSourceSize</key>
+			<string>{380, 424}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{324, 740}, {146, 136}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.5.3</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{512, 1024}</string>
+		<key>name</key>
+		<string>MasaiHit</string>
+		<key>premultipliedAlpha</key>
+		<false/>
+		<key>target</key>
+		<dict>
+			<key>name</key>
+			<string>default</string>
+			<key>textureFileName</key>
+			<string>MasaiHit</string>
+			<key>textureFileExtension</key>
+			<string>.png</string>
+			<key>coordinatesFileName</key>
+			<string>MasaiHit</string>
+			<key>coordinatesFileExtension</key>
+			<string>.plist</string>
+			<key>premultipliedAlpha</key>
+			<false/>
+		</dict>
+	</dict>
+</dict>
+</plist>

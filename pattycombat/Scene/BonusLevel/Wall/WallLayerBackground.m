@@ -19,9 +19,11 @@
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
+
         CCSprite * background = [CCSprite spriteWithFile:@"muretto_bg.png"];
         
         [self addChild:background z:0];
+
         
         [background setPosition:ccp(winSize.width/2, winSize.height/2)];
         

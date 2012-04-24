@@ -11,16 +11,16 @@
 	<key>Background5</key>
 	<string>maa_bg.png</string>
 	<key>Background6</key>
-	<string>jocopoco_bg.png</string>
+	<string>joco_bg.png</string>
 	<key>Background7</key>
-	<string>Jenny_bg.png</string>
-	<key>Background8</key>
+	<string>jenny_bg.png</string>
+	<key>Background9</key>
 	<string>bud_bg.png</string>
 	<key>Background10</key>
-	<string>JeanPaul_bg.png</string>
+	<string>jeanPaul_bg.png</string>
 	<key>Background11</key>
 	<string>steven_bg.png</string>
-	<key>Background12</key>
+	<key>Background13</key>
 	<string>chuck_bg.png</string>
 </dict>
 </plist>

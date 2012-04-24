@@ -184,7 +184,8 @@
         
         // Load Common Elements in Cache
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Common.plist"];
+        
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Common.plist" textureFilename:@"Common.png"];
         
         _commonElements = [CCSpriteBatchNode batchNodeWithFile:@"Common.png"];
         
@@ -382,6 +383,7 @@
     
     NSLog(@"%@ %@", NSStringFromSelector(_cmd), self);
     
+    _delegate = nil;
     _commonElements = nil;
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.plist"];

@@ -48,6 +48,7 @@
     self.player = nil;
     self.hudLayer = nil;
     
+    [self unscheduleAllSelectors];
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
@@ -107,13 +108,11 @@
 
 -(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score{
     
-
     self.isTouchEnabled = FALSE;
 
     CGSize size = [[CCDirectorIOS sharedDirector] winSize];
     
     [self unscheduleAllSelectors];
-    
     
     [[GameManager sharedGameManager]  stopBackgroundMusic];
     [[GameManager sharedGameManager]  setCurrentScore:[score intValue]];
@@ -264,6 +263,8 @@
         
         id dao = [GameManager sharedGameManager].dao;
         
+        CGSize size = [[CCDirectorIOS sharedDirector]winSize];
+
         // Load Scene
         
         NSDictionary* sceneObjects = [dao loadScene:[[GameManager sharedGameManager] currentLevel]];
@@ -279,19 +280,13 @@
         NSDictionary* playerSettings = [sceneObjects objectForKey:@"player"];
         
         _bpm = [[playerSettings objectForKey:@"bpm"] intValue];
-        
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-        
+                
         _player = [Player playerWithDictionary:playerSettings];
         
         [self addChild:_player z:kPlayerZValue tag:kPlayerTagValue];
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-        
         [_player setDelegate:self];
-        
-        CGSize size = [[CCDirectorIOS sharedDirector]winSize];
-        
+
         CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Get the Rhythm" fntFile:FONTHIGHSCORES];
         [self addChild:label z:kLabelReadyZValue tag:kLabelReadyTagValue];
         [label setPosition:ccp(size.width/2, size.height/2)];
@@ -319,19 +314,18 @@
             rightHand.opacity = 0;
             
         }
-        
-        
+                
     }
     return self;
 }
 
+
 -(void)onEnterTransitionDidFinish{
     
     [[GameManager sharedGameManager] playBackgroundTrack:backgroundTrack];
-    [self schedule:@selector(countDown:) interval:0.01];
-
+    [self schedule:@selector(countDown:) interval:0.001];
+    
 }
-
 
 // Count Down
 
@@ -354,13 +348,22 @@
         
     }
     
-    if (_countDown == 0) {
+    if (_countDown == 1) {
         
-        [self removeChild:label cleanup:YES];
         [self unschedule:_cmd];
-        id delay = [CCDelayTime actionWithDuration:0.2f];
-        id func = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
-        [self runAction:[CCSequence actionOne:delay two:func]];
+        id delay  = [CCDelayTime actionWithDuration:0.2f];
+        id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
+        id change = [CCCallBlock actionWithBlock:^{
+            [label setString:@"Go!"];
+        }];
+        
+        id d2 = [CCDelayTime actionWithDuration:0.2f];
+        id delete = [CCCallBlock actionWithBlock:^{
+            
+            [self removeChild:label cleanup:YES];
+        }];
+        
+        [self runAction:[CCSequence actions:delay,func,d2,change,d2,delete, nil]];
         self.isTouchEnabled = TRUE;
         
         }

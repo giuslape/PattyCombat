@@ -38,5 +38,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+    [[CCTextureCache sharedTextureCache] removeUnusedTextures];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
+}
 
 @end

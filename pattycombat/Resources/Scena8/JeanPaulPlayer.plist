@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>jeanPaul_arm_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{217, 130}, {202, 224}}</string>
+			<key>spriteOffset</key>
+			<string>{20, -62}</string>
+			<key>spriteSize</key>
+			<string>{202, 224}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 602}, {202, 224}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_arm_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{44, 44}, {312, 316}}</string>
+			<key>spriteOffset</key>
+			<string>{-98, -22}</string>
+			<key>spriteSize</key>
+			<string>{312, 316}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{140, 0}, {312, 316}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_arm_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{44, 69}, {288, 278}}</string>
+			<key>spriteOffset</key>
+			<string>{-110, -28}</string>
+			<key>spriteSize</key>
+			<string>{288, 278}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{454, 0}, {288, 278}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_arm_0004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{218, 42}, {138, 318}}</string>
+			<key>spriteOffset</key>
+			<string>{-11, -21}</string>
+			<key>spriteSize</key>
+			<string>{138, 318}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {138, 318}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_arm_0005.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{49, 67}, {282, 280}}</string>
+			<key>spriteOffset</key>
+			<string>{-108, -27}</string>
+			<key>spriteSize</key>
+			<string>{282, 280}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{286, 318}, {282, 280}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_arm_0006.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{47, 68}, {284, 280}}</string>
+			<key>spriteOffset</key>
+			<string>{-109, -28}</string>
+			<key>spriteSize</key>
+			<string>{284, 280}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 320}, {284, 280}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_arm_0007.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{235, 128}, {308, 226}}</string>
+			<key>spriteOffset</key>
+			<string>{91, -61}</string>
+			<key>spriteSize</key>
+			<string>{308, 226}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{286, 600}, {308, 226}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_arm_0008.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{235, 129}, {308, 226}}</string>
+			<key>spriteOffset</key>
+			<string>{91, -62}</string>
+			<key>spriteSize</key>
+			<string>{308, 226}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{570, 280}, {308, 226}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_arm_0009.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{236, 127}, {260, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{68, -49}</string>
+			<key>spriteSize</key>
+			<string>{260, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{744, 0}, {260, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_arm_0010.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{235, 129}, {304, 224}}</string>
+			<key>spriteOffset</key>
+			<string>{89, -61}</string>
+			<key>spriteSize</key>
+			<string>{304, 224}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{596, 736}, {304, 224}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_arm_0011.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{235, 129}, {306, 226}}</string>
+			<key>spriteOffset</key>
+			<string>{90, -62}</string>
+			<key>spriteSize</key>
+			<string>{306, 226}</string>
+			<key>spriteSourceSize</key>
+			<string>{596, 360}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{596, 508}, {306, 226}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_head_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{108, 0}, {120, 188}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, -0}</string>
+			<key>spriteSize</key>
+			<string>{120, 188}</string>
+			<key>spriteSourceSize</key>
+			<string>{338, 188}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{904, 396}, {120, 188}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_head_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{108, 0}, {120, 188}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, -0}</string>
+			<key>spriteSize</key>
+			<string>{120, 188}</string>
+			<key>spriteSourceSize</key>
+			<string>{338, 188}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{902, 736}, {120, 188}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jeanPaul_head_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{108, 0}, {120, 188}}</string>
+			<key>spriteOffset</key>
+			<string>{-1, -0}</string>
+			<key>spriteSize</key>
+			<string>{120, 188}</string>
+			<key>spriteSourceSize</key>
+			<string>{338, 188}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{880, 206}, {120, 188}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.5.3</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+		<key>name</key>
+		<string>JeanPaulPlayer</string>
+		<key>premultipliedAlpha</key>
+		<false/>
+		<key>target</key>
+		<dict>
+			<key>name</key>
+			<string>default</string>
+			<key>textureFileName</key>
+			<string>JeanPaulPlayer</string>
+			<key>textureFileExtension</key>
+			<string>.png</string>
+			<key>coordinatesFileName</key>
+			<string>JeanPaulPlayer</string>
+			<key>coordinatesFileExtension</key>
+			<string>.plist</string>
+			<key>premultipliedAlpha</key>
+			<false/>
+		</dict>
+	</dict>
+</dict>
+</plist>

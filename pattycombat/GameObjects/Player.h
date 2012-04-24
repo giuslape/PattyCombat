@@ -20,9 +20,10 @@
     CGRect rectRightFoot;
     CGRect rectLeftCross;
     CGRect rectRightCross;
-    __weak CCSpriteBatchNode* _leftHandBatchNode;
-    __weak CCSpriteBatchNode* _rightHandBatchNode;
-    __weak CCSpriteBatchNode* _bodyBatchNode;
+    
+    __weak CCSpriteBatchNode* _spriteBatchNode;
+    __weak CCSpriteBatchNode* _spriteHitUnderBatchNode;
+    __weak CCSpriteBatchNode* _spriteHitOverBatchNode;
     
     __weak id <PlayerDelegate> _delegate;
 
@@ -47,9 +48,17 @@
 @property(nonatomic, strong)CCAnimation* manoDestraCrossColpita;
 @property(nonatomic, strong)CCAnimation* feedBody;
 @property(nonatomic, strong)CCAnimation* feedBodyErr;
-@property(nonatomic, weak)CCSpriteBatchNode* leftHandBatchNode;
-@property(nonatomic, weak)CCSpriteBatchNode* rightHandBatchNode;
-@property (nonatomic, weak)CCSpriteBatchNode* bodyBatchNode;
+@property(nonatomic, strong)CCAnimation* manoSinistraHitUnder;
+@property(nonatomic, strong)CCAnimation* manoSinistraHitOver;
+@property(nonatomic, strong)CCAnimation* manoDestraHitUnder;
+@property(nonatomic, strong)CCAnimation* manoDestraHitOver;
+@property(nonatomic, strong)CCAnimation* manoSinistraCrossHitUnder;
+@property(nonatomic, strong)CCAnimation* manoSinistraCrossHitOver;
+@property(nonatomic, strong)CCAnimation* manoDestraCrossHitUnder;
+@property(nonatomic, strong)CCAnimation* manoDestraCrossHitOver;
+@property(nonatomic, weak) CCSpriteBatchNode* spriteBatchNode;
+@property(nonatomic, weak) CCSpriteBatchNode* spriteHitUnderBatchNode;
+@property(nonatomic, weak) CCSpriteBatchNode* spriteHitOverBatchNode;
 @property(nonatomic, strong) NSMutableArray* pattern;
 @property(nonatomic, strong) NSString* name;
 

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>jenny_arm_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{201, 101}, {190, 236}}</string>
+			<key>spriteOffset</key>
+			<string>{18, -50}</string>
+			<key>spriteSize</key>
+			<string>{190, 236}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{598, 242}, {190, 236}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_arm_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{27, 0}, {310, 302}}</string>
+			<key>spriteOffset</key>
+			<string>{-96, 18}</string>
+			<key>spriteSize</key>
+			<string>{310, 302}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {310, 302}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_arm_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{27, 63}, {294, 240}}</string>
+			<key>spriteOffset</key>
+			<string>{-104, -14}</string>
+			<key>spriteSize</key>
+			<string>{294, 240}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{454, 0}, {294, 240}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_arm_0004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{199, 0}, {140, 282}}</string>
+			<key>spriteOffset</key>
+			<string>{-9, 28}</string>
+			<key>spriteSize</key>
+			<string>{140, 282}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{312, 0}, {140, 282}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_arm_0005.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{32, 59}, {288, 242}}</string>
+			<key>spriteOffset</key>
+			<string>{-102, -11}</string>
+			<key>spriteSize</key>
+			<string>{288, 242}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 304}, {288, 242}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_arm_0006.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{29, 61}, {292, 240}}</string>
+			<key>spriteOffset</key>
+			<string>{-103, -12}</string>
+			<key>spriteSize</key>
+			<string>{292, 240}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{290, 510}, {292, 240}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_arm_0007.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{226, 100}, {306, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{101, -33}</string>
+			<key>spriteSize</key>
+			<string>{306, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{290, 304}, {306, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_arm_0008.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{246, 100}, {286, 176}}</string>
+			<key>spriteOffset</key>
+			<string>{111, -19}</string>
+			<key>spriteSize</key>
+			<string>{286, 176}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 728}, {286, 176}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_arm_0009.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{226, 101}, {200, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{48, -34}</string>
+			<key>spriteSize</key>
+			<string>{200, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{750, 0}, {200, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_arm_0010.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{246, 100}, {280, 172}}</string>
+			<key>spriteOffset</key>
+			<string>{108, -17}</string>
+			<key>spriteSize</key>
+			<string>{280, 172}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{584, 510}, {280, 172}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_arm_0011.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{246, 100}, {286, 178}}</string>
+			<key>spriteOffset</key>
+			<string>{111, -20}</string>
+			<key>spriteSize</key>
+			<string>{286, 178}</string>
+			<key>spriteSourceSize</key>
+			<string>{556, 338}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 548}, {286, 178}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_head_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{72, 0}, {178, 184}}</string>
+			<key>spriteOffset</key>
+			<string>{9, -0}</string>
+			<key>spriteSize</key>
+			<string>{178, 184}</string>
+			<key>spriteSourceSize</key>
+			<string>{304, 184}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{790, 206}, {178, 184}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_head_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{72, 2}, {178, 182}}</string>
+			<key>spriteOffset</key>
+			<string>{9, -1}</string>
+			<key>spriteSize</key>
+			<string>{178, 182}</string>
+			<key>spriteSourceSize</key>
+			<string>{304, 184}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{288, 752}, {178, 182}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>jenny_head_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{72, 0}, {178, 184}}</string>
+			<key>spriteOffset</key>
+			<string>{9, -0}</string>
+			<key>spriteSize</key>
+			<string>{178, 184}</string>
+			<key>spriteSourceSize</key>
+			<string>{304, 184}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{584, 684}, {178, 184}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.5.3</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{1024, 1024}</string>
+		<key>name</key>
+		<string>JennyPlayer</string>
+		<key>premultipliedAlpha</key>
+		<false/>
+		<key>target</key>
+		<dict>
+			<key>name</key>
+			<string>default</string>
+			<key>textureFileName</key>
+			<string>JennyPlayer</string>
+			<key>textureFileExtension</key>
+			<string>.png</string>
+			<key>coordinatesFileName</key>
+			<string>JennyPlayer</string>
+			<key>coordinatesFileExtension</key>
+			<string>.plist</string>
+			<key>premultipliedAlpha</key>
+			<false/>
+		</dict>
+	</dict>
+</dict>
+</plist>

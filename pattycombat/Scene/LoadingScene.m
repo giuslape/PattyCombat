@@ -44,6 +44,9 @@
 		[self addChild:loading z:1 tag:1];
 		
         [self scheduleOnce:@selector(loadScene:) delay:0.1];
+        
+        [loading setPosition:ccp(-loading.contentSize.width, -loading.contentSize.height)];
+        
 	}
 	
 	return self;
@@ -69,7 +72,7 @@
             
             [self feedPattern];
             
-            [self scheduleOnce:@selector(changeScene:) delay:4];
+            [self scheduleOnce:@selector(changeScene:) delay:2];
             
             loading.position = CGPointMake(size.width / 2, size.height * 0.6f);
 
@@ -192,6 +195,7 @@
 {
     _spriteBatchNode = nil;
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
+    [[CCTextureCache sharedTextureCache] removeUnusedTextures];
 }
 
 

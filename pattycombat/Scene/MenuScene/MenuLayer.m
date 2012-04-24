@@ -16,12 +16,13 @@
 #import "AppDelegate.h"
 #import <Twitter/Twitter.h>
 #import "CCMenuItemSpriteIndependent.h"
+#import "CreditsLayer.h"
 
 @interface MenuLayer ()
 
 @property CGSize size;
 
--(void) goBack;
+-(void)goBack;
 -(void)playGame;
 -(void)itemStatsTouched;
 -(void)itemGetCoinsTouched;
@@ -41,13 +42,26 @@
 
 - (void)dealloc {
     
+    NSLog(@"=========================================");
     CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
     
-    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
+    //TestFlight
+    [TestFlight passCheckpoint:@"Menu Deallocato"];
+
+    _darkLayer = nil;
+    _purchaseMenu = nil;
+    _hud = nil;
+    _permissions = nil;
     
-    [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
+    AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
+    
+    [delegate facebook].sessionDelegate = nil;
+    
+    [[[CCDirector sharedDirector] touchDispatcher] removeAllDelegates];
+    
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
-    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
+
     [[GameManager sharedGameManager] stopBackgroundMusic];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductsLoadedNotification object:nil];
@@ -65,7 +79,6 @@
 -(void)buildGetCoins{
         
     //Add background
-    
     CCSprite* getCoinsBackground = [CCSprite spriteWithFile:@"menu_01.png"];
     [self addChild:getCoinsBackground z:kGetCoinsBackgroundZValue tag:kGetCoinsBackgroundTagValue];
     [getCoinsBackground setPosition:ccp(-size.width/2, size.height/2)];
@@ -73,7 +86,7 @@
     //Label Coins Purchased
     
     CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins Held" fntFile:FONTHIGHSCORES];
-    [labelCoinsPurchased setPosition:ccp(-size.width + size.width * 0.8, size.height * 0.4)];
+    [labelCoinsPurchased setPosition:ccp(-size.width + size.width * 0.70f, size.height * 0.24f)];
     [self addChild:labelCoinsPurchased z:3];
     
     //Number of product purchased
@@ -85,9 +98,30 @@
                            fntFile:FONTHIGHSCORES];
     
     [self addChild:labelQuantity z:kLabelCoinsReachedZValue tag:kLabelCoinsReachedTagValue];
-    [labelQuantity setPosition:ccp(-size.width + size.width * 0.8, size.height * 0.3)];
+    [labelQuantity setPosition:ccp(-size.width + size.width * 0.70f, size.height * 0.32f)];
     
+    // Add Layer For explain purchase
     
+    CCLayerColor* layerMenuPurchase = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 127) width:450 height:220];
+    
+    [self addChild:layerMenuPurchase z:2];
+    
+    [layerMenuPurchase setPosition:ccp(- size.width + 15, size.height * 0.11f)];
+    
+    CCLabelTTF* labelDescription = [CCLabelTTF labelWithString:@"Coins are useful if you want to retry a level without restarting from the beginning.\n\n By buying coins you are also funding our work and helping us to come up with new games in the future!" dimensions:CGSizeMake(210, 110) alignment:UITextAlignmentCenter fontName:@"Helvetica" fontSize:12];
+    
+    [labelDescription setPosition:ccp(-size.width + size.width * 0.70f, size.height * 0.55f)];
+    
+    [self addChild:labelDescription z:2];
+    
+    // Add Store logo
+    
+    CCSprite* storeLogo = [CCSprite spriteWithFile:@"store_logo.png"];
+    
+    [storeLogo setPosition:ccp(-size.width * 0.5f, size.height * 0.9f)];
+    
+    [self addChild:storeLogo z:2];
+        
     //  Store Button for post to Social Network
     
     CCSprite* facebook = [CCSprite spriteWithSpriteFrameName:@"store1_btn.png"];
@@ -160,7 +194,7 @@
 
     [self addChild:_purchaseMenu z:kPurchaseMenuZValue tag:kPurchaseMenuTagValue];
     
-    _purchaseMenu.position = ccp(-size.width + size.width * 0.23, size.height * 0.43);
+    _purchaseMenu.position = ccp(-size.width + size.width * 0.25, size.height * 0.44);
     
     [_purchaseMenu alignItemsVerticallyWithPadding:3];
     
@@ -171,7 +205,6 @@
 -(void)buildStats{
     
     // Add background Stats
-    
     CCSprite* highscoresBackground = [CCSprite spriteWithFile:@"menu_03.png"];
     [self addChild:highscoresBackground z:kStatsBackgroundZValue tag:kStatsBackgroundTagValue];
     [highscoresBackground setPosition:ccp(1.5*size.width, size.height/2)];
@@ -249,8 +282,6 @@
                                                                 target:self
                                                                     selector:@selector(showAchievements)];
     
-   
-    
     // Menu Stats
     
     CCMenu* menuStats = [CCMenu menuWithItems:achievementButton,leaderboardButton, nil];
@@ -269,11 +300,9 @@
     float xPosition = size.width * 0.7;
     
     // Main Menu Background
-    
     CCSprite* mainMenuBackground = [CCSprite spriteWithFile:@"menu_02.png"];
     [self addChild:mainMenuBackground z:kMainMenuBackgroundZValue tag:kMainMenuBackgroundTagValue];
     [mainMenuBackground setPosition:ccp(size.width/2, size.height/2)];
-    
     // Actor Myagi
     
     CCSprite* myagi = [CCSprite spriteWithFile:@"myagi.png"];
@@ -381,9 +410,7 @@
     [_darkLayer setContentSize:CGSizeMake(2*size.width + size.width * 0.49, size.height)];
     
     [self addChild:_darkLayer z:kDarkLayerZValue tag:kDarkLayerTagValue];
-    
-    
-    
+        
 }
 
 
@@ -458,14 +485,6 @@
         [logo setAnchorPoint:ccp(0.5f, 1)];
         [logo setPosition:ccp(size.width * 0.7f, size.height * 0.97f)];
         [self addChild:logo z:3];
-        
-        // Add Credits Background (maybe will be a layer)
-        
-        CCSprite* creditsBackground= [CCSprite spriteWithFile:@"credits_window.png"];
-        creditsBackground.opacity = 0;
-        [self addChild:creditsBackground z:kCreditsBackgroundZValue tag:kCreditsBackgroundTagValue];
-        [creditsBackground setPosition:ccp(size.width/2, size.height/2)];
-
         
         // Add Observer for Purchase Notification
                 
@@ -720,10 +739,13 @@
 
 -(void) itemCreditsTouched{
     
-    CCSprite* creditsBackground = (CCSprite *)[self getChildByTag:kCreditsBackgroundTagValue];
+    CreditsLayer* creditsLayer = [CreditsLayer layerWithColor:ccc4(255, 255, 255, 0) width:size.width height:size.height];
     
-    CCFadeIn* fade = [CCFadeIn actionWithDuration:1];
-    [creditsBackground runAction:fade];
+    [self addChild:creditsLayer z:kCreditsBackgroundZValue tag:kCreditsBackgroundTagValue];
+    
+    CCFadeTo* fade = [CCFadeTo actionWithDuration:1 opacity:170];
+    [creditsLayer runAction:fade];
+    
     
     // Disabled Touch for Main Menu
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
@@ -751,10 +773,12 @@
 
 -(void)playGame{
     
+    // Test Flight
+    [TestFlight passCheckpoint:@"Comincia il gioco"];
+
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
-    mainMenu.isTouchEnabled = false;
-    self.isTouchEnabled = FALSE;
-    
+    mainMenu = nil;
+    [mainMenu removeFromParentAndCleanup:YES];
     [[GameManager sharedGameManager] runSceneWithID:kIntroScene];
     
 }
@@ -765,6 +789,9 @@
 #pragma mark -
 
 -(void)showAchievements{
+    
+    // Test Flight
+    [TestFlight passCheckpoint:@"Controllo achievement"];
     
     GKAchievementViewController* achievements = [[GKAchievementViewController alloc] init];
     
@@ -786,6 +813,9 @@
 
 
 -(void)showLeaderboard{
+    
+    // Test Flight
+    [TestFlight passCheckpoint:@"Controllo Leaderboard"];
     
     GKLeaderboardViewController *leaderboardController =
     [[GKLeaderboardViewController alloc] init];
@@ -836,6 +866,9 @@ viewController
     [self updateLabelCoinsForProductIdentifier:productIdentifier];
    
     NSLog(@"Purchased: %@", productIdentifier);
+    
+    // Test Flight
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Purchased: %@", productIdentifier]];
     
             
 }
@@ -903,6 +936,10 @@ viewController
     SKProduct *product = [[PattyCombatIAPHelper sharedHelper].products objectAtIndex:buyButton.tag];
     
     NSLog(@"Buying %@...", product.productIdentifier);
+        
+        // Test Flight
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"Sto comprando: %@",product.productIdentifier]];
+        
     [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
     
     self.hud = [MBProgressHUD showHUDAddedTo:[CCDirectorIOS sharedDirector].view animated:YES];
@@ -1033,7 +1070,10 @@ viewController
 
 -(void)loginToFacebook:(id)sender{
     
-    _permissions = [[NSArray alloc] initWithObjects:@"offline_access", nil];
+    // Test Flight
+    [TestFlight passCheckpoint:@"Posto su Facebook"];
+    
+    _permissions = [[NSArray alloc] initWithObjects:@"offline_access",@"publish_stream",nil];
     
     AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
 
@@ -1065,6 +1105,7 @@ viewController
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    @"I'm using Patty Combat", @"name",
                                    @"Patty Combat.", @"caption",
+                                   @"Questa è una prova", @"message",
                                    @"Test Patty Combat", @"description",
                                    @"http://www.facebook.com/pages/Patty-Combat/269975746417125", @"link",
                                    @"http://www.balzo.eu/wp-content/uploads/2012/04/iTunesArtwork.png", @"picture",
@@ -1120,6 +1161,9 @@ viewController
 
 -(void)postOnTwitter:(id)sender{
         
+    // Test Flight
+    [TestFlight passCheckpoint:@"Posto su Twitter"];
+    
     self.isTouchEnabled = FALSE;
     
     if ([TWTweetComposeViewController canSendTweet])
