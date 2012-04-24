@@ -113,9 +113,9 @@
 
 -(void)updateCar:(CGPoint)location{
     
-    int index = indexSprite;
+    int index = indexSprite + 2;
         
-    if (indexSprite == 7) {
+    if (index++ == 8) {
         
         CCSprite* sprite = (CCSprite *)[self getChildByTag:kWallTagValue];
         
@@ -135,14 +135,14 @@
     if (touchCount % kTapForProgress == 0) {
         
         PLAYSOUNDEFFECT(DestroyCar);
-        
-        indexSprite++;
-        
+                
         score+= 50;
         
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
-        [tempSprite setTexture:[[CCTextureCache sharedTextureCache] addImage:[NSString stringWithFormat:@"pickup_000%d.png",index]]];
+        [tempSprite setTexture:[[CCTextureCache sharedTextureCache] addImage:[NSString stringWithFormat:@"pickup_000%d.png",index - 1]]];
+        
+        indexSprite++;
                 
     }
     

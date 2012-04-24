@@ -54,7 +54,7 @@
         
         touchCount = 0;
         
-        indexSprite = 1;
+        indexSprite = 2;
         
         scoreDown = 4;
         
