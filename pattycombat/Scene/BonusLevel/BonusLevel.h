@@ -35,5 +35,4 @@
 }
 
 @property(nonatomic, strong) CCAnimation* touchAnimation;
-
 @end

@@ -11,9 +11,10 @@
 #import <GameKit/GameKit.h>
 #import "MBProgressHUD.h"
 #import "FBConnect.h"
+#import "CreditsLayer.h"
 
 
-@interface MenuLayer :CCLayer  <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate, FBSessionDelegate, FBDialogDelegate, UIAlertViewDelegate>{
+@interface MenuLayer :CCLayer  <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate, FBSessionDelegate, FBDialogDelegate, UIAlertViewDelegate, CreditsLayerProtocol>{
     
     MBProgressHUD* _hud;
     CCMenu* _purchaseMenu;

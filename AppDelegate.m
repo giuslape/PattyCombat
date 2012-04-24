@@ -48,7 +48,7 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
     //Audio Init
     [[GameManager sharedGameManager] setupAudioEngine];
     
-    //[glView setMultipleTouchEnabled:YES];
+    [glView setMultipleTouchEnabled:YES];
     
     // Facebook Init
     
@@ -115,7 +115,6 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 	// for rotation and other messages
 	[director_ setDelegate:self];
     
-
 	// 2D projection
 	[director_ setProjection:kCCDirectorProjection2D];
 //	[director setProjection:kCCDirectorProjection3D];
@@ -142,10 +141,12 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 
 	// When in iPhone RetinaDisplay, iPad, iPad RetinaDisplay mode, CCFileUtils will append the "-hd", "-ipad", "-ipadhd" to all loaded files
 	// If the -hd, -ipad, -ipadhd files are not found, it will load the non-suffixed version
-	[CCFileUtils setiPhoneRetinaDisplaySuffix:@"-hd"];		// Default on iPhone RetinaDisplay is "-hd"
-	[CCFileUtils setiPadSuffix:@"-ipad"];					// Default on iPad is "" (empty string)
-	[CCFileUtils setiPadRetinaDisplaySuffix:@"-ipadhd"];	// Default on iPad RetinaDisplay is "-ipadhd"
-
+	CCFileUtils *sharedFileUtils = [CCFileUtils sharedFileUtils];
+	[sharedFileUtils setEnableFallbackSuffixes:NO];				// Default: NO. No fallback suffixes are going to be used
+	[sharedFileUtils setiPhoneRetinaDisplaySuffix:@"-hd"];		// Default on iPhone RetinaDisplay is "-hd"
+	[sharedFileUtils setiPadSuffix:@"-ipad"];					// Default on iPad is "ipad"
+	[sharedFileUtils setiPadRetinaDisplaySuffix:@"-ipadhd"];	// Default on iPad RetinaDisplay is "-ipadhd"
+    
 	// Assume that PVR images have premultiplied alpha
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 

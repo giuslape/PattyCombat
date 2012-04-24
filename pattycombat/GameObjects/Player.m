@@ -649,6 +649,7 @@
 
     [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Player.plist",name] textureFilename:[NSString stringWithFormat:@"%@Player.png",name]];
     
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     CCTexture2D* texture = [[CCTextureCache sharedTextureCache] addImage:[playerSettings objectForKey:@"headName"]];
     
     if( (self=[super initWithTexture:texture]))
@@ -733,9 +734,7 @@
                                 [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:nameHand]];
         
         rightHand.anchorPoint = ccp(0, 0);
-        
-        rightHand.isRelativeAnchorPoint = YES;
-                    
+                            
         [rightHand setPosition:ccp(- self.position.x + (self.contentSize.width * self.anchorPoint.x) + size.width * (positionRight.x/2 / size.width), size.height - self.position.y + (self.contentSize.height * self.anchorPoint.y) - positionRight.y/2)];
     
         [_spriteBatchNode addChild:rightHand z:kRightHandZValue tag:kRightHandTagValue];
@@ -777,7 +776,7 @@
         handIsOpen = FALSE;
         
         handsAreOpen = FALSE;
-        
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
     }
     return self;
 }

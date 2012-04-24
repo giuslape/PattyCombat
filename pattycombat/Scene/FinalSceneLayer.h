@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "CreditsLayer.h"
 
-@interface FinalSceneLayer : CCLayer
+@interface FinalSceneLayer : CCLayer <CreditsLayerProtocol>
 
 @end

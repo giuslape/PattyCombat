@@ -16,7 +16,6 @@
 #import "AppDelegate.h"
 #import <Twitter/Twitter.h>
 #import "CCMenuItemSpriteIndependent.h"
-#import "CreditsLayer.h"
 
 @interface MenuLayer ()
 
@@ -78,12 +77,16 @@
 
 -(void)buildGetCoins{
         
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
     //Add background
+    
     CCSprite* getCoinsBackground = [CCSprite spriteWithFile:@"menu_01.png"];
     [self addChild:getCoinsBackground z:kGetCoinsBackgroundZValue tag:kGetCoinsBackgroundTagValue];
     [getCoinsBackground setPosition:ccp(-size.width/2, size.height/2)];
-    
+        
     //Label Coins Purchased
+    
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     
     CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins Held" fntFile:FONTHIGHSCORES];
     [labelCoinsPurchased setPosition:ccp(-size.width + size.width * 0.70f, size.height * 0.24f)];
@@ -100,7 +103,7 @@
     [self addChild:labelQuantity z:kLabelCoinsReachedZValue tag:kLabelCoinsReachedTagValue];
     [labelQuantity setPosition:ccp(-size.width + size.width * 0.70f, size.height * 0.32f)];
     
-    // Add Layer For explain purchase
+    // Add Layer for explain purchase
     
     CCLayerColor* layerMenuPurchase = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 127) width:450 height:220];
     
@@ -108,7 +111,7 @@
     
     [layerMenuPurchase setPosition:ccp(- size.width + 15, size.height * 0.11f)];
     
-    CCLabelTTF* labelDescription = [CCLabelTTF labelWithString:@"Coins are useful if you want to retry a level without restarting from the beginning.\n\n By buying coins you are also funding our work and helping us to come up with new games in the future!" dimensions:CGSizeMake(210, 110) alignment:UITextAlignmentCenter fontName:@"Helvetica" fontSize:12];
+      CCLabelTTF* labelDescription = [CCLabelTTF labelWithString:@"Coins are useful if you want to retry a level without restarting from the beginning.\n\n By buying coins you are also funding our work and helping us to come up with new games in the future!" dimensions:CGSizeMake(210, 110) hAlignment:UITextAlignmentCenter fontName:@"Helvetica" fontSize:12];
     
     [labelDescription setPosition:ccp(-size.width + size.width * 0.70f, size.height * 0.55f)];
     
@@ -200,15 +203,18 @@
     
     _purchaseMenu.isTouchEnabled = NO;
     
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 }
 
 -(void)buildStats{
     
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
     // Add background Stats
     CCSprite* highscoresBackground = [CCSprite spriteWithFile:@"menu_03.png"];
     [self addChild:highscoresBackground z:kStatsBackgroundZValue tag:kStatsBackgroundTagValue];
     [highscoresBackground setPosition:ccp(1.5*size.width, size.height/2)];
     
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     // Position of Menu
     
     float xPosition = size.width + size.width * 0.2;
@@ -293,17 +299,23 @@
     [reset setPosition:ccp(size.width + size.width * 0.9, size.height * 0.07)];
     [self addChild:reset z:kResetZValue tag:kResetTagValue];
         
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 }
 
 -(void)buildMainMenu{
     
     float xPosition = size.width * 0.7;
     
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
     // Main Menu Background
     CCSprite* mainMenuBackground = [CCSprite spriteWithFile:@"menu_02.png"];
     [self addChild:mainMenuBackground z:kMainMenuBackgroundZValue tag:kMainMenuBackgroundTagValue];
     [mainMenuBackground setPosition:ccp(size.width/2, size.height/2)];
+    
+    
     // Actor Myagi
+    
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
     
     CCSprite* myagi = [CCSprite spriteWithFile:@"myagi.png"];
     
@@ -392,6 +404,8 @@
     [self addChild:mainMenu z:kMainMenuZValue tag:kMainMenuTagValue];
     
     mainMenu.isTouchEnabled = FALSE;
+    
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 }
 
 
@@ -455,8 +469,9 @@
         
         _elapsedTime = 0;
         
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"MenuAtlas.plist" textureFilename:@"MenuAtlas.png"];
-        
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
         
         [[delegate facebook] setSessionDelegate:self];
@@ -479,6 +494,7 @@
         
         [self buildStats];
         
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         // Add Logo
         
         CCSprite* logo = [CCSprite spriteWithFile:@"logo.png"];
@@ -606,7 +622,7 @@
 
 -(void) registerWithTouchDispatcher
 {
-    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:-1
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0
      
                                               swallowsTouches:YES];
 }
@@ -620,9 +636,7 @@
     touchLocation = [self convertToNodeSpace:touchLocation];
     
     CCSprite* mainMenuBackground = (CCSprite *)[self getChildByTag:kMainMenuBackgroundTagValue];
-    
-    CCSprite* creditsBackground = (CCSprite *)[self getChildByTag:kCreditsBackgroundTagValue];
-    
+        
     CGRect boundingBox = CGRectMake(2*size.width * 0.9f, size.height * 0.03f, 80, 60);
     
     CCLOG(@"Touch: %@",NSStringFromCGPoint(touchLocation));
@@ -650,26 +664,14 @@
         [levelReachedValue setString:@"0"];
         [highscoreValue setString:@"0"];
         
-    }  else if (CGRectContainsPoint([creditsBackground boundingBox], touchLocation) && creditsBackground.opacity == 255) {
+        return YES;
         
-        // Fade Out of Credits Background and enable main menu
-        
-        CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
-        
-        CCFadeOut* fadeOut = [CCFadeOut actionWithDuration:1];
-        
-        [creditsBackground runAction:[CCSequence actionOne:fadeOut two:[CCCallBlock actionWithBlock:^{
-            
-            mainMenu.isTouchEnabled = YES;
-
-        }]]];  
-        
-    }else if (!CGRectContainsPoint([mainMenuBackground boundingBox], touchLocation)) {
+    }  else if (!CGRectContainsPoint([mainMenuBackground boundingBox], touchLocation)) {
         
         [self goBack];
-        
+        return YES;
     }  
-    return YES;
+    return NO;
     
 }
 
@@ -739,13 +741,13 @@
 
 -(void) itemCreditsTouched{
     
-    CreditsLayer* creditsLayer = [CreditsLayer layerWithColor:ccc4(255, 255, 255, 0) width:size.width height:size.height];
+    CreditsLayer* creditsLayer = [CreditsLayer layerWithColor:ccc4(0, 0, 0, 0) width:size.width height:size.height];
     
     [self addChild:creditsLayer z:kCreditsBackgroundZValue tag:kCreditsBackgroundTagValue];
+    [creditsLayer setDelegate:self];
     
     CCFadeTo* fade = [CCFadeTo actionWithDuration:1 opacity:170];
     [creditsLayer runAction:fade];
-    
     
     // Disabled Touch for Main Menu
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
@@ -777,7 +779,6 @@
     [TestFlight passCheckpoint:@"Comincia il gioco"];
 
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
-    mainMenu = nil;
     [mainMenu removeFromParentAndCleanup:YES];
     [[GameManager sharedGameManager] runSceneWithID:kIntroScene];
     
@@ -1202,6 +1203,20 @@ viewController
     }
     
     self.isTouchEnabled = TRUE;
+
+}
+
+#pragma mark -
+#pragma mark ===  Credits Delegate  ===
+#pragma mark -
+
+-(void)creditsLayerDidClose:(CreditsLayer *)layer{
+    
+    layer.delegate = nil;
+    [self removeChild:layer cleanup:YES];
+    
+    CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
+    mainMenu.isTouchEnabled = TRUE;
 
 }
 
