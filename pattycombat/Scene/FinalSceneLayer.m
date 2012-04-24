@@ -7,6 +7,7 @@
 //
 
 #import "FinalSceneLayer.h"
+#import "GameManager.h"
 
 @implementation FinalSceneLayer
 
@@ -32,6 +33,7 @@
                         
         [self scheduleOnce:@selector(showDarkLayer:) delay:2];
         
+        
     }
     return self;
 }
@@ -43,9 +45,11 @@
 
 -(void)showDarkLayer:(ccTime)delta{
     
-    CCLayerColor* layerColor = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];
+    CreditsLayer* layerColor = [CreditsLayer layerWithColor:ccc4(0, 0, 0, 0)];
     
     [self addChild:layerColor];
+    
+    [layerColor setDelegate:self];
     
     CCFadeTo* fade = [CCFadeTo actionWithDuration:0.5f opacity:180];
     
@@ -69,6 +73,17 @@
     NSLog(@"%@", NSStringFromSelector(_cmd));
     
     return YES;
+}
+
+
+#pragma mark -
+#pragma mark ===  Credits Layer Protocol  ===
+#pragma mark -
+
+-(void)creditsLayerDidClose:(CreditsLayer *)layer{
+    
+    [self removeChild:layer cleanup:YES];
+    [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
 }
 
 

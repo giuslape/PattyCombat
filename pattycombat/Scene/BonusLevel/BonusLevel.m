@@ -163,7 +163,7 @@
         
     [tempChar updateStateWithDeltaTime:delta];
     
-    if (indexSprite >= 6) {
+    if (indexSprite > 7) {
         
         [tempChar changeState:[NSNumber numberWithInt:kStateBellGongFinish]];
         

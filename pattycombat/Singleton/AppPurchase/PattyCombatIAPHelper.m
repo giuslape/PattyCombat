@@ -74,9 +74,8 @@ static PattyCombatIAPHelper * _sharedHelper;
         return;
     }
     
-    if (quantity <= 0) {
+    if (quantity == 0) {
         
-        quantity = 0;
         // Check if internet connection is available 
         
             Reachability *reach = [Reachability reachabilityForInternetConnection];	

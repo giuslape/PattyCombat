@@ -48,7 +48,7 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
     //Audio Init
     [[GameManager sharedGameManager] setupAudioEngine];
     
-    //[glView setMultipleTouchEnabled:YES];
+    [glView setMultipleTouchEnabled:YES];
     
     // Facebook Init
     
@@ -115,7 +115,6 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 	// for rotation and other messages
 	[director_ setDelegate:self];
     
-
 	// 2D projection
 	[director_ setProjection:kCCDirectorProjection2D];
 //	[director setProjection:kCCDirectorProjection3D];

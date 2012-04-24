@@ -19,8 +19,8 @@
     
     double _currentTime;
     double _elapsedTime;
-    int    _bpm;
-    int    _count;
+    float    _bpm;
+    float    _count;
     int    _countDown;
     
     BOOL   _isTouchInTime;

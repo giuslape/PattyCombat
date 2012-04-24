@@ -12,4 +12,6 @@
 
 @interface CarGamePlayLayer : BonusLevel
 
+@property(nonatomic, strong) CCAnimation* fireAnimation;
+
 @end

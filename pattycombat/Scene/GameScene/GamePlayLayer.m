@@ -263,7 +263,7 @@
         
         id dao = [GameManager sharedGameManager].dao;
         
-        CGSize size = [[CCDirectorIOS sharedDirector]winSize];
+        CGSize size = [[CCDirectorIOS sharedDirector] winSize];
 
         // Load Scene
         
