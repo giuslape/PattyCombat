@@ -76,7 +76,9 @@
     
     float yCropAmount;
     
-    switch (indexSprite) {
+    int index = indexSprite;
+    
+    switch (++index) {
         case 1:
             yCropAmount = wallBoundingBox.size.height*0;
             break;
@@ -105,19 +107,15 @@
     
     wallBoundingBox = CGRectMake(wallBoundingBox.origin.x, wallBoundingBox.origin.y, wallBoundingBox.size.width, wallBoundingBox.size.height - yCropAmount);
     
-    
     return wallBoundingBox;
-    
     
 }
 
 -(void)updateCar:(CGPoint)location{
     
     int index = indexSprite;
-
-    if (indexSprite >= 7)return;
         
-    if (++index == 7) {
+    if (indexSprite == 7) {
         
         CCSprite* sprite = (CCSprite *)[self getChildByTag:kWallTagValue];
         
@@ -144,7 +142,7 @@
         
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
-        [tempSprite setTexture:[[CCTextureCache sharedTextureCache] addImage:[NSString stringWithFormat:@"pickup_000%d.png",indexSprite]]];
+        [tempSprite setTexture:[[CCTextureCache sharedTextureCache] addImage:[NSString stringWithFormat:@"pickup_000%d.png",index]]];
                 
     }
     
@@ -162,6 +160,7 @@
     }];
     
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+    
     [temp runAction:[CCSequence actionOne:[CCAnimate actionWithAnimation:touchAnimation] two:block]];    
 }
 

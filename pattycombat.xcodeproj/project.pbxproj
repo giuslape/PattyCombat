@@ -1186,6 +1186,7 @@
 		2015C7AA1521AE4C00F3AE56 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				2015C7BF1521AE4C00F3AE56 /* EndScene */,
 				2015C7AB1521AE4C00F3AE56 /* BonusLevel */,
 				2015C7BA1521AE4C00F3AE56 /* Dao */,
 				2015C7C41521AE4C00F3AE56 /* GameScene */,
@@ -1237,7 +1238,6 @@
 				2015C7B81521AE4C00F3AE56 /* WallScene.h */,
 				2015C7B91521AE4C00F3AE56 /* WallScene.m */,
 				2015C7B41521AE4C00F3AE56 /* WallLayer.h */,
-				2015C7BF1521AE4C00F3AE56 /* EndScene */,
 			);
 			path = Wall;
 			sourceTree = "<group>";
@@ -1261,8 +1261,7 @@
 				2015C7C21521AE4C00F3AE56 /* EndScene.h */,
 				2015C7C31521AE4C00F3AE56 /* EndScene.m */,
 			);
-			name = EndScene;
-			path = ../../EndScene;
+			path = EndScene;
 			sourceTree = "<group>";
 		};
 		2015C7C41521AE4C00F3AE56 /* GameScene */ = {

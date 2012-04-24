@@ -588,7 +588,7 @@
         
         CCSprite* nextLevel =  (_thresholdReached) ? [CCSprite spriteWithSpriteFrameName:@"next_btn.png"] :[CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
         
-        [nextLevel setPosition:ccp (size.width* 0.87f , size.height * 0.1f)];
+        [nextLevel setPosition:ccp(size.width* 0.87f , size.height * 0.1f)];
         [nextLevel setAnchorPoint:ccp(0, 0.5f)];
         [_spriteBatchNode addChild:nextLevel z:kNextLevelZValue tag:kNextLevelTagValue];
         
