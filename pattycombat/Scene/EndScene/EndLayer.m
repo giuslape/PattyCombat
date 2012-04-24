@@ -333,6 +333,14 @@
     [self runAction:seq];
     
     self.isTouchEnabled = TRUE;
+    
+    (_thresholdReached) ? PLAYSOUNDEFFECT(win) : PLAYSOUNDEFFECT(lose);
+    
+  /*  [self runAction:[CCSequence actionOne:[CCDelayTime actionWithDuration:1] two:[CCCallBlock actionWithBlock:^{
+        
+        [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
+
+    }]]];*/
 }
 
 -(void)sendAchievementsForLevel:(int)currentLevel{
@@ -564,7 +572,16 @@
         
         int currentLevel = [[GameManager sharedGameManager] currentLevel];
         
-        if (_thresholdReached)[[GameManager sharedGameManager] setLevelReached:currentLevel];
+        // Set level reached
+        
+        if (_thresholdReached && [[GameManager sharedGameManager] levelReached] < currentLevel){
+            
+            if (currentLevel >= 4 && currentLevel < 8) currentLevel--;
+            else if (currentLevel >= 8)currentLevel -= 2;
+            
+            [[GameManager sharedGameManager] setLevelReached:currentLevel];
+
+        }
         
         // Find out the achievement is active 
         

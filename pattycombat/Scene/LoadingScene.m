@@ -85,7 +85,7 @@
                         
             [loading setPosition:ccp(size.width /2, size.height /2)];
             
-            [self scheduleOnce:@selector(changeScene:) delay:2];
+            [self scheduleOnce:@selector(changeScene:) delay:1];
             
         }
         

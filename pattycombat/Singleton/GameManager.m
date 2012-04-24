@@ -235,7 +235,7 @@ static GameManager* _sharedGameManager = nil;
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 66;
+            _gameTime = 69;
             break;
         case 2:
             _gameTime = 74;
@@ -477,8 +477,19 @@ static GameManager* _sharedGameManager = nil;
 
 -(void) stopBackgroundMusic{
     
+    if ((managerSoundState != kAudioManagerReady) &&
+        (managerSoundState != kAudioManagerFailed)) {
+        int waitCycles = 0;
+        while (waitCycles < AUDIO_MAX_WAITTIME) {
+            [NSThread sleepForTimeInterval:0.1f];
+            if ((managerSoundState == kAudioManagerReady) ||
+                (managerSoundState == kAudioManagerFailed)) {
+                break;
+            }
+            waitCycles = waitCycles + 1;
+        }
+    }
     if (managerSoundState == kAudioManagerReady) {
-        
         if ([soundEngine isBackgroundMusicPlaying]) {
             [soundEngine stopBackgroundMusic];
         }
@@ -492,6 +503,7 @@ static GameManager* _sharedGameManager = nil;
     }
     
 -(ALuint)playSoundEffect:(NSString*)soundEffectKey {
+    
         ALuint soundID = 0;
         if (managerSoundState == kAudioManagerReady) {
             NSNumber *isSFXLoaded =

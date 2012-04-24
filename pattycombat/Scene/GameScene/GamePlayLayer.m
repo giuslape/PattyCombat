@@ -256,7 +256,6 @@
     
     if (self) {
         
-        _countDown = 15;
         _currentTime = 0;
         _count = 1;
         _elapsedTime = 0;
@@ -333,28 +332,28 @@
     
     _currentTime += delta;
     
+    int count = _count;
+    
     if ((_count * (60.0 / _bpm)) <= _currentTime) {
         
     _count++;
-        
-    _countDown --;
-    
+            
     CCLabelBMFont* label = (CCLabelBMFont*)[self getChildByTag:kLabelReadyTagValue];
    
-     if(_countDown <= 3){
+     if(count >= 12){
          
-         NSString *tempString = [NSString stringWithFormat:@"%d", _countDown];
+         NSString *tempString = [NSString stringWithFormat:@"%d", count - 11];
          [label setString:tempString];
         
     }
     
-    if (_countDown == 1) {
+    if (count == 14) {
         
         [self unschedule:_cmd];
         id delay  = [CCDelayTime actionWithDuration:0.2f];
         id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
         id change = [CCCallBlock actionWithBlock:^{
-            [label setString:@"Go!"];
+            [label setString:@"4!"];
         }];
         
         id d2 = [CCDelayTime actionWithDuration:0.2f];

@@ -367,6 +367,8 @@
 		20E33C9915469F9300265DA9 /* pickup_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E33C9815469F9300265DA9 /* pickup_bg.png */; };
 		20E33CB41546D09900265DA9 /* playExtreme_btn_over.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E33CB31546D09900265DA9 /* playExtreme_btn_over.png */; };
 		20E33CB71546D0A100265DA9 /* playExtreme_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E33CB61546D0A100265DA9 /* playExtreme_btn.png */; };
+		20E33CB91546D62200265DA9 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 20E33CB81546D62200265DA9 /* win.mp3 */; };
+		20E33CBB1546D62B00265DA9 /* lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 20E33CBA1546D62B00265DA9 /* lose.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -923,6 +925,8 @@
 		20E33C9815469F9300265DA9 /* pickup_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickup_bg.png; sourceTree = "<group>"; };
 		20E33CB31546D09900265DA9 /* playExtreme_btn_over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playExtreme_btn_over.png; sourceTree = "<group>"; };
 		20E33CB61546D0A100265DA9 /* playExtreme_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playExtreme_btn.png; sourceTree = "<group>"; };
+		20E33CB81546D62200265DA9 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
+		20E33CBA1546D62B00265DA9 /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lose.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1620,6 +1624,8 @@
 		205B2ADE1545ECDF00C8C61E /* Effetti */ = {
 			isa = PBXGroup;
 			children = (
+				20E33CBA1546D62B00265DA9 /* lose.mp3 */,
+				20E33CB81546D62200265DA9 /* win.mp3 */,
 				202AE190154612E90061E0E4 /* muro_2.mp3 */,
 				202AE191154612E90061E0E4 /* muro_1.mp3 */,
 				205B2ADF1545ECDF00C8C61E /* bell.aif */,
@@ -2246,6 +2252,8 @@
 				20E33C9915469F9300265DA9 /* pickup_bg.png in Resources */,
 				20E33CB41546D09900265DA9 /* playExtreme_btn_over.png in Resources */,
 				20E33CB71546D0A100265DA9 /* playExtreme_btn.png in Resources */,
+				20E33CB91546D62200265DA9 /* win.mp3 in Resources */,
+				20E33CBB1546D62B00265DA9 /* lose.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

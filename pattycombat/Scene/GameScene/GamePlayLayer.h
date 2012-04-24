@@ -21,8 +21,6 @@
     double _elapsedTime;
     float    _bpm;
     float    _count;
-    int    _countDown;
-    
     BOOL   _isTouchInTime;
 
     HUDLayer* _hudLayer;
