@@ -25,6 +25,9 @@
     self = [super init];
     if (self) {
         
+#if DEBUG
+        [[CCDirectorIOS sharedDirector].view setMultipleTouchEnabled:NO];
+#endif
         size = [[CCDirector sharedDirector] winSize];
 
         [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithString:@"Common.plist"]];
@@ -47,7 +50,7 @@
         
         touchCount = 0;
         
-        indexSprite = 1;
+        indexSprite = 2;
         
         scoreDown = 4;
         
@@ -163,7 +166,7 @@
         
     [tempChar updateStateWithDeltaTime:delta];
     
-    if (indexSprite > 7) {
+    if (indexSprite >= 6) {
         
         [tempChar changeState:[NSNumber numberWithInt:kStateBellGongFinish]];
         

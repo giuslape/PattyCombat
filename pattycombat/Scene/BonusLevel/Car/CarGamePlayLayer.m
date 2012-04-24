@@ -37,7 +37,7 @@
     
     for (int i = 1; i <= 4; i++) {
         
-        [fireAnimationLoc addSpriteFrameWithFilename:[NSString stringWithFormat:@"pickup_fuoco_000%d",i]];
+        [fireAnimationLoc addSpriteFrameWithFilename:[NSString stringWithFormat:@"pickup_fuoco_000%d.png",i]];
     }
     
     [self setFireAnimation:fireAnimationLoc];
@@ -95,6 +95,9 @@
         case 6:
             yCropAmount = wallBoundingBox.size.height*0.71;
             break;
+        case 7:
+            yCropAmount = wallBoundingBox.size.height*0.71;
+            break;
         default:
             yCropAmount = wallBoundingBox.size.height;
             break;
@@ -110,11 +113,11 @@
 
 -(void)updateCar:(CGPoint)location{
     
-    if (indexSprite > 7)return;
-    
     int index = indexSprite;
-    
-    if (index == 6) {
+
+    if (indexSprite >= 7)return;
+        
+    if (++index == 7) {
         
         CCSprite* sprite = (CCSprite *)[self getChildByTag:kWallTagValue];
         

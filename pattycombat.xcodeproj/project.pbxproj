@@ -2403,13 +2403,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Giuseppe Lapenta (ZQ7D368422)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Giuseppe Lapenta (ZQ7D368422)";
 				COMPRESS_PNG_FILES = YES;
-				COPY_PHASE_STRIP = NO;
-				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"COCOS2D_DEBUG=1",
 					DEBUG,
+					"COCOS2D_DEBUG=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2433,8 +2431,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Giuseppe Lapenta (ZQ7D368422)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Giuseppe Lapenta (ZQ7D368422)";
 				COMPRESS_PNG_FILES = YES;
-				COPY_PHASE_STRIP = YES;
-				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
@@ -2514,8 +2510,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Giuseppe Lapenta";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Giuseppe Lapenta";
 				COMPRESS_PNG_FILES = YES;
-				COPY_PHASE_STRIP = YES;
-				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					NDEBUG,
