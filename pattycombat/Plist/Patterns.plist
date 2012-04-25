@@ -5,22 +5,22 @@
 	<key>Scena1</key>
 	<array>
 		<string>dx,sx</string>
-		<string>dx,sx,two</string>
+		<string>dx,sx,two,dx,sx,two,sx,sx</string>
 	</array>
 	<key>Scena2</key>
 	<array>
 		<string>sx,dx,two</string>
-		<string>dx,dx,sx,sx,sx,two,two</string>
+		<string>dx,sx,two,dx,sx,two,two</string>
 	</array>
 	<key>Scena3</key>
 	<array>
 		<string>sxCross,dxCross,two</string>
-		<string>sxCross,dxCross,two,two,two,two,two</string>
+		<string>sxCross,dxCross,sx,sx,sxCross,two,two,dxCross</string>
 	</array>
 	<key>Scena5</key>
 	<array>
 		<string>sx,dxCross,dx,sxCross</string>
-		<string>sx,dxCross,dx,sxCross,sx,dxCross,dx,sxCross</string>
+		<string>sx,dxCross,dx,sxCross,sx,two,dx,sxCross,two</string>
 	</array>
 	<key>Scena6</key>
 	<array>
@@ -30,27 +30,27 @@
 	<key>Scena7</key>
 	<array>
 		<string>sx,dx,sxCross,dxCross,two</string>
-		<string>sx,dx,sxCross</string>
+		<string>sx,dx,sxCross,sxCross,dxCross,two,two,sx</string>
 	</array>
 	<key>Scena9</key>
 	<array>
-		<string>sx,dx,sxCross,dxCross</string>
-		<string>sx,dx,sxCross,dxCross,two,two,sx,dx,two,sxCross</string>
+		<string>sx,dx,sxCross,dxCross,two,sx,dxCross</string>
+		<string>sx,dx,sxCross,dxCross,two,two,dx,two,sxCross,sx,sx</string>
 	</array>
 	<key>Scena10</key>
 	<array>
-		<string>sx,dx</string>
-		<string>sx,dx,dx,sxCross,dxCross,two,two</string>
+		<string>sx,dx,sxCross,two,dxCross,dx</string>
+		<string>sx,dx,dx,sxCross,dxCross,two,two,sxCross,dxCross</string>
 	</array>
 	<key>Scena11</key>
 	<array>
-		<string>sx,dx</string>
-		<string>sx,sxCross,sx,dx,dxCross,dxCross,two</string>
+		<string>sx,dx,sxCross,sx,two,dxCross,dxCross,sx</string>
+		<string>sx,dx,sxCross,sx,two,dxCross,dxCross,sx,sxCross,two,dx</string>
 	</array>
 	<key>Scena13</key>
 	<array>
-		<string>sx,dx</string>
-		<string>dx,sx,sxCross,dxCross,two</string>
+		<string>sx,dx,dxCross,sxCross,two,sx,sx,dxCross,dx,two,two</string>
+		<string>sx,dx,dxCross,sxCross,two,sx,sx,dxCross,dx,two,two,dxCross,sxCross,sx,two</string>
 	</array>
 </dict>
 </plist>
