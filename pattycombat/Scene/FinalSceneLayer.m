@@ -46,6 +46,12 @@
 }
 
 
+-(void)onEnterTransitionDidFinish{
+    
+    
+    [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
+}
+
 #pragma mark -
 #pragma mark ===  Show Dark Layer  ===
 #pragma mark -
