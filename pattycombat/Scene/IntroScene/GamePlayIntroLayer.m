@@ -103,6 +103,9 @@
         
         CCSprite* handSprite = nil;
         
+        //TestFlight
+        [TestFlight passCheckpoint:hand];
+        
         if ([hand isEqualToString:@"dx"] || [hand isEqualToString:@"dxCross"]) {
             
             handSprite = [CCSprite spriteWithSpriteFrame: 
@@ -433,6 +436,9 @@
         
             [pat setDisplayFrame:[[[animationFeedBoth frames] objectAtIndex:0] spriteFrame]];
         }
+    
+    //TestFlight
+    [TestFlight passCheckpoint:@"Tocco sbagliato Intro"];
 }
     
 
@@ -536,20 +542,34 @@
     if((CGRectContainsPoint([_rightHand boundingBox], firstLocation) && 
         CGRectContainsPoint([_leftHand boundingBox], secondLocation)) || 
        ((CGRectContainsPoint([_rightHand boundingBox], secondLocation) && 
-         CGRectContainsPoint([_leftHand boundingBox], firstLocation))))
+         CGRectContainsPoint([_leftHand boundingBox], firstLocation)))){
         
     nodeHits =  kStateTwoHandsHit;
+        
+        //TestFlight
+        [TestFlight passCheckpoint:@"Doppio Tocco Intro"];
     
-
+    }
     else if (CGRectContainsPoint([_rightHand boundingBox], firstLocation) ||
              CGRectContainsPoint([_rightHand boundingBox], secondLocation))
+    {
                     nodeHits = kStateRightHandHit;
-        
+        //TestFlight
+        [TestFlight passCheckpoint:@"Tocco mano Destra Intro"];
+    }   
         else if (CGRectContainsPoint([_leftHand boundingBox], firstLocation)||
-                 CGRectContainsPoint([_leftHand boundingBox], secondLocation))
-                    nodeHits =  kStateLeftHandHit;
+                 CGRectContainsPoint([_leftHand boundingBox], secondLocation)){
+            nodeHits =  kStateLeftHandHit;
+            //TestFlight
+            [TestFlight passCheckpoint:@"Tocco Sinistra Intro"];
+        }
         
-                else nodeHits = kStateHitBackground;
+        else {
+            nodeHits = kStateHitBackground;
+            //TestFlight
+            [TestFlight passCheckpoint:@"Tocco Background Intro"];
+        }
+            
     }
 
     
@@ -565,11 +585,29 @@
 
     CharacterStates nodeHit;
     
-    if (CGRectContainsPoint([_rightHand boundingBox], touch))nodeHit = kStateRightHandHit;
+    if (CGRectContainsPoint([_rightHand boundingBox], touch)){
+        
+        nodeHit = kStateRightHandHit;
+        
+        //TestFlight
+        [TestFlight passCheckpoint:@"Tocco Destra"];
+    }
     
-    else if (CGRectContainsPoint([_leftHand boundingBox], touch))nodeHit =  kStateLeftHandHit;
+    else if (CGRectContainsPoint([_leftHand boundingBox], touch)){
+        
+        //TestFlight
+        [TestFlight passCheckpoint:@"Tocco Sinistra"];
+        
+        nodeHit =  kStateLeftHandHit;
     
-    else nodeHit = kStateHitBackground;
+    }
+    
+    else {
+        
+        nodeHit = kStateHitBackground;
+        //TestFlight
+        [TestFlight passCheckpoint:@"Tocco Background"];
+    }
     
     return nodeHit;
 

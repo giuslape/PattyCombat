@@ -20,6 +20,7 @@
     BOOL completedLevel8;
     BOOL completedLevel9;
     BOOL completedLevel10;
+    BOOL extreme;
     BOOL perfect;
     BOOL ko;
     int timesFell;

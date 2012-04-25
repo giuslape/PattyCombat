@@ -30,6 +30,9 @@
             
         }
         
+        //TestFlight
+        [TestFlight passCheckpoint:[NSString stringWithFormat:@"Livello: %d", [[GameManager sharedGameManager]currentLevel]]];
+        
     }
     return self;
 }

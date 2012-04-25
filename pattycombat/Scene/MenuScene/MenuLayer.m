@@ -44,9 +44,6 @@
     NSLog(@"=========================================");
     CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
     
-    //TestFlight
-    [TestFlight passCheckpoint:@"Menu Deallocato"];
-
     _darkLayer = nil;
     _purchaseMenu = nil;
     _hud = nil;
@@ -498,7 +495,7 @@
         
         // Add Logo
         
-        CCSprite* logo = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithFile:@"logo.png"] : [CCSprite spriteWithFile:@"logoExtreme.png"];
+        CCSprite* logo = [CCSprite spriteWithFile:@"logo.png"];
         
         [logo setAnchorPoint:ccp(0.5f, 1)];
         [logo setPosition:ccp(size.width * 0.7f, size.height * 0.97f)];
@@ -685,6 +682,10 @@
 {
     CCLOG(@"Sono in Credits Touched");
     
+    //TestFlight
+    [TestFlight passCheckpoint:@"Controllo gettoni"];
+
+    
     // Movement animation to Get Coins Area
     
     CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(size.width , 0)];
@@ -734,6 +735,9 @@
 {
     CCLOG(@"Sono in High Scores Touched");
     
+    //TestFlight
+    [TestFlight passCheckpoint:@"Controllo statistiche"];
+
     CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(-(size.width), 0)];
 	CCEaseExponentialOut* ease = [CCEaseExponentialOut actionWithAction:move];
 	[self runAction:ease];
@@ -744,6 +748,9 @@
 // Called when Credits Button is Touched
 
 -(void) itemCreditsTouched{
+    
+    //TestFlight
+    [TestFlight passCheckpoint:@"Controllo crediti"];
     
     CreditsLayer* creditsLayer = [CreditsLayer layerWithColor:ccc4(0, 0, 0, 0) width:size.width height:size.height];
     
@@ -873,7 +880,7 @@ viewController
     NSLog(@"Purchased: %@", productIdentifier);
     
     // Test Flight
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Purchased: %@", productIdentifier]];
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Prodotto comprato: %@", productIdentifier]];
     
             
 }
@@ -1076,7 +1083,7 @@ viewController
 -(void)loginToFacebook:(id)sender{
     
     // Test Flight
-    [TestFlight passCheckpoint:@"Posto su Facebook"];
+    [TestFlight passCheckpoint:@"Post su Facebook"];
     
     _permissions = [[NSArray alloc] initWithObjects:@"offline_access",@"publish_stream",nil];
     
@@ -1167,7 +1174,7 @@ viewController
 -(void)postOnTwitter:(id)sender{
         
     // Test Flight
-    [TestFlight passCheckpoint:@"Posto su Twitter"];
+    [TestFlight passCheckpoint:@"Post su Twitter"];
     
     self.isTouchEnabled = FALSE;
     

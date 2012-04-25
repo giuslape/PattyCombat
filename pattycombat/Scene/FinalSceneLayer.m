@@ -39,6 +39,8 @@
             [[GameManager sharedGameManager] setIsExtreme:YES];
         }
         
+        [TestFlight passCheckpoint:@"Gioco Finito"];
+        
     }
     return self;
 }
@@ -60,24 +62,6 @@
     
     [layerColor runAction:fade];
     
-}
-
-#pragma mark -
-#pragma mark ===  Touch Handler  ===
-#pragma mark -
-
-
--(void) registerWithTouchDispatcher
-{
-    [[[CCDirectorIOS sharedDirector] touchDispatcher] addTargetedDelegate:self priority:-1 swallowsTouches:YES];
-    
-}
-
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-    
-    return YES;
 }
 
 

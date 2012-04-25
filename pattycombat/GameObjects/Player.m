@@ -724,7 +724,7 @@
         CGPoint position = 
         CGPointFromString([playerSettings objectForKey:@"position"]);
         
-        self.position    = ccp(size.width * (position.x/2 / size.width), size.height - size.height * (position.y/2 / size.height));
+        self.position = ccp(size.width * (position.x/2 / size.width), size.height - size.height * (position.y/2 / size.height));
         
         // Add Right Hand
                 
@@ -733,14 +733,15 @@
         CCSprite* rightHand =  [CCSprite spriteWithSpriteFrame:
                                 [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:nameHand]];
         
-        rightHand.anchorPoint = ccp(0, 0);
+        rightHand.anchorPoint = ccp(0,0);
                             
-        [rightHand setPosition:ccp(- self.position.x + (self.contentSize.width * self.anchorPoint.x) + size.width * (positionRight.x/2 / size.width), size.height - self.position.y + (self.contentSize.height * self.anchorPoint.y) - positionRight.y/2)];
+        [rightHand setPosition:ccp(- self.position.x + (self.contentSize.width * self.anchorPoint.x) + positionRight.x/2, size.height - self.position.y + (self.contentSize.height * self.anchorPoint.y) - positionRight.y/2)];
     
+        NSLog(@"===============");
+        NSLog(@"Poszione destra: %@", NSStringFromCGPoint(rightHand.position));
         [_spriteBatchNode addChild:rightHand z:kRightHandZValue tag:kRightHandTagValue];
         
         [rightHand setVertexZ:40];
-
         
         // Add Left hand
         

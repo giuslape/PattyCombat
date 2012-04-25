@@ -340,26 +340,27 @@
             
     CCLabelBMFont* label = (CCLabelBMFont*)[self getChildByTag:kLabelReadyTagValue];
    
-     if(count >= 12){
+     if(count >= 14){
          
-         NSString *tempString = [NSString stringWithFormat:@"%d", count - 11];
+         NSString *tempString = [NSString stringWithFormat:@"%d", count - 13];
          [label setString:tempString];
         
     }
     
-    if (count == 14) {
+    if (count == 16) {
         
         [self unschedule:_cmd];
         id delay  = [CCDelayTime actionWithDuration:0.2f];
         id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
         id change = [CCCallBlock actionWithBlock:^{
-            [label setString:@"4!"];
+            [label setString:@"4"];
         }];
         
         id d2 = [CCDelayTime actionWithDuration:0.2f];
         id delete = [CCCallBlock actionWithBlock:^{
             
             [self removeChild:label cleanup:YES];
+            
         }];
         
         [self runAction:[CCSequence actions:delay,func,d2,change,d2,delete, nil]];

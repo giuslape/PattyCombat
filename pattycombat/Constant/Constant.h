@@ -88,8 +88,8 @@
 #define kHandFeedBothTagValue 13
 #define kHandFeedBothZValue 1
 #define kLeftHandTagValue 14
-#define kLeftHandZValue 1
-#define kRightHandZValue 1
+#define kLeftHandZValue 2
+#define kRightHandZValue 2
 #define kRightHandTagValue 15
 #define kFightButtonTagValue 16
 #define kFightButtonZValue 1

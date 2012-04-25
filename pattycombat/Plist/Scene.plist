@@ -17,13 +17,13 @@
 			<key>name</key>
 			<string>Miaghi</string>
 			<key>position</key>
-			<string>{480,250}</string>
+			<string>{480, 250}</string>
 			<key>handName</key>
 			<string>miaghi_arm_0001.png</string>
 			<key>rightPosition</key>
-			<string>{88,574}</string>
+			<string>{88, 574}</string>
 			<key>rightRectPosition</key>
-			<string>{150,282}</string>
+			<string>{150, 282}</string>
 			<key>headName</key>
 			<string>miaghi_head_0001.png</string>
 			<key>hitNameDxUnder</key>
@@ -34,14 +34,6 @@
 			<string>miaghi_hit2_0001.png</string>
 			<key>hitNameSxOver</key>
 			<string>miaghi_hit2_0003.png</string>
-			<key>leftPositionUnder</key>
-			<string>{,}</string>
-			<key>leftPositionOver</key>
-			<string>{,}</string>
-			<key>rightPositionUnder</key>
-			<string>{,}</string>
-			<key>rightPositionOver</key>
-			<string>{,}</string>
 		</dict>
 	</dict>
 	<key>Scena2</key>
@@ -53,7 +45,7 @@
 			<key>bpm</key>
 			<integer>120</integer>
 			<key>leftPosition</key>
-			<string>{476, 514}</string>
+			<string>{476,514}</string>
 			<key>leftRectPosition</key>
 			<string>{678,230}</string>
 			<key>name</key>
@@ -135,7 +127,7 @@
 			<key>leftPosition</key>
 			<string>{485,524}</string>
 			<key>leftRectPosition</key>
-			<string>{694, 116}</string>
+			<string>{694,116}</string>
 			<key>name</key>
 			<string>Masai</string>
 			<key>position</key>
@@ -219,7 +211,7 @@
 			<key>name</key>
 			<string>Jenny</string>
 			<key>position</key>
-			<string>{474, 168}</string>
+			<string>{474,168}</string>
 			<key>handName</key>
 			<string>jenny_arm_0001.png</string>
 			<key>rightPosition</key>
