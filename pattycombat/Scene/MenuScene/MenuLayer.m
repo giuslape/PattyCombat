@@ -684,7 +684,7 @@
     
     //TestFlight
     [TestFlight passCheckpoint:@"Controllo gettoni"];
-
+    TFLog(@"Controllo gettoni");
     
     // Movement animation to Get Coins Area
     
@@ -737,6 +737,7 @@
     
     //TestFlight
     [TestFlight passCheckpoint:@"Controllo statistiche"];
+    TFLog(@"Controllo statistiche");
 
     CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(-(size.width), 0)];
 	CCEaseExponentialOut* ease = [CCEaseExponentialOut actionWithAction:move];
@@ -751,6 +752,8 @@
     
     //TestFlight
     [TestFlight passCheckpoint:@"Controllo crediti"];
+    TFLog(@"Controllo crediti");
+
     
     CreditsLayer* creditsLayer = [CreditsLayer layerWithColor:ccc4(0, 0, 0, 0) width:size.width height:size.height];
     
@@ -786,9 +789,6 @@
 
 -(void)playGame{
     
-    // Test Flight
-    [TestFlight passCheckpoint:@"Comincia il gioco"];
-
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     [mainMenu removeFromParentAndCleanup:YES];
     [[GameManager sharedGameManager] runSceneWithID:kIntroScene];
@@ -804,6 +804,8 @@
     
     // Test Flight
     [TestFlight passCheckpoint:@"Controllo achievement"];
+    TFLog(@"Controllo achievement");
+
     
     GKAchievementViewController* achievements = [[GKAchievementViewController alloc] init];
     
@@ -828,6 +830,7 @@
     
     // Test Flight
     [TestFlight passCheckpoint:@"Controllo Leaderboard"];
+    TFLog(@"Controllo leaderboard");
     
     GKLeaderboardViewController *leaderboardController =
     [[GKLeaderboardViewController alloc] init];
@@ -880,7 +883,7 @@ viewController
     NSLog(@"Purchased: %@", productIdentifier);
     
     // Test Flight
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Prodotto comprato: %@", productIdentifier]];
+    TFLog(@"Prodotto comprato: %@", productIdentifier);
     
             
 }
@@ -949,8 +952,7 @@ viewController
     
     NSLog(@"Buying %@...", product.productIdentifier);
         
-        // Test Flight
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"Sto comprando: %@",product.productIdentifier]];
+    TFLog(@"Comprando %@",product.productIdentifier);
         
     [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
     
@@ -1084,6 +1086,7 @@ viewController
     
     // Test Flight
     [TestFlight passCheckpoint:@"Post su Facebook"];
+    TFLog(@"Post su Facebook");
     
     _permissions = [[NSArray alloc] initWithObjects:@"offline_access",@"publish_stream",nil];
     
@@ -1175,6 +1178,7 @@ viewController
         
     // Test Flight
     [TestFlight passCheckpoint:@"Post su Twitter"];
+    TFLog(@"Post su twitter");
     
     self.isTouchEnabled = FALSE;
     

@@ -260,6 +260,8 @@
         _count = 1;
         _elapsedTime = 0;
         
+        _gameTimeInit = [[GameManager sharedGameManager] gameTimeInit];
+        
         id dao = [GameManager sharedGameManager].dao;
         
         CGSize size = [[CCDirectorIOS sharedDirector] winSize];
@@ -340,14 +342,15 @@
             
     CCLabelBMFont* label = (CCLabelBMFont*)[self getChildByTag:kLabelReadyTagValue];
    
-     if(count >= 14){
+     if(count >= _gameTimeInit){
          
-         NSString *tempString = [NSString stringWithFormat:@"%d", count - 13];
+         int tempCount = _gameTimeInit - 1;
+         NSString *tempString = [NSString stringWithFormat:@"%d", count - tempCount];
          [label setString:tempString];
         
     }
     
-    if (count == 16) {
+    if (count == _gameTimeInit + 2) {
         
         [self unschedule:_cmd];
         id delay  = [CCDelayTime actionWithDuration:0.2f];

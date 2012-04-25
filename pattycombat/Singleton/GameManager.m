@@ -28,6 +28,7 @@ static GameManager* _sharedGameManager = nil;
 @synthesize namePlayer   = _namePlayer;
 @synthesize gameState    = _gameState;
 @synthesize gameTime     = _gameTime;
+@synthesize gameTimeInit = _gameTimeInit;
 @synthesize isPerfect;
 @synthesize isPerfectForLevel = _isPerfectForLevel;
 @synthesize isKoForLevel = _isKoForLevel;
@@ -235,34 +236,40 @@ static GameManager* _sharedGameManager = nil;
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 69;
+            _gameTime = 63;
+            _gameTimeInit = 14;
             break;
         case 2:
-            _gameTime = 74;
+            _gameTime = 62;
+            _gameTimeInit = 14;
             break;
         case 3:
-            _gameTime = 75;
+            _gameTime = 63;
             break;
         case 5:
-            _gameTime = 64;
+            _gameTime = 53;
             break;
         case 6:
-            _gameTime = 64;
+            _gameTime = 53;
             break;
         case 7:
-            _gameTime = 65;
+            _gameTime = 53;
             break;
         case 9:
-            _gameTime = 56;
+            _gameTime = 46;
+            _gameTimeInit = 16;
             break;
         case 10:
-            _gameTime = 57;
+            _gameTime = 46;
+            _gameTimeInit = 15;
             break;
         case 11:
-            _gameTime = 56;
+            _gameTime = 46;
+            _gameTimeInit = 16;
             break;
         case 13:
-            _gameTime = 50;
+            _gameTime = 41;
+            _gameTimeInit = 14;
             break;
         default:
             break;
@@ -608,13 +615,13 @@ static GameManager* _sharedGameManager = nil;
             patternForLevel = [[NSMutableArray alloc] initWithArray:
                                [self.dao loadPlistForPatternWithLevel:_currentLevel andIsExtreme:self.isExtreme]];
             self.namePlayer = [self formatPlayerTypeToString];
-            [self formatGameTime];
             sceneToRun = [IntroScene node];
             break;
         case kLevelCompleteScene:            
             sceneToRun = [EndScene node];
             break;
         case kGamelevel1:
+            [self formatGameTime];
             _currentScore = 0;
             sceneToRun = [GameScene node];
             break;

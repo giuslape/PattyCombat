@@ -104,7 +104,7 @@
         CCSprite* handSprite = nil;
         
         //TestFlight
-        [TestFlight passCheckpoint:hand];
+        TFLog(hand);        
         
         if ([hand isEqualToString:@"dx"] || [hand isEqualToString:@"dxCross"]) {
             
@@ -438,7 +438,7 @@
         }
     
     //TestFlight
-    [TestFlight passCheckpoint:@"Tocco sbagliato Intro"];
+    TFLog(@"Tocco sbagliato Intro");
 }
     
 
@@ -547,7 +547,7 @@
     nodeHits =  kStateTwoHandsHit;
         
         //TestFlight
-        [TestFlight passCheckpoint:@"Doppio Tocco Intro"];
+        TFLog(@"Doppio Tocco Intro");
     
     }
     else if (CGRectContainsPoint([_rightHand boundingBox], firstLocation) ||
@@ -555,19 +555,19 @@
     {
                     nodeHits = kStateRightHandHit;
         //TestFlight
-        [TestFlight passCheckpoint:@"Tocco mano Destra Intro"];
+        TFLog(@"Tocco mano Destra Intro");
     }   
         else if (CGRectContainsPoint([_leftHand boundingBox], firstLocation)||
                  CGRectContainsPoint([_leftHand boundingBox], secondLocation)){
             nodeHits =  kStateLeftHandHit;
             //TestFlight
-            [TestFlight passCheckpoint:@"Tocco Sinistra Intro"];
+            TFLog(@"Tocco Sinistra Intro");
         }
         
         else {
             nodeHits = kStateHitBackground;
             //TestFlight
-            [TestFlight passCheckpoint:@"Tocco Background Intro"];
+            TFLog(@"Tocco Background Intro");
         }
             
     }
@@ -590,13 +590,13 @@
         nodeHit = kStateRightHandHit;
         
         //TestFlight
-        [TestFlight passCheckpoint:@"Tocco Destra"];
+        TFLog(@"Tocco Destra");
     }
     
     else if (CGRectContainsPoint([_leftHand boundingBox], touch)){
         
         //TestFlight
-        [TestFlight passCheckpoint:@"Tocco Sinistra"];
+        TFLog(@"Tocco Sinistra");
         
         nodeHit =  kStateLeftHandHit;
     
@@ -606,7 +606,7 @@
         
         nodeHit = kStateHitBackground;
         //TestFlight
-        [TestFlight passCheckpoint:@"Tocco Background"];
+        TFLog(@"Tocco Background");
     }
     
     return nodeHit;

@@ -314,7 +314,7 @@
         pauseMenu.isTouchEnabled = TRUE;
             
         //TestFlight
-        [TestFlight passCheckpoint:@"Pausa nel gioco"];
+        TFLog(@"Pausa nel gioco");
     }
 
 }
@@ -322,7 +322,7 @@
 -(void)resumeGame:(id)sender{
     
     //TestFlight
-    [TestFlight passCheckpoint:@"Resume"];
+    TFLog(@"Resume");
     
     isPause = FALSE;
     
@@ -340,7 +340,7 @@
 -(void)mainMenu:(id)sender{
     
     //TestFlight
-    [TestFlight passCheckpoint:@"Ritorno al main menu"];
+    TFLog(@"Ritorno al main menu");
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         
@@ -358,7 +358,7 @@
     
     
     //TestFlight
-    [TestFlight passCheckpoint:@"Tocco Restart"];
+    TFLog(@"Tocco Restart");
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
             

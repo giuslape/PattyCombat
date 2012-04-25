@@ -261,7 +261,7 @@
     
     GameStates gameState = [[GameManager sharedGameManager] gameState];
     
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Game State: %d", gameState]];
+    TFLog([NSString stringWithFormat:@"Game State: %d", gameState]);
     
     switch (gameState) {
             
@@ -324,20 +324,22 @@
 
 -(void)onEnterTransitionDidFinish{
     
-    [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
-
     id delay = [CCDelayTime actionWithDuration:0.5];
     
     id func = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
     
-    id seq = [CCSequence actionOne:delay two:func];
+    id play = [CCCallBlock actionWithBlock:^{
+        
+        (_thresholdReached) ? PLAYSOUNDEFFECT(win) : PLAYSOUNDEFFECT(lose);
+
+    }];
+    
+    id seq = [CCSequence actions:delay,func,play,nil];
     
     [self runAction:seq];
     
     self.isTouchEnabled = TRUE;
-    
-    (_thresholdReached) ? PLAYSOUNDEFFECT(win) : PLAYSOUNDEFFECT(lose);
-    
+        
   /*  [self runAction:[CCSequence actionOne:[CCDelayTime actionWithDuration:1] two:[CCCallBlock actionWithBlock:^{
         
         [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
@@ -484,7 +486,15 @@
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel10
                                          percentComplete:100.0];
             
-                        [TestFlight passCheckpoint:@"Gioco Terminato"];
+            [TestFlight passCheckpoint:@"Gioco Terminato"];
+            
+            if (![GameState sharedInstance].extreme) {
+                
+                [[GameState sharedInstance] save];
+                [[GCHelper sharedInstance] reportAchievement:kAchievementExtreme 
+                                             percentComplete:100.0];
+            }
+            
         }
         
         if (![GameState sharedInstance].perfect && [GameManager sharedGameManager].isPerfect) {
@@ -575,10 +585,10 @@
     }
     
     //TestFlight
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Level Score: %d", _currentLevelScore]];
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Total Score: %d", _totalGameScore]];
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Best Score: %d", _bestScore]];
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Time Bonus: %d", _timeBonus]];
+    TFLog([NSString stringWithFormat:@"Level Score: %d", _currentLevelScore]);
+    TFLog([NSString stringWithFormat:@"Total Score: %d", _totalGameScore]);
+    TFLog([NSString stringWithFormat:@"Best Score: %d", _bestScore]);
+    TFLog([NSString stringWithFormat:@"Time Bonus: %d", _timeBonus]);
 }
 
 - (id)init {

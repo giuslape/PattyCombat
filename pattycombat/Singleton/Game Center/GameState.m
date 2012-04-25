@@ -25,6 +25,7 @@
 @synthesize perfect;
 @synthesize ko;
 @synthesize timesFell;
+@synthesize extreme;
 
 
 

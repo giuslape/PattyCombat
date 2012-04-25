@@ -17,10 +17,11 @@
 @interface GamePlayLayer : CCLayer <PlayerDelegate, HUDDelegate>
 {
     
-    double _currentTime;
-    double _elapsedTime;
+    double   _currentTime;
+    double   _elapsedTime;
     float    _bpm;
     float    _count;
+    int      _gameTimeInit;
     BOOL   _isTouchInTime;
 
     HUDLayer* _hudLayer;
