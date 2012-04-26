@@ -41,7 +41,8 @@
 - (void)dealloc {
     
     _spriteBatchNode = nil;
-    [[[CCDirectorIOS sharedDirector] touchDispatcher] removeAllDelegates];
+    [[GameManager sharedGameManager] stopBackgroundMusic];
+    [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];    
         
@@ -102,6 +103,9 @@
     for (NSString* hand in patternArray) {
         
         CCSprite* handSprite = nil;
+        
+        //TestFlight
+        TFLog(hand);        
         
         if ([hand isEqualToString:@"dx"] || [hand isEqualToString:@"dxCross"]) {
             
@@ -433,6 +437,9 @@
         
             [pat setDisplayFrame:[[[animationFeedBoth frames] objectAtIndex:0] spriteFrame]];
         }
+    
+    //TestFlight
+    TFLog(@"Tocco sbagliato Intro");
 }
     
 
@@ -444,7 +451,6 @@
             
         CCLOG(@"Intro complete, asking Game Manager to start the Game play");
         
-        [self unschedule:_cmd];
         [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
         
         self.isTouchEnabled = FALSE;
@@ -536,20 +542,34 @@
     if((CGRectContainsPoint([_rightHand boundingBox], firstLocation) && 
         CGRectContainsPoint([_leftHand boundingBox], secondLocation)) || 
        ((CGRectContainsPoint([_rightHand boundingBox], secondLocation) && 
-         CGRectContainsPoint([_leftHand boundingBox], firstLocation))))
+         CGRectContainsPoint([_leftHand boundingBox], firstLocation)))){
         
     nodeHits =  kStateTwoHandsHit;
+        
+        //TestFlight
+        TFLog(@"Doppio Tocco Intro");
     
-
+    }
     else if (CGRectContainsPoint([_rightHand boundingBox], firstLocation) ||
              CGRectContainsPoint([_rightHand boundingBox], secondLocation))
+    {
                     nodeHits = kStateRightHandHit;
-        
+        //TestFlight
+        TFLog(@"Tocco mano Destra Intro");
+    }   
         else if (CGRectContainsPoint([_leftHand boundingBox], firstLocation)||
-                 CGRectContainsPoint([_leftHand boundingBox], secondLocation))
-                    nodeHits =  kStateLeftHandHit;
+                 CGRectContainsPoint([_leftHand boundingBox], secondLocation)){
+            nodeHits =  kStateLeftHandHit;
+            //TestFlight
+            TFLog(@"Tocco Sinistra Intro");
+        }
         
-                else nodeHits = kStateHitBackground;
+        else {
+            nodeHits = kStateHitBackground;
+            //TestFlight
+            TFLog(@"Tocco Background Intro");
+        }
+            
     }
 
     
@@ -565,11 +585,29 @@
 
     CharacterStates nodeHit;
     
-    if (CGRectContainsPoint([_rightHand boundingBox], touch))nodeHit = kStateRightHandHit;
+    if (CGRectContainsPoint([_rightHand boundingBox], touch)){
+        
+        nodeHit = kStateRightHandHit;
+        
+        //TestFlight
+        TFLog(@"Tocco Destra");
+    }
     
-    else if (CGRectContainsPoint([_leftHand boundingBox], touch))nodeHit =  kStateLeftHandHit;
+    else if (CGRectContainsPoint([_leftHand boundingBox], touch)){
+        
+        //TestFlight
+        TFLog(@"Tocco Sinistra");
+        
+        nodeHit =  kStateLeftHandHit;
     
-    else nodeHit = kStateHitBackground;
+    }
+    
+    else {
+        
+        nodeHit = kStateHitBackground;
+        //TestFlight
+        TFLog(@"Tocco Background");
+    }
     
     return nodeHit;
 

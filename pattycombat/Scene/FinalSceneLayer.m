@@ -8,6 +8,7 @@
 
 #import "FinalSceneLayer.h"
 #import "GameManager.h"
+#import "LoadingScene.h"
 
 @implementation FinalSceneLayer
 
@@ -33,11 +34,23 @@
                         
         [self scheduleOnce:@selector(showDarkLayer:) delay:2];
         
+        if(![[GameManager sharedGameManager] isExtreme]){
+            
+            [[GameManager sharedGameManager] setIsExtreme:YES];
+        }
+        
+        [TestFlight passCheckpoint:@"Gioco Finito"];
         
     }
     return self;
 }
 
+
+-(void)onEnterTransitionDidFinish{
+    
+    
+    [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
+}
 
 #pragma mark -
 #pragma mark ===  Show Dark Layer  ===
@@ -57,24 +70,6 @@
     
 }
 
-#pragma mark -
-#pragma mark ===  Touch Handler  ===
-#pragma mark -
-
-
--(void) registerWithTouchDispatcher
-{
-    [[[CCDirectorIOS sharedDirector] touchDispatcher] addTargetedDelegate:self priority:-1 swallowsTouches:YES];
-    
-}
-
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-    
-    return YES;
-}
-
 
 #pragma mark -
 #pragma mark ===  Credits Layer Protocol  ===
@@ -83,7 +78,10 @@
 -(void)creditsLayerDidClose:(CreditsLayer *)layer{
     
     [self removeChild:layer cleanup:YES];
-    [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
+    
+    CCScene* scene = [LoadingScene sceneWithTargetScene:kMainMenuScene];
+    
+    [[CCDirectorIOS sharedDirector] replaceScene:scene];
 }
 
 

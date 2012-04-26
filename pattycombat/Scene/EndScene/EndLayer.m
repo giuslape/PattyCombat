@@ -100,7 +100,7 @@
                     self.isTouchEnabled = TRUE;
                     
                 };
-                [tweetSheet setInitialText:[NSString stringWithFormat:@"I got %d points in Patty Combat Beat that!", _totalGameScore]];
+                [tweetSheet setInitialText:[NSString stringWithFormat:@"I got %d points in #PattyCombat Beat that! ", _totalGameScore]];
                 // Hide the HUD in the main tread 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:[CCDirectorIOS sharedDirector].view animated:YES];
@@ -261,6 +261,8 @@
     
     GameStates gameState = [[GameManager sharedGameManager] gameState];
     
+    TFLog([NSString stringWithFormat:@"Game State: %d", gameState]);
+    
     switch (gameState) {
             
         case kStateKo:
@@ -322,17 +324,27 @@
 
 -(void)onEnterTransitionDidFinish{
     
-    [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
-
     id delay = [CCDelayTime actionWithDuration:0.5];
     
     id func = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
     
-    id seq = [CCSequence actionOne:delay two:func];
+    id play = [CCCallBlock actionWithBlock:^{
+        
+        (_thresholdReached) ? PLAYSOUNDEFFECT(win) : PLAYSOUNDEFFECT(lose);
+
+    }];
+    
+    id seq = [CCSequence actions:delay,func,play,nil];
     
     [self runAction:seq];
     
     self.isTouchEnabled = TRUE;
+        
+  /*  [self runAction:[CCSequence actionOne:[CCDelayTime actionWithDuration:1] two:[CCCallBlock actionWithBlock:^{
+        
+        [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
+
+    }]]];*/
 }
 
 -(void)sendAchievementsForLevel:(int)currentLevel{
@@ -347,6 +359,9 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel1
                                          percentComplete:100.0];
+            
+            //TestFlight
+            [TestFlight passCheckpoint:@"Livello 1 superato"];
         }        
     }else if (currentLevel == 2) {
         
@@ -358,6 +373,8 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel2
                                          percentComplete:100.0];
+            //TestFlight
+            [TestFlight passCheckpoint:@"Livello 2 superato"];
         }        
 
     }else if (currentLevel == 3) {
@@ -370,6 +387,8 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel3
                                          percentComplete:100.0];
+            //TestFlight
+            [TestFlight passCheckpoint:@"Livello 3 superato"];
         }        
         
     }else if (currentLevel == 5) {
@@ -382,6 +401,8 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel4
                                          percentComplete:100.0];
+            
+                        [TestFlight passCheckpoint:@"Livello 4 superato"];
         }        
         
     }else if (currentLevel == 6) {
@@ -394,6 +415,8 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel5
                                          percentComplete:100.0];
+            
+            [TestFlight passCheckpoint:@"Livello 5 superato"];
         }        
         
     }else if (currentLevel == 7) {
@@ -406,6 +429,8 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel6
                                          percentComplete:100.0];
+            
+                        [TestFlight passCheckpoint:@"Livello 6 superato"];
         }        
         
     }else if (currentLevel == 8) {
@@ -418,6 +443,8 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel7
                                          percentComplete:100.0];
+            
+            [TestFlight passCheckpoint:@"Livello 7 superato"];
         }        
         
     }else if (currentLevel == 10) {
@@ -430,6 +457,8 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel8
                                          percentComplete:100.0];
+            
+                        [TestFlight passCheckpoint:@"Livello 8 superato"];
         }        
         
     }else if (currentLevel == 11) {
@@ -442,6 +471,8 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel9
                                          percentComplete:100.0];
+            
+                        [TestFlight passCheckpoint:@"Livello 9 superato"];
         }        
         
     }else if (currentLevel == 12) {
@@ -454,6 +485,17 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel10
                                          percentComplete:100.0];
+            
+            [TestFlight passCheckpoint:@"Gioco Terminato"];
+            
+            if (![GameState sharedInstance].extreme) {
+                
+                [GameState sharedInstance].extreme = true;
+                [[GameState sharedInstance] save];
+                [[GCHelper sharedInstance] reportAchievement:kAchievementExtreme 
+                                             percentComplete:100.0];
+            }
+            
         }
         
         if (![GameState sharedInstance].perfect && [GameManager sharedGameManager].isPerfect) {
@@ -463,6 +505,8 @@
             [[GCHelper sharedInstance] reportAchievement:kAchievementPerfect
                                          percentComplete:100.0];
             
+                        [TestFlight passCheckpoint:@"Gioco terminato con Perfect"];
+            
         }
         
         if (![GameState sharedInstance].ko && [GameManager sharedGameManager].isKo) {
@@ -471,6 +515,8 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementKO
                                          percentComplete:100.0];
+            
+                        [TestFlight passCheckpoint:@"gioco terminato con Ko"];
 
         }
         
@@ -538,6 +584,12 @@
         [[GameManager sharedGameManager] setBestScore:_totalGameScore];
         
     }
+    
+    //TestFlight
+    TFLog([NSString stringWithFormat:@"Level Score: %d", _currentLevelScore]);
+    TFLog([NSString stringWithFormat:@"Total Score: %d", _totalGameScore]);
+    TFLog([NSString stringWithFormat:@"Best Score: %d", _bestScore]);
+    TFLog([NSString stringWithFormat:@"Time Bonus: %d", _timeBonus]);
 }
 
 - (id)init {
@@ -546,7 +598,7 @@
     
     if (self) {
         
-         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Feedback_default.plist"];
+         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Feedback_default.plist" textureFilename:@"Feedback_default.png"];
         
          _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"Feedback_default.png"];
         
@@ -564,8 +616,6 @@
         
         int currentLevel = [[GameManager sharedGameManager] currentLevel];
         
-        if (_thresholdReached)[[GameManager sharedGameManager] setLevelReached:currentLevel];
-        
         // Find out the achievement is active 
         
         [self sendAchievementsForLevel:currentLevel];
@@ -573,6 +623,17 @@
         // Load background for level
         
         [self loadBackgroundAtLevel:currentLevel andWin:_thresholdReached];
+        
+        // Set level reached
+        
+        if (_thresholdReached && [[GameManager sharedGameManager] levelReached] < currentLevel){
+            
+            if (currentLevel >= 4 && currentLevel < 8) currentLevel--;
+            else if (currentLevel >= 8)currentLevel -= 2;
+            
+            [[GameManager sharedGameManager] setLevelReached:currentLevel];
+
+        }
         
         // Add label score
 

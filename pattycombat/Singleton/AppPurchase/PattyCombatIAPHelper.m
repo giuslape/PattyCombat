@@ -51,7 +51,7 @@ static PattyCombatIAPHelper * _sharedHelper;
     value = [self quantity];
     
     if ([productIdentifier isEqualToString:kProductPurchaseFacebookCoins]) constant = 3;
-        else if ([productIdentifier isEqualToString:kProductPurchase25coins])constant = 1;
+        else if ([productIdentifier isEqualToString:kProductPurchase25coins])constant = 25;
             else if([productIdentifier isEqualToString:kProductPurchse75coins]) constant = 75;
                     else if ([productIdentifier isEqualToString:kProductPurchase200coins])constant = 200;
     
@@ -99,11 +99,15 @@ static PattyCombatIAPHelper * _sharedHelper;
                 
             }else {
                 
+                if ([self.products count] > 0) {
+                    
                 SKProduct* product  = [self.products objectAtIndex:1];
                 MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
                 hud.labelText = @"Buying Coins";
                 [self buyProductIdentifier:product];
                 [self performSelector:@selector(timeout:) withObject:view afterDelay:60];
+                    
+                }
             }
 
         

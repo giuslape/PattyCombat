@@ -6,10 +6,6 @@
 //  Copyright 2011 Lapenta. All rights reserved.
 //
 
-
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////     Menu    /////////////////////////////////////////////////////////////////////////
@@ -88,8 +84,8 @@
 #define kHandFeedBothTagValue 13
 #define kHandFeedBothZValue 1
 #define kLeftHandTagValue 14
-#define kLeftHandZValue 1
-#define kRightHandZValue 1
+#define kLeftHandZValue 2
+#define kRightHandZValue 2
 #define kRightHandTagValue 15
 #define kFightButtonTagValue 16
 #define kFightButtonZValue 1
@@ -108,7 +104,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define GAMETIMEBONUSLEVEL 30
+#define GAMETIMEBONUSLEVEL 15
 #define DELAY 12
 #define INTERVAL 0.50f
 #define MAX_ELAPSED_TIME 0.08f
@@ -255,6 +251,8 @@ typedef enum {
 
 
 #define BACKGROUND_TRACK_MAIN_MENU @"MainTheme.mp3"
+#define WinTheme @"win.mp3"
+#define LoseTheme @"lose.mp3"
 #define WAITINGTHEME @"loop_memorize.mp3"
 // Audio Constants
 #define SFX_NOTLOADED NO
@@ -265,3 +263,7 @@ typedef enum {
 
 #define STOPSOUNDEFFECT(...) \
 [[GameManager sharedGameManager] stopSoundEffect:__VA_ARGS__]
+
+
+ #define NSLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+

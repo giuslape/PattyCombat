@@ -313,11 +313,16 @@
         
         pauseMenu.isTouchEnabled = TRUE;
             
+        //TestFlight
+        TFLog(@"Pausa nel gioco");
     }
 
 }
 
 -(void)resumeGame:(id)sender{
+    
+    //TestFlight
+    TFLog(@"Resume");
     
     isPause = FALSE;
     
@@ -334,6 +339,9 @@
 
 -(void)mainMenu:(id)sender{
     
+    //TestFlight
+    TFLog(@"Ritorno al main menu");
+    
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         
     pauseMenu.isTouchEnabled = FALSE;
@@ -343,10 +351,14 @@
     [[CCDirectorIOS sharedDirector]  resume];
     [[GameManager sharedGameManager] stopBackgroundMusic];
     LoadingScene* scene = [LoadingScene sceneWithTargetScene:kMainMenuScene];
-    [[CCDirector sharedDirector] replaceScene:scene];
+    [[CCDirectorIOS sharedDirector] replaceScene:scene];
 }
 
 -(void)restartTapped:(id)sender{
+    
+    
+    //TestFlight
+    TFLog(@"Tocco Restart");
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
             
@@ -421,6 +433,8 @@
     [[PattyCombatIAPHelper sharedHelper] updateQuantityForProductIdentifier:productIdentifier];
     
     NSLog(@"Purchased: %@", productIdentifier);
+    //TestFlight
+    [TestFlight passCheckpoint:@"Comprati 25 gettoni nel gioco"];
         
 }
 

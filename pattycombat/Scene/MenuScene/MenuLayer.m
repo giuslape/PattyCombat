@@ -44,9 +44,6 @@
     NSLog(@"=========================================");
     CCLOG(@"%@: %@", NSStringFromSelector(_cmd), self);
     
-    //TestFlight
-    [TestFlight passCheckpoint:@"Menu Deallocato"];
-
     _darkLayer = nil;
     _purchaseMenu = nil;
     _hud = nil;
@@ -56,7 +53,7 @@
     
     [delegate facebook].sessionDelegate = nil;
     
-    [[[CCDirector sharedDirector] touchDispatcher] removeAllDelegates];
+    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
@@ -327,9 +324,9 @@
     
     //Play button
     
-    CCSprite* play = [CCSprite spriteWithSpriteFrameName:@"play_btn.png"];
+    CCSprite* play = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn.png"] : [CCSprite spriteWithFile:@"playExtreme_btn.png"] ;
     play.anchorPoint = ccp(0.5f,0);
-    CCSprite* playSelected = [CCSprite spriteWithSpriteFrameName:@"play_btn_over.png"];
+    CCSprite* playSelected = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn_over.png"] :[CCSprite spriteWithFile:@"playExtreme_btn_over.png"];
     playSelected.anchorPoint = ccp(0.5f,0);
     CCNode* nodePlay = [CCNode node];
     nodePlay.contentSize = play.contentSize;
@@ -495,9 +492,11 @@
         [self buildStats];
         
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+        
         // Add Logo
         
         CCSprite* logo = [CCSprite spriteWithFile:@"logo.png"];
+        
         [logo setAnchorPoint:ccp(0.5f, 1)];
         [logo setPosition:ccp(size.width * 0.7f, size.height * 0.97f)];
         [self addChild:logo z:3];
@@ -518,6 +517,8 @@
                                                     selector:@selector(productsLoaded:)
                                                         name:kProductsLoadedNotification 
                                                             object:nil];  
+        
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         
 	}
 	return self;
@@ -681,6 +682,10 @@
 {
     CCLOG(@"Sono in Credits Touched");
     
+    //TestFlight
+    [TestFlight passCheckpoint:@"Controllo gettoni"];
+    TFLog(@"Controllo gettoni");
+    
     // Movement animation to Get Coins Area
     
     CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(size.width , 0)];
@@ -730,6 +735,10 @@
 {
     CCLOG(@"Sono in High Scores Touched");
     
+    //TestFlight
+    [TestFlight passCheckpoint:@"Controllo statistiche"];
+    TFLog(@"Controllo statistiche");
+
     CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(-(size.width), 0)];
 	CCEaseExponentialOut* ease = [CCEaseExponentialOut actionWithAction:move];
 	[self runAction:ease];
@@ -740,6 +749,11 @@
 // Called when Credits Button is Touched
 
 -(void) itemCreditsTouched{
+    
+    //TestFlight
+    [TestFlight passCheckpoint:@"Controllo crediti"];
+    TFLog(@"Controllo crediti");
+
     
     CreditsLayer* creditsLayer = [CreditsLayer layerWithColor:ccc4(0, 0, 0, 0) width:size.width height:size.height];
     
@@ -775,9 +789,6 @@
 
 -(void)playGame{
     
-    // Test Flight
-    [TestFlight passCheckpoint:@"Comincia il gioco"];
-
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     [mainMenu removeFromParentAndCleanup:YES];
     [[GameManager sharedGameManager] runSceneWithID:kIntroScene];
@@ -793,6 +804,8 @@
     
     // Test Flight
     [TestFlight passCheckpoint:@"Controllo achievement"];
+    TFLog(@"Controllo achievement");
+
     
     GKAchievementViewController* achievements = [[GKAchievementViewController alloc] init];
     
@@ -817,6 +830,7 @@
     
     // Test Flight
     [TestFlight passCheckpoint:@"Controllo Leaderboard"];
+    TFLog(@"Controllo leaderboard");
     
     GKLeaderboardViewController *leaderboardController =
     [[GKLeaderboardViewController alloc] init];
@@ -869,7 +883,7 @@ viewController
     NSLog(@"Purchased: %@", productIdentifier);
     
     // Test Flight
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Purchased: %@", productIdentifier]];
+    TFLog(@"Prodotto comprato: %@", productIdentifier);
     
             
 }
@@ -938,8 +952,7 @@ viewController
     
     NSLog(@"Buying %@...", product.productIdentifier);
         
-        // Test Flight
-        [TestFlight passCheckpoint:[NSString stringWithFormat:@"Sto comprando: %@",product.productIdentifier]];
+    TFLog(@"Comprando %@",product.productIdentifier);
         
     [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
     
@@ -1072,7 +1085,8 @@ viewController
 -(void)loginToFacebook:(id)sender{
     
     // Test Flight
-    [TestFlight passCheckpoint:@"Posto su Facebook"];
+    [TestFlight passCheckpoint:@"Post su Facebook"];
+    TFLog(@"Post su Facebook");
     
     _permissions = [[NSArray alloc] initWithObjects:@"offline_access",@"publish_stream",nil];
     
@@ -1099,16 +1113,22 @@ viewController
     
     // The action links to be shown with the post in the feed
     NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                      @"Get Started",@"name",@"http://www.facebook.com/pages/Patty-Combat/269975746417125",@"link", nil], nil];
+                                                      @"Get Started",
+                                                      @"name",
+                                                      @"http://bit.ly/HwglVX",
+                                                      @"link",
+                                                      @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX",
+                                                      @"message", nil], nil];
+    
     NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
     
     // Dialog parameters
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"I'm using Patty Combat", @"name",
+                                   @"I'm Patty Combat beta tester", @"name",
                                    @"Patty Combat.", @"caption",
-                                   @"Questa è una prova", @"message",
-                                   @"Test Patty Combat", @"description",
-                                   @"http://www.facebook.com/pages/Patty-Combat/269975746417125", @"link",
+                                   @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX", @"message",
+                                   @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX", @"description",
+                                   @"http://bit.ly/HwglVX", @"link",
                                    @"http://www.balzo.eu/wp-content/uploads/2012/04/iTunesArtwork.png", @"picture",
                                    actionLinksStr, @"actions",
                                    nil];
@@ -1163,7 +1183,8 @@ viewController
 -(void)postOnTwitter:(id)sender{
         
     // Test Flight
-    [TestFlight passCheckpoint:@"Posto su Twitter"];
+    [TestFlight passCheckpoint:@"Post su Twitter"];
+    TFLog(@"Post su twitter");
     
     self.isTouchEnabled = FALSE;
     
@@ -1185,7 +1206,7 @@ viewController
 
         };
         [tweetSheet setInitialText:
-         @"Tweeting from Patty Combat! :)"];
+         [NSString stringWithFormat:@"I'm enjoying to be a #PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX"]];
         [[CCDirectorIOS sharedDirector] presentViewController:tweetSheet animated:YES completion:^{
             
             NSLog(@"Completato");

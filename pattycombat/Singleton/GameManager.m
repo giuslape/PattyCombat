@@ -28,10 +28,12 @@ static GameManager* _sharedGameManager = nil;
 @synthesize namePlayer   = _namePlayer;
 @synthesize gameState    = _gameState;
 @synthesize gameTime     = _gameTime;
+@synthesize gameTimeInit = _gameTimeInit;
 @synthesize isPerfect;
 @synthesize isPerfectForLevel = _isPerfectForLevel;
 @synthesize isKoForLevel = _isKoForLevel;
 @synthesize isKo;
+@synthesize isExtreme = _isExtreme;
 @synthesize bestScore;
 @synthesize dao;
 @synthesize managerSoundState;
@@ -100,6 +102,9 @@ static GameManager* _sharedGameManager = nil;
         _namePlayer = nil;
         _gameTime = 0;
         _gameState = kStateLose;
+#if DEBUG
+       self.isExtreme = FALSE;
+#endif
     }
     return self;
 }
@@ -231,34 +236,40 @@ static GameManager* _sharedGameManager = nil;
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 66;
+            _gameTime = 63;
+            _gameTimeInit = 12;
             break;
         case 2:
-            _gameTime = 74;
+            _gameTime = 62;
+         //   _gameTimeInit = 11;
             break;
         case 3:
-            _gameTime = 75;
+            _gameTime = 63;
             break;
         case 5:
-            _gameTime = 64;
+            _gameTime = 53;
             break;
         case 6:
-            _gameTime = 64;
+            _gameTime = 53;
             break;
         case 7:
-            _gameTime = 65;
+            _gameTime = 53;
             break;
         case 9:
-            _gameTime = 56;
+            _gameTime = 46;
+         //   _gameTimeInit = 11;
             break;
         case 10:
-            _gameTime = 57;
+            _gameTime = 46;
+         //   _gameTimeInit = 11;
             break;
         case 11:
-            _gameTime = 56;
+            _gameTime = 46;
+           // _gameTimeInit = 11;
             break;
         case 13:
-            _gameTime = 50;
+            _gameTime = 41;
+        //    _gameTimeInit = 11;
             break;
         default:
             break;
@@ -402,7 +413,7 @@ static GameManager* _sharedGameManager = nil;
             return;
         }
         // Get all of the entries and PreLoad // 3
-        for( NSString *keyString in soundEffectsToLoad )
+        for(NSString *keyString in soundEffectsToLoad )
         {
             CCLOG(@"\nLoading Audio Key:%@ File:%@",
                   keyString,[soundEffectsToLoad objectForKey:keyString]);
@@ -473,8 +484,19 @@ static GameManager* _sharedGameManager = nil;
 
 -(void) stopBackgroundMusic{
     
+    if ((managerSoundState != kAudioManagerReady) &&
+        (managerSoundState != kAudioManagerFailed)) {
+        int waitCycles = 0;
+        while (waitCycles < AUDIO_MAX_WAITTIME) {
+            [NSThread sleepForTimeInterval:0.1f];
+            if ((managerSoundState == kAudioManagerReady) ||
+                (managerSoundState == kAudioManagerFailed)) {
+                break;
+            }
+            waitCycles = waitCycles + 1;
+        }
+    }
     if (managerSoundState == kAudioManagerReady) {
-        
         if ([soundEngine isBackgroundMusicPlaying]) {
             [soundEngine stopBackgroundMusic];
         }
@@ -488,6 +510,7 @@ static GameManager* _sharedGameManager = nil;
     }
     
 -(ALuint)playSoundEffect:(NSString*)soundEffectKey {
+    
         ALuint soundID = 0;
         if (managerSoundState == kAudioManagerReady) {
             NSNumber *isSFXLoaded =
@@ -557,7 +580,7 @@ static GameManager* _sharedGameManager = nil;
     switch (sceneID) {
             
         case kMainMenuScene:
-            _currentLevel = 11;
+            _currentLevel = 0;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;
@@ -590,15 +613,15 @@ static GameManager* _sharedGameManager = nil;
             isLastLevel = (_currentLevel == 13) ? TRUE : FALSE;
             patternForLevel = nil;
             patternForLevel = [[NSMutableArray alloc] initWithArray:
-                               [self.dao loadPlistForPatternWithLevel:_currentLevel]];
+                               [self.dao loadPlistForPatternWithLevel:_currentLevel andIsExtreme:self.isExtreme]];
             self.namePlayer = [self formatPlayerTypeToString];
-            [self formatGameTime];
             sceneToRun = [IntroScene node];
             break;
         case kLevelCompleteScene:            
             sceneToRun = [EndScene node];
             break;
         case kGamelevel1:
+            [self formatGameTime];
             _currentScore = 0;
             sceneToRun = [GameScene node];
             break;
@@ -769,6 +792,27 @@ static GameManager* _sharedGameManager = nil;
     _isKoForLevel = isKoForLevel;
     
     if (self.isKo) self.isKo = FALSE;
+}
+
+
+#pragma mark -
+#pragma mark ===  Extreme  ===
+#pragma mark -
+
+-(BOOL)isExtreme{
+    
+    _isExtreme = [[NSUserDefaults standardUserDefaults] boolForKey:@"Extreme"];
+    
+    return _isExtreme; 
+    
+}
+
+-(void)setIsExtreme:(BOOL)isExtreme{
+    
+    _isExtreme = isExtreme;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:isExtreme forKey:@"Extreme"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

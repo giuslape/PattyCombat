@@ -54,7 +54,7 @@
         
         touchCount = 0;
         
-        indexSprite = 2;
+        indexSprite = 1;
         
         scoreDown = 4;
         
@@ -146,7 +146,7 @@
     
     if (scoreUp <= (totalScore + score)) {
         
-        [label setString:[NSString stringWithFormat:@"%d",scoreUp]];
+        [label setString:[NSString stringWithFormat:@"Total Score: %d",scoreUp]];
         
     }else {
         
@@ -221,13 +221,13 @@
     
     [self removeChildByTag:kLabelScoreTagValue cleanup:YES];
     
-    CCLabelBMFont* labelFinal = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",score] fntFile:FONTHIGHSCORES];
+    CCLabelBMFont* labelFinal = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"level score: %d",score] fntFile:FONTHIGHSCORES];
     
     [self addChild:labelFinal z:2 tag:102];
     
     [labelFinal setPosition:ccp(240, 220)];
     
-    CCLabelBMFont * totalScoreLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"%d",totalScore] fntFile:FONTHIGHSCORES];
+    CCLabelBMFont * totalScoreLabel = [CCLabelBMFont labelWithString:[NSString stringWithFormat:@"Total Score: %d",totalScore] fntFile:FONTHIGHSCORES];
     
     [self addChild:totalScoreLabel z:2 tag:101];
     

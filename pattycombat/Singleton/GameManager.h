@@ -20,11 +20,13 @@
     BOOL _isTutorial;
     BOOL _isPerfectForLevel;
     BOOL _isKoForLevel;
+    BOOL _isExtreme;
     int  _totalScore;
     int  _currentScore;
     int  _currentLevel;
     int  _levelReached;
     int  _gameTime;
+    int  _gameTimeInit;
 
     
     // Added for audio
@@ -49,9 +51,11 @@
 @property (readwrite, nonatomic) BOOL isPerfectForLevel;
 @property (readwrite, nonatomic) BOOL isKoForLevel;
 @property (readwrite) int gameTime;
+@property (readwrite) int gameTimeInit;
 @property (readwrite) BOOL isMusicON;
 @property (readwrite) BOOL isSoundEffectsON;
 @property (readwrite) BOOL isBonusLevel;
+@property (nonatomic,readwrite) BOOL isExtreme;
 @property (readwrite, nonatomic) int levelReached;
 @property (nonatomic, strong) NSString* namePlayer;
 @property (strong, readonly) id<SceneDao> dao;

@@ -17,7 +17,7 @@
 
 -(NSDictionary *)loadScene:(int)sceneNumber;
 -(CCAnimation*)loadPlistForAnimationWithName:(NSString*)animationName andClassName:(NSString*)className;
--(NSMutableArray*)loadPlistForPatternWithLevel:(int)sceneId;
+-(NSMutableArray*)loadPlistForPatternWithLevel:(int)sceneId andIsExtreme:(BOOL)isExtreme;
 -(NSString*)loadBackgroundIntro:(NSString*)className atLevel:(int)currentLevel;
 -(NSDictionary *)loadPlayerWithName:(NSString *)name;
 

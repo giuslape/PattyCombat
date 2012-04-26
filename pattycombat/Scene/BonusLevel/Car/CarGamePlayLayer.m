@@ -114,19 +114,27 @@
 -(void)updateCar:(CGPoint)location{
     
     int index = indexSprite + 2;
+    
+    CCSprite* tempSprite = (CCSprite *)[self getChildByTag:kWallTagValue];
         
     if (index++ == 8) {
         
-        CCSprite* sprite = (CCSprite *)[self getChildByTag:kWallTagValue];
+        CCSprite* sprite = [CCSprite spriteWithFile:@"pickup_fuoco_0001.png"];
+                
+        [sprite setPosition:ccp(tempSprite.position.x, tempSprite.position.y - 5)];
         
-         [sprite runAction:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:fireAnimation]]];
+        [self addChild:sprite z:2];
+        
+        sprite.opacity = 200;
+        
+        [sprite runAction:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:fireAnimation]]];
+
     }
     
     PLAYSOUNDEFFECT(TouchCar);
     
     score+= 5;
     
-    CCSprite* tempSprite = (CCSprite *)[self getChildByTag:kWallTagValue];
     
     CCLabelBMFont* label = (CCLabelBMFont *)[self getChildByTag:kLabelScoreTagValue];
     

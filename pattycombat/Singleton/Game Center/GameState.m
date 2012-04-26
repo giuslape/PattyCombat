@@ -25,6 +25,7 @@
 @synthesize perfect;
 @synthesize ko;
 @synthesize timesFell;
+@synthesize extreme;
 
 
 
@@ -73,6 +74,7 @@ static GameState * sharedInstance = nil;
     [encoder encodeBool:completedLevel8 forKey:@"CompletedLevel8"];
     [encoder encodeBool:completedLevel9 forKey:@"CompletedLevel9"];
     [encoder encodeBool:completedLevel10 forKey:@"CompletedLevel10"];
+    [encoder encodeBool:extreme forKey:@"Extreme"];
     [encoder encodeBool:perfect forKey:@"Perfect"];
     [encoder encodeBool:ko forKey:@"KO"];
     
@@ -82,32 +84,34 @@ static GameState * sharedInstance = nil;
     
     if ((self = [super init])) {
         
-        completedLevel1 = [decoder
+        completedLevel1  = [decoder
                            decodeBoolForKey:@"CompletedLevel1"];
-        completedLevel2 = [decoder
+        completedLevel2  = [decoder
                            decodeBoolForKey:@"CompletedLevel2"];
-        completedLevel3 = [decoder
+        completedLevel3  = [decoder
                            decodeBoolForKey:@"CompletedLevel3"];
-        completedLevel4 = [decoder
+        completedLevel4  = [decoder
                            decodeBoolForKey:@"CompletedLevel4"];
-        completedLevel5 = [decoder
+        completedLevel5  = [decoder
                            decodeBoolForKey:@"CompletedLevel5"];
-        completedLevel6 = [decoder
+        completedLevel6  = [decoder
                            decodeBoolForKey:@"CompletedLevel6"];
-        completedLevel7 = [decoder
+        completedLevel7  = [decoder
                            decodeBoolForKey:@"CompletedLevel7"];
-        completedLevel8 = [decoder
+        completedLevel8  = [decoder
                            decodeBoolForKey:@"CompletedLevel8"];
-        completedLevel9 = [decoder
+        completedLevel9  = [decoder
                            decodeBoolForKey:@"CompletedLevel9"];
         completedLevel10 = [decoder
                             decodeBoolForKey:@"CompletedLevel10"];
-        perfect = [decoder
-                   decodeBoolForKey:@"Perfect"];
-        
-        ko      = [decoder decodeBoolForKey:@"KO"];
-        
-        timesFell = [decoder decodeIntForKey:@"TimesFell"];
+        extreme          = [decoder
+                           decodeBoolForKey:@"Extreme"];
+        perfect          = [decoder
+                            decodeBoolForKey:@"Perfect"];
+        ko               = [decoder
+                            decodeBoolForKey:@"KO"];
+        timesFell        = [decoder
+                            decodeIntForKey:@"TimesFell"];
     }
     return self;
 }

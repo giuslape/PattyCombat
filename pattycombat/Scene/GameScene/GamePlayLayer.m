@@ -256,10 +256,11 @@
     
     if (self) {
         
-        _countDown = 15;
         _currentTime = 0;
         _count = 1;
         _elapsedTime = 0;
+        
+        _gameTimeInit = [[GameManager sharedGameManager] gameTimeInit];
         
         id dao = [GameManager sharedGameManager].dao;
         
@@ -314,59 +315,67 @@
             rightHand.opacity = 0;
             
         }
-                
+           
+        [self scheduleOnce:@selector(playSound) delay:1.0f];
+
     }
     return self;
 }
 
 
--(void)onEnterTransitionDidFinish{
+    
+
+-(void)playSound{
     
     [[GameManager sharedGameManager] playBackgroundTrack:backgroundTrack];
     [self schedule:@selector(countDown:) interval:0.001];
-    
 }
+    
+
 
 // Count Down
 
 -(void)countDown:(ccTime)delta{
     
     _currentTime += delta;
-    
+        
     if ((_count * (60.0 / _bpm)) <= _currentTime) {
         
+    int count = _count;
     _count++;
-        
-    _countDown --;
-    
+
     CCLabelBMFont* label = (CCLabelBMFont*)[self getChildByTag:kLabelReadyTagValue];
    
-     if(_countDown <= 3){
+    if (count == _gameTimeInit + 3) {
+            
+            [self unschedule:_cmd];
+            //  id delay  = [CCDelayTime actionWithDuration:0.5f];
+            id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
+            id change = [CCCallBlock actionWithBlock:^{
+                 [label setString:@"4"];
+             }];
+            
+            id d2 = [CCDelayTime actionWithDuration:(60.0f/ _bpm)];
+            id delete = [CCCallBlock actionWithBlock:^{
+                
+                [self removeChild:label cleanup:YES];
+                
+            }];
+            
+            [self runAction:[CCSequence actions:change,func,d2,delete, nil]];
+            self.isTouchEnabled = TRUE;
+            return;
+            
+        }
+
+     if(count >= _gameTimeInit){
          
-         NSString *tempString = [NSString stringWithFormat:@"%d", _countDown];
+         int tempCount = _gameTimeInit - 1;
+         NSString *tempString = [NSString stringWithFormat:@"%d", count - tempCount];
          [label setString:tempString];
         
-    }
-    
-    if (_countDown == 1) {
-        
-        [self unschedule:_cmd];
-        id delay  = [CCDelayTime actionWithDuration:0.2f];
-        id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
-        id change = [CCCallBlock actionWithBlock:^{
-            [label setString:@"Go!"];
-        }];
-        
-        id d2 = [CCDelayTime actionWithDuration:0.2f];
-        id delete = [CCCallBlock actionWithBlock:^{
-            
-            [self removeChild:label cleanup:YES];
-        }];
-        
-        [self runAction:[CCSequence actions:delay,func,d2,change,d2,delete, nil]];
-        self.isTouchEnabled = TRUE;
-        
         }
+    
     }
 }
 

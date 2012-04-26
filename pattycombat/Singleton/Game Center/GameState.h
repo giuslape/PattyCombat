@@ -20,6 +20,7 @@
     BOOL completedLevel8;
     BOOL completedLevel9;
     BOOL completedLevel10;
+    BOOL extreme;
     BOOL perfect;
     BOOL ko;
     int timesFell;
@@ -41,6 +42,7 @@
 @property (assign) BOOL completedLevel10;
 @property (assign) BOOL perfect;
 @property (assign) BOOL ko;
+@property (assign) BOOL extreme;
 
 
 @property (assign) int  timesFell;

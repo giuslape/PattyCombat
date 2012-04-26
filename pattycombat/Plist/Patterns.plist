@@ -3,24 +3,54 @@
 <plist version="1.0">
 <dict>
 	<key>Scena1</key>
-	<string>dx,sx,two</string>
+	<array>
+		<string>dx,sx</string>
+		<string>dx,dx,dx,sx,sx,two</string>
+	</array>
 	<key>Scena2</key>
-	<string>sx,dx,two</string>
+	<array>
+		<string>sx,dx,two</string>
+		<string>sx,sx,sx,dx,dx,two,two</string>
+	</array>
 	<key>Scena3</key>
-	<string>sxCross,dxCross,two</string>
+	<array>
+		<string>sxCross,dxCross,two</string>
+		<string>sx,dx,sxCross,dxCross,two,sxCross,dx</string>
+	</array>
 	<key>Scena5</key>
-	<string>sx,dxCross,dx,sxCross</string>
+	<array>
+		<string>sx,dxCross,dx,sxCross,two</string>
+		<string>sx,dx,sxCross,sx,two,dxCross,dxCross,sx,dx</string>
+	</array>
 	<key>Scena6</key>
-	<string>sx,dx,two,sx,dx,dx</string>
+	<array>
+		<string>sx,dx,two,sx,dx,dx,two</string>
+		<string>sx,sx,sx,dx,dx,dx,dx,two,sx,two,two</string>
+	</array>
 	<key>Scena7</key>
-	<string>sx,dx,sxCross,dxCross,two</string>
+	<array>
+		<string>sx,dx,sxCross,dxCross,two,sxCross,dx</string>
+		<string>sx,dx,sxCross,dxCross,two,sxCross,dx,dxCross,sx,sx,two</string>
+	</array>
 	<key>Scena9</key>
-	<string>sx,dx,sxCross,dxCross,two,two,sx,dx,two,sxCross</string>
+	<array>
+		<string>sx,sx,dx,sxCross,dxCross,dxCross,two</string>
+		<string>sx,sx,sx,dx,dx,dxCross,dxCross,sxCross,two,two,two,sx</string>
+	</array>
 	<key>Scena10</key>
-	<string>sx,dx,dx,sxCross,dxCross,two,two</string>
+	<array>
+		<string>sx,dx,dx,sxCross,two,two,dxCross,dxCross</string>
+		<string>sx,dx,sxCross,dxCross,two,sxCross,dx,dxCross,sx,sx,sxCross</string>
+	</array>
 	<key>Scena11</key>
-	<string>sx,sxCross,sx,dx,dxCross,dxCross,two</string>
+	<array>
+		<string>sx,dx,sxCross,sx,two,dxCross,dxCross,sx,dx</string>
+		<string>sx,sx,sx,dx,dx,dxCross,dxCross,sxCross,two,two,two,sx,dxCross</string>
+	</array>
 	<key>Scena13</key>
-	<string>dx,sx,sxCross,dxCross,two</string>
+	<array>
+		<string>sx,sx,sx,dx,dx,dxCross,dxCross,sxCross,two,two</string>
+		<string>sx,dx,dxCross,sxCross,two,sx,sx,dxCross,dx,two,two,dxCross,sxCross,sx,two</string>
+	</array>
 </dict>
 </plist>

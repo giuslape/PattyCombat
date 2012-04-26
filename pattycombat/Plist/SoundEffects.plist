@@ -38,5 +38,12 @@
 		<key>DestroyCar</key>
 		<string>hit_car_3.mp3</string>
 	</dict>
+	<key>kLevelCompleteScene</key>
+	<dict>
+		<key>win</key>
+		<string>win.mp3</string>
+		<key>lose</key>
+		<string>lose.mp3</string>
+	</dict>
 </dict>
 </plist>

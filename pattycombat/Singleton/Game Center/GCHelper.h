@@ -22,6 +22,7 @@
 #define kAchievementPerfect @"com.tadaa.pattycombat.achievement.perfect"
 #define kAchievementKO      @"com.tadaa.pattycombat.achievement.ko"
 #define kPattyLeaderboard   @"com.tadaa.pattycombat.leaderboard.score"
+#define kAchievementExtreme       @"com.tadaa.pattycombat.achievement.extreme"
 
 @interface GCHelper : NSObject <NSCoding>
 {
