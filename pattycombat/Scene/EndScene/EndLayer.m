@@ -100,7 +100,7 @@
                     self.isTouchEnabled = TRUE;
                     
                 };
-                [tweetSheet setInitialText:[NSString stringWithFormat:@"I got %d points in Patty Combat Beat that!", _totalGameScore]];
+                [tweetSheet setInitialText:[NSString stringWithFormat:@"I got %d points in #PattyCombat Beat that! ", _totalGameScore]];
                 // Hide the HUD in the main tread 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:[CCDirectorIOS sharedDirector].view animated:YES];
@@ -490,6 +490,7 @@
             
             if (![GameState sharedInstance].extreme) {
                 
+                [GameState sharedInstance].extreme = true;
                 [[GameState sharedInstance] save];
                 [[GCHelper sharedInstance] reportAchievement:kAchievementExtreme 
                                              percentComplete:100.0];

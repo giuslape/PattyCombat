@@ -155,13 +155,13 @@
         
         score+= 50;
         
+        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         [tempSprite setTexture:[[CCTextureCache sharedTextureCache]addImage:[NSString stringWithFormat:@"tv_000%d.png",indexSprite]]];
         
     }
     
     [label setString:[NSString stringWithFormat:@"%d",score]];
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     CCSprite * temp = [CCSprite spriteWithFile:@"tv_touch_0001.png"];
     
     [self addChild:temp z:2 tag:kAnimationTouch];

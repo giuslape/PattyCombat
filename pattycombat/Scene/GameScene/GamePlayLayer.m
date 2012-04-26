@@ -315,61 +315,67 @@
             rightHand.opacity = 0;
             
         }
-                
+           
+        [self scheduleOnce:@selector(playSound) delay:1.0f];
+
     }
     return self;
 }
 
 
--(void)onEnterTransitionDidFinish{
+    
+
+-(void)playSound{
     
     [[GameManager sharedGameManager] playBackgroundTrack:backgroundTrack];
     [self schedule:@selector(countDown:) interval:0.001];
-    
 }
+    
+
 
 // Count Down
 
 -(void)countDown:(ccTime)delta{
     
     _currentTime += delta;
-    
-    int count = _count;
-    
+        
     if ((_count * (60.0 / _bpm)) <= _currentTime) {
         
+    int count = _count;
     _count++;
-            
+
     CCLabelBMFont* label = (CCLabelBMFont*)[self getChildByTag:kLabelReadyTagValue];
    
+    if (count == _gameTimeInit + 3) {
+            
+            [self unschedule:_cmd];
+            //  id delay  = [CCDelayTime actionWithDuration:0.5f];
+            id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
+            id change = [CCCallBlock actionWithBlock:^{
+                 [label setString:@"4"];
+             }];
+            
+            id d2 = [CCDelayTime actionWithDuration:(60.0f/ _bpm)];
+            id delete = [CCCallBlock actionWithBlock:^{
+                
+                [self removeChild:label cleanup:YES];
+                
+            }];
+            
+            [self runAction:[CCSequence actions:change,func,d2,delete, nil]];
+            self.isTouchEnabled = TRUE;
+            return;
+            
+        }
+
      if(count >= _gameTimeInit){
          
          int tempCount = _gameTimeInit - 1;
          NSString *tempString = [NSString stringWithFormat:@"%d", count - tempCount];
          [label setString:tempString];
         
-    }
-    
-    if (count == _gameTimeInit + 2) {
-        
-        [self unschedule:_cmd];
-        id delay  = [CCDelayTime actionWithDuration:0.2f];
-        id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
-        id change = [CCCallBlock actionWithBlock:^{
-            [label setString:@"4"];
-        }];
-        
-        id d2 = [CCDelayTime actionWithDuration:0.2f];
-        id delete = [CCCallBlock actionWithBlock:^{
-            
-            [self removeChild:label cleanup:YES];
-            
-        }];
-        
-        [self runAction:[CCSequence actions:delay,func,d2,change,d2,delete, nil]];
-        self.isTouchEnabled = TRUE;
-        
         }
+    
     }
 }
 

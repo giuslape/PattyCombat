@@ -53,7 +53,7 @@
     
     [delegate facebook].sessionDelegate = nil;
     
-    [[[CCDirector sharedDirector] touchDispatcher] removeAllDelegates];
+    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
@@ -1113,16 +1113,22 @@ viewController
     
     // The action links to be shown with the post in the feed
     NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                      @"Get Started",@"name",@"http://www.facebook.com/pages/Patty-Combat/269975746417125",@"link", nil], nil];
+                                                      @"Get Started",
+                                                      @"name",
+                                                      @"http://bit.ly/HwglVX",
+                                                      @"link",
+                                                      @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX",
+                                                      @"message", nil], nil];
+    
     NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
     
     // Dialog parameters
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"I'm using Patty Combat", @"name",
+                                   @"I'm Patty Combat beta tester", @"name",
                                    @"Patty Combat.", @"caption",
-                                   @"Questa è una prova", @"message",
-                                   @"Test Patty Combat", @"description",
-                                   @"http://www.facebook.com/pages/Patty-Combat/269975746417125", @"link",
+                                   @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX", @"message",
+                                   @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX", @"description",
+                                   @"http://bit.ly/HwglVX", @"link",
                                    @"http://www.balzo.eu/wp-content/uploads/2012/04/iTunesArtwork.png", @"picture",
                                    actionLinksStr, @"actions",
                                    nil];
@@ -1200,7 +1206,7 @@ viewController
 
         };
         [tweetSheet setInitialText:
-         @"Tweeting from Patty Combat! :)"];
+         [NSString stringWithFormat:@"I'm enjoying to be a #PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX"]];
         [[CCDirectorIOS sharedDirector] presentViewController:tweetSheet animated:YES completion:^{
             
             NSLog(@"Completato");

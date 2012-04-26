@@ -41,7 +41,8 @@
 - (void)dealloc {
     
     _spriteBatchNode = nil;
-    [[[CCDirectorIOS sharedDirector] touchDispatcher] removeAllDelegates];
+    [[GameManager sharedGameManager] stopBackgroundMusic];
+    [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];    
         
@@ -450,7 +451,6 @@
             
         CCLOG(@"Intro complete, asking Game Manager to start the Game play");
         
-        [self unschedule:_cmd];
         [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
         
         self.isTouchEnabled = FALSE;

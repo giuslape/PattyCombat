@@ -237,11 +237,11 @@ static GameManager* _sharedGameManager = nil;
             
         case 1:
             _gameTime = 63;
-            _gameTimeInit = 14;
+            _gameTimeInit = 12;
             break;
         case 2:
             _gameTime = 62;
-            _gameTimeInit = 14;
+         //   _gameTimeInit = 11;
             break;
         case 3:
             _gameTime = 63;
@@ -257,19 +257,19 @@ static GameManager* _sharedGameManager = nil;
             break;
         case 9:
             _gameTime = 46;
-            _gameTimeInit = 16;
+         //   _gameTimeInit = 11;
             break;
         case 10:
             _gameTime = 46;
-            _gameTimeInit = 15;
+         //   _gameTimeInit = 11;
             break;
         case 11:
             _gameTime = 46;
-            _gameTimeInit = 16;
+           // _gameTimeInit = 11;
             break;
         case 13:
             _gameTime = 41;
-            _gameTimeInit = 14;
+        //    _gameTimeInit = 11;
             break;
         default:
             break;
@@ -413,7 +413,7 @@ static GameManager* _sharedGameManager = nil;
             return;
         }
         // Get all of the entries and PreLoad // 3
-        for( NSString *keyString in soundEffectsToLoad )
+        for(NSString *keyString in soundEffectsToLoad )
         {
             CCLOG(@"\nLoading Audio Key:%@ File:%@",
                   keyString,[soundEffectsToLoad objectForKey:keyString]);
