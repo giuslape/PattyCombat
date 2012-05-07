@@ -21,12 +21,27 @@
     CGRect rectLeftCross;
     CGRect rectRightCross;
     
+#if __has_feature(objc_arc_weak)
     __weak CCSpriteBatchNode* _spriteBatchNode;
     __weak CCSpriteBatchNode* _spriteHitUnderBatchNode;
     __weak CCSpriteBatchNode* _spriteHitOverBatchNode;
     
     __weak id <PlayerDelegate> _delegate;
+#elif __has_feature(objc_arc)
+    __unsafe_unretained CCSpriteBatchNode* _spriteBatchNode;
+    __unsafe_unretained CCSpriteBatchNode* _spriteHitUnderBatchNode;
+    __unsafe_unretained CCSpriteBatchNode* _spriteHitOverBatchNode;
+    
+    __unsafe_unretained id <PlayerDelegate> _delegate;
+#else
+     CCSpriteBatchNode* _spriteBatchNode;
+     CCSpriteBatchNode* _spriteHitUnderBatchNode;
+     CCSpriteBatchNode* _spriteHitOverBatchNode;
+    
+     id <PlayerDelegate> _delegate;
+#endif
 
+    
     
     int cnt;
     double currentTime;
@@ -56,15 +71,28 @@
 @property(nonatomic, strong)CCAnimation* manoSinistraCrossHitOver;
 @property(nonatomic, strong)CCAnimation* manoDestraCrossHitUnder;
 @property(nonatomic, strong)CCAnimation* manoDestraCrossHitOver;
-@property(nonatomic, weak) CCSpriteBatchNode* spriteBatchNode;
-@property(nonatomic, weak) CCSpriteBatchNode* spriteHitUnderBatchNode;
-@property(nonatomic, weak) CCSpriteBatchNode* spriteHitOverBatchNode;
+
 @property(nonatomic, strong) NSMutableArray* pattern;
 @property(nonatomic, strong) NSString* name;
 
+
+#if __has_feature(objc_arc_weak)
+@property(nonatomic, weak) CCSpriteBatchNode* spriteBatchNode;
+@property(nonatomic, weak) CCSpriteBatchNode* spriteHitUnderBatchNode;
+@property(nonatomic, weak) CCSpriteBatchNode* spriteHitOverBatchNode;
 @property(nonatomic, weak) id <PlayerDelegate> delegate;
 
-
+#elif __has_feature(objc_arc)
+@property(nonatomic, unsafe_unretained) CCSpriteBatchNode* spriteBatchNode;
+@property(nonatomic, unsafe_unretained) CCSpriteBatchNode* spriteHitUnderBatchNode;
+@property(nonatomic, unsafe_unretained) CCSpriteBatchNode* spriteHitOverBatchNode;
+@property(nonatomic, unsafe_unretained) id <PlayerDelegate> delegate;
+#else
+@property(nonatomic, assign) CCSpriteBatchNode* spriteBatchNode;
+@property(nonatomic, assign) CCSpriteBatchNode* spriteHitUnderBatchNode;
+@property(nonatomic, assign) CCSpriteBatchNode* spriteHitOverBatchNode;
+@property(nonatomic, assign) id <PlayerDelegate> delegate;
+#endif
 
 @property(readwrite) int currentItem;
 @property(readwrite) BOOL handIsOpen;

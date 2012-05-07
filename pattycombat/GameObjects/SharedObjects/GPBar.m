@@ -62,7 +62,7 @@
         
         renderMasked = [[CCRenderTexture alloc] initWithWidth:screenSize.width 
                                                        height:screenSize.height 
-                                                       pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+                                                       pixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
         
         [[renderMasked sprite] setBlendFunc: (ccBlendFunc) {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA}];
@@ -70,7 +70,7 @@
         
         renderMaskNegative = [[CCRenderTexture alloc] initWithWidth:screenSize.width 
                                                              height:screenSize.height 
-                                                             pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+                                                             pixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
         [[renderMaskNegative sprite] setBlendFunc: (ccBlendFunc) {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA}];
         renderMaskNegative.position = screenMid;
@@ -119,10 +119,10 @@
         maskSprite.position = screenMid;
         
         
-        renderMasked = [[CCRenderTexture alloc] initWithWidth:screenSize.width height:screenSize.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        renderMasked = [[CCRenderTexture alloc] initWithWidth:screenSize.width height:screenSize.height pixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         [[renderMasked sprite] setBlendFunc: (ccBlendFunc) {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA}];
         renderMasked.position = screenMid;
-        renderMaskNegative = [[CCRenderTexture alloc] initWithWidth:screenSize.width height:screenSize.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        renderMaskNegative = [[CCRenderTexture alloc] initWithWidth:screenSize.width height:screenSize.height pixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         [[renderMaskNegative sprite] setBlendFunc: (ccBlendFunc) {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA}];
         renderMaskNegative.position = screenMid;
         

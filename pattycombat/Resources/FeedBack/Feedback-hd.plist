@@ -163,7 +163,7 @@
 	<key>metadata</key>
 	<dict>
 		<key>version</key>
-		<string>1.5.3</string>
+		<string>1.5.5</string>
 		<key>format</key>
 		<integer>3</integer>
 		<key>size</key>
@@ -171,21 +171,21 @@
 		<key>name</key>
 		<string>Feedback</string>
 		<key>premultipliedAlpha</key>
-		<false/>
+		<true/>
 		<key>target</key>
 		<dict>
 			<key>name</key>
 			<string>default</string>
 			<key>textureFileName</key>
-			<string>Feedback_default</string>
+			<string>Feedback.pvr</string>
 			<key>textureFileExtension</key>
-			<string>.png</string>
+			<string>.pvr.ccz</string>
 			<key>coordinatesFileName</key>
-			<string>Feedback_default</string>
+			<string>Feedback</string>
 			<key>coordinatesFileExtension</key>
 			<string>.plist</string>
 			<key>premultipliedAlpha</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 </dict>

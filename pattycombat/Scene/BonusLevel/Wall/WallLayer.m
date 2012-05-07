@@ -45,7 +45,7 @@
         
         size = [[CCDirector sharedDirector] winSize];
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+       // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         CCSprite* wall = [CCSprite spriteWithFile:@"muretto_0001.png"];
         
         [self addChild:wall z:kWallZValue tag:kWallTagValue];
@@ -56,7 +56,7 @@
         
         [self initAnimation];
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+       // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 
     }
     return self;
@@ -163,7 +163,7 @@
         
         score+= 50;
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+     //   [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         [tempSprite setTexture:[[CCTextureCache sharedTextureCache]addImage:[NSString stringWithFormat:@"muretto_000%d.png",indexSprite]]];
         
         
@@ -171,12 +171,12 @@
     
     [label setString:[NSString stringWithFormat:@"%d",score]];
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+   // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     CCSprite * temp = [CCSprite spriteWithFile:@"muretto_touch_0001.png"];
 
     [self addChild:temp z:2 tag:kAnimationTouch];
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+   // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
     
     [temp setPosition:location];
     

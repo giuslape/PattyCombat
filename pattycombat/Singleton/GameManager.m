@@ -503,6 +503,28 @@ static GameManager* _sharedGameManager = nil;
     }
     
 }
+
+-(void) resumeBackgroundMusic{
+    
+    if ((managerSoundState != kAudioManagerReady) &&
+        (managerSoundState != kAudioManagerFailed)) {
+        int waitCycles = 0;
+        while (waitCycles < AUDIO_MAX_WAITTIME) {
+            [NSThread sleepForTimeInterval:0.1f];
+            if ((managerSoundState == kAudioManagerReady) ||
+                (managerSoundState == kAudioManagerFailed)) {
+                break;
+            }
+            waitCycles = waitCycles + 1;
+        }
+    }
+    if (managerSoundState == kAudioManagerReady) {
+        if (![soundEngine isBackgroundMusicPlaying]) {
+            [soundEngine resumeBackgroundMusic];
+        }
+    }
+    
+}
 -(void)stopSoundEffect:(ALuint)soundEffectID {
         if (managerSoundState == kAudioManagerReady) {
             [soundEngine stopEffect:soundEffectID];
@@ -679,7 +701,19 @@ static GameManager* _sharedGameManager = nil;
 
         [hudlayer onPause:self];
     }
+    else [[CCDirectorIOS sharedDirector] pause];
     
+    
+}
+
+-(void)resumeGame{
+    
+    CCScene* runningScene = [[CCDirectorIOS sharedDirector] runningScene];
+    
+    if (![runningScene isKindOfClass:[GameScene class]]) {
+        
+        [[CCDirectorIOS sharedDirector] resume];
+    }
 }
 
 #pragma mark -

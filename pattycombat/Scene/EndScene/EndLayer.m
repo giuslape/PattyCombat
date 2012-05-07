@@ -433,7 +433,7 @@
                         [TestFlight passCheckpoint:@"Livello 6 superato"];
         }        
         
-    }else if (currentLevel == 8) {
+    }else if (currentLevel == 9) {
         
         CCLOG(@"Finished level 7");
         
@@ -475,7 +475,7 @@
                         [TestFlight passCheckpoint:@"Livello 9 superato"];
         }        
         
-    }else if (currentLevel == 12) {
+    }else if (currentLevel == 13) {
         
         CCLOG(@"Finished level 10");
         

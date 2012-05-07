@@ -185,6 +185,10 @@
 -(void)runNewScene{
     
     self.isTouchEnabled = FALSE;
+    
+    CCMenu* handnext = (CCMenu *)[self getChildByTag:kHandNext];
+    handnext.enabled = false;
+    
     [[GameManager sharedGameManager]stopBackgroundMusic];
     [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
 

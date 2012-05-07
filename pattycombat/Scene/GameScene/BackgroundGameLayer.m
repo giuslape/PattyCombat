@@ -19,15 +19,15 @@
 
         CGSize size = [[CCDirector sharedDirector]winSize];
         
-      __weak NSString* backgroundName = [[[GameManager sharedGameManager]dao]loadBackgroundGame:NSStringFromClass([self class]) atLevel:[[GameManager sharedGameManager]currentLevel]];
+       NSString* backgroundName = [[[GameManager sharedGameManager]dao]loadBackgroundGame:NSStringFromClass([self class]) atLevel:[[GameManager sharedGameManager]currentLevel]];
         
         if (backgroundName) {
             
-            [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+        //    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
             CCSprite* background = [CCSprite spriteWithFile:backgroundName];
             background.position = CGPointMake(size.width/2, size.height/2);
             [self addChild:background z:1 tag:10];
-            [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+         //   [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         }
     }
     return self;

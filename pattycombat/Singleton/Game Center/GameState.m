@@ -131,6 +131,7 @@ static GameState * sharedInstance = nil;
     completedLevel10 = FALSE;
     perfect = FALSE;
     ko = FALSE;
+    extreme = FALSE;
     
     [self save];
 }

@@ -73,17 +73,9 @@
 
 
 -(void)buildGetCoins{
-        
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
-    //Add background
     
-    CCSprite* getCoinsBackground = [CCSprite spriteWithFile:@"menu_01.png"];
-    [self addChild:getCoinsBackground z:kGetCoinsBackgroundZValue tag:kGetCoinsBackgroundTagValue];
-    [getCoinsBackground setPosition:ccp(-size.width/2, size.height/2)];
-        
+
     //Label Coins Purchased
-    
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     
     CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins Held" fntFile:FONTHIGHSCORES];
     [labelCoinsPurchased setPosition:ccp(-size.width + size.width * 0.70f, size.height * 0.24f)];
@@ -141,6 +133,7 @@
         
         
         [alertView show];
+        [alertView setTag:kAlertViewSocial];
         
     }];
                                             
@@ -200,18 +193,32 @@
     
     _purchaseMenu.isTouchEnabled = NO;
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+    CCTexture2DPixelFormat defaultPixelFormat = [CCTexture2D defaultAlphaPixelFormat];
+    
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+    
+    //Add background
+    
+    CCSprite* getCoinsBackground = [CCSprite spriteWithFile:@"menu_01.png"];
+    [self addChild:getCoinsBackground z:kGetCoinsBackgroundZValue tag:kGetCoinsBackgroundTagValue];
+    [getCoinsBackground setPosition:ccp(-size.width/2, size.height/2)];
+    
+    [CCTexture2D setDefaultAlphaPixelFormat:defaultPixelFormat];
 }
 
 -(void)buildStats{
     
+    CCTexture2DPixelFormat defaultPixelFormat = [CCTexture2D defaultAlphaPixelFormat];
+    
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+    
     // Add background Stats
     CCSprite* highscoresBackground = [CCSprite spriteWithFile:@"menu_03.png"];
     [self addChild:highscoresBackground z:kStatsBackgroundZValue tag:kStatsBackgroundTagValue];
     [highscoresBackground setPosition:ccp(1.5*size.width, size.height/2)];
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+    [CCTexture2D setDefaultAlphaPixelFormat:defaultPixelFormat];
+    
     // Position of Menu
     
     float xPosition = size.width + size.width * 0.2;
@@ -295,24 +302,27 @@
     CCSprite* reset = [CCSprite spriteWithSpriteFrameName:@"reset_btn.png"];
     [reset setPosition:ccp(size.width + size.width * 0.9, size.height * 0.07)];
     [self addChild:reset z:kResetZValue tag:kResetTagValue];
-        
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 }
 
 -(void)buildMainMenu{
     
     float xPosition = size.width * 0.7;
     
+    CCTexture2DPixelFormat defaultPixelFormat = [CCTexture2D defaultAlphaPixelFormat];
+    
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+    
     // Main Menu Background
     CCSprite* mainMenuBackground = [CCSprite spriteWithFile:@"menu_02.png"];
     [self addChild:mainMenuBackground z:kMainMenuBackgroundZValue tag:kMainMenuBackgroundTagValue];
     [mainMenuBackground setPosition:ccp(size.width/2, size.height/2)];
     
+    [CCTexture2D setDefaultAlphaPixelFormat:defaultPixelFormat];
+
     
     // Actor Myagi
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+   // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     
     CCSprite* myagi = [CCSprite spriteWithFile:@"myagi.png"];
     
@@ -324,9 +334,9 @@
     
     //Play button
     
-    CCSprite* play = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn.png"] : [CCSprite spriteWithFile:@"playExtreme_btn.png"] ;
+    CCSprite* play = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn.png"] : [CCSprite spriteWithSpriteFrameName:@"playExtreme_btn.png"] ;
     play.anchorPoint = ccp(0.5f,0);
-    CCSprite* playSelected = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn_over.png"] :[CCSprite spriteWithFile:@"playExtreme_btn_over.png"];
+    CCSprite* playSelected = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn_over.png"] :[CCSprite spriteWithSpriteFrameName:@"playExtreme_btn_over.png"];
     playSelected.anchorPoint = ccp(0.5f,0);
     CCNode* nodePlay = [CCNode node];
     nodePlay.contentSize = play.contentSize;
@@ -401,8 +411,6 @@
     [self addChild:mainMenu z:kMainMenuZValue tag:kMainMenuTagValue];
     
     mainMenu.isTouchEnabled = FALSE;
-    
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 }
 
 
@@ -466,32 +474,17 @@
         
         _elapsedTime = 0;
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"MenuAtlas.plist" textureFilename:@"MenuAtlas.png"];
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+       // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+        CCTexture2D* texture = [[CCTextureCache sharedTextureCache] addImage:@"MenuAtlas.pvr.ccz"];
+        
+        [[CCSpriteFrameCache sharedSpriteFrameCache]
+         addSpriteFramesWithFile:@"MenuAtlas.plist" texture:texture];
+        
         AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
         
         [[delegate facebook] setSessionDelegate:self];
         
         size = [[CCDirector sharedDirector] winSize];
-        
-        // Add Dark Layer
-        
-        [self addDarkLayer];
-        
-        //Build Main Menu
-        
-        [self buildMainMenu];
-        
-        // Build Menu GetCoins
-        
-        [self buildGetCoins];
-        
-        // Build Menu Stats
-        
-        [self buildStats];
-        
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
         // Add Logo
         
@@ -500,6 +493,22 @@
         [logo setAnchorPoint:ccp(0.5f, 1)];
         [logo setPosition:ccp(size.width * 0.7f, size.height * 0.97f)];
         [self addChild:logo z:3];
+        
+        // Add Dark Layer
+        
+        [self addDarkLayer];
+        
+        // Build Menu GetCoins
+        
+        [self buildGetCoins];
+        
+        //Build Main Menu
+        
+        [self buildMainMenu];
+        
+        // Build Menu Stats
+        
+        [self buildStats];
         
         // Add Observer for Purchase Notification
                 
@@ -518,7 +527,7 @@
                                                         name:kProductsLoadedNotification 
                                                             object:nil];  
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+       // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         
 	}
 	return self;
@@ -614,7 +623,31 @@
 }
 
 
+-(void)resetStats{
+    
+    // Reset Level Reached
+    
+    [[GameManager sharedGameManager] setLevelReached:0];
+    
+    // Reset Achievements
+    
+    [[GCHelper sharedInstance] resetAchievements];
+    
+    // Reset Best Score
+    
+    [[GameManager sharedGameManager] resetBestScore];
+    
+    // Reset Labels
+    
+    CCLabelBMFont* levelReachedValue = (CCLabelBMFont *)[self getChildByTag:kLevelReachedValueTagValue];
+    
+    CCLabelBMFont* highscoreValue = (CCLabelBMFont *)[self getChildByTag:kHighScoreLabelTagValue];
+    
+    [levelReachedValue setString:@"0"];
+    [highscoreValue setString:@"0"];
 
+    
+}
 
 
 #pragma mark -
@@ -644,27 +677,15 @@
     
     if (CGRectContainsPoint(boundingBox, touchLocation)) {
         
-        // Reset Level Reached
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil 
+                                                        message:@"Vuoi azzerare i tuoi progressi?" 
+                                                        delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                        otherButtonTitles:@"Reset", nil];
         
-        [[GameManager sharedGameManager] setLevelReached:0];
-        
-        // Reset Achievements
-        
-        [[GCHelper sharedInstance] resetAchievements];
-        
-        // Reset Best Score
-        
-        [[GameManager sharedGameManager] resetBestScore];
-        
-        // Reset Labels
-        
-        CCLabelBMFont* levelReachedValue = (CCLabelBMFont *)[self getChildByTag:kLevelReachedValueTagValue];
-        
-        CCLabelBMFont* highscoreValue = (CCLabelBMFont *)[self getChildByTag:kHighScoreLabelTagValue];
-        
-        [levelReachedValue setString:@"0"];
-        [highscoreValue setString:@"0"];
-        
+        [alert show];
+        [alert setTag:kALertViewReset];
+              
         return YES;
         
     }  else if (!CGRectContainsPoint([mainMenuBackground boundingBox], touchLocation)) {
@@ -681,6 +702,11 @@
 - (void) itemGetCoinsTouched
 {
     CCLOG(@"Sono in Credits Touched");
+    
+    CCMenu * mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
+    
+    mainMenu.enabled = false;
+
     
     //TestFlight
     [TestFlight passCheckpoint:@"Controllo gettoni"];
@@ -735,6 +761,11 @@
 {
     CCLOG(@"Sono in High Scores Touched");
     
+    CCMenu * mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
+    
+    mainMenu.enabled = false;
+
+    
     //TestFlight
     [TestFlight passCheckpoint:@"Controllo statistiche"];
     TFLog(@"Controllo statistiche");
@@ -765,7 +796,7 @@
     
     // Disabled Touch for Main Menu
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
-    mainMenu.isTouchEnabled = FALSE;
+    mainMenu.isTouchEnabled = false;
         
 }
 
@@ -778,6 +809,11 @@
     CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointZero];
 	CCEaseExponentialOut* ease = [CCEaseExponentialOut actionWithAction:move];
 	[self runAction:ease];
+    
+    CCMenu * mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
+    
+    mainMenu.enabled = true;
+
     
 }
 
@@ -988,7 +1024,7 @@ viewController
 
 
 #pragma mark -
-#pragma mark ===  Alert View Social Delegate   ===
+#pragma mark ===  Alert View Delegate   ===
 #pragma mark -
 
 
@@ -996,6 +1032,8 @@ viewController
     
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
     
+    if (alertView.tag == kAlertViewSocial) {
+        
     switch (buttonIndex) {
         case 0:
             break;
@@ -1007,6 +1045,18 @@ viewController
             break;
         default:
             break;
+        }
+    }
+    
+    if (alertView.tag == kALertViewReset) {
+        
+        switch (buttonIndex) {
+            case 1:
+                [self resetStats];
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -1217,7 +1267,7 @@ viewController
         UIAlertView *alertView = [[UIAlertView alloc]
                                   initWithTitle:@"Sorry"
                                   message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
-                                  delegate:self
+                                  delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
         [alertView show];

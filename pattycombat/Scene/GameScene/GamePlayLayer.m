@@ -131,6 +131,16 @@
   
 }
 
+-(void)pauseDidEnter:(HUDLayer *)layer{
+    
+    [self pauseSchedulerAndActions];
+    
+}
+
+-(void)pauseDidExit:(HUDLayer *)layer{
+    
+    [self resumeSchedulerAndActions];
+}
 
 
 
@@ -328,7 +338,7 @@
 -(void)playSound{
     
     [[GameManager sharedGameManager] playBackgroundTrack:backgroundTrack];
-    [self schedule:@selector(countDown:) interval:0.001];
+    [self schedule:@selector(countDown:) interval:0.01];
 }
     
 
@@ -348,9 +358,11 @@
    
     if (count == _gameTimeInit + 3) {
             
-            [self unschedule:_cmd];
             //  id delay  = [CCDelayTime actionWithDuration:0.5f];
-            id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
+            [self unschedule:_cmd];
+        
+           // id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
+        
             id change = [CCCallBlock actionWithBlock:^{
                  [label setString:@"4"];
              }];
@@ -362,7 +374,8 @@
                 
             }];
             
-            [self runAction:[CCSequence actions:change,func,d2,delete, nil]];
+            [self runAction:[CCSequence actions:change,d2,delete, nil]];
+            [self schedule:@selector(update:) interval:0 repeat:kCCRepeatForever delay:0.00001f];
             self.isTouchEnabled = TRUE;
             return;
             

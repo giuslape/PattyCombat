@@ -175,25 +175,25 @@
     
     if (handIsOpen) {
         
-        if ([leftHand isFrameDisplayed:[[[manoSinistraApre frames]objectAtIndex:2]spriteFrame]]
+        if ([leftHand isFrameDisplayed:[[[manoSinistraApre frames]lastObject]spriteFrame]]
             && CGRectContainsPoint(rectLeft, location)) {
             
             [self changeState:[NSNumber numberWithInt:kStateLeftHandHit]];
             touchOk = YES;
             
-        }else if(([rightHand isFrameDisplayed:[[[manoDestraApre frames]objectAtIndex:2]spriteFrame]])
+        }else if(([rightHand isFrameDisplayed:[[[manoDestraApre frames]lastObject]spriteFrame]])
             && CGRectContainsPoint(rectRight, location)){
             
             [self changeState:[NSNumber numberWithInt:kStateRightHandHit]];
             touchOk = YES;
             
-        }else if ([leftHand isFrameDisplayed:[[[manoSinistraCrossApre frames]objectAtIndex:2]spriteFrame]]
+        }else if ([leftHand isFrameDisplayed:[[[manoSinistraCrossApre frames]lastObject]spriteFrame]]
                    && CGRectContainsPoint(rectLeftCross, location)) {
             
             [self changeState:[NSNumber numberWithInt:kStateLeftCrossHandHit]];
             touchOk = YES;
             
-        }else if([rightHand isFrameDisplayed:[[[manoDestraCrossApre frames]objectAtIndex:2]spriteFrame]] 
+        }else if([rightHand isFrameDisplayed:[[[manoDestraCrossApre frames]lastObject]spriteFrame]] 
                  && CGRectContainsPoint(rectRightCross, location)){
             
             [self changeState:[NSNumber numberWithInt:kStateRightCrossHandHit]];
@@ -649,7 +649,7 @@
 
     [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Player.plist",name] textureFilename:[NSString stringWithFormat:@"%@Player.png",name]];
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+  //  [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     CCTexture2D* texture = [[CCTextureCache sharedTextureCache] addImage:[playerSettings objectForKey:@"headName"]];
     
     if( (self=[super initWithTexture:texture]))
@@ -777,7 +777,7 @@
         handIsOpen = FALSE;
         
         handsAreOpen = FALSE;
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        //[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
     }
     return self;
 }

@@ -302,10 +302,9 @@
     if (!isPause) {
         
     isPause = TRUE;
-                
-    [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
-        
-    [[CCDirectorIOS sharedDirector] pause];
+    
+        [_delegate pauseDidEnter:self];
+        [[CDAudioManager sharedManager] pauseBackgroundMusic];
         
         CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         
@@ -315,6 +314,9 @@
             
         //TestFlight
         TFLog(@"Pausa nel gioco");
+        
+   // [[CCDirectorIOS sharedDirector]  pause];
+
     }
 
 }
@@ -324,6 +326,17 @@
     //TestFlight
     TFLog(@"Resume");
     
+    [[GameManager sharedGameManager]  resumeBackgroundMusic];
+    
+    while (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying]){
+    
+        NSLog(@"%@ %@ =====================", NSStringFromSelector(_cmd), self);
+        [NSThread sleepForTimeInterval:0.01f];
+
+    }
+    
+    [_delegate pauseDidExit:self];
+    
     isPause = FALSE;
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
@@ -332,15 +345,16 @@
             
     pauseMenu.isTouchEnabled = FALSE;
     
-    [[CCDirectorIOS sharedDirector]   resume];
-    [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
-    
+   // [[CCDirectorIOS sharedDirector]   resume];
+
 }
 
 -(void)mainMenu:(id)sender{
     
     //TestFlight
     TFLog(@"Ritorno al main menu");
+    
+    [_delegate pauseDidExit:self];
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         
@@ -480,15 +494,13 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
-    
-    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
-    
+        
     switch (buttonIndex) {
         case 0:
             break;
         case 1:
-            pauseMenu.isTouchEnabled = FALSE;
-            [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
+            [[PattyCombatIAPHelper sharedHelper]
+             coinWillUsedinView:[CCDirector sharedDirector].view];
             break;
         default:
             break;

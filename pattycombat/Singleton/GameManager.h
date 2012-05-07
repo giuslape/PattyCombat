@@ -77,7 +77,9 @@
 -(void)playBackgroundTrack:(NSString*)trackFileName;
 -(void) stopBackgroundMusic;
 -(void) resetBestScore;
--(void)pauseGame;
+-(void) pauseGame;
+-(void) resumeGame;
+-(void) resumeBackgroundMusic;
 -(NSString*)formatPlayerNameTypeToString;
 -(NSString *)formatAchievementTypeToString;
 -(void)updateGameState:(GameStates)newGameState;

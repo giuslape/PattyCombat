@@ -137,7 +137,7 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
-	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
 
 	// When in iPhone RetinaDisplay, iPad, iPad RetinaDisplay mode, CCFileUtils will append the "-hd", "-ipad", "-ipadhd" to all loaded files
 	// If the -hd, -ipad, -ipadhd files are not found, it will load the non-suffixed version
@@ -151,6 +151,12 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
+    
+    #define TESTING 1
+    
+    #ifdef TESTING
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    #endif
     
     [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
 
@@ -167,14 +173,15 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application
 {
-    [[GameManager sharedGameManager] pauseGame];
+    if( [navController_ visibleViewController] == director_ )
+        [[GameManager sharedGameManager] pauseGame];
 }
 
 // call got rejected
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
-	//if( [navController_ visibleViewController] == director_ )
-		//[director_ resume];
+	if( [navController_ visibleViewController] == director_ )
+        [[GameManager sharedGameManager] resumeGame];
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application

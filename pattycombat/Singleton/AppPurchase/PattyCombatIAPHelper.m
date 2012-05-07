@@ -86,9 +86,10 @@ static PattyCombatIAPHelper * _sharedHelper;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
                                                                 message:@"No internet Connection" 
                                                                delegate:nil 
-                                                      cancelButtonTitle:nil 
-                                                      otherButtonTitles:@"OK", nil];
+                                                      cancelButtonTitle:@"OK" 
+                                                      otherButtonTitles:nil];
                 [alert show];
+                
                 
             } else if (self.products == nil) {
                 

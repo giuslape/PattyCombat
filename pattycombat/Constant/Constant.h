@@ -62,6 +62,9 @@
 #define kResetTagValue 23
 #define kResetZValue 3
 
+#define kAlertViewSocial 30
+#define kALertViewReset 31
+
 
 // Dark Layer
 

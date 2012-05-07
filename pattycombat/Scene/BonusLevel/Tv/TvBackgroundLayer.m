@@ -24,11 +24,11 @@
         
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+       // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
         CCSprite * background = [CCSprite spriteWithFile:@"tv_bg.png"];
         [self addChild:background z:0];
         [background setPosition:ccp(winSize.width/2, winSize.height/2)];
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+       // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         
     }
     return self;

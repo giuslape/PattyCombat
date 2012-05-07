@@ -22,7 +22,7 @@
             
             self.isTouchEnabled = YES;
             
-            [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+         //   [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
             
             CCSprite* logoSprite = [CCSprite spriteWithFile:@"logo_balzo_4444.png"];
             
@@ -72,7 +72,7 @@
             [closeButton setPosition:ccp(size.width * 0.97f, size.height * 0.95f)];
             [creditsLabel setPosition:ccp(size.width * 0.45f, size.height * 0.10f)];
             
-            [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+           // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         }
         return self;
 

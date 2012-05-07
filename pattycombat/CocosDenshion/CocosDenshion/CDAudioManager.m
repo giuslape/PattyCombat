@@ -219,6 +219,13 @@ NSString * const kCDN_AudioManagerInitialised = @"kCDN_AudioManagerInitialised";
 	}
 }
 
+- (void)audioPlayerEndInterruption:(AVAudioPlayer *)player withFlags:(NSUInteger)flags{
+    
+    CDLOGINFO(@"Denshion::CDLongAudioSource - audio player interrupted with flags");
+
+}
+
+
 @end
 
 

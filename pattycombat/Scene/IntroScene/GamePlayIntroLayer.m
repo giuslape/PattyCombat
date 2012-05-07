@@ -621,9 +621,9 @@
     
     if (!_isLastLevel) {
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"IntroButtAndFeed.plist" textureFilename:@"IntroButtAndFeed.png"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"IntroButtAndFeed.plist" textureFilename:@"IntroButtAndFeed.pvr.ccz"];
         
-        _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"IntroButtAndFeed.png"];
+        _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"IntroButtAndFeed.pvr.ccz"];
         
         [self addChild:_spriteBatchNode z:kSpriteBatchNodeIntroZValue tag:kSpriteBatchNodeIntroTagValue];
         

@@ -50,7 +50,7 @@
     
     if (self) {
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+     //   [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
         size = [[CCDirector sharedDirector] winSize];
         
@@ -62,7 +62,7 @@
         
         [self initAnimation];
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+      //  [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         
     }
     return self;
@@ -146,7 +146,7 @@
                 
         score+= 50;
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+     //   [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
         [tempSprite setTexture:[[CCTextureCache sharedTextureCache] addImage:[NSString stringWithFormat:@"pickup_000%d.png",index - 1]]];
         
@@ -167,7 +167,7 @@
         [self removeChild:temp cleanup:YES];
     }];
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+  //  [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
     
     [temp runAction:[CCSequence actionOne:[CCAnimate actionWithAnimation:touchAnimation] two:block]];    
 }
