@@ -202,7 +202,9 @@ NSString * const kCDN_AudioManagerInitialised = @"kCDN_AudioManagerInitialised";
 }
 
 -(void)audioPlayerBeginInterruption:(AVAudioPlayer *)player {
+    
 	CDLOGINFO(@"Denshion::CDLongAudioSource - audio player interrupted");
+    
 }
 
 -(void)audioPlayerEndInterruption:(AVAudioPlayer *)player {
@@ -406,7 +408,7 @@ static BOOL configured = FALSE;
 
 		//Initialise the audio session
 		AVAudioSession* session = [AVAudioSession sharedInstance];
-		session.delegate = self;
+		[session setDelegate:self];
 
 		_mode = mode;
 		backgroundMusicCompletionSelector = nil;

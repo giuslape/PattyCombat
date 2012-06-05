@@ -1,6 +1,6 @@
 info face="SnyderSpeed" size=40 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=2,2
 common lineHeight=43 base=35 scaleW=512 scaleH=256 pages=1 packed=0
-page id=0 file="Highscores_font.png"
+page id=0 file="Highscores_font-hd.png"
 chars count=82
 char id=78 x=2 y=2 width=49 height=44 xoffset=-3 yoffset=-2 xadvance=38 page=0 chnl=0 letter="N"
 char id=85 x=53 y=2 width=42 height=44 xoffset=-2 yoffset=-2 xadvance=31 page=0 chnl=0 letter="U"

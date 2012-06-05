@@ -677,8 +677,8 @@
     
     if (CGRectContainsPoint(boundingBox, touchLocation)) {
         
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil 
-                                                        message:@"Vuoi azzerare i tuoi progressi?" 
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"Vuoi Resettare i tuoi progressi?" 
                                                         delegate:self
                                                         cancelButtonTitle:@"Cancel"
                                                         otherButtonTitles:@"Reset", nil];
@@ -706,8 +706,9 @@
     CCMenu * mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     
     mainMenu.enabled = false;
-
     
+    self.isTouchEnabled = false;
+
     //TestFlight
     [TestFlight passCheckpoint:@"Controllo gettoni"];
     TFLog(@"Controllo gettoni");
@@ -731,24 +732,24 @@
                                                   cancelButtonTitle:nil 
                                                   otherButtonTitles:@"OK", nil];
             [alert show];
-
+            self.isTouchEnabled = true;
 
         } else { 
             
             if ([PattyCombatIAPHelper sharedHelper].products == nil) {
-                                
+                
                 [[PattyCombatIAPHelper sharedHelper] requestProducts];
                 _hud = [MBProgressHUD showHUDAddedTo:[CCDirector sharedDirector].view animated:YES];
                 _hud.labelText = @"Loading coins...";
-                [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
+                [self performSelector:@selector(timeout:) withObject:nil afterDelay:60.0];
             }
             else {
                     for (CCMenuItemSprite* item in _purchaseMenu.children) item.opacity = 255;
                 
                     _purchaseMenu.isTouchEnabled = TRUE; 
                 }
+            self.isTouchEnabled = true;
         }
-
     
     })];
 	[self runAction:[CCSequence actionOne:ease two:blockLoadingPurchase]];
@@ -764,7 +765,6 @@
     CCMenu * mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     
     mainMenu.enabled = false;
-
     
     //TestFlight
     [TestFlight passCheckpoint:@"Controllo statistiche"];
@@ -813,7 +813,6 @@
     CCMenu * mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     
     mainMenu.enabled = true;
-
     
 }
 
@@ -951,6 +950,7 @@ viewController
     
    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
     self.hud = nil;
+    self.isTouchEnabled = true;
     
 }
 
@@ -1156,9 +1156,7 @@ viewController
 
 
 -(void)postToFacebook:(id)sender{
-    
-    self.isTouchEnabled = FALSE;
-    
+        
     SBJSON *jsonWriter = [SBJSON new];
     
     // The action links to be shown with the post in the feed
@@ -1199,8 +1197,6 @@ viewController
 
 - (void)dialogCompleteWithUrl:(NSURL *)url {
     
-    self.isTouchEnabled = TRUE;
-
     if (![url query]) {
         NSLog(@"User canceled dialog or there was an error");
         return;

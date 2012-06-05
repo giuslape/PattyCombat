@@ -19,12 +19,12 @@
 	</array>
 	<key>Scena5</key>
 	<array>
-		<string>sx,dxCross,dx,sxCross,two</string>
+		<string>sx,dxCross,dx,sxCross</string>
 		<string>sx,dx,sxCross,sx,two,dxCross,dxCross,sx,dx</string>
 	</array>
 	<key>Scena6</key>
 	<array>
-		<string>sx,dx,two,sx,dx,dx,two</string>
+		<string>sx,dx,two,sx,dx,two</string>
 		<string>sx,sx,sx,dx,dx,dx,dx,two,sx,two,two</string>
 	</array>
 	<key>Scena7</key>

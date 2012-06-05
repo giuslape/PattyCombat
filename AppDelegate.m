@@ -173,27 +173,23 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application
 {
-    if( [navController_ visibleViewController] == director_ )
         [[GameManager sharedGameManager] pauseGame];
 }
 
 // call got rejected
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
-	if( [navController_ visibleViewController] == director_ )
         [[GameManager sharedGameManager] resumeGame];
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ stopAnimation];
+		[[CCDirectorIOS sharedDirector] stopAnimation];
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ startAnimation];
+		[[CCDirectorIOS sharedDirector] startAnimation];
 }
 
 // application will be killed

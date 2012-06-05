@@ -127,6 +127,7 @@ typedef enum {
 /** Returns whether or not the audio source is playing */
 -(BOOL) isPlaying;
 
+
 @end
 
 /**

@@ -397,13 +397,13 @@
 			<key>position</key>
 			<string>{206,640}</string>
 			<key>handName</key>
-			<string>chuck_arm_0001.png</string>
+			<string>chuck_leg_0001.png</string>
 			<key>rightPosition</key>
 			<string>{206,640}</string>
 			<key>rightRectPosition</key>
 			<string>{302,66}</string>
 			<key>headName</key>
-			<string>chuck_arm_0001.png</string>
+			<string>chuck_leg_0001.png</string>
 			<key>rightRectCrossPosition</key>
 			<string>{664,174}</string>
 			<key>leftRectCrossPosition</key>

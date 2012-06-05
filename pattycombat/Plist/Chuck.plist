@@ -9,7 +9,7 @@
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>chuck_arm_00</string>
+		<string>chuck_leg_00</string>
 	</dict>
 	<key>manoChiude</key>
 	<dict>
@@ -18,7 +18,7 @@
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>chuck_arm_00</string>
+		<string>chuck_leg_00</string>
 	</dict>
 	<key>manoColpita</key>
 	<dict>
@@ -27,7 +27,7 @@
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>chuck_arm_00</string>
+		<string>chuck_leg_00</string>
 	</dict>
 	<key>manoCrossApre</key>
 	<dict>
@@ -36,7 +36,7 @@
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>chuck_arm_00</string>
+		<string>chuck_leg_00</string>
 	</dict>
 	<key>manoCrossChiude</key>
 	<dict>
@@ -45,7 +45,7 @@
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>chuck_arm_00</string>
+		<string>chuck_leg_00</string>
 	</dict>
 	<key>manoCrossColpita</key>
 	<dict>
@@ -54,7 +54,7 @@
 		<key>delay</key>
 		<real>0.08</real>
 		<key>filenamePrefix</key>
-		<string>chuck_arm_00</string>
+		<string>chuck_leg_00</string>
 	</dict>
 	<key>manoDestraHitUnder</key>
 	<dict>

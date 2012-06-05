@@ -12,7 +12,6 @@
 @interface Player ()
     
 @property (readonly) int bpm;
-@property (readonly) BOOL isLastPlayer;
 @property (readonly) int frameForDoubleTouch;
 -(void)handleHands;
 
@@ -41,7 +40,6 @@
 @synthesize name;
 @synthesize touchOk;
 @synthesize bpm;
-@synthesize isLastPlayer;
 @synthesize delegate = _delegate;
 @synthesize frameForDoubleTouch;
 @synthesize manoDestraCrossApre;
@@ -647,9 +645,10 @@
 {    
     [self setName:[playerSettings objectForKey:@"name"]];
 
-    [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Player.plist",name] textureFilename:[NSString stringWithFormat:@"%@Player.png",name]];
+    [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Player.plist",name] textureFilename:[NSString stringWithFormat:@"%@Player.pvr.ccz",name]];
     
   //  [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+    
     CCTexture2D* texture = [[CCTextureCache sharedTextureCache] addImage:[playerSettings objectForKey:@"headName"]];
     
     if( (self=[super initWithTexture:texture]))
@@ -662,9 +661,7 @@
         cnt = 1;
         
         self.gameObjectType = kObjectTypePlayer;
-        
-        isLastPlayer = [[GameManager sharedGameManager] isLastLevel];
-        
+                
         CGSize size = [[CCDirector sharedDirector] winSize];
                 
         bpm = [[playerSettings objectForKey:@"bpm"] intValue];
@@ -701,15 +698,15 @@
         
         // I use CCSpriteBatchNode as a layer: Under ---> Hand ----> Over (ZOrder)
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Hit.plist", name] textureFilename:[NSString stringWithFormat:@"%@Hit.png", name]];
+        [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithFormat:@"%@Hit.plist", name] textureFilename:[NSString stringWithFormat:@"%@Hit.pvr.ccz", name]];
         
-        _spriteHitUnderBatchNode = [CCSpriteBatchNode batchNodeWithFile:[NSString stringWithFormat:@"%@Hit.png", name]];
+        _spriteHitUnderBatchNode = [CCSpriteBatchNode batchNodeWithFile:[NSString stringWithFormat:@"%@Hit.pvr.ccz", name]];
         
         [self addChild:_spriteHitUnderBatchNode];
                     
         // Add Batch Node Hand
         
-        _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:[NSString stringWithFormat:@"%@Player.png",name]];
+        _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:[NSString stringWithFormat:@"%@Player.pvr.ccz",name]];
     
         [self addChild:_spriteBatchNode]; 
         

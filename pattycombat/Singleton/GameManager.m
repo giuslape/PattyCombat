@@ -102,6 +102,7 @@ static GameManager* _sharedGameManager = nil;
         _namePlayer = nil;
         _gameTime = 0;
         _gameState = kStateLose;
+        _gameTimeInit = 12;
 #if DEBUG
        self.isExtreme = FALSE;
 #endif
@@ -237,7 +238,6 @@ static GameManager* _sharedGameManager = nil;
             
         case 1:
             _gameTime = 63;
-            _gameTimeInit = 12;
             break;
         case 2:
             _gameTime = 62;
@@ -575,7 +575,7 @@ static GameManager* _sharedGameManager = nil;
 
 -(int)bestScore{
     
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
     NSString * bestCurrentScore=[ud objectForKey:[NSString stringWithString:@"HighScore"]];
 
@@ -708,12 +708,12 @@ static GameManager* _sharedGameManager = nil;
 
 -(void)resumeGame{
     
-    CCScene* runningScene = [[CCDirectorIOS sharedDirector] runningScene];
+  //  CCScene* runningScene = [[CCDirectorIOS sharedDirector] runningScene];
     
-    if (![runningScene isKindOfClass:[GameScene class]]) {
+  //  if (![runningScene isKindOfClass:[GameScene class]]) {
         
         [[CCDirectorIOS sharedDirector] resume];
-    }
+    //}
 }
 
 #pragma mark -

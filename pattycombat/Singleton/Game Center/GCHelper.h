@@ -3,7 +3,7 @@
 //  PattyCombat
 //
 //  Created by Giuseppe Lapenta on 04/03/12.
-//  Copyright (c) 2012 Fratello. All rights reserved.
+//  Copyright (c) 2012. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

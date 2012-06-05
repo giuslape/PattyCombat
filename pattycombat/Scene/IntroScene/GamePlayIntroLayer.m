@@ -70,18 +70,12 @@
         CCLayerColor* layer = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 0)];
                 
         [self addChild:layer z:kDarkValueIntroZValue tag:kDarkLayerIntroTagValue];
+        
+        [self scheduleOnce:@selector(showButtonAndFeed) delay:0.5f];
                 
         NSLog(@"Inizializzazione Intro");
     }
     return self;
-}
-
--(void)onEnterTransitionDidFinish{
-        
-    [self scheduleOnce:@selector(showButtonAndFeed) delay:0.5f];
-    
-    [[GameManager sharedGameManager] playBackgroundTrack:WAITINGTHEME];
-    
 }
 
 
@@ -617,6 +611,8 @@
     
     CGSize size = [[CCDirectorIOS sharedDirector] winSize];
     
+    [[GameManager sharedGameManager] playBackgroundTrack:WAITINGTHEME];
+
     // Check if is last level
     
     if (!_isLastLevel) {

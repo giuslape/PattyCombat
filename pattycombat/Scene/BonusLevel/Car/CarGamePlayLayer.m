@@ -17,7 +17,7 @@
 - (void)dealloc {
     
     CCLOG(@"%@, %@",NSStringFromSelector(_cmd), self);
-    [[[CCDirector sharedDirector] touchDispatcher]removeDelegate:self];
+    [[[CCDirectorIOS sharedDirector] touchDispatcher]removeDelegate:self];
     
 }
 

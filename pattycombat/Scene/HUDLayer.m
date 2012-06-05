@@ -185,9 +185,9 @@
         // Load Common Elements in Cache
         
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Common.plist" textureFilename:@"Common.png"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Common.plist" textureFilename:@"Common.pvr.ccz"];
         
-        _commonElements = [CCSpriteBatchNode batchNodeWithFile:@"Common.png"];
+        _commonElements = [CCSpriteBatchNode batchNodeWithFile:@"Common.pvr.ccz"];
         
         [self addChild:_commonElements];
                         
@@ -282,6 +282,10 @@
     touchLocation = [[CCDirectorIOS sharedDirector] convertToGL:touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
     
+    // Mi serve per fermate la catena di Responder
+    
+    if (isPause) return YES;
+    
     if (CGRectContainsPoint([_pauseButton boundingBox], touchLocation)) {
         
         [self onPause:self];
@@ -301,9 +305,12 @@
     
     if (!isPause) {
         
-    isPause = TRUE;
+        isPause = TRUE;
     
         [_delegate pauseDidEnter:self];
+        
+        [[CCDirectorIOS sharedDirector] pause];
+        
         [[CDAudioManager sharedManager] pauseBackgroundMusic];
         
         CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
@@ -315,7 +322,6 @@
         //TestFlight
         TFLog(@"Pausa nel gioco");
         
-   // [[CCDirectorIOS sharedDirector]  pause];
 
     }
 
@@ -325,18 +331,9 @@
     
     //TestFlight
     TFLog(@"Resume");
-    
-    [[GameManager sharedGameManager]  resumeBackgroundMusic];
-    
-    while (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying]){
-    
-        NSLog(@"%@ %@ =====================", NSStringFromSelector(_cmd), self);
-        [NSThread sleepForTimeInterval:0.01f];
-
-    }
-    
-    [_delegate pauseDidExit:self];
-    
+        
+    [[GameManager sharedGameManager] resumeBackgroundMusic];
+        
     isPause = FALSE;
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
@@ -345,7 +342,9 @@
             
     pauseMenu.isTouchEnabled = FALSE;
     
-   // [[CCDirectorIOS sharedDirector]   resume];
+    [[CCDirectorIOS sharedDirector] resume];
+    
+    [_delegate pauseDidExit:self];
 
 }
 

@@ -1,6 +1,6 @@
 info face="SnyderSpeed" size=30 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=2,2
 common lineHeight=32 base=27 scaleW=256 scaleH=256 pages=1 packed=0
-page id=0 file="Feedback_font.png"
+page id=0 file="Feedback_font-hd.png"
 chars count=80
 char id=81 x=2 y=2 width=26 height=31 xoffset=-2 yoffset=-0 xadvance=23 page=0 chnl=0 letter="Q"
 char id=37 x=30 y=2 width=26 height=31 xoffset=1 yoffset=-0 xadvance=27 page=0 chnl=0 letter="%"

@@ -103,7 +103,7 @@
                 [tweetSheet setInitialText:[NSString stringWithFormat:@"I got %d points in #PattyCombat Beat that! ", _totalGameScore]];
                 // Hide the HUD in the main tread 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:[CCDirectorIOS sharedDirector].view animated:YES];
+                    [hud hide:YES];
                     [[CCDirectorIOS sharedDirector] presentViewController:tweetSheet animated:YES completion:nil];
                 });
                 
@@ -339,12 +339,7 @@
     [self runAction:seq];
     
     self.isTouchEnabled = TRUE;
-        
-  /*  [self runAction:[CCSequence actionOne:[CCDelayTime actionWithDuration:1] two:[CCCallBlock actionWithBlock:^{
-        
-        [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
-
-    }]]];*/
+    
 }
 
 -(void)sendAchievementsForLevel:(int)currentLevel{
@@ -583,6 +578,8 @@
         
         [[GameManager sharedGameManager] setBestScore:_totalGameScore];
         
+        [[GCHelper sharedInstance] reportScore:kPattyLeaderboard score:_bestScore];
+        
     }
     
     //TestFlight
@@ -598,9 +595,9 @@
     
     if (self) {
         
-         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Feedback_default.plist" textureFilename:@"Feedback_default.png"];
+         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Feedback.plist" textureFilename:@"Feedback.pvr.ccz"];
         
-         _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"Feedback_default.png"];
+         _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"Feedback.pvr.ccz"];
         
         [self addChild:_spriteBatchNode z:2 tag:2];
         

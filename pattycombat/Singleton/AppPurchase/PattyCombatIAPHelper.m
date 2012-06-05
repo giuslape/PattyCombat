@@ -96,7 +96,7 @@ static PattyCombatIAPHelper * _sharedHelper;
                 [self requestProducts];
                 MBProgressHUD* _hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
                 _hud.labelText = @"Loading coins...";
-                [self performSelector:@selector(timeout:) withObject:view afterDelay:30.0];
+                [self performSelector:@selector(timeout:) withObject:view afterDelay:60.0f];
                 
             }else {
                 
@@ -106,7 +106,7 @@ static PattyCombatIAPHelper * _sharedHelper;
                 MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
                 hud.labelText = @"Buying Coins";
                 [self buyProductIdentifier:product];
-                [self performSelector:@selector(timeout:) withObject:view afterDelay:60];
+                [self performSelector:@selector(timeout:) withObject:view afterDelay:60.0f];
                     
                 }
             }

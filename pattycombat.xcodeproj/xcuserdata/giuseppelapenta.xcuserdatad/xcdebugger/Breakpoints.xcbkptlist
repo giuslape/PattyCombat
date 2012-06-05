@@ -4,15 +4,28 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "pattycombat/Singleton/GameManager.m"
+         timestampString = "359106117.567442"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "715"
+         endingLineNumber = "715"
+         landmarkName = "-resumeGame"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "pattycombat/CocosDenshion/CocosDenshion/CDAudioManager.m"
-         timestampString = "357377021.11292"
+         timestampString = "359570914.611753"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "187"
-         endingLineNumber = "187"
+         startingLineNumber = "199"
+         endingLineNumber = "199"
          landmarkName = "-audioPlayerDidFinishPlaying:successfully:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,24 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "pattycombat/CocosDenshion/CocosDenshion/CDAudioManager.m"
-         timestampString = "357377026.21471"
+         timestampString = "359571200.802458"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "205"
-         endingLineNumber = "205"
-         landmarkName = "-audioPlayerBeginInterruption:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "pattycombat/CocosDenshion/CocosDenshion/CDAudioManager.m"
-         timestampString = "357377029.308779"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "209"
-         endingLineNumber = "209"
+         startingLineNumber = "212"
+         endingLineNumber = "212"
          landmarkName = "-audioPlayerEndInterruption:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "pattycombat/CocosDenshion/CocosDenshion/CDAudioManager.m"
-         timestampString = "357380369.466742"
+         timestampString = "359571200.802458"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "224"
-         endingLineNumber = "224"
+         startingLineNumber = "226"
+         endingLineNumber = "226"
          landmarkName = "-audioPlayerEndInterruption:withFlags:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,52 +60,35 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "pattycombat/CocosDenshion/CocosDenshion/CDAudioManager.m"
-         timestampString = "357463987.120353"
+         timestampString = "359571200.802458"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "664"
-         endingLineNumber = "664"
-         landmarkName = "-applicationDidBecomeActive"
+         startingLineNumber = "206"
+         endingLineNumber = "206"
+         landmarkName = "-audioPlayerBeginInterruption:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "pattycombat/CocosDenshion/CocosDenshion/CDAudioManager.m"
-         timestampString = "357463997.336239"
+         filePath = "pattycombat/Scene/EndScene/EndLayer.m"
+         timestampString = "360508150.371244"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "619"
-         endingLineNumber = "619"
-         landmarkName = "-applicationWillResignActive"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "pattycombat/CocosDenshion/CocosDenshion/CDAudioManager.m"
-         timestampString = "357464018.30872"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "735"
-         endingLineNumber = "735"
-         landmarkName = "-audioSessionInterrupted"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "pattycombat/CocosDenshion/CocosDenshion/CDAudioManager.m"
-         timestampString = "357464022.533994"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "760"
-         endingLineNumber = "760"
-         landmarkName = "-audioSessionResumed"
+         startingLineNumber = "581"
+         endingLineNumber = "581"
+         landmarkName = "-updatePoints"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
+   <ExceptionBreakpoints>
+      <ExceptionBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         scope = "0"
+         stopOnStyle = "0">
+      </ExceptionBreakpoint>
+   </ExceptionBreakpoints>
 </Bucket>
