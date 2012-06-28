@@ -29,6 +29,14 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 {
     
     [TestFlight takeOff:kTokenFlight];
+    
+    //App Purchase Init
+    
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:[PattyCombatIAPHelper sharedHelper]];
+    
+    //Game center Init
+    
+    [[GCHelper sharedInstance] authenticateLocalUser];
 
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -92,15 +100,6 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
         [alertView show];
     }
 
-    
-    //App Purchase Init
-    
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:[PattyCombatIAPHelper sharedHelper]];
-    
-    //Game center Init
-    
-    [[GCHelper sharedInstance] authenticateLocalUser];
-
 	director_.wantsFullScreenLayout = YES;
 
 	// Display FSP and SPF
@@ -158,7 +157,7 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
     #endif
     
-    [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
+    [[GameManager sharedGameManager] runSceneWithID:kGinoScappelloni];
 
 	return YES;
 }

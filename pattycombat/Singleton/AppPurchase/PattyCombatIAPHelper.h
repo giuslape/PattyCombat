@@ -10,7 +10,7 @@
 #import "IAPHelper.h"
 
 #define kQuantityProductPurchased @"quantity"
-#define kProductPurchaseFacebookCoins @"facebook"
+#define kProductPurchaseSocialCoins @"social"
 #define kProductPurchase25coins @"com.tadaa.pattycombat.purchase.25coins"
 #define kProductPurchse75coins @"com.tadaa.pattycombat.purchase.75coins"
 #define kProductPurchase200coins @"com.tadaa.pattycombat.purchase.200coins"

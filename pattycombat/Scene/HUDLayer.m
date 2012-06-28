@@ -220,8 +220,14 @@
                                                                    target:self 
                                                                         selector:@selector(resumeGame:)];
         
-        CCMenuItemSprite* restart = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn.png"]
-                                                            selectedSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn_over.png"] 
+        NSInteger currentLevel = [[GameManager sharedGameManager] currentLevel];
+        
+        NSString* nameSprite = (currentLevel == 1) ? [NSString stringWithString:@"restart_free_btn.png"] : [NSString stringWithString:@"restart_btn.png"];
+        
+        NSString* nameSpriteOver = (currentLevel == 1) ? [NSString stringWithString:@"restart_free_btn_over.png"] : [NSString stringWithString:@"restart_btn_over.png"];
+        
+        CCMenuItemSprite* restart = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:nameSprite]
+                                                            selectedSprite:[CCSprite spriteWithSpriteFrameName:nameSpriteOver] 
                                                                     target:self selector:@selector(restartTapped:)];
                                                                        
         
@@ -371,32 +377,67 @@
     
     
     //TestFlight
-    TFLog(@"Tocco Restart");
+    TFLog(@"Restart");
     
-    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
-            
-    if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0) {
+    NSInteger currentLevel = [[GameManager sharedGameManager] currentLevel];
+    
+    if (currentLevel == 1) {
+    
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+        [self removeChild: pauseMenu cleanup:YES];
+        [[CCDirectorIOS sharedDirector]  resume];
+        [[GameManager sharedGameManager] stopBackgroundMusic];
+        LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+        [[CCDirector sharedDirector] replaceScene:scene];
+        return;
+    }
+    
+    NSInteger quantity = [[PattyCombatIAPHelper sharedHelper] quantity];
         
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Patty Coins esauriti"
-                                                        message:@"Compra altri Patty Coins per continuare"
+    if (quantity == 0) {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Patty Coins esauriti \n\n\n"
+                                                        message:@"Ottieni altri Patty Coins per continuare ahahahahha"
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel" 
-                                              otherButtonTitles:@"Compra", nil];
+                                              otherButtonTitles:@"Facebook",@"Twitter",@"Compra",nil];
         
         [alert show];
+        
+        alert.frame = CGRectMake(alert.frame.origin.x, alert.frame.origin.y - 50, alert.frame.size.width, 300);
+                
+        alert.tag = kAlertViewCoinsFinished;
         
         return;
     }
     
-
-    [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
-           
-    [self removeChild: pauseMenu cleanup:YES];     
+    if (quantity == 1) {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Ultimo Gettone"
+                                                        message:@"Puoi ottenere altri gettoni nello Store"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel" 
+                                              otherButtonTitles:@"Continua",nil];
+        
+        [alert show];
+        
+        alert.tag = kAlertViewLastCoin;
+        
+    }
     
-    [[CCDirectorIOS sharedDirector]  resume];
-    [[GameManager sharedGameManager] stopBackgroundMusic];
-    LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
-    [[CCDirector sharedDirector] replaceScene:scene];
+    if (quantity > 1) {
+        
+        [[PattyCombatIAPHelper sharedHelper]
+         coinWillUsedinView:[CCDirector sharedDirector].view];
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+        [self removeChild: pauseMenu cleanup:YES];
+        [[CCDirectorIOS sharedDirector]  resume];
+        [[GameManager sharedGameManager] stopBackgroundMusic];
+        LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+        [[CCDirectorIOS sharedDirector] replaceScene:scene];
+
+    }
+
 }
 
 #pragma mark -
@@ -493,16 +534,41 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
+      
+    if (alertView.tag == kAlertViewCoinsFinished) {
+    
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+                [[PattyCombatIAPHelper sharedHelper]
+                 coinWillUsedinView:[CCDirector sharedDirector].view];
+                break;
+            default:
+                break;
+        }
+    }
+    
+    if (alertView.tag == kAlertViewLastCoin) {
         
-    switch (buttonIndex) {
-        case 0:
-            break;
-        case 1:
-            [[PattyCombatIAPHelper sharedHelper]
-             coinWillUsedinView:[CCDirector sharedDirector].view];
-            break;
-        default:
-            break;
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+            {
+                [[PattyCombatIAPHelper sharedHelper]
+                 coinWillUsedinView:[CCDirector sharedDirector].view];
+                CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+                [[CCDirectorIOS sharedDirector]  resume];
+                [self removeChild: pauseMenu cleanup:YES];    
+                [[GameManager sharedGameManager] stopBackgroundMusic];
+                LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+                [[CCDirectorIOS sharedDirector] replaceScene:scene];
+            }
+                break;
+            default:
+                break;
+        }
     }
 }
 

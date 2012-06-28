@@ -4,19 +4,6 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "pattycombat/Singleton/GameManager.m"
-         timestampString = "359106117.567442"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "715"
-         endingLineNumber = "715"
-         landmarkName = "-resumeGame"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
@@ -66,19 +53,6 @@
          startingLineNumber = "206"
          endingLineNumber = "206"
          landmarkName = "-audioPlayerBeginInterruption:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "pattycombat/Scene/EndScene/EndLayer.m"
-         timestampString = "360508150.371244"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "581"
-         endingLineNumber = "581"
-         landmarkName = "-updatePoints"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

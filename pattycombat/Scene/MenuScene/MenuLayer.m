@@ -27,6 +27,7 @@
 -(void)itemGetCoinsTouched;
 -(void)showAchievements;
 -(void)showLeaderboard;
+
 @end
 
 
@@ -271,8 +272,8 @@
     [levelReachedValue setPosition:ccp(xPosition, size.height * 0.3)];
     [levelReachedValue setAnchorPoint:ccp(0.5f, 0)];
     [self addChild:levelReachedValue z:kLevelReachedValueZValue tag:kLevelReachedValueTagValue];
-
     
+        
     // Add Achievement Button
     
     CCSprite* achievement = [CCSprite spriteWithSpriteFrameName:@"achievements_btn.png"];
@@ -554,6 +555,12 @@
     
     [self scheduleUpdate];
     
+    //Test Flight Level Reached
+    
+    CCLabelBMFont* levelReachedValue = (CCLabelBMFont *)[self getChildByTag:kLevelReachedValueTagValue];
+    
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Livello Raggiunto %@",levelReachedValue.string]];
+
 }
 
 #pragma mark -
@@ -677,7 +684,7 @@
     
     if (CGRectContainsPoint(boundingBox, touchLocation)) {
         
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Attenzione"
                                                         message:@"Vuoi Resettare i tuoi progressi?" 
                                                         delegate:self
                                                         cancelButtonTitle:@"Cancel"
@@ -747,8 +754,9 @@
                     for (CCMenuItemSprite* item in _purchaseMenu.children) item.opacity = 255;
                 
                     _purchaseMenu.isTouchEnabled = TRUE; 
+                
+                    self.isTouchEnabled = true;
                 }
-            self.isTouchEnabled = true;
         }
     
     })];
@@ -770,7 +778,7 @@
     [TestFlight passCheckpoint:@"Controllo statistiche"];
     TFLog(@"Controllo statistiche");
 
-    CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(-(size.width), 0)];
+    CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(-size.width, 0)];
 	CCEaseExponentialOut* ease = [CCEaseExponentialOut actionWithAction:move];
 	[self runAction:ease];
     
@@ -959,6 +967,7 @@ viewController
 - (void)productsLoaded:(NSNotification *)notification {
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
+    self.isTouchEnabled = true;
     [self dismissHUD:self];
     
     for (CCMenuItemSprite* item in _purchaseMenu.children) {
@@ -1008,17 +1017,28 @@ viewController
 #pragma mark ===  Check if is First Post  ===
 #pragma mark -
 
--(void)updateSocialCoins{
+-(void)updateForSocialCoins:(NSString *)social{
 
-    BOOL isFirstPost = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPost"]; 
     
-    if (!isFirstPost) {
-        [self updateLabelCoinsForProductIdentifier:kProductPurchaseFacebookCoins];
+    BOOL isFirstPost = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostFacebook"]; 
+    
+    if (!isFirstPost && [social isEqualToString:@"Facebook"]) {
+        [self updateLabelCoinsForProductIdentifier:kProductPurchaseSocialCoins];
         isFirstPost = YES;
-        [[NSUserDefaults standardUserDefaults] setBool:isFirstPost forKey:@"FirstPost"];
+        [[NSUserDefaults standardUserDefaults] setBool:isFirstPost forKey:@"FirstPostFacebook"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    
+     isFirstPost = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostTw"];
+    
+    if (!isFirstPost && [social isEqualToString:@"Twitter"]) {
+        
+        [self updateLabelCoinsForProductIdentifier:kProductPurchaseSocialCoins];
+        isFirstPost = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:isFirstPost forKey:@"FirstPostTw"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
 
+    }
 }
 
 
@@ -1134,9 +1154,6 @@ viewController
 
 -(void)loginToFacebook:(id)sender{
     
-    // Test Flight
-    [TestFlight passCheckpoint:@"Post su Facebook"];
-    TFLog(@"Post su Facebook");
     
     _permissions = [[NSArray alloc] initWithObjects:@"offline_access",@"publish_stream",nil];
     
@@ -1202,7 +1219,12 @@ viewController
         return;
     }
     
-    [self updateSocialCoins];
+    [self updateForSocialCoins:@"Facebook"];
+    
+    // Test Flight
+
+    [TestFlight passCheckpoint:@"Post su Facebook"];
+
 
     NSLog(@"Dialog Complete");
 }
@@ -1246,7 +1268,7 @@ viewController
             }
             else
             {
-                [self updateSocialCoins];
+                [self updateForSocialCoins:@"Twitter"];
             }
             [[CCDirectorIOS sharedDirector] dismissModalViewControllerAnimated:YES];
 

@@ -22,7 +22,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{1, 106}, {78, 51}}</string>
+			<string>{{169, 41}, {78, 51}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -44,7 +44,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{124, 104}, {110, 103}}</string>
+			<string>{{118, 258}, {110, 103}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -66,7 +66,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{124, 1}, {115, 101}}</string>
+			<string>{{124, 155}, {115, 101}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -88,7 +88,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{64, 209}, {166, 53}}</string>
+			<string>{{1, 41}, {166, 53}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -110,7 +110,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{1, 264}, {216, 38}}</string>
+			<string>{{1, 1}, {216, 38}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -132,7 +132,29 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{1, 1}, {121, 103}}</string>
+			<string>{{1, 96}, {121, 103}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>retry_free_btn.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{1, 1}, {115, 99}}</string>
+			<key>spriteOffset</key>
+			<string>{-2, 1}</string>
+			<key>spriteSize</key>
+			<string>{115, 99}</string>
+			<key>spriteSourceSize</key>
+			<string>{121, 103}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{1, 201}, {115, 99}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -154,7 +176,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{1, 159}, {61, 59}}</string>
+			<string>{{169, 94}, {61, 59}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>

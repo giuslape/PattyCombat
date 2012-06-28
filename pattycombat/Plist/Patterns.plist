@@ -29,7 +29,7 @@
 	</array>
 	<key>Scena7</key>
 	<array>
-		<string>sx,dx,sxCross,dxCross,two,sxCross,dx</string>
+		<string>sx,dx,sxCross,dxCross,sxCross,dx</string>
 		<string>sx,dx,sxCross,dxCross,two,sxCross,dx,dxCross,sx,sx,two</string>
 	</array>
 	<key>Scena9</key>

@@ -30,6 +30,17 @@ static PattyCombatIAPHelper * _sharedHelper;
 {
     NSSet *productIdentifiers = [NSSet setWithObjects:kProductPurchase25coins,kProductPurchse75coins,kProductPurchase200coins,kProductTest, nil];
     
+    bool firstCoin = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstCoin"];
+    
+    if (firstCoin) {
+        
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:kQuantityProductPurchased];  
+        firstCoin = NO;
+        [[NSUserDefaults standardUserDefaults] setBool:firstCoin forKey:@"FirstCoin"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    
     if ((self = [super initWithProductIdentifiers:productIdentifiers])) {}
     return self;
 }
@@ -50,10 +61,10 @@ static PattyCombatIAPHelper * _sharedHelper;
     
     value = [self quantity];
     
-    if ([productIdentifier isEqualToString:kProductPurchaseFacebookCoins]) constant = 3;
-        else if ([productIdentifier isEqualToString:kProductPurchase25coins])constant = 25;
-            else if([productIdentifier isEqualToString:kProductPurchse75coins]) constant = 75;
-                    else if ([productIdentifier isEqualToString:kProductPurchase200coins])constant = 200;
+    if ([productIdentifier isEqualToString:kProductPurchaseSocialCoins]) constant = 5;
+        else if ([productIdentifier isEqualToString:kProductPurchase25coins])constant = 30;
+            else if([productIdentifier isEqualToString:kProductPurchse75coins]) constant = 90;
+                    else if ([productIdentifier isEqualToString:kProductPurchase200coins])constant = 300;
     
     quantity = constant + value;
     

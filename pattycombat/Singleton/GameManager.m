@@ -15,6 +15,7 @@
 #import "CarScene.h"
 #import "FinalScene.h"
 #import "TvScene.h"
+#import "MainIntro.h"
 
 
 
@@ -140,6 +141,10 @@ static GameManager* _sharedGameManager = nil;
             break;
         case kGamelevelFinal:
             break;
+        case kGameMainIntro:
+            break;
+        case kGinoScappelloni:
+            break;
         default:
             [NSException raise:NSGenericException format:@"Unexpected SceneType."];
     }
@@ -237,7 +242,7 @@ static GameManager* _sharedGameManager = nil;
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 63;
+            _gameTime = 5;
             break;
         case 2:
             _gameTime = 62;
@@ -600,9 +605,14 @@ static GameManager* _sharedGameManager = nil;
     id sceneToRun = nil;
     
     switch (sceneID) {
-            
+        case kGinoScappelloni:
+            sceneToRun = [GinoScappelloni node];
+            break;
+        case kGameMainIntro:
+            sceneToRun = [MainIntro node];
+            break;
         case kMainMenuScene:
-            _currentLevel = 0;
+            _currentLevel = 1;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;

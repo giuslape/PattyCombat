@@ -22,7 +22,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{542, 395}, {88, 360}}</string>
+			<string>{{442, 387}, {88, 360}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -44,7 +44,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{452, 395}, {88, 360}}</string>
+			<string>{{530, 387}, {88, 360}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -66,9 +66,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 387}, {89, 385}}</string>
+			<string>{{0, 770}, {385, 89}}</string>
 			<key>textureRotated</key>
-			<true/>
+			<false/>
 		</dict>
 		
 		<key>credits_btn_over.png</key>
@@ -88,9 +88,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{875, 0}, {89, 385}}</string>
+			<string>{{0, 212}, {385, 89}}</string>
 			<key>textureRotated</key>
-			<true/>
+			<false/>
 		</dict>
 		
 		<key>getcoins_btn.png</key>
@@ -110,7 +110,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{271, 307}, {88, 385}}</string>
+			<string>{{771, 385}, {88, 385}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -132,7 +132,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{775, 387}, {88, 385}}</string>
+			<string>{{265, 301}, {88, 385}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -154,7 +154,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{388, 863}, {360, 89}}</string>
+			<string>{{388, 857}, {360, 89}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -176,7 +176,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{361, 395}, {89, 360}}</string>
+			<string>{{353, 387}, {89, 360}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -198,7 +198,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 774}, {385, 89}}</string>
+			<string>{{0, 123}, {385, 89}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -220,7 +220,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{784, 0}, {89, 385}}</string>
+			<string>{{869, 0}, {89, 385}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -242,9 +242,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 125}, {385, 89}}</string>
+			<string>{{0, 385}, {89, 385}}</string>
 			<key>textureRotated</key>
-			<false/>
+			<true/>
 		</dict>
 		
 		<key>play_btn_over.png</key>
@@ -264,9 +264,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 216}, {385, 89}}</string>
+			<string>{{780, 0}, {89, 385}}</string>
 			<key>textureRotated</key>
-			<false/>
+			<true/>
 		</dict>
 		
 		<key>reset_btn.png</key>
@@ -286,7 +286,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{966, 0}, {27, 160}}</string>
+			<string>{{958, 0}, {27, 160}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -308,7 +308,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{387, 774}, {385, 87}}</string>
+			<string>{{385, 770}, {385, 87}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -330,7 +330,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{865, 387}, {87, 385}}</string>
+			<string>{{859, 385}, {87, 385}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -352,7 +352,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{387, 305}, {386, 88}}</string>
+			<string>{{385, 211}, {386, 88}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -374,7 +374,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{181, 307}, {88, 386}}</string>
+			<string>{{177, 301}, {88, 386}}</string>
 			<key>textureRotated</key>
 			<true/>
 		</dict>
@@ -396,9 +396,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 865}, {386, 88}}</string>
+			<string>{{89, 301}, {88, 386}}</string>
 			<key>textureRotated</key>
-			<false/>
+			<true/>
 		</dict>
 		
 		<key>store2_btn_over.png</key>
@@ -418,9 +418,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{91, 307}, {88, 386}}</string>
+			<string>{{385, 299}, {386, 88}}</string>
 			<key>textureRotated</key>
-			<true/>
+			<false/>
 		</dict>
 		
 		<key>store3_btn.png</key>
@@ -430,17 +430,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{4, 1}, {386, 88}}</string>
+			<string>{{2, 1}, {388, 88}}</string>
 			<key>spriteOffset</key>
-			<string>{2, -0}</string>
+			<string>{1, -0}</string>
 			<key>spriteSize</key>
-			<string>{386, 88}</string>
+			<string>{388, 88}</string>
 			<key>spriteSourceSize</key>
 			<string>{390, 90}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{387, 215}, {386, 88}}</string>
+			<string>{{385, 123}, {388, 88}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -452,17 +452,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{4, 1}, {386, 88}}</string>
+			<string>{{2, 1}, {388, 88}}</string>
 			<key>spriteOffset</key>
-			<string>{2, -0}</string>
+			<string>{1, -0}</string>
 			<key>spriteSize</key>
-			<string>{386, 88}</string>
+			<string>{388, 88}</string>
 			<key>spriteSourceSize</key>
 			<string>{390, 90}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{387, 125}, {386, 88}}</string>
+			<string>{{0, 859}, {388, 88}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -484,7 +484,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{392, 0}, {390, 123}}</string>
+			<string>{{390, 0}, {390, 123}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -515,7 +515,7 @@
 	<key>metadata</key>
 	<dict>
 		<key>version</key>
-		<string>1.5.3</string>
+		<string>1.5.5</string>
 		<key>format</key>
 		<integer>3</integer>
 		<key>size</key>

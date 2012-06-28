@@ -96,6 +96,7 @@
                     {
                         NSLog(@"Tweet sending");
                     }
+                    
                     [[CCDirectorIOS sharedDirector] dismissModalViewControllerAnimated:YES];
                     self.isTouchEnabled = TRUE;
                     
@@ -117,9 +118,9 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
                 [alertView show];
-            }
-            
+                [hud hide:YES];
 
+            }
            
         });       
         
@@ -128,31 +129,70 @@
         
         if (!_thresholdReached) {
             
-            if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0) {
-                            
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Patty Coins esauriti"
-                                                            message:@"Compra altri Patty Coins per continuare"
-                                                            delegate:self
-                                                            cancelButtonTitle:@"Cancel" 
-                                                            otherButtonTitles:@"Compra", nil];
+            NSInteger currentLevel = [[GameManager sharedGameManager] currentLevel];
             
-            [alert show];
+            if (currentLevel == 1) {
+             
+                [[GameManager sharedGameManager] stopBackgroundMusic];
+                LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+                [[CCDirector sharedDirector] replaceScene:scene];
+                
+                return YES;
+            }
             
-            return YES;
+            else {
+            
+            NSInteger quantity = [[PattyCombatIAPHelper sharedHelper] quantity];
+            
+            if (quantity == 0) {
+                
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Patty Coins esauriti"
+                                                                message:@"Compra altri Patty Coins per continuare"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Cancel" 
+                                                      otherButtonTitles:@"Compra", nil];
+                
+                [alert show];
+                
+                alert.tag = kAlertViewCoinsFinished;
+                
+                return YES;
+            }
+            
+            if (quantity == 1) {
+                
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Ultimo Gettone"
+                                                                message:@"Puoi ottenere altri gettoni nello Store"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Cancel" 
+                                                      otherButtonTitles:@"Continua",nil];
+                
+                [alert show];
+                
+                alert.tag = kAlertViewLastCoin;
+                
+                return YES;
                 
             }
             
-            // Threshold is Reached and the button is next!
-            
-            self.isTouchEnabled = FALSE;
-            [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
-            LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
-            [[CCDirectorIOS sharedDirector] replaceScene:scene];
+            if (quantity > 1) {
+                    
+                [[PattyCombatIAPHelper sharedHelper]
+                 coinWillUsedinView:[CCDirector sharedDirector].view];
+                
+                [[GameManager sharedGameManager] stopBackgroundMusic];
+                LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+                [[CCDirector sharedDirector] replaceScene:scene];
 
+            }
+        }
+
+           
 
         } else{
             
             BOOL isLastLevel = [[GameManager sharedGameManager] isLastLevel];
+            
             if (isLastLevel)   {
                 
             [[GameManager sharedGameManager] runSceneWithID:kGamelevelFinal];
@@ -644,8 +684,13 @@
         
         // Add button next or retry
         
-        CCSprite* nextLevel =  (_thresholdReached) ? [CCSprite spriteWithSpriteFrameName:@"next_btn.png"] :[CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
+        CCSprite* nextLevel = [CCSprite node];
         
+        if (!_thresholdReached && [[GameManager sharedGameManager] currentLevel] == 1) 
+            nextLevel = [CCSprite spriteWithSpriteFrameName:@"retry_free_btn.png"];
+        else if(!_thresholdReached) nextLevel = [CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
+        else if (_thresholdReached)nextLevel = [CCSprite spriteWithSpriteFrameName:@"next_btn.png"];        
+            
         [nextLevel setPosition:ccp(size.width* 0.87f , size.height * 0.1f)];
         [nextLevel setAnchorPoint:ccp(0, 0.5f)];
         [_spriteBatchNode addChild:nextLevel z:kNextLevelZValue tag:kNextLevelTagValue];
@@ -699,19 +744,42 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
-    [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+    [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
     
-    switch (buttonIndex) {
-        case 0:
-            NSLog(@"Cancel");
-            break;
-        case 1:
-            [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
-            NSLog(@"Compra");
-            break;
-        default:
-            break;
+    if (alertView.tag == kAlertViewCoinsFinished) {
+        
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+                [[PattyCombatIAPHelper sharedHelper]
+                 coinWillUsedinView:[CCDirector sharedDirector].view];
+                break;
+            default:
+                break;
+        }
     }
+    
+    if (alertView.tag == kAlertViewLastCoin) {
+        
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+            {
+                [[PattyCombatIAPHelper sharedHelper]
+                 coinWillUsedinView:[CCDirector sharedDirector].view];
+                
+                [[GameManager sharedGameManager] stopBackgroundMusic];
+                LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+                [[CCDirector sharedDirector] replaceScene:scene];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+
     
 }
 
