@@ -537,6 +537,7 @@
 		20F3A56C159C5DBD00A296F4 /* Feedback.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 20F3A56A159C5DBD00A296F4 /* Feedback.pvr.ccz */; };
 		20F3A56F159C5DDB00A296F4 /* Feedback-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20F3A56D159C5DDB00A296F4 /* Feedback-hd.plist */; };
 		20F3A570159C5DDB00A296F4 /* Feedback-hd.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = 20F3A56E159C5DDB00A296F4 /* Feedback-hd.pvr.ccz */; };
+		20F3A585159C99B000A296F4 /* UIAlertTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F3A584159C99A300A296F4 /* UIAlertTableView.m */; };
 		20FAC3AC1589C75400EFB549 /* MainIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FAC3AB1589C75400EFB549 /* MainIntro.m */; };
 		20FAC3B31589CEFA00EFB549 /* jenny_bg-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAC3B11589CEFA00EFB549 /* jenny_bg-hd.png */; };
 		20FAC3B41589CEFA00EFB549 /* jenny_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FAC3B21589CEFA00EFB549 /* jenny_bg.png */; };
@@ -1273,6 +1274,8 @@
 		20F3A56A159C5DBD00A296F4 /* Feedback.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feedback.pvr.ccz; sourceTree = "<group>"; };
 		20F3A56D159C5DDB00A296F4 /* Feedback-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Feedback-hd.plist"; sourceTree = "<group>"; };
 		20F3A56E159C5DDB00A296F4 /* Feedback-hd.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Feedback-hd.pvr.ccz"; sourceTree = "<group>"; };
+		20F3A583159C999E00A296F4 /* UIAlertTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertTableView.h; sourceTree = "<group>"; };
+		20F3A584159C99A300A296F4 /* UIAlertTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertTableView.m; sourceTree = "<group>"; };
 		20FAC3AA1589C75400EFB549 /* MainIntro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainIntro.h; sourceTree = "<group>"; };
 		20FAC3AB1589C75400EFB549 /* MainIntro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainIntro.m; sourceTree = "<group>"; };
 		20FAC3B11589CEFA00EFB549 /* jenny_bg-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jenny_bg-hd.png"; sourceTree = "<group>"; };
@@ -1398,6 +1401,8 @@
 		2015C5F71521AB7400F3AE56 /* pattycombat */ = {
 			isa = PBXGroup;
 			children = (
+				20F3A583159C999E00A296F4 /* UIAlertTableView.h */,
+				20F3A584159C99A300A296F4 /* UIAlertTableView.m */,
 				20FAC4A51589E4EE00EFB549 /* CCScrollLayer.h */,
 				20FAC4A61589E4EF00EFB549 /* CCScrollLayer.m */,
 				2015C9AD1521AED000F3AE56 /* AppDelegate.h */,
@@ -3146,6 +3151,7 @@
 				200450BF157D6B2A00708E03 /* FBRequest.m in Sources */,
 				20FAC3AC1589C75400EFB549 /* MainIntro.m in Sources */,
 				20FAC4A71589E4EF00EFB549 /* CCScrollLayer.m in Sources */,
+				20F3A585159C99B000A296F4 /* UIAlertTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

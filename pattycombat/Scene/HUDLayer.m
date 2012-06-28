@@ -12,6 +12,7 @@
 #import "PattyCombatIAPHelper.h"
 #import "MBProgressHUD.h"
 #import "LoadingScene.h"
+#import "UIAlertTableView.h"
 
 
 @implementation HUDLayer
@@ -396,18 +397,15 @@
         
     if (quantity == 0) {
         
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Patty Coins esauriti \n\n\n"
-                                                        message:@"Ottieni altri Patty Coins per continuare ahahahahha"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel" 
-                                              otherButtonTitles:@"Facebook",@"Twitter",@"Compra",nil];
-        
-        [alert show];
-        
-        alert.frame = CGRectMake(alert.frame.origin.x, alert.frame.origin.y - 50, alert.frame.size.width, 300);
-                
+        UIAlertTableView* alert = [[UIAlertTableView alloc] initWithTitle:@"Patty Coins esauriti" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        ;                
         alert.tag = kAlertViewCoinsFinished;
         
+        [alert setTableDelegate:self];
+        [alert setDataSource:self];
+        
+        [alert show];
+
         return;
     }
     
@@ -488,7 +486,7 @@
     
     NSLog(@"Purchased: %@", productIdentifier);
     //TestFlight
-    [TestFlight passCheckpoint:@"Comprati 25 gettoni nel gioco"];
+    [TestFlight passCheckpoint:@"Comprati 30 gettoni nel gioco"];
         
 }
 
@@ -571,6 +569,59 @@
         }
     }
 }
+
+#pragma mark ===  Table Alert View  ===
+#pragma mark -
+
+#pragma mark - SBTableAlertDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    	
+	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+	
+    NSString* text = [NSString string];
+    switch (indexPath.row) {
+        case 0:
+            text = @"Facebook";
+            break;
+        case 1:
+            text = @"Twitter";
+            break;
+        case 2:
+            text = @"30 gettoni";
+            break;
+        case 3:
+            text = @"90 gettoni";
+            break;
+        case 4:
+            text = @"300 gettoni";
+            break;
+        default:
+            break;
+    }
+	[cell.textLabel setText:text];
+	
+	return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	
+    return 6;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+#pragma mark - SBTableAlertDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
+}
+
 
 
 @end

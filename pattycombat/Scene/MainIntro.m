@@ -110,9 +110,6 @@
 	s2.position =  ccp( screenSize.width /2 , screenSize.height/2 );
 	[pageTwo addChild:s2];
     
-        
-    
-    
     
 	return [NSArray arrayWithObjects: pageOne,pageTwo,nil];
 }

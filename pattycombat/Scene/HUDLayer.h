@@ -10,6 +10,7 @@
 #import "Bell.h"
 #import "GPBar.h"
 
+
 @class HUDLayer;
 
 @protocol HUDDelegate <NSObject>
@@ -20,7 +21,8 @@
 
 @end
 
-@interface HUDLayer : CCLayer  <BellDelegate, GPBarDelegate, UIAlertViewDelegate>{
+@interface HUDLayer : CCLayer  <BellDelegate, GPBarDelegate, UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource>
+{
     
     CCSprite* _pauseButton;
     CCLabelBMFont* _scoreLabel;
