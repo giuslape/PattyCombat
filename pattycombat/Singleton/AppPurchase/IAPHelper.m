@@ -108,15 +108,12 @@
     }
 }
 
-- (void)buyProductIdentifier:(SKProduct *)product {
+- (void)buyProductIdentifier:(NSString *)productIdentifier {
     
-    SKPayment *payment = [SKPayment paymentWithProduct:product];
+    SKPayment *payment = [SKPayment paymentWithProductIdentifier:productIdentifier];
         
     [[SKPaymentQueue defaultQueue] addPayment:payment];
     
 }
-
-
-
 
 @end

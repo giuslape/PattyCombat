@@ -178,7 +178,7 @@
             if (quantity > 1) {
                     
                 [[PattyCombatIAPHelper sharedHelper]
-                 coinWillUsedinView:[CCDirector sharedDirector].view];
+                 coinWillUsedinView:[CCDirector sharedDirector].view forProductIdentifier:nil];
                 
                 [[GameManager sharedGameManager] stopBackgroundMusic];
                 LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
@@ -426,7 +426,7 @@
             [TestFlight passCheckpoint:@"Livello 3 superato"];
         }        
         
-    }else if (currentLevel == 5) {
+    }else if (currentLevel == 6) {
         
         CCLOG(@"Finished level 4");
         
@@ -440,7 +440,7 @@
                         [TestFlight passCheckpoint:@"Livello 4 superato"];
         }        
         
-    }else if (currentLevel == 6) {
+    }else if (currentLevel == 5) {
         
         CCLOG(@"Finished level 5");
         
@@ -752,8 +752,6 @@
             case 0:
                 break;
             case 1:
-                [[PattyCombatIAPHelper sharedHelper]
-                 coinWillUsedinView:[CCDirector sharedDirector].view];
                 break;
             default:
                 break;
@@ -768,7 +766,7 @@
             case 1:
             {
                 [[PattyCombatIAPHelper sharedHelper]
-                 coinWillUsedinView:[CCDirector sharedDirector].view];
+                 coinWillUsedinView:[CCDirector sharedDirector].view forProductIdentifier:nil];
                 
                 [[GameManager sharedGameManager] stopBackgroundMusic];
                 LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
@@ -806,7 +804,6 @@
     
     NSLog(@"Purchased: %@", productIdentifier);
     
-    
 }
 
 // Notification Callback when purchase is failed
@@ -835,7 +832,6 @@
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirectorIOS sharedDirector].view];
 }
 
 

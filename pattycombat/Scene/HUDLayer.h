@@ -9,6 +9,7 @@
 #import "cocos2d.h"
 #import "Bell.h"
 #import "GPBar.h"
+#import "UIAlertTableView.h"
 
 
 @class HUDLayer;
@@ -24,6 +25,7 @@
 @interface HUDLayer : CCLayer  <BellDelegate, GPBarDelegate, UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     
+    UIAlertTableView* _alert;
     CCSprite* _pauseButton;
     CCLabelBMFont* _scoreLabel;
     CCSpriteBatchNode* _commonElements;

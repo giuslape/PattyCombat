@@ -23,14 +23,14 @@
 		<key>loose</key>
 		<string>cinziah_feedback_0002.png</string>
 	</dict>
-	<key>EndBackground5</key>
+	<key>EndBackground6</key>
 	<dict>
 		<key>win</key>
 		<string>maa_feedback_0001.png</string>
 		<key>loose</key>
 		<string>maa_feedback_0002.png</string>
 	</dict>
-	<key>EndBackground6</key>
+	<key>EndBackground5</key>
 	<dict>
 		<key>win</key>
 		<string>jocopoco_feedback_0001.png</string>

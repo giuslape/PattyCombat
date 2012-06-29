@@ -23,6 +23,6 @@
 
 -(NSInteger)quantity;
 -(void)updateQuantityForProductIdentifier:(NSString *)productIdentifier;
--(void)coinWillUsedinView:(UIView *)view;
+-(void)coinWillUsedinView:(UIView *)view forProductIdentifier:(NSString *)productId;
 
 @end

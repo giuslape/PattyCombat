@@ -12,7 +12,6 @@
 #import "PattyCombatIAPHelper.h"
 #import "MBProgressHUD.h"
 #import "LoadingScene.h"
-#import "UIAlertTableView.h"
 
 
 @implementation HUDLayer
@@ -397,14 +396,14 @@
         
     if (quantity == 0) {
         
-        UIAlertTableView* alert = [[UIAlertTableView alloc] initWithTitle:@"Patty Coins esauriti" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        _alert = [[UIAlertTableView alloc] initWithTitle:@"Patty Coins esauriti" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         ;                
-        alert.tag = kAlertViewCoinsFinished;
+        _alert.tag = kAlertViewCoinsFinished;
         
-        [alert setTableDelegate:self];
-        [alert setDataSource:self];
+        [_alert setTableDelegate:self];
+        [_alert setDataSource:self];
         
-        [alert show];
+        [_alert show];
 
         return;
     }
@@ -426,7 +425,7 @@
     if (quantity > 1) {
         
         [[PattyCombatIAPHelper sharedHelper]
-         coinWillUsedinView:[CCDirector sharedDirector].view];
+         coinWillUsedinView:[CCDirector sharedDirector].view forProductIdentifier:nil];
         CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         [self removeChild: pauseMenu cleanup:YES];
         [[CCDirectorIOS sharedDirector]  resume];
@@ -521,7 +520,6 @@
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirectorIOS sharedDirector].view];
 }
 
 
@@ -533,20 +531,6 @@
     
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
       
-    if (alertView.tag == kAlertViewCoinsFinished) {
-    
-        switch (buttonIndex) {
-            case 0:
-                break;
-            case 1:
-                [[PattyCombatIAPHelper sharedHelper]
-                 coinWillUsedinView:[CCDirector sharedDirector].view];
-                break;
-            default:
-                break;
-        }
-    }
-    
     if (alertView.tag == kAlertViewLastCoin) {
         
         switch (buttonIndex) {
@@ -555,7 +539,7 @@
             case 1:
             {
                 [[PattyCombatIAPHelper sharedHelper]
-                 coinWillUsedinView:[CCDirector sharedDirector].view];
+                 coinWillUsedinView:[CCDirector sharedDirector].view forProductIdentifier:nil];
                 CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
                 [[CCDirectorIOS sharedDirector]  resume];
                 [self removeChild: pauseMenu cleanup:YES];    
@@ -619,7 +603,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        NSString* text = cell.textLabel.text;
+    
+    if ([text isEqualToString:@"Facebook"]) NSLog(@"Facebook");
+    else if([text isEqualToString:@"Twitter"]) NSLog(@"Twitter");
+    else if([text isEqualToString:@"30 gettoni"]) NSLog(@"30 gettoni");
+    else if([text isEqualToString:@"90 gettoni"]) NSLog(@"90 gettoni");
+    else if([text isEqualToString:@"300 gettoni"]) NSLog(@"300 gettoni");
+    
+    [_alert dismissWithClickedButtonIndex:indexPath.row animated:YES];
 }
 
 

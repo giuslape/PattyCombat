@@ -116,7 +116,7 @@
 			<string>cinziah_hit2_0007.png</string>
 		</dict>
 	</dict>
-	<key>Scena5</key>
+	<key>Scena6</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>140_masai_music.mp3</string>
@@ -162,7 +162,7 @@
 			<string>maa_hit2_0007.png</string>
 		</dict>
 	</dict>
-	<key>Scena6</key>
+	<key>Scena5</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>140_jocopoco_music.mp3</string>

@@ -73,7 +73,7 @@ static PattyCombatIAPHelper * _sharedHelper;
         
 }
 
--(void)coinWillUsedinView:(UIView *)view{
+-(void)coinWillUsedinView:(UIView *)view forProductIdentifier:(NSString *)productId{
     
     int quantity = [self quantity];
     
@@ -113,10 +113,9 @@ static PattyCombatIAPHelper * _sharedHelper;
                 
                 if ([self.products count] > 0) {
                     
-                SKProduct* product  = [self.products objectAtIndex:1];
                 MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
                 hud.labelText = @"Buying Coins";
-                [self buyProductIdentifier:product];
+                [self buyProductIdentifier:productId];
                 [self performSelector:@selector(timeout:) withObject:view afterDelay:60.0f];
                     
                 }

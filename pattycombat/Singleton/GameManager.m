@@ -209,10 +209,10 @@ static GameManager* _sharedGameManager = nil;
         case 3:
             result = @"Cin Ziah";
             break;
-        case 5:
+        case 6:
             result = @"Maa Sallo";
             break;
-        case 6:
+        case 5:
             result = @"Jocopoco Majoco";
             break;
         case 7:
@@ -251,10 +251,10 @@ static GameManager* _sharedGameManager = nil;
         case 3:
             _gameTime = 63;
             break;
-        case 5:
+        case 6:
             _gameTime = 53;
             break;
-        case 6:
+        case 5:
             _gameTime = 53;
             break;
         case 7:
@@ -612,7 +612,7 @@ static GameManager* _sharedGameManager = nil;
             sceneToRun = [MainIntro node];
             break;
         case kMainMenuScene:
-            _currentLevel = 1;
+            _currentLevel = 3;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;

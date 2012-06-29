@@ -970,10 +970,9 @@ viewController
     self.isTouchEnabled = true;
     [self dismissHUD:self];
     
-    for (CCMenuItemSprite* item in _purchaseMenu.children) {
-        
+    for (CCMenuItemSprite* item in _purchaseMenu.children)
         item.opacity = 255;
-    }
+    
 }
 
 
@@ -995,11 +994,13 @@ viewController
     
     SKProduct *product = [[PattyCombatIAPHelper sharedHelper].products objectAtIndex:buyButton.tag];
     
+    NSString* identifier = product.productIdentifier;
+        
     NSLog(@"Buying %@...", product.productIdentifier);
         
     TFLog(@"Comprando %@",product.productIdentifier);
         
-    [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
+    [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:identifier];
     
     self.hud = [MBProgressHUD showHUDAddedTo:[CCDirectorIOS sharedDirector].view animated:YES];
     _hud.labelText = @"Buying Coins...";
