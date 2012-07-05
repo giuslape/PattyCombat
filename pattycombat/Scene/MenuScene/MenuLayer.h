@@ -10,15 +10,14 @@
 #import "cocos2d.h"
 #import <GameKit/GameKit.h>
 #import "MBProgressHUD.h"
-#import "FBConnect.h"
 #import "CreditsLayer.h"
 
 
-@interface MenuLayer :CCLayer  <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate, FBSessionDelegate, FBDialogDelegate, UIAlertViewDelegate, CreditsLayerProtocol>{
+
+@interface MenuLayer :CCLayer  <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate, UIAlertViewDelegate, CreditsLayerProtocol>{
     
     MBProgressHUD* _hud;
     CCMenu* _purchaseMenu;
-    NSArray* _permissions;
     CCLayerGradient* _darkLayer;
     
     float _elapsedTime;

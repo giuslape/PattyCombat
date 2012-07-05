@@ -49,7 +49,7 @@
         
         [self addChild:menu z:1 tag:1];
         
-        [menu setPosition:ccp(screenSize.width * 0.96f, screenSize.height)];
+        [menu setPosition:ccp(screenSize.width * 0.96f, screenSize.height * .97f)];
         
         [menu setAnchorPoint:ccp(1, 1)];
         

@@ -13,9 +13,8 @@
 #import "GCHelper.h"
 #import "PattyCombatIAPHelper.h"
 #import "Reachability.h"
-#import "AppDelegate.h"
-#import <Twitter/Twitter.h>
 #import "CCMenuItemSpriteIndependent.h"
+#import "SocialHelper.h"
 
 @interface MenuLayer ()
 
@@ -48,22 +47,16 @@
     _darkLayer = nil;
     _purchaseMenu = nil;
     _hud = nil;
-    _permissions = nil;
-    
-    AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
-    
-    [delegate facebook].sessionDelegate = nil;
     
     [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
-
-    [[GameManager sharedGameManager] stopBackgroundMusic];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductsLoadedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchasedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchaseFailedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Social" object:nil];
     
     
 }
@@ -462,13 +455,6 @@
 	if ((self = [super init]))
         
 	{
-        
-        // Reset First Post (for Test)
-        
-       /* [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstPost"];
-        [[NSUserDefaults standardUserDefaults] synchronize];*/
-        
-        
         // Add Sprite at cache 
         
         _neonEffectInterval = 0;
@@ -480,10 +466,6 @@
         
         [[CCSpriteFrameCache sharedSpriteFrameCache]
          addSpriteFramesWithFile:@"MenuAtlas.plist" texture:texture];
-        
-        AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
-        
-        [[delegate facebook] setSessionDelegate:self];
         
         size = [[CCDirector sharedDirector] winSize];
         
@@ -529,6 +511,11 @@
                                                             object:nil];  
         
        // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                selector:@selector(updateLabelForSocialCoin:) 
+                                                    name:@"Social" 
+                                                        object:nil];
         
 	}
 	return self;
@@ -684,11 +671,11 @@
     
     if (CGRectContainsPoint(boundingBox, touchLocation)) {
         
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Attenzione"
-                                                        message:@"Vuoi Resettare i tuoi progressi?" 
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Reset Score"
+                                                        message:@"Are you sure you want to reset your progress?" 
                                                         delegate:self
-                                                        cancelButtonTitle:@"Cancel"
-                                                        otherButtonTitles:@"Reset", nil];
+                                                        cancelButtonTitle:@"No"
+                                                        otherButtonTitles:@"Yes", nil];
         
         [alert show];
         [alert setTag:kALertViewReset];
@@ -834,6 +821,7 @@
     
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     [mainMenu removeFromParentAndCleanup:YES];
+    [[GameManager sharedGameManager] stopBackgroundMusic];
     [[GameManager sharedGameManager] runSceneWithID:kIntroScene];
     
 }
@@ -900,8 +888,12 @@ viewController
 #pragma mark -
 
 
-// Called when purchase is done for update label coins 
+-(void)updateLabelForSocialCoin:(NSNotification *)notification{
+    
+    [self updateLabelCoinsForProductIdentifier:kProductPurchaseSocialCoins];
+}
 
+// Called when purchase is done for update label coins 
 
 -(void)updateLabelCoinsForProductIdentifier:(NSString *)productIdentifier{
     
@@ -922,9 +914,7 @@ viewController
     
     NSString *productIdentifier = (NSString *) notification.object;
     [self updateLabelCoinsForProductIdentifier:productIdentifier];
-   
-    NSLog(@"Purchased: %@", productIdentifier);
-    
+       
     // Test Flight
     TFLog(@"Prodotto comprato: %@", productIdentifier);
     
@@ -995,9 +985,7 @@ viewController
     SKProduct *product = [[PattyCombatIAPHelper sharedHelper].products objectAtIndex:buyButton.tag];
     
     NSString* identifier = product.productIdentifier;
-        
-    NSLog(@"Buying %@...", product.productIdentifier);
-        
+                
     TFLog(@"Comprando %@",product.productIdentifier);
         
     [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:identifier];
@@ -1013,35 +1001,6 @@ viewController
     }
     
 }
-
-#pragma mark -
-#pragma mark ===  Check if is First Post  ===
-#pragma mark -
-
--(void)updateForSocialCoins:(NSString *)social{
-
-    
-    BOOL isFirstPost = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostFacebook"]; 
-    
-    if (!isFirstPost && [social isEqualToString:@"Facebook"]) {
-        [self updateLabelCoinsForProductIdentifier:kProductPurchaseSocialCoins];
-        isFirstPost = YES;
-        [[NSUserDefaults standardUserDefaults] setBool:isFirstPost forKey:@"FirstPostFacebook"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    
-     isFirstPost = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostTw"];
-    
-    if (!isFirstPost && [social isEqualToString:@"Twitter"]) {
-        
-        [self updateLabelCoinsForProductIdentifier:kProductPurchaseSocialCoins];
-        isFirstPost = YES;
-        [[NSUserDefaults standardUserDefaults] setBool:isFirstPost forKey:@"FirstPostTw"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-
-    }
-}
-
 
 
 #pragma mark -
@@ -1059,10 +1018,10 @@ viewController
         case 0:
             break;
         case 1:
-            [self loginToFacebook:self];
+            [[SocialHelper sharedHelper] loginToFacebook:self];
             break;
         case 2:
-            [self postOnTwitter:self];
+            [[SocialHelper sharedHelper] postOnTwitter:self];
             break;
         default:
             break;
@@ -1082,221 +1041,6 @@ viewController
 }
 
 #pragma mark -
-#pragma mark ===  Facebook Delegate  ===
-#pragma mark -
-
-- (void)storeAuthData:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];
-    [defaults setObject:expiresAt forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-    
-}
-
-
-//Callback login on Facebook
-
-- (void)fbDidLogin {
-    
-    AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
-
-    [self storeAuthData:[[delegate facebook] accessToken] expiresAt:[[delegate facebook] expirationDate]];
-    
-    [self postToFacebook:self];
-    
-}
--(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
-    
-    NSLog(@"token extended");
-    [self storeAuthData:accessToken expiresAt:expiresAt];
-}
-
-
- // Called when the user canceled the authorization dialog.
- 
--(void)fbDidNotLogin:(BOOL)cancelled {
-    
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-
-}
-
-
- // Called when the request logout has succeeded.
- 
-- (void)fbDidLogout {
-    
-    // Remove saved authorization information if it exists and it is
-    // ok to clear it (logout, session invalid, app unauthorized)
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"FBAccessTokenKey"];
-    [defaults removeObjectForKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-    
-}
-
-
-// * Called when the session has expired.
- 
-- (void)fbSessionInvalidated {
-    UIAlertView *alertView = [[UIAlertView alloc]
-                              initWithTitle:@"Auth Exception"
-                              message:@"Your session has expired."
-                              delegate:nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil,
-                              nil];
-    [alertView show];
-    [self fbDidLogout];
-}
-
-
-// Call when button is pressed 
-
--(void)loginToFacebook:(id)sender{
-    
-    
-    _permissions = [[NSArray alloc] initWithObjects:@"offline_access",@"publish_stream",nil];
-    
-    AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
-
-    if (![[delegate facebook] isSessionValid]) {
-        
-        [[delegate facebook] authorize:_permissions];
-        
-    }else {
-        
-        [self postToFacebook:self];
-    }
-
-    
-}
-
-
--(void)postToFacebook:(id)sender{
-        
-    SBJSON *jsonWriter = [SBJSON new];
-    
-    // The action links to be shown with the post in the feed
-    NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                      @"Get Started",
-                                                      @"name",
-                                                      @"http://bit.ly/HwglVX",
-                                                      @"link",
-                                                      @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX",
-                                                      @"message", nil], nil];
-    
-    NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
-    
-    // Dialog parameters
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"I'm Patty Combat beta tester", @"name",
-                                   @"Patty Combat.", @"caption",
-                                   @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX", @"message",
-                                   @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX", @"description",
-                                   @"http://bit.ly/HwglVX", @"link",
-                                   @"http://www.balzo.eu/wp-content/uploads/2012/04/iTunesArtwork.png", @"picture",
-                                   actionLinksStr, @"actions",
-                                   nil];
-    
-    AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
-
-    [[delegate facebook] dialog:@"feed"
-                      andParams:params
-                    andDelegate:self];
-}
-
-
-#pragma mark -
-#pragma mark ===  Facebook Dialog Delegate  ===
-#pragma mark -
-
-// Called when dialog is finish
-
-- (void)dialogCompleteWithUrl:(NSURL *)url {
-    
-    if (![url query]) {
-        NSLog(@"User canceled dialog or there was an error");
-        return;
-    }
-    
-    [self updateForSocialCoins:@"Facebook"];
-    
-    // Test Flight
-
-    [TestFlight passCheckpoint:@"Post su Facebook"];
-
-
-    NSLog(@"Dialog Complete");
-}
-
-- (void)dialogDidNotComplete:(FBDialog *)dialog {
-    
-    self.isTouchEnabled = TRUE;
-
-    NSLog(@"Dialog dismissed.");
-}
-
-- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error {
-    NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
-    self.isTouchEnabled = TRUE;
-    //[self showMessage:@"Oops, something went haywire."];
-}
-
-
-
-#pragma mark -
-#pragma mark ===  Twitter  ===
-#pragma mark -
-
--(void)postOnTwitter:(id)sender{
-        
-    // Test Flight
-    [TestFlight passCheckpoint:@"Post su Twitter"];
-    TFLog(@"Post su twitter");
-    
-    self.isTouchEnabled = FALSE;
-    
-    if ([TWTweetComposeViewController canSendTweet])
-    {
-        TWTweetComposeViewController *tweetSheet =
-        [[TWTweetComposeViewController alloc] init];
-        tweetSheet.completionHandler = ^(TWTweetComposeViewControllerResult
-                                         result){
-            if (result == TWTweetComposeViewControllerResultCancelled)
-            {
-                NSLog(@"Cancelled the Tweet");
-            }
-            else
-            {
-                [self updateForSocialCoins:@"Twitter"];
-            }
-            [[CCDirectorIOS sharedDirector] dismissModalViewControllerAnimated:YES];
-
-        };
-        [tweetSheet setInitialText:
-         [NSString stringWithFormat:@"I'm enjoying to be a #PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX"]];
-        [[CCDirectorIOS sharedDirector] presentViewController:tweetSheet animated:YES completion:^{
-            
-            NSLog(@"Completato");
-        }];
-    }
-    else
-    {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Sorry"
-                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
-                                  delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-        [alertView show];
-    }
-    
-    self.isTouchEnabled = TRUE;
-
-}
-
-#pragma mark -
 #pragma mark ===  Credits Delegate  ===
 #pragma mark -
 
@@ -1307,7 +1051,7 @@ viewController
     
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     mainMenu.isTouchEnabled = TRUE;
-
+    
 }
 
 @end

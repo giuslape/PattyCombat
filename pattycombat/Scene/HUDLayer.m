@@ -12,6 +12,7 @@
 #import "PattyCombatIAPHelper.h"
 #import "MBProgressHUD.h"
 #import "LoadingScene.h"
+#import "SocialHelper.h"
 
 
 @implementation HUDLayer
@@ -375,7 +376,6 @@
 
 -(void)restartTapped:(id)sender{
     
-    
     //TestFlight
     TFLog(@"Restart");
     
@@ -396,7 +396,7 @@
         
     if (quantity == 0) {
         
-        _alert = [[UIAlertTableView alloc] initWithTitle:@"Patty Coins esauriti" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        _alert = [[UIAlertTableView alloc] initWithTitle:@"You've run out of coins" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
         ;                
         _alert.tag = kAlertViewCoinsFinished;
         
@@ -410,11 +410,11 @@
     
     if (quantity == 1) {
         
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Ultimo Gettone"
-                                                        message:@"Puoi ottenere altri gettoni nello Store"
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"One Coin Left"
+                                                        message:@"Want to use your last coin now? \n Remember You can get more coins in the Store"
                                                        delegate:self
-                                              cancelButtonTitle:@"Cancel" 
-                                              otherButtonTitles:@"Continua",nil];
+                                              cancelButtonTitle:@"No" 
+                                              otherButtonTitles:@"Yes",nil];
         
         [alert show];
         
@@ -448,6 +448,7 @@
     
     _delegate = nil;
     _commonElements = nil;
+    _productId = nil;
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.plist"];
 
@@ -520,6 +521,11 @@
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
+    bool reach = [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirectorIOS sharedDirector].view forProductIdentifier:_productId];
+    if (!reach) {
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+        pauseMenu.isTouchEnabled = true;
+    }
 }
 
 
@@ -557,32 +563,44 @@
 #pragma mark ===  Table Alert View  ===
 #pragma mark -
 
-#pragma mark - SBTableAlertDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     	
 	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 	
     NSString* text = [NSString string];
+    
+    bool isFirstPostFb = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostFacebook"]; 
+    
+    bool isFirstPostTw = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostTw"];
+    
     switch (indexPath.row) {
         case 0:
-            text = @"Facebook";
+            if (!isFirstPostFb)text = @"5 free coins - Facebook";
+            else if (!isFirstPostTw)text = @"5 free coins - Twitter";
+            else text = @"Buy 30 coins";
             break;
         case 1:
-            text = @"Twitter";
+            if (!isFirstPostFb && !isFirstPostTw) text = @"5 free coins - Twitter";
+            else if (!isFirstPostTw || !isFirstPostFb) text = @"Buy 30 coins";
+            else text = @"Buy 90 coins";
             break;
         case 2:
-            text = @"30 gettoni";
+            if (!isFirstPostFb && !isFirstPostTw) text = @"Buy 30 coins";
+            else if (!isFirstPostTw || !isFirstPostFb) text = @"Buy 90 coins";
+            else text = @"Buy 300 coins";
             break;
         case 3:
-            text = @"90 gettoni";
+            if (!isFirstPostFb && !isFirstPostTw) text = @"Buy 90 coins";
+            else if (!isFirstPostTw || !isFirstPostFb) text = @"Buy 300 coins";
             break;
         case 4:
-            text = @"300 gettoni";
+            text = @"Buy 300 coins";
             break;
         default:
             break;
     }
+    
 	[cell.textLabel setText:text];
 	
 	return cell;
@@ -590,7 +608,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	
-    return 6;
+    bool isFirstPostFb = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostFacebook"]; 
+    
+    bool isFirstPostTw = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostTw"];
+    
+    if (!isFirstPostFb && !isFirstPostTw) return 5;
+    else if (!isFirstPostFb || !isFirstPostTw) return 4; 
+    else return 3;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -598,22 +622,33 @@
     return 1;
 }
 
-#pragma mark - SBTableAlertDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
         UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-        
         NSString* text = cell.textLabel.text;
     
-    if ([text isEqualToString:@"Facebook"]) NSLog(@"Facebook");
-    else if([text isEqualToString:@"Twitter"]) NSLog(@"Twitter");
-    else if([text isEqualToString:@"30 gettoni"]) NSLog(@"30 gettoni");
-    else if([text isEqualToString:@"90 gettoni"]) NSLog(@"90 gettoni");
-    else if([text isEqualToString:@"300 gettoni"]) NSLog(@"300 gettoni");
+    if ([text isEqualToString:@"Facebook"])    [[SocialHelper sharedHelper] loginToFacebook:self];
+    else if([text isEqualToString:@"Twitter"]) [[SocialHelper sharedHelper] postOnTwitter:self];
+    else if([text isEqualToString:@"Buy 30 coins"]) 
+        _productId = kProductPurchase30coins;
+    else if([text isEqualToString:@"Buy 90 coins"]) 
+        _productId = kProductPurchase90coins;
+    else if([text isEqualToString:@"Buy 300 coins"]) 
+        _productId = kProductPurchase300coins;
     
     [_alert dismissWithClickedButtonIndex:indexPath.row animated:YES];
+    if (_productId) {
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+        pauseMenu.isTouchEnabled = false;
+        bool reach = [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view 
+                                           forProductIdentifier:_productId];
+        if (!reach) {
+            pauseMenu.isTouchEnabled = true;
+        }
+    }
+    
 }
 
 

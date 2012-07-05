@@ -297,8 +297,8 @@
         [self addChild:_player z:kPlayerZValue tag:kPlayerTagValue];
         
         [_player setDelegate:self];
-
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Get the Rhythm" fntFile:FONTHIGHSCORES];
+                
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Get ready to play the sequence" fntFile:FONTHIGHSCORES];
         [self addChild:label z:kLabelReadyZValue tag:kLabelReadyTagValue];
         [label setPosition:ccp(size.width/2, size.height/2)];
         
@@ -308,19 +308,19 @@
         
         if(isTutorial){
             
-            CCSprite* leftHand = [CCSprite spriteWithFile:@"intro_btn_sx_02.png"];
+            CCSprite* leftHand = [CCSprite spriteWithFile:@"tut_btn_sx.png"];
             
             [self addChild:leftHand z:kLeftHandHelpZValue tag:kLeftHandHelpTagValue];
             
-            [leftHand setPosition:ccp(size.width * 0.76f, size.height * 0.40f)];
+            [leftHand setPosition:ccp(size.width * 0.79f, size.height * 0.40f)];
             
             leftHand.opacity = 0;
             
-            CCSprite* rightHand = [CCSprite spriteWithFile:@"intro_btn_dx_02.png"];
+            CCSprite* rightHand = [CCSprite spriteWithFile:@"tut_btn_dx.png"];
             
             [self addChild:rightHand z:kRightHandHelpZValue tag:kRightHandHelpTagValue];
             
-            [rightHand setPosition:ccp(size.width * 0.24f, size.height * 0.40f)];
+            [rightHand setPosition:ccp(size.width * 0.22f, size.height * 0.40f)];
             
             rightHand.opacity = 0;
             

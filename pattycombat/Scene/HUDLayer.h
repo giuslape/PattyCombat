@@ -29,6 +29,7 @@
     CCSprite* _pauseButton;
     CCLabelBMFont* _scoreLabel;
     CCSpriteBatchNode* _commonElements;
+    NSString* _productId;
     
 #if __has_feature(objc_arc_weak)
     __weak id <HUDDelegate> _delegate;

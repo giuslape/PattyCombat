@@ -41,7 +41,6 @@
 - (void)dealloc {
     
     _spriteBatchNode = nil;
-    [[GameManager sharedGameManager] stopBackgroundMusic];
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"IntroButtAndFeed.plist"];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];    
@@ -444,7 +443,8 @@
 -(void)startGamePlay {
             
         CCLOG(@"Intro complete, asking Game Manager to start the Game play");
-        
+
+        [[GameManager sharedGameManager] stopBackgroundMusic];
         [[GameManager sharedGameManager] runSceneWithID:kGamelevel1];
         
         self.isTouchEnabled = FALSE;
@@ -481,8 +481,12 @@
         // Add animation 
         
         CGSize size = [CCDirectorIOS sharedDirector].winSize;
-
-        CCLabelBMFont* labelEnd = [CCLabelBMFont labelWithString:@"Don't forget the sequence" fntFile:FONTHIGHSCORES];
+        
+        NSString* string = [NSString string];
+        
+        string = (!_isLastLevel) ? @"Don't forget the sequence" : @"This one will be tough";
+        
+        CCLabelBMFont* labelEnd = [CCLabelBMFont labelWithString:string fntFile:FONTHIGHSCORES];
         
         [self addChild:labelEnd z:4];
         
@@ -511,11 +515,6 @@
         [self handleHitWithTouch:pointLocation];
         
         _state = kStateOneTouchWaiting;
-    }
-    
-    if (_isLastLevel) {
-        
-        [self startGamePlay];
     }
 }
 
@@ -613,16 +612,28 @@
     
     [[GameManager sharedGameManager] playBackgroundTrack:WAITINGTHEME];
 
-    // Check if is last level
     
-    if (!_isLastLevel) {
         
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"IntroButtAndFeed.plist" textureFilename:@"IntroButtAndFeed.pvr.ccz"];
         
         _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"IntroButtAndFeed.pvr.ccz"];
         
         [self addChild:_spriteBatchNode z:kSpriteBatchNodeIntroZValue tag:kSpriteBatchNodeIntroTagValue];
-        
+    
+        CCSprite* fightButton = [CCSprite spriteWithSpriteFrameName:@"fight_btn.png"];
+    
+        [_spriteBatchNode addChild:fightButton z:kFightButtonZValue tag:kFightButtonTagValue];
+    
+        [fightButton setPosition:ccp(size.width - fightButton.contentSize.width * 0.6f, 0)];
+    
+        [fightButton setAnchorPoint:ccp(0.5f, 0)];
+
+    // Check if is last level
+    
+    if (!_isLastLevel) {
+
+        fightButton.opacity = 0;
+
         //Load animation for Hands
         
         [self loadAnimation];
@@ -649,15 +660,6 @@
         [_spriteBatchNode addChild:_leftHand z:kLeftHandZValue tag:kLeftHandTagValue];
         
         [_leftHand setPosition:ccp(size.width * 0.81f, size.height * 0.45f)];
-        
-        CCSprite* fightButton = [CCSprite spriteWithSpriteFrameName:@"fight_btn.png"];
-        fightButton.opacity = 0;
-        
-        [_spriteBatchNode addChild:fightButton z:kFightButtonZValue tag:kFightButtonTagValue];
-        
-        [fightButton setPosition:ccp(size.width - fightButton.contentSize.width * 0.6f, 0)];
-        
-        [fightButton setAnchorPoint:ccp(0.5f, 0)];
         
         if ([[GameManager sharedGameManager] isTutorial]) {
             
