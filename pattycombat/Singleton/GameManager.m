@@ -242,52 +242,39 @@ static GameManager* _sharedGameManager = nil;
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 60;
-            break;
-        case 2:
-            _gameTime = 60;
-         //   _gameTimeInit = 11;
-            break;
-        case 3:
             _gameTime = 63;
             break;
+        case 2:
+            _gameTime = 64;
+            break;
+        case 3:
+            _gameTime = 64;
+            break;
         case 6:
-            _gameTime = 53;
+            _gameTime = 54;
             break;
         case 5:
-            _gameTime = 53;
+            _gameTime = 54;
             break;
         case 7:
-            _gameTime = 53;
+            _gameTime = 54;
             break;
         case 9:
-            _gameTime = 46;
-         //   _gameTimeInit = 11;
+            _gameTime = 47;
             break;
         case 10:
-            _gameTime = 46;
-         //   _gameTimeInit = 11;
+            _gameTime = 47;
             break;
         case 11:
-            _gameTime = 46;
-           // _gameTimeInit = 11;
+            _gameTime = 47;
             break;
         case 13:
-            _gameTime = 41;
-        //    _gameTimeInit = 11;
+            _gameTime = 47;
             break;
         default:
             break;
     }
 }
-
--(NSString *)formatAchievementTypeToString{
-    
-    NSString* result;
-    
-    return result;
-}
-
 
 -(void)initAudioAsync {
     // Initializes the audio engine asynchronously
@@ -612,7 +599,7 @@ static GameManager* _sharedGameManager = nil;
             sceneToRun = [MainIntro node];
             break;
         case kMainMenuScene:
-            _currentLevel = 12;
+            _currentLevel = 2;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;

@@ -32,6 +32,8 @@
 
 @implementation MenuLayer
 
+static int kpadding = 10;
+
 @synthesize size;
 @synthesize hud = _hud;
 
@@ -263,7 +265,7 @@
                                             fntFile:FONTHIGHSCORES];
     
     [levelReachedValue setPosition:ccp(xPosition, size.height * 0.3)];
-    [levelReachedValue setAnchorPoint:ccp(0.5f, 0)];
+    [levelReachedValue setAnchorPoint:ccp(0.5f,0)];
     [self addChild:levelReachedValue z:kLevelReachedValueZValue tag:kLevelReachedValueTagValue];
     
         
@@ -960,9 +962,36 @@ viewController
     self.isTouchEnabled = true;
     [self dismissHUD:self];
     
-    for (CCMenuItemSprite* item in _purchaseMenu.children)
-        item.opacity = 255;
+    int index = 0;
+    NSArray* array = (NSArray *)[notification object];
     
+    if (array) {
+        
+        SKProduct* product = [SKProduct new];  
+        
+        for (CCMenuItemSprite* item in _purchaseMenu.children){
+            
+            if (item.tag == kFacebookItemTagValue) continue;
+            else if(item.tag == kFirstPurchaseItemTagValue) index = kFirstPurchaseItemTagValue;
+            else if(item.tag == kSecondPurchaseItemTagValue)index = kSecondPurchaseItemTagValue;
+            else if(item.tag == kThirdPurchaseItemTagValue) index = kThirdPurchaseItemTagValue;
+            
+            CCLabelTTF* labelPrice = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:10];
+            item.opacity = 255;
+            product = [array objectAtIndex:index];
+            NSLocale* pricelocale = product.priceLocale;
+            NSDecimalNumber *price = product.price;
+            labelPrice.string = [NSString stringWithFormat:@"%@ %@", [price stringValue], [pricelocale objectForKey:NSLocaleCurrencySymbol]];
+            labelPrice.color = ccc3(0, 0, 0); 
+            labelPrice.anchorPoint = ccp(1,0.5f);
+            labelPrice.position = ccp(item.position.x + item.contentSize.width - kpadding, item.contentSize.height/2);
+            
+            [item addChild:labelPrice];
+            
+            index++;
+        }
+        
+    }
 }
 
 

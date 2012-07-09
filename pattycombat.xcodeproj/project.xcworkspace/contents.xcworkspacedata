@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:pattycombat.xcodeproj">
+      location = "SDK:Users/giuseppelapenta/Dropbox/Codice/pattycombat/pattycombat.xcodeproj">
    </FileRef>
 </Workspace>
