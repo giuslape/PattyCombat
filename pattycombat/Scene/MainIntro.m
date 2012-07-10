@@ -18,14 +18,17 @@
 -(void)updateForScreenReshape;
 
 @end
+
 @implementation MainIntro
 
+bool fadingOutLoop1;
+bool fadingOutLoop2;
 
 - (id)init
 {
     self = [super init];
+    
     if (self) {
-        
         
         CGSize screenSize = [CCDirector sharedDirector].winSize;
 
@@ -36,9 +39,15 @@
             
             [self removeChildByTag:1 cleanup:YES];
             
+            [[[CCDirector sharedDirector] actionManager] removeAllActionsFromTarget:sound1];                  
+            [[[CCDirector sharedDirector] actionManager] removeAllActionsFromTarget:sound2];
+          //  [[SimpleAudioEngine sharedEngine] unloadEffect:@"loop_sinth.mp3"];
+          //  [[SimpleAudioEngine sharedEngine] unloadEffect:@"loop_metronomo.mp3"];
+            [sound1 stop];
+            [sound2 stop];
+            
             CCScene* scene = [LoadingScene sceneWithTargetScene:kMainMenuScene];
             
-            [[GameManager sharedGameManager] stopBackgroundMusic];
             [[CCDirectorIOS sharedDirector]  replaceScene:scene];  
             
         }] ;
@@ -52,11 +61,18 @@
         [menu setPosition:ccp(screenSize.width * 0.96f, screenSize.height * .97f)];
         
         [menu setAnchorPoint:ccp(1, 1)];
-        
-        [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
-        
+                
         [self updateForScreenReshape];
-            
+        
+        sound1 = [[SimpleAudioEngine sharedEngine] soundSourceForFile:@"loop_sinth.mp3"];
+        sound2 = [[SimpleAudioEngine sharedEngine] soundSourceForFile:@"loop_metronomo.mp3"];
+        
+        fadingOutLoop1 = YES;
+        fadingOutLoop2 = YES;
+        sound1.gain = 0.0f;
+        sound2.gain = 0.0f;
+        
+        [self fadeSound:sound1];
     }
     return self;
 }
@@ -94,8 +110,8 @@
     CCSprite* arrow = [CCSprite spriteWithFile:@"arrow.png"];
     arrow.position = ccp(screenSize.width /2, screenSize.height * 0.05f);
     
-    CCMoveTo* moveTo = [CCMoveTo actionWithDuration:0.2f position:ccp(screenSize.width/2, screenSize.height * 0.10f)];
-    CCMoveTo* move   = [CCMoveTo actionWithDuration:.1f position:arrow.position];
+    CCMoveTo* moveTo = [CCMoveTo actionWithDuration:.21f position:ccp(screenSize.width/2, screenSize.height * 0.10f)];
+    CCMoveTo* move   = [CCMoveTo actionWithDuration:.21f position:arrow.position];
     
     CCDelayTime* delay = [CCDelayTime actionWithDuration:.2f];
     
@@ -141,9 +157,10 @@
 -(void)scrollLayer:(CCScrollLayer *)sender scrolledToPageNumber:(int)page{
     
     CGSize screenSize = [CCDirectorIOS sharedDirector].winSize;
-    
+
     switch (page) {
         case 0:
+            if (sound2.isPlaying) [self fadeSound:sound2];
             break;
         case 1:
         {
@@ -155,9 +172,8 @@
                 s3.position =  ccp( screenSize.width /2 , screenSize.height/2 );
                 [pageThree addChild:s3];
                 [sender addPage:pageThree withNumber:2];
-                
             }
-
+            if (!sound2.isPlaying)[self fadeSound:sound2];
         }
             break;
         case 2:
@@ -171,9 +187,9 @@
                 [pageFour addChild:s4];
             
                 [sender addPage:pageFour withNumber:3];
-                
             }
-        
+            if (!sound2.isPlaying)[self fadeSound:sound2];
+            if (!sound1.isPlaying)[self fadeSound:sound1];
         }
             break;
         case 3:
@@ -192,21 +208,30 @@
                 
                 CCMenuItemSprite* button = [CCMenuItemSprite itemWithNormalSprite:start selectedSprite:start_over block:^(id sender) {
                    
+                    [[[CCDirector sharedDirector] actionManager] removeAllActionsFromTarget:sound1];                  
+                    [[[CCDirector sharedDirector] actionManager] removeAllActionsFromTarget:sound2];
+                    [sound1 stop];
+                    [sound2 stop];
+                    
                     CCScene* scene = [LoadingScene sceneWithTargetScene:kMainMenuScene];
                     
-                    [[GameManager sharedGameManager] stopBackgroundMusic];
                     [[CCDirectorIOS sharedDirector]  replaceScene:scene];
                     
                 }];
-                
+                                
                 CCMenu* menu = [CCMenu menuWithItems:button, nil];
-                
                 menu.position = ccp(screenSize.width/2 * 0.975f, screenSize.height/2 * 0.55f);
                 [pageFive addChild:menu];
             }
+            
+            if (sound2.isPlaying) [self fadeSound:sound2];
+            if (!sound1.isPlaying)[self fadeSound:sound1];
         }
             break;
         case 4:
+            if (sound1.isPlaying) [self fadeSound:sound1];
+            if (sound2.isPlaying) [self fadeSound:sound2];
+            break;
         default:
             break;
     }
@@ -217,6 +242,47 @@
     
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
+}
+
+
+-(void)fadeSound:(CDSoundSource *)sender{
+    
+    CCDirector* director = [CCDirector sharedDirector];
+    
+    [[director actionManager] removeAllActionsFromTarget:sender];
+    
+    if ([sender isEqual:sound1]) {
+        
+    
+        if (!fadingOutLoop1) {
+        
+            [CDXPropertyModifierAction fadeSoundEffect:1.0f finalVolume:0.0f curveType:kIT_Linear shouldStop:YES effect:sender]; 
+            }else {
+        
+                sender.looping = YES;
+                [sender play];
+                [CDXPropertyModifierAction fadeSoundEffect:1.0f finalVolume:1.0f curveType:kIT_Linear shouldStop:NO effect:sender];
+         }
+    
+    fadingOutLoop1 = !fadingOutLoop1;
+    }
+    
+    if ([sender isEqual:sound2]) {
+        
+        
+        if (!fadingOutLoop2) {
+            
+            [CDXPropertyModifierAction fadeSoundEffect:0.5f finalVolume:0.0f curveType:kIT_Linear shouldStop:YES effect:sender]; 
+        }else {
+            
+            sender.looping = YES;
+            [sender play];
+            [CDXPropertyModifierAction fadeSoundEffect:0.5f finalVolume:1.0f curveType:kIT_Linear shouldStop:NO effect:sender];
+        }
+        
+        fadingOutLoop2 = !fadingOutLoop2;
+    }
+
 }
 
 
@@ -258,8 +324,7 @@
 
 -(void)changeScene{
     
-    [[CCDirectorIOS sharedDirector] replaceScene:[MainIntro node]];
-    
+    [[GameManager sharedGameManager] runSceneWithID:kGameMainIntro];    
 }
 
 - (void)dealloc

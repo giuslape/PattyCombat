@@ -8,12 +8,19 @@
 
 #import "cocos2d.h"
 #import "CCScrollLayer.h"
+#import "SimpleAudioEngine.h"
+#import "CDXPropertyModifierAction.h"
 
 
 @interface GinoScappelloni : CCLayer
-
 @end
 
-@interface MainIntro : CCLayer <CCScrollLayerDelegate>
+@interface MainIntro : CCLayer <CCScrollLayerDelegate>{
+    
+    CDSoundSource* sound1;
+    CDSoundSource* sound2;
+}
+
+-(void)fadeSound:(CDSoundSource *)sender;
 
 @end

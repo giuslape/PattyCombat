@@ -267,9 +267,11 @@ typedef enum {
 
 
 #define BACKGROUND_TRACK_MAIN_MENU @"MainTheme.mp3"
-#define WinTheme @"win.mp3"
-#define LoseTheme @"lose.mp3"
 #define WAITINGTHEME @"loop_memorize.mp3"
+#define ComicsPag1 @"fumetto_pagina_1.mp3"
+#define ComicsPag2 @"fumetto_pagina_2.mp3"
+#define ComicsPag3 @"fumetto_pagina_3.mp3"
+
 // Audio Constants
 #define SFX_NOTLOADED NO
 #define SFX_LOADED YES

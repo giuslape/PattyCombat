@@ -101,16 +101,7 @@
 #pragma mark -
 
 -(void)updateStateWithDelta:(ccTime)deltaTime{
-    
-    _elapsedTime += deltaTime;
-    
-    if (_elapsedTime > 10 && [[GameManager sharedGameManager] isTutorial] && _barProgress < 20 && _helpAlert) {
-        
-        _helpAlert = NO;
-        
-        [self onPause:self];
-    }
-    
+            
     GameCharacter* bellChar = (GameCharacter*)[_commonElements getChildByTag:kBellTagValue];
     
     [bellChar updateStateWithDeltaTime:deltaTime];

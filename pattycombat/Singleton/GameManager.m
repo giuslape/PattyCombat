@@ -104,9 +104,6 @@ static GameManager* _sharedGameManager = nil;
         _gameTime = 0;
         _gameState = kStateLose;
         _gameTimeInit = 12;
-#if DEBUG
-       self.isExtreme = FALSE;
-#endif
     }
     return self;
 }
@@ -142,6 +139,7 @@ static GameManager* _sharedGameManager = nil;
         case kGamelevelFinal:
             break;
         case kGameMainIntro:
+            result = @"kGameMainIntro";
             break;
         case kGinoScappelloni:
             break;
@@ -239,10 +237,12 @@ static GameManager* _sharedGameManager = nil;
 
 -(void)formatGameTime{
     
+    self.gameTimeInit = 12;
+
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 63;
+            _gameTime = 68;
             break;
         case 2:
             _gameTime = 64;
@@ -251,25 +251,25 @@ static GameManager* _sharedGameManager = nil;
             _gameTime = 64;
             break;
         case 6:
-            _gameTime = 54;
+            _gameTime = 56;
             break;
         case 5:
-            _gameTime = 54;
+            _gameTime = 55;
             break;
         case 7:
-            _gameTime = 54;
+            _gameTime = 56;
             break;
         case 9:
-            _gameTime = 47;
+            _gameTime = 49;
             break;
         case 10:
-            _gameTime = 47;
+            _gameTime = 50;
             break;
         case 11:
-            _gameTime = 47;
+            _gameTime = 55;
             break;
         case 13:
-            _gameTime = 47;
+            _gameTime = 45;
             break;
         default:
             break;
@@ -599,7 +599,7 @@ static GameManager* _sharedGameManager = nil;
             sceneToRun = [MainIntro node];
             break;
         case kMainMenuScene:
-            _currentLevel = 2;
+            _currentLevel = 0;
             _totalScore = 0;
             isLastLevel = FALSE;
             self.isPerfect = TRUE;
@@ -705,12 +705,7 @@ static GameManager* _sharedGameManager = nil;
 
 -(void)resumeGame{
     
-  //  CCScene* runningScene = [[CCDirectorIOS sharedDirector] runningScene];
-    
-  //  if (![runningScene isKindOfClass:[GameScene class]]) {
-        
         [[CCDirectorIOS sharedDirector] resume];
-    //}
 }
 
 #pragma mark -

@@ -31,7 +31,6 @@
     CCSpriteBatchNode* _commonElements;
     NSString* _productId;
     
-    float _elapsedTime;
     bool  _helpAlert;
     
 #if __has_feature(objc_arc_weak)

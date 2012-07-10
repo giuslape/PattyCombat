@@ -740,11 +740,14 @@ static int kpadding = 10;
                 [self performSelector:@selector(timeout:) withObject:nil afterDelay:60.0];
             }
             else {
+                if ([[PattyCombatIAPHelper sharedHelper].products count] > 0) {
+                    
                     for (CCMenuItemSprite* item in _purchaseMenu.children) item.opacity = 255;
                 
                     _purchaseMenu.isTouchEnabled = TRUE; 
                 
-                    self.isTouchEnabled = true;
+                    }
+                self.isTouchEnabled = true;
                 }
         }
     
@@ -965,7 +968,7 @@ viewController
     int index = 0;
     NSArray* array = (NSArray *)[notification object];
     
-    if (array) {
+    if ([array count] > 0) {
         
         SKProduct* product = [SKProduct new];  
         

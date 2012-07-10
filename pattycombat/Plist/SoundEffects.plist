@@ -45,5 +45,12 @@
 		<key>lose</key>
 		<string>lose.mp3</string>
 	</dict>
+	<key>kGameMainIntro</key>
+	<dict>
+		<key>loop1</key>
+		<string>loop_sinth.mp3</string>
+		<key>loop2</key>
+		<string>loop_metronomo.mp3</string>
+	</dict>
 </dict>
 </plist>

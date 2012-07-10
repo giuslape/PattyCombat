@@ -16,6 +16,8 @@
 
 #import "GCHelper.h"
 
+#import "Appirater.h"
+
 static NSString* kAppId = @"321845184543524";
 
 static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyLTA0LTEwIDA0OjM3OjQ1LjE4OTQ1MQ";
@@ -151,13 +153,9 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
     
-    #define TESTING 1
-    
-    #ifdef TESTING
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-    #endif
-    
     [[GameManager sharedGameManager] runSceneWithID:kGinoScappelloni];
+    
+    [Appirater appLaunched:YES]; 
 
 	return YES;
 }
@@ -189,6 +187,7 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 -(void) applicationWillEnterForeground:(UIApplication*)application
 {
 		[[CCDirectorIOS sharedDirector] startAnimation];
+       // [Appirater appEnteredForeground:YES]; 
 }
 
 // application will be killed

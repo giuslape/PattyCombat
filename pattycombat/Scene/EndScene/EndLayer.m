@@ -160,11 +160,11 @@
             
             if (quantity == 1) {
                 
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Ultimo Gettone"
-                                                                message:@"Puoi ottenere altri gettoni nello Store"
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"One Coin Left"
+                                                                message:@"Want to use your last coin now? \n Remember You can get more coins in the Store"
                                                                delegate:self
-                                                      cancelButtonTitle:@"Cancel" 
-                                                      otherButtonTitles:@"Continua",nil];
+                                                      cancelButtonTitle:@"No" 
+                                                      otherButtonTitles:@"Yes",nil];
                 
                 [alert show];
                 
