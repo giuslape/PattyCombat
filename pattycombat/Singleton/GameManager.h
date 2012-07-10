@@ -44,7 +44,7 @@
 @property (readwrite) int currentLevel;
 @property (readwrite) int currentScore;
 @property (readwrite) int totalScore;
-@property (readwrite, nonatomic) int bestScore;
+@property (readwrite, nonatomic) int  bestScore;
 @property (readonly , nonatomic) BOOL isTutorial;
 @property (readwrite, nonatomic) BOOL isPerfect;
 @property (readwrite, nonatomic) BOOL isKo;
@@ -55,10 +55,10 @@
 @property (readwrite) BOOL isMusicON;
 @property (readwrite) BOOL isSoundEffectsON;
 @property (readwrite) BOOL isBonusLevel;
-@property (nonatomic,readwrite) BOOL isExtreme;
+@property (nonatomic, readwrite) BOOL isExtreme;
 @property (readwrite, nonatomic) int levelReached;
 @property (nonatomic, strong) NSString* namePlayer;
-@property (strong, readonly) id<SceneDao> dao;
+@property (strong   , readonly) id <SceneDao> dao;
 @property (readwrite) GameManagerSoundState managerSoundState;
 @property (readwrite) GameStates gameState;
 @property (nonatomic, strong) NSMutableDictionary *listOfSoundEffectFiles;
@@ -70,16 +70,17 @@
 
 
 +(GameManager*)sharedGameManager;                                
--(void)runSceneWithID:(SceneTypes)sceneID; 
--(void)setupAudioEngine;
+-(void) runSceneWithID:(SceneTypes)sceneID; 
+-(void) setupAudioEngine;
 -(ALuint)playSoundEffect:(NSString*)soundEffectKey;
--(void)stopSoundEffect:(ALuint)soundEffectID;
--(void)playBackgroundTrack:(NSString*)trackFileName;
+-(void) stopSoundEffect:(ALuint)soundEffectID;
+-(void) playBackgroundTrack:(NSString*)trackFileName;
 -(void) stopBackgroundMusic;
 -(void) resetBestScore;
--(void)pauseGame;
+-(void) pauseGame;
+-(void) resumeGame;
+-(void) resumeBackgroundMusic;
 -(NSString*)formatPlayerNameTypeToString;
--(NSString *)formatAchievementTypeToString;
 -(void)updateGameState:(GameStates)newGameState;
 
 @end

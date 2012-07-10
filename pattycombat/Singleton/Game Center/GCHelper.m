@@ -3,7 +3,7 @@
 //  PattyCombat
 //
 //  Created by Giuseppe Lapenta on 04/03/12.
-//  Copyright (c) 2012 Fratello. All rights reserved.
+//  Copyright (c) 2012. All rights reserved.
 //
 
 #import "GCHelper.h"
@@ -213,6 +213,7 @@ static GCHelper *sharedHelper = nil;
     achievement.percentComplete = percentComplete;
     [achievementsToReport addObject:achievement];
     [self save];
+    if ([achievement respondsToSelector:@selector(showsCompletionBanner)])
     achievement.showsCompletionBanner = YES;
     if (!gameCenterAvailable || !userAuthenticated) return;
     [self sendAchievement:achievement];

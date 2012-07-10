@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>bud_hit1_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{2, 6}, {296, 294}}</string>
+			<key>spriteOffset</key>
+			<string>{-70, 112}</string>
+			<key>spriteSize</key>
+			<string>{296, 294}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{596, 0}, {296, 294}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit1_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{25, 21}, {228, 242}}</string>
+			<key>spriteOffset</key>
+			<string>{-81, 123}</string>
+			<key>spriteSize</key>
+			<string>{228, 242}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{298, 526}, {228, 242}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit1_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{43, 217}, {296, 294}}</string>
+			<key>spriteOffset</key>
+			<string>{-29, -99}</string>
+			<key>spriteSize</key>
+			<string>{296, 294}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {296, 294}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit1_0004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{61, 225}, {228, 242}}</string>
+			<key>spriteOffset</key>
+			<string>{-45, -81}</string>
+			<key>spriteSize</key>
+			<string>{228, 242}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{298, 296}, {228, 242}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit1_0005.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{2, 6}, {296, 294}}</string>
+			<key>spriteOffset</key>
+			<string>{-70, 112}</string>
+			<key>spriteSize</key>
+			<string>{296, 294}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{298, 0}, {296, 294}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit1_0006.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{25, 21}, {228, 242}}</string>
+			<key>spriteOffset</key>
+			<string>{-81, 123}</string>
+			<key>spriteSize</key>
+			<string>{228, 242}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{542, 296}, {228, 242}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit1_0007.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{43, 217}, {296, 294}}</string>
+			<key>spriteOffset</key>
+			<string>{-29, -99}</string>
+			<key>spriteSize</key>
+			<string>{296, 294}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 296}, {296, 294}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit1_0008.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{61, 225}, {228, 242}}</string>
+			<key>spriteOffset</key>
+			<string>{-45, -81}</string>
+			<key>spriteSize</key>
+			<string>{228, 242}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{782, 296}, {228, 242}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit2_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{39, 63}, {224, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{-69, 100}</string>
+			<key>spriteSize</key>
+			<string>{224, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{542, 732}, {224, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit2_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{29, 63}, {224, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{-79, 100}</string>
+			<key>spriteSize</key>
+			<string>{224, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{452, 938}, {224, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit2_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{63, 255}, {224, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{-45, -92}</string>
+			<key>spriteSize</key>
+			<string>{224, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 798}, {224, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit2_0004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{63, 256}, {224, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{-45, -93}</string>
+			<key>spriteSize</key>
+			<string>{224, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{768, 746}, {224, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit2_0005.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{39, 63}, {224, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{-69, 100}</string>
+			<key>spriteSize</key>
+			<string>{224, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 592}, {224, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit2_0006.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{29, 63}, {224, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{-79, 100}</string>
+			<key>spriteSize</key>
+			<string>{224, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{768, 540}, {224, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit2_0007.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{63, 255}, {224, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{-45, -92}</string>
+			<key>spriteSize</key>
+			<string>{224, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{226, 756}, {224, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>bud_hit2_0008.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{63, 256}, {224, 204}}</string>
+			<key>spriteOffset</key>
+			<string>{-45, -93}</string>
+			<key>spriteSize</key>
+			<string>{224, 204}</string>
+			<key>spriteSourceSize</key>
+			<string>{440, 530}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{542, 526}, {224, 204}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.5.5</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{1024, 2048}</string>
+		<key>name</key>
+		<string>BudHit</string>
+		<key>premultipliedAlpha</key>
+		<true/>
+		<key>target</key>
+		<dict>
+			<key>name</key>
+			<string>hd</string>
+			<key>textureFileName</key>
+			<string>BudHit-hd.pvr</string>
+			<key>textureFileExtension</key>
+			<string>.pvr.ccz</string>
+			<key>coordinatesFileName</key>
+			<string>BudHit-hd</string>
+			<key>coordinatesFileExtension</key>
+			<string>.plist</string>
+			<key>premultipliedAlpha</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

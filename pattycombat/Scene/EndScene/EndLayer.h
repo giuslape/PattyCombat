@@ -9,15 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "GameState.h"
+#import "UIAlertTableView.h"
 
 
 
-@interface EndLayer : CCLayer <UIAlertViewDelegate>
+@interface EndLayer : CCLayer <UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource>
 {
     
     CGSize size;
     
     CCSpriteBatchNode* _spriteBatchNode;
+    
+    UIAlertTableView* _alert;
+    
+    NSString* _productId;
     
     int _totalGameScore;
     int _currentLevelScore;

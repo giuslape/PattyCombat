@@ -38,9 +38,7 @@
             
             [[GameManager sharedGameManager] setIsExtreme:YES];
         }
-        
-        [TestFlight passCheckpoint:@"Gioco Finito"];
-        
+                
     }
     return self;
 }

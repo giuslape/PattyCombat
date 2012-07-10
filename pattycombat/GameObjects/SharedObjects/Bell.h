@@ -35,13 +35,26 @@
     
     CCAnimation* _bellAnimation;
     CCAnimation* _gongAnimation;
-    
+#if __has_feature(objc_arc_weak)
     __weak id <BellDelegate> _delegate;
+#elif __has_feature(objc_arc)
+    __unsafe_unretained id <BellDelegate> _delegate;
+#else
+     id <BellDelegate> _delegate;
+#endif
 }
 
 @property (nonatomic, strong)CCAnimation* bellAnimation;
 @property (nonatomic, strong)CCAnimation* gongAnimation;
+
+#if __has_feature(objc_arc_weak)
 @property (nonatomic, weak) id <BellDelegate> delegate;
+#elif __has_feature(objc_arc)
+@property (nonatomic, unsafe_unretained) id <BellDelegate> delegate;
+#else
+@property (nonatomic, assign) id <BellDelegate> delegate;
+#endif
+
 
 @end
 

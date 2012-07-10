@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>frames</key>
+	<dict>
+		
+		<key>steven_arm_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{180, 215}, {256, 256}}</string>
+			<key>spriteOffset</key>
+			<string>{90, -83}</string>
+			<key>spriteSize</key>
+			<string>{256, 256}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 750}, {256, 256}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_arm_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{62, 240}, {374, 280}}</string>
+			<key>spriteOffset</key>
+			<string>{31, -120}</string>
+			<key>spriteSize</key>
+			<string>{374, 280}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{914, 612}, {374, 280}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_arm_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{62, 215}, {226, 304}}</string>
+			<key>spriteOffset</key>
+			<string>{-43, -107}</string>
+			<key>spriteSize</key>
+			<string>{226, 304}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{670, 0}, {226, 304}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_arm_0004.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{179, 213}, {216, 284}}</string>
+			<key>spriteOffset</key>
+			<string>{69, -95}</string>
+			<key>spriteSize</key>
+			<string>{216, 284}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{898, 0}, {216, 284}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_arm_0005.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{62, 215}, {226, 304}}</string>
+			<key>spriteOffset</key>
+			<string>{-43, -107}</string>
+			<key>spriteSize</key>
+			<string>{226, 304}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{686, 694}, {226, 304}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_arm_0006.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{62, 215}, {226, 304}}</string>
+			<key>spriteOffset</key>
+			<string>{-43, -107}</string>
+			<key>spriteSize</key>
+			<string>{226, 304}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{712, 306}, {226, 304}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_arm_0007.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{38, 56}, {398, 380}}</string>
+			<key>spriteOffset</key>
+			<string>{19, 14}</string>
+			<key>spriteSize</key>
+			<string>{398, 380}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 0}, {398, 380}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_arm_0008.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{38, 56}, {268, 366}}</string>
+			<key>spriteOffset</key>
+			<string>{-46, 21}</string>
+			<key>spriteSize</key>
+			<string>{268, 366}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 382}, {268, 366}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_arm_0009.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{173, 117}, {170, 324}}</string>
+			<key>spriteOffset</key>
+			<string>{40, -19}</string>
+			<key>spriteSize</key>
+			<string>{170, 324}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{540, 368}, {170, 324}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_arm_0010.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{38, 56}, {268, 366}}</string>
+			<key>spriteOffset</key>
+			<string>{-46, 21}</string>
+			<key>spriteSize</key>
+			<string>{268, 366}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{400, 0}, {268, 366}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_arm_0011.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{38, 56}, {268, 366}}</string>
+			<key>spriteOffset</key>
+			<string>{-46, 21}</string>
+			<key>spriteSize</key>
+			<string>{268, 366}</string>
+			<key>spriteSourceSize</key>
+			<string>{436, 520}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{270, 382}, {268, 366}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_head_0001.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{4, 8}, {426, 228}}</string>
+			<key>spriteOffset</key>
+			<string>{-2, -4}</string>
+			<key>spriteSize</key>
+			<string>{426, 228}</string>
+			<key>spriteSourceSize</key>
+			<string>{438, 236}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{258, 750}, {426, 228}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_head_0002.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{4, 8}, {426, 228}}</string>
+			<key>spriteOffset</key>
+			<string>{-2, -4}</string>
+			<key>spriteSize</key>
+			<string>{426, 228}</string>
+			<key>spriteSourceSize</key>
+			<string>{438, 236}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{1116, 0}, {426, 228}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>steven_head_0003.png</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
+			<string>{{4, 8}, {426, 228}}</string>
+			<key>spriteOffset</key>
+			<string>{-2, -4}</string>
+			<key>spriteSize</key>
+			<string>{426, 228}</string>
+			<key>spriteSourceSize</key>
+			<string>{438, 236}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{940, 286}, {426, 228}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+	</dict>
+	<key>metadata</key>
+	<dict>
+		<key>version</key>
+		<string>1.5.5</string>
+		<key>format</key>
+		<integer>3</integer>
+		<key>size</key>
+		<string>{2048, 1024}</string>
+		<key>name</key>
+		<string>BitontiPlayer</string>
+		<key>premultipliedAlpha</key>
+		<true/>
+		<key>target</key>
+		<dict>
+			<key>name</key>
+			<string>hd</string>
+			<key>textureFileName</key>
+			<string>BitontiPlayer-hd.pvr</string>
+			<key>textureFileExtension</key>
+			<string>.pvr.ccz</string>
+			<key>coordinatesFileName</key>
+			<string>BitontiPlayer-hd</string>
+			<key>coordinatesFileExtension</key>
+			<string>.plist</string>
+			<key>premultipliedAlpha</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -13,9 +13,8 @@
 #import "GCHelper.h"
 #import "PattyCombatIAPHelper.h"
 #import "Reachability.h"
-#import "AppDelegate.h"
-#import <Twitter/Twitter.h>
 #import "CCMenuItemSpriteIndependent.h"
+#import "SocialHelper.h"
 
 @interface MenuLayer ()
 
@@ -27,10 +26,13 @@
 -(void)itemGetCoinsTouched;
 -(void)showAchievements;
 -(void)showLeaderboard;
+
 @end
 
 
 @implementation MenuLayer
+
+static int kpadding = 10;
 
 @synthesize size;
 @synthesize hud = _hud;
@@ -47,22 +49,16 @@
     _darkLayer = nil;
     _purchaseMenu = nil;
     _hud = nil;
-    _permissions = nil;
-    
-    AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
-    
-    [delegate facebook].sessionDelegate = nil;
     
     [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeUnusedSpriteFrames];
-
-    [[GameManager sharedGameManager] stopBackgroundMusic];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductsLoadedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchasedNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kProductPurchaseFailedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"Social" object:nil];
     
     
 }
@@ -73,17 +69,9 @@
 
 
 -(void)buildGetCoins{
-        
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
-    //Add background
     
-    CCSprite* getCoinsBackground = [CCSprite spriteWithFile:@"menu_01.png"];
-    [self addChild:getCoinsBackground z:kGetCoinsBackgroundZValue tag:kGetCoinsBackgroundTagValue];
-    [getCoinsBackground setPosition:ccp(-size.width/2, size.height/2)];
-        
+
     //Label Coins Purchased
-    
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     
     CCLabelBMFont* labelCoinsPurchased = [CCLabelBMFont labelWithString:@"Coins Held" fntFile:FONTHIGHSCORES];
     [labelCoinsPurchased setPosition:ccp(-size.width + size.width * 0.70f, size.height * 0.24f)];
@@ -141,6 +129,7 @@
         
         
         [alertView show];
+        [alertView setTag:kAlertViewSocial];
         
     }];
                                             
@@ -200,18 +189,32 @@
     
     _purchaseMenu.isTouchEnabled = NO;
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+    CCTexture2DPixelFormat defaultPixelFormat = [CCTexture2D defaultAlphaPixelFormat];
+    
+    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+    
+    //Add background
+    
+    CCSprite* getCoinsBackground = [CCSprite spriteWithFile:@"menu_01.png"];
+    [self addChild:getCoinsBackground z:kGetCoinsBackgroundZValue tag:kGetCoinsBackgroundTagValue];
+    [getCoinsBackground setPosition:ccp(-size.width/2, size.height/2)];
+    
+    [CCTexture2D setDefaultAlphaPixelFormat:defaultPixelFormat];
 }
 
 -(void)buildStats{
     
+    CCTexture2DPixelFormat defaultPixelFormat = [CCTexture2D defaultAlphaPixelFormat];
+    
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+    
     // Add background Stats
     CCSprite* highscoresBackground = [CCSprite spriteWithFile:@"menu_03.png"];
     [self addChild:highscoresBackground z:kStatsBackgroundZValue tag:kStatsBackgroundTagValue];
     [highscoresBackground setPosition:ccp(1.5*size.width, size.height/2)];
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+    [CCTexture2D setDefaultAlphaPixelFormat:defaultPixelFormat];
+    
     // Position of Menu
     
     float xPosition = size.width + size.width * 0.2;
@@ -262,10 +265,10 @@
                                             fntFile:FONTHIGHSCORES];
     
     [levelReachedValue setPosition:ccp(xPosition, size.height * 0.3)];
-    [levelReachedValue setAnchorPoint:ccp(0.5f, 0)];
+    [levelReachedValue setAnchorPoint:ccp(0.5f,0)];
     [self addChild:levelReachedValue z:kLevelReachedValueZValue tag:kLevelReachedValueTagValue];
-
     
+        
     // Add Achievement Button
     
     CCSprite* achievement = [CCSprite spriteWithSpriteFrameName:@"achievements_btn.png"];
@@ -295,24 +298,27 @@
     CCSprite* reset = [CCSprite spriteWithSpriteFrameName:@"reset_btn.png"];
     [reset setPosition:ccp(size.width + size.width * 0.9, size.height * 0.07)];
     [self addChild:reset z:kResetZValue tag:kResetTagValue];
-        
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 }
 
 -(void)buildMainMenu{
     
     float xPosition = size.width * 0.7;
     
+    CCTexture2DPixelFormat defaultPixelFormat = [CCTexture2D defaultAlphaPixelFormat];
+    
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB565];
+    
     // Main Menu Background
     CCSprite* mainMenuBackground = [CCSprite spriteWithFile:@"menu_02.png"];
     [self addChild:mainMenuBackground z:kMainMenuBackgroundZValue tag:kMainMenuBackgroundTagValue];
     [mainMenuBackground setPosition:ccp(size.width/2, size.height/2)];
     
+    [CCTexture2D setDefaultAlphaPixelFormat:defaultPixelFormat];
+
     
     // Actor Myagi
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+   // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
     
     CCSprite* myagi = [CCSprite spriteWithFile:@"myagi.png"];
     
@@ -324,9 +330,9 @@
     
     //Play button
     
-    CCSprite* play = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn.png"] : [CCSprite spriteWithFile:@"playExtreme_btn.png"] ;
+    CCSprite* play = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn.png"] : [CCSprite spriteWithSpriteFrameName:@"playExtreme_btn.png"] ;
     play.anchorPoint = ccp(0.5f,0);
-    CCSprite* playSelected = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn_over.png"] :[CCSprite spriteWithFile:@"playExtreme_btn_over.png"];
+    CCSprite* playSelected = (![[GameManager sharedGameManager] isExtreme]) ? [CCSprite spriteWithSpriteFrameName:@"play_btn_over.png"] :[CCSprite spriteWithSpriteFrameName:@"playExtreme_btn_over.png"];
     playSelected.anchorPoint = ccp(0.5f,0);
     CCNode* nodePlay = [CCNode node];
     nodePlay.contentSize = play.contentSize;
@@ -401,8 +407,6 @@
     [self addChild:mainMenu z:kMainMenuZValue tag:kMainMenuTagValue];
     
     mainMenu.isTouchEnabled = FALSE;
-    
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 }
 
 
@@ -453,45 +457,19 @@
 	if ((self = [super init]))
         
 	{
-        
-        // Reset First Post (for Test)
-        
-       /* [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstPost"];
-        [[NSUserDefaults standardUserDefaults] synchronize];*/
-        
-        
         // Add Sprite at cache 
         
         _neonEffectInterval = 0;
         
         _elapsedTime = 0;
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"MenuAtlas.plist" textureFilename:@"MenuAtlas.png"];
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-        AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
+       // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+        CCTexture2D* texture = [[CCTextureCache sharedTextureCache] addImage:@"MenuAtlas.pvr.ccz"];
         
-        [[delegate facebook] setSessionDelegate:self];
+        [[CCSpriteFrameCache sharedSpriteFrameCache]
+         addSpriteFramesWithFile:@"MenuAtlas.plist" texture:texture];
         
         size = [[CCDirector sharedDirector] winSize];
-        
-        // Add Dark Layer
-        
-        [self addDarkLayer];
-        
-        //Build Main Menu
-        
-        [self buildMainMenu];
-        
-        // Build Menu GetCoins
-        
-        [self buildGetCoins];
-        
-        // Build Menu Stats
-        
-        [self buildStats];
-        
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
         // Add Logo
         
@@ -500,6 +478,22 @@
         [logo setAnchorPoint:ccp(0.5f, 1)];
         [logo setPosition:ccp(size.width * 0.7f, size.height * 0.97f)];
         [self addChild:logo z:3];
+        
+        // Add Dark Layer
+        
+        [self addDarkLayer];
+        
+        // Build Menu GetCoins
+        
+        [self buildGetCoins];
+        
+        //Build Main Menu
+        
+        [self buildMainMenu];
+        
+        // Build Menu Stats
+        
+        [self buildStats];
         
         // Add Observer for Purchase Notification
                 
@@ -518,7 +512,12 @@
                                                         name:kProductsLoadedNotification 
                                                             object:nil];  
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+       // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                selector:@selector(updateLabelForSocialCoin:) 
+                                                    name:@"Social" 
+                                                        object:nil];
         
 	}
 	return self;
@@ -545,6 +544,12 @@
     
     [self scheduleUpdate];
     
+    //Test Flight Level Reached
+    
+    CCLabelBMFont* levelReachedValue = (CCLabelBMFont *)[self getChildByTag:kLevelReachedValueTagValue];
+    
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Livello Raggiunto %@",levelReachedValue.string]];
+
 }
 
 #pragma mark -
@@ -614,7 +619,31 @@
 }
 
 
+-(void)resetStats{
+    
+    // Reset Level Reached
+    
+    [[GameManager sharedGameManager] setLevelReached:0];
+    
+    // Reset Achievements
+    
+    [[GCHelper sharedInstance] resetAchievements];
+    
+    // Reset Best Score
+    
+    [[GameManager sharedGameManager] resetBestScore];
+    
+    // Reset Labels
+    
+    CCLabelBMFont* levelReachedValue = (CCLabelBMFont *)[self getChildByTag:kLevelReachedValueTagValue];
+    
+    CCLabelBMFont* highscoreValue = (CCLabelBMFont *)[self getChildByTag:kHighScoreLabelTagValue];
+    
+    [levelReachedValue setString:@"0"];
+    [highscoreValue setString:@"0"];
 
+    
+}
 
 
 #pragma mark -
@@ -644,27 +673,15 @@
     
     if (CGRectContainsPoint(boundingBox, touchLocation)) {
         
-        // Reset Level Reached
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Reset Score"
+                                                        message:@"Are you sure you want to reset your progress?" 
+                                                        delegate:self
+                                                        cancelButtonTitle:@"No"
+                                                        otherButtonTitles:@"Yes", nil];
         
-        [[GameManager sharedGameManager] setLevelReached:0];
-        
-        // Reset Achievements
-        
-        [[GCHelper sharedInstance] resetAchievements];
-        
-        // Reset Best Score
-        
-        [[GameManager sharedGameManager] resetBestScore];
-        
-        // Reset Labels
-        
-        CCLabelBMFont* levelReachedValue = (CCLabelBMFont *)[self getChildByTag:kLevelReachedValueTagValue];
-        
-        CCLabelBMFont* highscoreValue = (CCLabelBMFont *)[self getChildByTag:kHighScoreLabelTagValue];
-        
-        [levelReachedValue setString:@"0"];
-        [highscoreValue setString:@"0"];
-        
+        [alert show];
+        [alert setTag:kALertViewReset];
+              
         return YES;
         
     }  else if (!CGRectContainsPoint([mainMenuBackground boundingBox], touchLocation)) {
@@ -682,6 +699,12 @@
 {
     CCLOG(@"Sono in Credits Touched");
     
+    CCMenu * mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
+    
+    mainMenu.enabled = false;
+    
+    self.isTouchEnabled = false;
+
     //TestFlight
     [TestFlight passCheckpoint:@"Controllo gettoni"];
     TFLog(@"Controllo gettoni");
@@ -705,24 +728,28 @@
                                                   cancelButtonTitle:nil 
                                                   otherButtonTitles:@"OK", nil];
             [alert show];
-
+            self.isTouchEnabled = true;
 
         } else { 
             
             if ([PattyCombatIAPHelper sharedHelper].products == nil) {
-                                
+                
                 [[PattyCombatIAPHelper sharedHelper] requestProducts];
                 _hud = [MBProgressHUD showHUDAddedTo:[CCDirector sharedDirector].view animated:YES];
                 _hud.labelText = @"Loading coins...";
-                [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
+                [self performSelector:@selector(timeout:) withObject:nil afterDelay:60.0];
             }
             else {
+                if ([[PattyCombatIAPHelper sharedHelper].products count] > 0) {
+                    
                     for (CCMenuItemSprite* item in _purchaseMenu.children) item.opacity = 255;
                 
                     _purchaseMenu.isTouchEnabled = TRUE; 
+                
+                    }
+                self.isTouchEnabled = true;
                 }
         }
-
     
     })];
 	[self runAction:[CCSequence actionOne:ease two:blockLoadingPurchase]];
@@ -735,11 +762,15 @@
 {
     CCLOG(@"Sono in High Scores Touched");
     
+    CCMenu * mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
+    
+    mainMenu.enabled = false;
+    
     //TestFlight
     [TestFlight passCheckpoint:@"Controllo statistiche"];
     TFLog(@"Controllo statistiche");
 
-    CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(-(size.width), 0)];
+    CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(-size.width, 0)];
 	CCEaseExponentialOut* ease = [CCEaseExponentialOut actionWithAction:move];
 	[self runAction:ease];
     
@@ -765,7 +796,7 @@
     
     // Disabled Touch for Main Menu
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
-    mainMenu.isTouchEnabled = FALSE;
+    mainMenu.isTouchEnabled = false;
         
 }
 
@@ -779,6 +810,10 @@
 	CCEaseExponentialOut* ease = [CCEaseExponentialOut actionWithAction:move];
 	[self runAction:ease];
     
+    CCMenu * mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
+    
+    mainMenu.enabled = true;
+    
 }
 
 
@@ -791,6 +826,7 @@
     
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     [mainMenu removeFromParentAndCleanup:YES];
+    [[GameManager sharedGameManager] stopBackgroundMusic];
     [[GameManager sharedGameManager] runSceneWithID:kIntroScene];
     
 }
@@ -857,8 +893,12 @@ viewController
 #pragma mark -
 
 
-// Called when purchase is done for update label coins 
+-(void)updateLabelForSocialCoin:(NSNotification *)notification{
+    
+    [self updateLabelCoinsForProductIdentifier:kProductPurchaseSocialCoins];
+}
 
+// Called when purchase is done for update label coins 
 
 -(void)updateLabelCoinsForProductIdentifier:(NSString *)productIdentifier{
     
@@ -879,9 +919,7 @@ viewController
     
     NSString *productIdentifier = (NSString *) notification.object;
     [self updateLabelCoinsForProductIdentifier:productIdentifier];
-   
-    NSLog(@"Purchased: %@", productIdentifier);
-    
+       
     // Test Flight
     TFLog(@"Prodotto comprato: %@", productIdentifier);
     
@@ -915,6 +953,7 @@ viewController
     
    [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
     self.hud = nil;
+    self.isTouchEnabled = true;
     
 }
 
@@ -923,11 +962,38 @@ viewController
 - (void)productsLoaded:(NSNotification *)notification {
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
+    self.isTouchEnabled = true;
     [self dismissHUD:self];
     
-    for (CCMenuItemSprite* item in _purchaseMenu.children) {
+    int index = 0;
+    NSArray* array = (NSArray *)[notification object];
+    
+    if ([array count] > 0) {
         
-        item.opacity = 255;
+        SKProduct* product = [SKProduct new];  
+        
+        for (CCMenuItemSprite* item in _purchaseMenu.children){
+            
+            if (item.tag == kFacebookItemTagValue) continue;
+            else if(item.tag == kFirstPurchaseItemTagValue) index = kFirstPurchaseItemTagValue;
+            else if(item.tag == kSecondPurchaseItemTagValue)index = kSecondPurchaseItemTagValue;
+            else if(item.tag == kThirdPurchaseItemTagValue) index = kThirdPurchaseItemTagValue;
+            
+            CCLabelTTF* labelPrice = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:10];
+            item.opacity = 255;
+            product = [array objectAtIndex:index];
+            NSLocale* pricelocale = product.priceLocale;
+            NSDecimalNumber *price = product.price;
+            labelPrice.string = [NSString stringWithFormat:@"%@ %@", [price stringValue], [pricelocale objectForKey:NSLocaleCurrencySymbol]];
+            labelPrice.color = ccc3(0, 0, 0); 
+            labelPrice.anchorPoint = ccp(1,0.5f);
+            labelPrice.position = ccp(item.position.x + item.contentSize.width - kpadding, item.contentSize.height/2);
+            
+            [item addChild:labelPrice];
+            
+            index++;
+        }
+        
     }
 }
 
@@ -950,11 +1016,11 @@ viewController
     
     SKProduct *product = [[PattyCombatIAPHelper sharedHelper].products objectAtIndex:buyButton.tag];
     
-    NSLog(@"Buying %@...", product.productIdentifier);
-        
+    NSString* identifier = product.productIdentifier;
+                
     TFLog(@"Comprando %@",product.productIdentifier);
         
-    [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:product];
+    [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:identifier];
     
     self.hud = [MBProgressHUD showHUDAddedTo:[CCDirectorIOS sharedDirector].view animated:YES];
     _hud.labelText = @"Buying Coins...";
@@ -968,27 +1034,9 @@ viewController
     
 }
 
-#pragma mark -
-#pragma mark ===  Check if is First Post  ===
-#pragma mark -
-
--(void)updateSocialCoins{
-
-    BOOL isFirstPost = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPost"]; 
-    
-    if (!isFirstPost) {
-        [self updateLabelCoinsForProductIdentifier:kProductPurchaseFacebookCoins];
-        isFirstPost = YES;
-        [[NSUserDefaults standardUserDefaults] setBool:isFirstPost forKey:@"FirstPost"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-
-}
-
-
 
 #pragma mark -
-#pragma mark ===  Alert View Social Delegate   ===
+#pragma mark ===  Alert View Delegate   ===
 #pragma mark -
 
 
@@ -996,235 +1044,32 @@ viewController
     
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
     
+    if (alertView.tag == kAlertViewSocial) {
+        
     switch (buttonIndex) {
         case 0:
             break;
         case 1:
-            [self loginToFacebook:self];
+            [[SocialHelper sharedHelper] loginToFacebook:self];
             break;
         case 2:
-            [self postOnTwitter:self];
+            [[SocialHelper sharedHelper] postOnTwitter:self];
             break;
         default:
             break;
+        }
     }
-}
-
-#pragma mark -
-#pragma mark ===  Facebook Delegate  ===
-#pragma mark -
-
-- (void)storeAuthData:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];
-    [defaults setObject:expiresAt forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-    
-}
-
-
-//Callback login on Facebook
-
-- (void)fbDidLogin {
-    
-    AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
-
-    [self storeAuthData:[[delegate facebook] accessToken] expiresAt:[[delegate facebook] expirationDate]];
-    
-    [self postToFacebook:self];
-    
-}
--(void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
-    
-    NSLog(@"token extended");
-    [self storeAuthData:accessToken expiresAt:expiresAt];
-}
-
-
- // Called when the user canceled the authorization dialog.
- 
--(void)fbDidNotLogin:(BOOL)cancelled {
-    
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-
-}
-
-
- // Called when the request logout has succeeded.
- 
-- (void)fbDidLogout {
-    
-    // Remove saved authorization information if it exists and it is
-    // ok to clear it (logout, session invalid, app unauthorized)
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"FBAccessTokenKey"];
-    [defaults removeObjectForKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-    
-}
-
-
-// * Called when the session has expired.
- 
-- (void)fbSessionInvalidated {
-    UIAlertView *alertView = [[UIAlertView alloc]
-                              initWithTitle:@"Auth Exception"
-                              message:@"Your session has expired."
-                              delegate:nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil,
-                              nil];
-    [alertView show];
-    [self fbDidLogout];
-}
-
-
-// Call when button is pressed 
-
--(void)loginToFacebook:(id)sender{
-    
-    // Test Flight
-    [TestFlight passCheckpoint:@"Post su Facebook"];
-    TFLog(@"Post su Facebook");
-    
-    _permissions = [[NSArray alloc] initWithObjects:@"offline_access",@"publish_stream",nil];
-    
-    AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
-
-    if (![[delegate facebook] isSessionValid]) {
+    if (alertView.tag == kALertViewReset) {
         
-        [[delegate facebook] authorize:_permissions];
-        
-    }else {
-        
-        [self postToFacebook:self];
+        switch (buttonIndex) {
+            case 1:
+                [self resetStats];
+                break;
+            default:
+                break;
+        }
     }
-
-    
-}
-
-
--(void)postToFacebook:(id)sender{
-    
-    self.isTouchEnabled = FALSE;
-    
-    SBJSON *jsonWriter = [SBJSON new];
-    
-    // The action links to be shown with the post in the feed
-    NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                      @"Get Started",
-                                                      @"name",
-                                                      @"http://bit.ly/HwglVX",
-                                                      @"link",
-                                                      @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX",
-                                                      @"message", nil], nil];
-    
-    NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
-    
-    // Dialog parameters
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"I'm Patty Combat beta tester", @"name",
-                                   @"Patty Combat.", @"caption",
-                                   @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX", @"message",
-                                   @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX", @"description",
-                                   @"http://bit.ly/HwglVX", @"link",
-                                   @"http://www.balzo.eu/wp-content/uploads/2012/04/iTunesArtwork.png", @"picture",
-                                   actionLinksStr, @"actions",
-                                   nil];
-    
-    AppController* delegate = (AppController *)[[UIApplication sharedApplication] delegate];
-
-    [[delegate facebook] dialog:@"feed"
-                      andParams:params
-                    andDelegate:self];
-}
-
-
-#pragma mark -
-#pragma mark ===  Facebook Dialog Delegate  ===
-#pragma mark -
-
-// Called when dialog is finish
-
-- (void)dialogCompleteWithUrl:(NSURL *)url {
-    
-    self.isTouchEnabled = TRUE;
-
-    if (![url query]) {
-        NSLog(@"User canceled dialog or there was an error");
-        return;
-    }
-    
-    [self updateSocialCoins];
-
-    NSLog(@"Dialog Complete");
-}
-
-- (void)dialogDidNotComplete:(FBDialog *)dialog {
-    
-    self.isTouchEnabled = TRUE;
-
-    NSLog(@"Dialog dismissed.");
-}
-
-- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error {
-    NSLog(@"Error message: %@", [[error userInfo] objectForKey:@"error_msg"]);
-    self.isTouchEnabled = TRUE;
-    //[self showMessage:@"Oops, something went haywire."];
-}
-
-
-
-#pragma mark -
-#pragma mark ===  Twitter  ===
-#pragma mark -
-
--(void)postOnTwitter:(id)sender{
-        
-    // Test Flight
-    [TestFlight passCheckpoint:@"Post su Twitter"];
-    TFLog(@"Post su twitter");
-    
-    self.isTouchEnabled = FALSE;
-    
-    if ([TWTweetComposeViewController canSendTweet])
-    {
-        TWTweetComposeViewController *tweetSheet =
-        [[TWTweetComposeViewController alloc] init];
-        tweetSheet.completionHandler = ^(TWTweetComposeViewControllerResult
-                                         result){
-            if (result == TWTweetComposeViewControllerResultCancelled)
-            {
-                NSLog(@"Cancelled the Tweet");
-            }
-            else
-            {
-                [self updateSocialCoins];
-            }
-            [[CCDirectorIOS sharedDirector] dismissModalViewControllerAnimated:YES];
-
-        };
-        [tweetSheet setInitialText:
-         [NSString stringWithFormat:@"I'm enjoying to be a #PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX"]];
-        [[CCDirectorIOS sharedDirector] presentViewController:tweetSheet animated:YES completion:^{
-            
-            NSLog(@"Completato");
-        }];
-    }
-    else
-    {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Sorry"
-                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
-                                  delegate:self
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-        [alertView show];
-    }
-    
-    self.isTouchEnabled = TRUE;
-
 }
 
 #pragma mark -
@@ -1238,7 +1083,7 @@ viewController
     
     CCMenu* mainMenu = (CCMenu *)[self getChildByTag:kMainMenuTagValue];
     mainMenu.isTouchEnabled = TRUE;
-
+    
 }
 
 @end

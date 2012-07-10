@@ -2,8 +2,8 @@
 //  GameState.m
 //  pattycombat
 //
-//  Created by Vincenzo Lapenta on 26/03/12.
-//  Copyright (c) 2012 Fratello. All rights reserved.
+//  Created by Giuseppe Lapenta on 26/03/12.
+//  Copyright (c) 2012. All rights reserved.
 //
 
 #import "GameState.h"
@@ -131,6 +131,7 @@ static GameState * sharedInstance = nil;
     completedLevel10 = FALSE;
     perfect = FALSE;
     ko = FALSE;
+    extreme = FALSE;
     
     [self save];
 }

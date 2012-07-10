@@ -116,7 +116,7 @@
 			<string>cinziah_hit2_0007.png</string>
 		</dict>
 	</dict>
-	<key>Scena5</key>
+	<key>Scena6</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>140_masai_music.mp3</string>
@@ -162,7 +162,7 @@
 			<string>maa_hit2_0007.png</string>
 		</dict>
 	</dict>
-	<key>Scena6</key>
+	<key>Scena5</key>
 	<dict>
 		<key>backgroundTrack</key>
 		<string>140_jocopoco_music.mp3</string>
@@ -397,13 +397,13 @@
 			<key>position</key>
 			<string>{206,640}</string>
 			<key>handName</key>
-			<string>chuck_arm_0001.png</string>
+			<string>chuck_leg_0001.png</string>
 			<key>rightPosition</key>
 			<string>{206,640}</string>
 			<key>rightRectPosition</key>
 			<string>{302,66}</string>
 			<key>headName</key>
-			<string>chuck_arm_0001.png</string>
+			<string>chuck_leg_0001.png</string>
 			<key>rightRectCrossPosition</key>
 			<string>{664,174}</string>
 			<key>leftRectCrossPosition</key>

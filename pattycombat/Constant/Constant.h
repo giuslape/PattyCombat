@@ -62,6 +62,9 @@
 #define kResetTagValue 23
 #define kResetZValue 3
 
+#define kAlertViewSocial 30
+#define kALertViewReset 31
+
 
 // Dark Layer
 
@@ -170,6 +173,15 @@
 
 #define kNextLevelLabelTagValue 25
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////    General   ////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#define kAlertViewLastCoin 1000
+#define kAlertViewCoinsFinished 1001
+
 #define kScore 1
 #define kWallTagValue 1
 #define kWallZValue 1
@@ -178,6 +190,8 @@
 #define kTapForProgress 20
 #define MaxZOrder 100
 #define MinZOrder 2
+
+#define kScrollLayer 300
 
 typedef enum{
     kNoSceneUninitialized=0,
@@ -198,6 +212,8 @@ typedef enum{
     kGamelevel9 = 109,
     kGamelevel10 = 110,
     kGamelevelFinal = 111,
+    kGameMainIntro = 112,
+    kGinoScappelloni = 113,
 } SceneTypes;
 
 
@@ -251,9 +267,11 @@ typedef enum {
 
 
 #define BACKGROUND_TRACK_MAIN_MENU @"MainTheme.mp3"
-#define WinTheme @"win.mp3"
-#define LoseTheme @"lose.mp3"
 #define WAITINGTHEME @"loop_memorize.mp3"
+#define ComicsPag1 @"fumetto_pagina_1.mp3"
+#define ComicsPag2 @"fumetto_pagina_2.mp3"
+#define ComicsPag3 @"fumetto_pagina_3.mp3"
+
 // Audio Constants
 #define SFX_NOTLOADED NO
 #define SFX_LOADED YES

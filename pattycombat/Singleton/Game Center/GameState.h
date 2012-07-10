@@ -2,8 +2,8 @@
 //  GameState.h
 //  pattycombat
 //
-//  Created by Vincenzo Lapenta on 26/03/12.
-//  Copyright (c) 2012 Fratello. All rights reserved.
+//  Created by Giuseppe Lapenta on 26/03/12.
+//  Copyright (c) 2012. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

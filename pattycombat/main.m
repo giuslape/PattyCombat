@@ -2,8 +2,8 @@
 //  main.m
 //  pattycombat
 //
-//  Created by Vincenzo Lapenta on 27/03/12.
-//  Copyright Fratello 2012. All rights reserved.
+//  Created by Giuseppe Lapenta on 27/03/12.
+//  Copyright 2012. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

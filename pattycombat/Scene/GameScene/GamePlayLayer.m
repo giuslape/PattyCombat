@@ -131,6 +131,16 @@
   
 }
 
+-(void)pauseDidEnter:(HUDLayer *)layer{
+    
+    [self pauseSchedulerAndActions];
+    
+}
+
+-(void)pauseDidExit:(HUDLayer *)layer{
+    
+    [self resumeSchedulerAndActions];
+}
 
 
 
@@ -239,7 +249,7 @@
         [player handleHit:loc];
         
         state = kStateOneTouchWaiting;
-            
+        
     }
     
 }
@@ -260,7 +270,7 @@
         _count = 1;
         _elapsedTime = 0;
         
-        _gameTimeInit = [[GameManager sharedGameManager] gameTimeInit];
+        _gameTimeInit = 12;
         
         id dao = [GameManager sharedGameManager].dao;
         
@@ -281,14 +291,14 @@
         NSDictionary* playerSettings = [sceneObjects objectForKey:@"player"];
         
         _bpm = [[playerSettings objectForKey:@"bpm"] intValue];
-                
+
         _player = [Player playerWithDictionary:playerSettings];
         
         [self addChild:_player z:kPlayerZValue tag:kPlayerTagValue];
         
         [_player setDelegate:self];
-
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Get the Rhythm" fntFile:FONTHIGHSCORES];
+                
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Get ready to play the sequence" fntFile:FONTHIGHSCORES];
         [self addChild:label z:kLabelReadyZValue tag:kLabelReadyTagValue];
         [label setPosition:ccp(size.width/2, size.height/2)];
         
@@ -298,19 +308,19 @@
         
         if(isTutorial){
             
-            CCSprite* leftHand = [CCSprite spriteWithFile:@"intro_btn_sx_02.png"];
+            CCSprite* leftHand = [CCSprite spriteWithFile:@"tut_btn_sx.png"];
             
             [self addChild:leftHand z:kLeftHandHelpZValue tag:kLeftHandHelpTagValue];
             
-            [leftHand setPosition:ccp(size.width * 0.76f, size.height * 0.40f)];
+            [leftHand setPosition:ccp(size.width * 0.79f, size.height * 0.40f)];
             
             leftHand.opacity = 0;
             
-            CCSprite* rightHand = [CCSprite spriteWithFile:@"intro_btn_dx_02.png"];
+            CCSprite* rightHand = [CCSprite spriteWithFile:@"tut_btn_dx.png"];
             
             [self addChild:rightHand z:kRightHandHelpZValue tag:kRightHandHelpTagValue];
             
-            [rightHand setPosition:ccp(size.width * 0.24f, size.height * 0.40f)];
+            [rightHand setPosition:ccp(size.width * 0.22f, size.height * 0.40f)];
             
             rightHand.opacity = 0;
             
@@ -328,7 +338,7 @@
 -(void)playSound{
     
     [[GameManager sharedGameManager] playBackgroundTrack:backgroundTrack];
-    [self schedule:@selector(countDown:) interval:0.001];
+    [self schedule:@selector(countDown:) interval:0.01f];
 }
     
 
@@ -339,7 +349,7 @@
     
     _currentTime += delta;
         
-    if ((_count * (60.0 / _bpm)) <= _currentTime) {
+    if ((_count * (60.0f / _bpm)) <= _currentTime) {
         
     int count = _count;
     _count++;
@@ -349,33 +359,31 @@
     if (count == _gameTimeInit + 3) {
             
             [self unschedule:_cmd];
-            //  id delay  = [CCDelayTime actionWithDuration:0.5f];
-            id func   = [CCCallFunc actionWithTarget:self selector:@selector(scheduleUpdate)];
+                
             id change = [CCCallBlock actionWithBlock:^{
                  [label setString:@"4"];
              }];
             
-            id d2 = [CCDelayTime actionWithDuration:(60.0f/ _bpm)];
+            id d2 = [CCDelayTime actionWithDuration:(60.0f / _bpm)];
             id delete = [CCCallBlock actionWithBlock:^{
-                
                 [self removeChild:label cleanup:YES];
-                
             }];
             
-            [self runAction:[CCSequence actions:change,func,d2,delete, nil]];
+            [self runAction:[CCSequence actions:change,d2,delete,nil]];
+            [self schedule:@selector(update:) interval:0 repeat:kCCRepeatForever delay:0.00001f];
             self.isTouchEnabled = TRUE;
+        
             return;
-            
         }
 
-     if(count >= _gameTimeInit){
-         
-         int tempCount = _gameTimeInit - 1;
+    if(count >= _gameTimeInit){
+
+        int tempCount = _gameTimeInit - 1;
          NSString *tempString = [NSString stringWithFormat:@"%d", count - tempCount];
          [label setString:tempString];
         
         }
-    
+
     }
 }
 

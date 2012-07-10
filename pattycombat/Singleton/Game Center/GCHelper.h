@@ -3,7 +3,7 @@
 //  PattyCombat
 //
 //  Created by Giuseppe Lapenta on 04/03/12.
-//  Copyright (c) 2012 Fratello. All rights reserved.
+//  Copyright (c) 2012. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -22,7 +22,7 @@
 #define kAchievementPerfect @"com.tadaa.pattycombat.achievement.perfect"
 #define kAchievementKO      @"com.tadaa.pattycombat.achievement.ko"
 #define kPattyLeaderboard   @"com.tadaa.pattycombat.leaderboard.score"
-#define kAchievementExtreme       @"com.tadaa.pattycombat.achievement.extreme"
+#define kAchievementExtreme @"com.tadaa.pattycombat.achievement.extreme"
 
 @interface GCHelper : NSObject <NSCoding>
 {

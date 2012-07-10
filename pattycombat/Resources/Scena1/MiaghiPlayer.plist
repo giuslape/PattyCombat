@@ -12,17 +12,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{198, 158}, {202, 212}}</string>
+			<string>{{98, 78}, {102, 107}}</string>
 			<key>spriteOffset</key>
-			<string>{99, -79}</string>
+			<string>{49, -39}</string>
 			<key>spriteSize</key>
-			<string>{202, 212}</string>
+			<string>{102, 107}</string>
 			<key>spriteSourceSize</key>
-			<string>{400, 370}</string>
+			<string>{200, 185}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{666, 0}, {202, 212}}</string>
+			<string>{{340, 0}, {102, 107}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -34,17 +34,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{29, 2}, {310, 368}}</string>
+			<string>{{14, 0}, {156, 185}}</string>
 			<key>spriteOffset</key>
-			<string>{-16, -1}</string>
+			<string>{-8, -0}</string>
 			<key>spriteSize</key>
-			<string>{310, 368}</string>
+			<string>{156, 185}</string>
 			<key>spriteSourceSize</key>
-			<string>{400, 370}</string>
+			<string>{200, 185}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 0}, {310, 368}}</string>
+			<string>{{0, 0}, {156, 185}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -56,17 +56,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{29, 50}, {292, 320}}</string>
+			<string>{{14, 24}, {148, 161}}</string>
 			<key>spriteOffset</key>
-			<string>{-25, -25}</string>
+			<string>{-12, -12}</string>
 			<key>spriteSize</key>
-			<string>{292, 320}</string>
+			<string>{148, 161}</string>
 			<key>spriteSourceSize</key>
-			<string>{400, 370}</string>
+			<string>{200, 185}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 370}, {292, 320}}</string>
+			<string>{{0, 187}, {148, 161}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -78,17 +78,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{195, 8}, {146, 348}}</string>
+			<string>{{97, 4}, {74, 175}}</string>
 			<key>spriteOffset</key>
-			<string>{68, 3}</string>
+			<string>{34, 1}</string>
 			<key>spriteSize</key>
-			<string>{146, 348}</string>
+			<string>{74, 175}</string>
 			<key>spriteSourceSize</key>
-			<string>{400, 370}</string>
+			<string>{200, 185}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{312, 0}, {146, 348}}</string>
+			<string>{{158, 0}, {74, 175}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -100,17 +100,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{39, 50}, {282, 320}}</string>
+			<string>{{19, 24}, {142, 161}}</string>
 			<key>spriteOffset</key>
-			<string>{-20, -25}</string>
+			<string>{-10, -12}</string>
 			<key>spriteSize</key>
-			<string>{282, 320}</string>
+			<string>{142, 161}</string>
 			<key>spriteSourceSize</key>
-			<string>{400, 370}</string>
+			<string>{200, 185}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{288, 692}, {282, 320}}</string>
+			<string>{{146, 350}, {142, 161}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -122,17 +122,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{35, 50}, {286, 320}}</string>
+			<string>{{17, 24}, {144, 161}}</string>
 			<key>spriteOffset</key>
-			<string>{-22, -25}</string>
+			<string>{-11, -12}</string>
 			<key>spriteSize</key>
-			<string>{286, 320}</string>
+			<string>{144, 161}</string>
 			<key>spriteSourceSize</key>
-			<string>{400, 370}</string>
+			<string>{200, 185}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 692}, {286, 320}}</string>
+			<string>{{0, 350}, {144, 161}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -144,17 +144,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{8, 16}, {204, 224}}</string>
+			<string>{{4, 8}, {104, 112}}</string>
 			<key>spriteOffset</key>
-			<string>{0, -8}</string>
+			<string>{1, -4}</string>
 			<key>spriteSize</key>
-			<string>{204, 224}</string>
+			<string>{104, 112}</string>
 			<key>spriteSourceSize</key>
-			<string>{220, 240}</string>
+			<string>{110, 120}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{460, 0}, {204, 224}}</string>
+			<string>{{234, 0}, {104, 112}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -166,17 +166,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{8, 16}, {204, 224}}</string>
+			<string>{{4, 8}, {104, 112}}</string>
 			<key>spriteOffset</key>
-			<string>{0, -8}</string>
+			<string>{1, -4}</string>
 			<key>spriteSize</key>
-			<string>{204, 224}</string>
+			<string>{104, 112}</string>
 			<key>spriteSourceSize</key>
-			<string>{220, 240}</string>
+			<string>{110, 120}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{500, 226}, {204, 224}}</string>
+			<string>{{150, 187}, {104, 112}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -188,17 +188,17 @@
 			
 			</array>
 			<key>spriteColorRect</key>
-			<string>{{8, 16}, {204, 224}}</string>
+			<string>{{4, 8}, {104, 112}}</string>
 			<key>spriteOffset</key>
-			<string>{0, -8}</string>
+			<string>{1, -4}</string>
 			<key>spriteSize</key>
-			<string>{204, 224}</string>
+			<string>{104, 112}</string>
 			<key>spriteSourceSize</key>
-			<string>{220, 240}</string>
+			<string>{110, 120}</string>
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{294, 370}, {204, 224}}</string>
+			<string>{{256, 114}, {104, 112}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -207,29 +207,29 @@
 	<key>metadata</key>
 	<dict>
 		<key>version</key>
-		<string>1.5.3</string>
+		<string>1.5.5</string>
 		<key>format</key>
 		<integer>3</integer>
 		<key>size</key>
-		<string>{1024, 1024}</string>
+		<string>{512, 512}</string>
 		<key>name</key>
 		<string>MiaghiPlayer</string>
 		<key>premultipliedAlpha</key>
-		<false/>
+		<true/>
 		<key>target</key>
 		<dict>
 			<key>name</key>
 			<string>default</string>
 			<key>textureFileName</key>
-			<string>MiaghiPlayer</string>
+			<string>MiaghiPlayer.pvr</string>
 			<key>textureFileExtension</key>
-			<string>.png</string>
+			<string>.pvr.ccz</string>
 			<key>coordinatesFileName</key>
 			<string>MiaghiPlayer</string>
 			<key>coordinatesFileExtension</key>
 			<string>.plist</string>
 			<key>premultipliedAlpha</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 </dict>

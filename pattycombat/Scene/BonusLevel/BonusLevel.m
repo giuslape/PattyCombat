@@ -34,9 +34,9 @@
         
         size = [[CCDirector sharedDirector] winSize];
 
-        [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:[NSString stringWithString:@"Common.plist"]];
+        [[CCSpriteFrameCache sharedSpriteFrameCache]addSpriteFramesWithFile:@"Common.plist" textureFilename:@"Common.pvr.ccz"];
         
-        spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"Common.png"];
+        spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"Common.pvr.ccz"];
         
         [self addChild:spriteBatchNode];
         
@@ -185,6 +185,10 @@
 -(void)runNewScene{
     
     self.isTouchEnabled = FALSE;
+    
+    CCMenu* handnext = (CCMenu *)[self getChildByTag:kHandNext];
+    handnext.enabled = false;
+    
     [[GameManager sharedGameManager]stopBackgroundMusic];
     [[GameManager sharedGameManager]runSceneWithID:kIntroScene];
 

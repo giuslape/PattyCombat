@@ -41,7 +41,7 @@
         
         size = [[CCDirector sharedDirector] winSize];
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+      //  [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         CCSprite* tv = [CCSprite spriteWithFile:@"tv_0001.png"];
         
         [self addChild:tv z:kTvZValue tag:kTvTagValue];
@@ -50,7 +50,7 @@
         
         [self initAnimation];
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+       // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         
     }
     return self;
@@ -155,7 +155,7 @@
         
         score+= 50;
         
-        [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
+       // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         [tempSprite setTexture:[[CCTextureCache sharedTextureCache]addImage:[NSString stringWithFormat:@"tv_000%d.png",indexSprite]]];
         
     }
@@ -173,7 +173,7 @@
         [self removeChild:temp cleanup:YES];
     }];
     
-    [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+   // [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
     
     [temp runAction:[CCSequence actionOne:[CCAnimate actionWithAnimation:touchAnimation] two:block]];
             

@@ -12,6 +12,7 @@
 #import "PattyCombatIAPHelper.h"
 #import "MBProgressHUD.h"
 #import "LoadingScene.h"
+#import "SocialHelper.h"
 
 
 @implementation HUDLayer
@@ -100,7 +101,7 @@
 #pragma mark -
 
 -(void)updateStateWithDelta:(ccTime)deltaTime{
-    
+            
     GameCharacter* bellChar = (GameCharacter*)[_commonElements getChildByTag:kBellTagValue];
     
     [bellChar updateStateWithDeltaTime:deltaTime];
@@ -178,6 +179,7 @@
         
         _barProgress = 0;
         
+        _helpAlert = ([[GameManager sharedGameManager] isTutorial]) ? YES : NO;
         CGSize size = [[CCDirectorIOS sharedDirector] winSize];
         
         isPause = FALSE;
@@ -185,9 +187,9 @@
         // Load Common Elements in Cache
         
         
-        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Common.plist" textureFilename:@"Common.png"];
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Common.plist" textureFilename:@"Common.pvr.ccz"];
         
-        _commonElements = [CCSpriteBatchNode batchNodeWithFile:@"Common.png"];
+        _commonElements = [CCSpriteBatchNode batchNodeWithFile:@"Common.pvr.ccz"];
         
         [self addChild:_commonElements];
                         
@@ -220,8 +222,14 @@
                                                                    target:self 
                                                                         selector:@selector(resumeGame:)];
         
-        CCMenuItemSprite* restart = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn.png"]
-                                                            selectedSprite:[CCSprite spriteWithSpriteFrameName:@"restart_btn_over.png"] 
+        NSInteger currentLevel = [[GameManager sharedGameManager] currentLevel];
+        
+        NSString* nameSprite = (currentLevel == 1) ? [NSString stringWithString:@"restart_free_btn.png"] : [NSString stringWithString:@"restart_btn.png"];
+        
+        NSString* nameSpriteOver = (currentLevel == 1) ? [NSString stringWithString:@"restart_free_btn_over.png"] : [NSString stringWithString:@"restart_btn_over.png"];
+        
+        CCMenuItemSprite* restart = [CCMenuItemSprite itemWithNormalSprite:[CCSprite spriteWithSpriteFrameName:nameSprite]
+                                                            selectedSprite:[CCSprite spriteWithSpriteFrameName:nameSpriteOver] 
                                                                     target:self selector:@selector(restartTapped:)];
                                                                        
         
@@ -282,6 +290,10 @@
     touchLocation = [[CCDirectorIOS sharedDirector] convertToGL:touchLocation];
     touchLocation = [self convertToNodeSpace:touchLocation];
     
+    // Mi serve per fermate la catena di Responder
+    
+    if (isPause) return YES;
+    
     if (CGRectContainsPoint([_pauseButton boundingBox], touchLocation)) {
         
         [self onPause:self];
@@ -301,11 +313,13 @@
     
     if (!isPause) {
         
-    isPause = TRUE;
-                
-    [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
+        isPause = TRUE;
+    
+        [_delegate pauseDidEnter:self];
         
-    [[CCDirectorIOS sharedDirector] pause];
+        [[CCDirectorIOS sharedDirector] pause];
+        
+        [[CDAudioManager sharedManager] pauseBackgroundMusic];
         
         CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         
@@ -315,6 +329,8 @@
             
         //TestFlight
         TFLog(@"Pausa nel gioco");
+        
+
     }
 
 }
@@ -323,7 +339,9 @@
     
     //TestFlight
     TFLog(@"Resume");
-    
+        
+    [[GameManager sharedGameManager] resumeBackgroundMusic];
+        
     isPause = FALSE;
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
@@ -332,15 +350,18 @@
             
     pauseMenu.isTouchEnabled = FALSE;
     
-    [[CCDirectorIOS sharedDirector]   resume];
-    [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+    [[CCDirectorIOS sharedDirector] resume];
     
+    [_delegate pauseDidExit:self];
+
 }
 
 -(void)mainMenu:(id)sender{
     
     //TestFlight
     TFLog(@"Ritorno al main menu");
+    
+    [_delegate pauseDidExit:self];
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         
@@ -356,34 +377,65 @@
 
 -(void)restartTapped:(id)sender{
     
-    
     //TestFlight
-    TFLog(@"Tocco Restart");
+    TFLog(@"Restart");
     
-    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
-            
-    if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0) {
-        
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Patty Coins esauriti"
-                                                        message:@"Compra altri Patty Coins per continuare"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel" 
-                                              otherButtonTitles:@"Compra", nil];
-        
-        [alert show];
-        
+    NSInteger currentLevel = [[GameManager sharedGameManager] currentLevel];
+    
+    if (currentLevel == 1) {
+    
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+        [self removeChild: pauseMenu cleanup:YES];
+        [[CCDirectorIOS sharedDirector]  resume];
+        [[GameManager sharedGameManager] stopBackgroundMusic];
+        LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+        [[CCDirector sharedDirector] replaceScene:scene];
         return;
     }
     
+    NSInteger quantity = [[PattyCombatIAPHelper sharedHelper] quantity];
+        
+    if (quantity == 0) {
+        
+        _alert = [[UIAlertTableView alloc] initWithTitle:@"You've run out of coins" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+        ;                
+        _alert.tag = kAlertViewCoinsFinished;
+        
+        [_alert setTableDelegate:self];
+        [_alert setDataSource:self];
+        
+        [_alert show];
 
-    [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
-           
-    [self removeChild: pauseMenu cleanup:YES];     
+        return;
+    }
     
-    [[CCDirectorIOS sharedDirector]  resume];
-    [[GameManager sharedGameManager] stopBackgroundMusic];
-    LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
-    [[CCDirector sharedDirector] replaceScene:scene];
+    if (quantity == 1) {
+        
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"One Coin Left"
+                                                        message:@"Want to use your last coin now? \n Remember You can get more coins in the Store"
+                                                       delegate:self
+                                              cancelButtonTitle:@"No" 
+                                              otherButtonTitles:@"Yes",nil];
+        
+        [alert show];
+        
+        alert.tag = kAlertViewLastCoin;
+        
+    }
+    
+    if (quantity > 1) {
+        
+        [[PattyCombatIAPHelper sharedHelper]
+         coinWillUsedinView:[CCDirector sharedDirector].view forProductIdentifier:nil];
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+        [self removeChild: pauseMenu cleanup:YES];
+        [[CCDirectorIOS sharedDirector]  resume];
+        [[GameManager sharedGameManager] stopBackgroundMusic];
+        LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+        [[CCDirectorIOS sharedDirector] replaceScene:scene];
+
+    }
+
 }
 
 #pragma mark -
@@ -397,6 +449,7 @@
     
     _delegate = nil;
     _commonElements = nil;
+    _productId = nil;
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFramesFromFile:@"Common.plist"];
 
@@ -434,7 +487,7 @@
     
     NSLog(@"Purchased: %@", productIdentifier);
     //TestFlight
-    [TestFlight passCheckpoint:@"Comprati 25 gettoni nel gioco"];
+    [TestFlight passCheckpoint:@"Comprati 30 gettoni nel gioco"];
         
 }
 
@@ -469,7 +522,11 @@
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirectorIOS sharedDirector].view];
+    bool reach = [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirectorIOS sharedDirector].view forProductIdentifier:_productId];
+    if (!reach) {
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+        pauseMenu.isTouchEnabled = true;
+    }
 }
 
 
@@ -480,20 +537,121 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
+      
+    if (alertView.tag == kAlertViewLastCoin) {
+        
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+            {
+                [[PattyCombatIAPHelper sharedHelper]
+                 coinWillUsedinView:[CCDirector sharedDirector].view forProductIdentifier:nil];
+                CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+                [[CCDirectorIOS sharedDirector]  resume];
+                [self removeChild: pauseMenu cleanup:YES];    
+                [[GameManager sharedGameManager] stopBackgroundMusic];
+                LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+                [[CCDirectorIOS sharedDirector] replaceScene:scene];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+#pragma mark ===  Table Alert View  ===
+#pragma mark -
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    	
+	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+	
+    NSString* text = [NSString string];
     
-    CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+    bool isFirstPostFb = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostFacebook"]; 
     
-    switch (buttonIndex) {
+    bool isFirstPostTw = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostTw"];
+    
+    switch (indexPath.row) {
         case 0:
+            if (!isFirstPostFb)text = @"5 free coins - Facebook";
+            else if (!isFirstPostTw)text = @"5 free coins - Twitter";
+            else text = @"Buy 30 coins";
             break;
         case 1:
-            pauseMenu.isTouchEnabled = FALSE;
-            [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
+            if (!isFirstPostFb && !isFirstPostTw) text = @"5 free coins - Twitter";
+            else if (!isFirstPostTw || !isFirstPostFb) text = @"Buy 30 coins";
+            else text = @"Buy 90 coins";
+            break;
+        case 2:
+            if (!isFirstPostFb && !isFirstPostTw) text = @"Buy 30 coins";
+            else if (!isFirstPostTw || !isFirstPostFb) text = @"Buy 90 coins";
+            else text = @"Buy 300 coins";
+            break;
+        case 3:
+            if (!isFirstPostFb && !isFirstPostTw) text = @"Buy 90 coins";
+            else if (!isFirstPostTw || !isFirstPostFb) text = @"Buy 300 coins";
+            break;
+        case 4:
+            text = @"Buy 300 coins";
             break;
         default:
             break;
     }
+    
+	[cell.textLabel setText:text];
+	
+	return cell;
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	
+    bool isFirstPostFb = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostFacebook"]; 
+    
+    bool isFirstPostTw = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostTw"];
+    
+    if (!isFirstPostFb && !isFirstPostTw) return 5;
+    else if (!isFirstPostFb || !isFirstPostTw) return 4; 
+    else return 3;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        NSString* text = cell.textLabel.text;
+    
+    if ([text isEqualToString:@"Facebook"])    [[SocialHelper sharedHelper] loginToFacebook:self];
+    else if([text isEqualToString:@"Twitter"]) [[SocialHelper sharedHelper] postOnTwitter:self];
+    else if([text isEqualToString:@"Buy 30 coins"]) 
+        _productId = kProductPurchase30coins;
+    else if([text isEqualToString:@"Buy 90 coins"]) 
+        _productId = kProductPurchase90coins;
+    else if([text isEqualToString:@"Buy 300 coins"]) 
+        _productId = kProductPurchase300coins;
+    
+    [_alert dismissWithClickedButtonIndex:indexPath.row animated:YES];
+    if (_productId) {
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+        pauseMenu.isTouchEnabled = false;
+        bool reach = [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view 
+                                           forProductIdentifier:_productId];
+        if (!reach) {
+            pauseMenu.isTouchEnabled = true;
+        }
+    }
+    
+}
+
 
 
 @end

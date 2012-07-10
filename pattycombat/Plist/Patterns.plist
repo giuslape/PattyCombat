@@ -17,19 +17,19 @@
 		<string>sxCross,dxCross,two</string>
 		<string>sx,dx,sxCross,dxCross,two,sxCross,dx</string>
 	</array>
-	<key>Scena5</key>
-	<array>
-		<string>sx,dxCross,dx,sxCross,two</string>
-		<string>sx,dx,sxCross,sx,two,dxCross,dxCross,sx,dx</string>
-	</array>
 	<key>Scena6</key>
 	<array>
-		<string>sx,dx,two,sx,dx,dx,two</string>
+		<string>sx,dxCross,dx,sxCross,dx</string>
+		<string>sx,dx,sxCross,sx,two,dxCross,dxCross,sx,dx</string>
+	</array>
+	<key>Scena5</key>
+	<array>
+		<string>sx,dx,two,sx,dx</string>
 		<string>sx,sx,sx,dx,dx,dx,dx,two,sx,two,two</string>
 	</array>
 	<key>Scena7</key>
 	<array>
-		<string>sx,dx,sxCross,dxCross,two,sxCross,dx</string>
+		<string>sx,dx,sxCross,dxCross,sxCross,dx</string>
 		<string>sx,dx,sxCross,dxCross,two,sxCross,dx,dxCross,sx,sx,two</string>
 	</array>
 	<key>Scena9</key>
@@ -39,7 +39,7 @@
 	</array>
 	<key>Scena10</key>
 	<array>
-		<string>sx,dx,dx,sxCross,two,two,dxCross,dxCross</string>
+		<string>sx,dx,dx,sxCross,two,dxCross,dxCross</string>
 		<string>sx,dx,sxCross,dxCross,two,sxCross,dx,dxCross,sx,sx,sxCross</string>
 	</array>
 	<key>Scena11</key>

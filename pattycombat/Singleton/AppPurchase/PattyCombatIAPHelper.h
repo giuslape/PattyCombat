@@ -10,10 +10,10 @@
 #import "IAPHelper.h"
 
 #define kQuantityProductPurchased @"quantity"
-#define kProductPurchaseFacebookCoins @"facebook"
-#define kProductPurchase25coins @"com.tadaa.pattycombat.purchase.25coins"
-#define kProductPurchse75coins @"com.tadaa.pattycombat.purchase.75coins"
-#define kProductPurchase200coins @"com.tadaa.pattycombat.purchase.200coins"
+#define kProductPurchaseSocialCoins @"social"
+#define kProductPurchase30coins @"com.tadaa.pattycombat.purchase.30coins"
+#define kProductPurchase90coins @"com.tadaa.pattycombat.purchase.90coins"
+#define kProductPurchase300coins @"com.tadaa.pattycombat.purchase.300coins"
 #define kProductTest @"com.tadaa.pattycombat.purchase.test7"
 
 
@@ -23,6 +23,6 @@
 
 -(NSInteger)quantity;
 -(void)updateQuantityForProductIdentifier:(NSString *)productIdentifier;
--(void)coinWillUsedinView:(UIView *)view;
+-(BOOL)coinWillUsedinView:(UIView *)view forProductIdentifier:(NSString *)productId;
 
 @end

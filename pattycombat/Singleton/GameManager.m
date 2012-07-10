@@ -15,6 +15,7 @@
 #import "CarScene.h"
 #import "FinalScene.h"
 #import "TvScene.h"
+#import "MainIntro.h"
 
 
 
@@ -102,9 +103,7 @@ static GameManager* _sharedGameManager = nil;
         _namePlayer = nil;
         _gameTime = 0;
         _gameState = kStateLose;
-#if DEBUG
-       self.isExtreme = FALSE;
-#endif
+        _gameTimeInit = 12;
     }
     return self;
 }
@@ -138,6 +137,11 @@ static GameManager* _sharedGameManager = nil;
             result = @"kBonusLevel3";
             break;
         case kGamelevelFinal:
+            break;
+        case kGameMainIntro:
+            result = @"kGameMainIntro";
+            break;
+        case kGinoScappelloni:
             break;
         default:
             [NSException raise:NSGenericException format:@"Unexpected SceneType."];
@@ -203,10 +207,10 @@ static GameManager* _sharedGameManager = nil;
         case 3:
             result = @"Cin Ziah";
             break;
-        case 5:
+        case 6:
             result = @"Maa Sallo";
             break;
-        case 6:
+        case 5:
             result = @"Jocopoco Majoco";
             break;
         case 7:
@@ -233,56 +237,44 @@ static GameManager* _sharedGameManager = nil;
 
 -(void)formatGameTime{
     
+    self.gameTimeInit = 12;
+
     switch (_currentLevel) {
             
         case 1:
-            _gameTime = 63;
-            _gameTimeInit = 12;
+            _gameTime = 68;
             break;
         case 2:
-            _gameTime = 62;
-         //   _gameTimeInit = 11;
+            _gameTime = 64;
             break;
         case 3:
-            _gameTime = 63;
-            break;
-        case 5:
-            _gameTime = 53;
+            _gameTime = 64;
             break;
         case 6:
-            _gameTime = 53;
+            _gameTime = 56;
+            break;
+        case 5:
+            _gameTime = 55;
             break;
         case 7:
-            _gameTime = 53;
+            _gameTime = 56;
             break;
         case 9:
-            _gameTime = 46;
-         //   _gameTimeInit = 11;
+            _gameTime = 49;
             break;
         case 10:
-            _gameTime = 46;
-         //   _gameTimeInit = 11;
+            _gameTime = 50;
             break;
         case 11:
-            _gameTime = 46;
-           // _gameTimeInit = 11;
+            _gameTime = 55;
             break;
         case 13:
-            _gameTime = 41;
-        //    _gameTimeInit = 11;
+            _gameTime = 45;
             break;
         default:
             break;
     }
 }
-
--(NSString *)formatAchievementTypeToString{
-    
-    NSString* result;
-    
-    return result;
-}
-
 
 -(void)initAudioAsync {
     // Initializes the audio engine asynchronously
@@ -503,6 +495,28 @@ static GameManager* _sharedGameManager = nil;
     }
     
 }
+
+-(void) resumeBackgroundMusic{
+    
+    if ((managerSoundState != kAudioManagerReady) &&
+        (managerSoundState != kAudioManagerFailed)) {
+        int waitCycles = 0;
+        while (waitCycles < AUDIO_MAX_WAITTIME) {
+            [NSThread sleepForTimeInterval:0.1f];
+            if ((managerSoundState == kAudioManagerReady) ||
+                (managerSoundState == kAudioManagerFailed)) {
+                break;
+            }
+            waitCycles = waitCycles + 1;
+        }
+    }
+    if (managerSoundState == kAudioManagerReady) {
+        if (![soundEngine isBackgroundMusicPlaying]) {
+            [soundEngine resumeBackgroundMusic];
+        }
+    }
+    
+}
 -(void)stopSoundEffect:(ALuint)soundEffectID {
         if (managerSoundState == kAudioManagerReady) {
             [soundEngine stopEffect:soundEffectID];
@@ -553,7 +567,7 @@ static GameManager* _sharedGameManager = nil;
 
 -(int)bestScore{
     
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
     NSString * bestCurrentScore=[ud objectForKey:[NSString stringWithString:@"HighScore"]];
 
@@ -578,7 +592,12 @@ static GameManager* _sharedGameManager = nil;
     id sceneToRun = nil;
     
     switch (sceneID) {
-            
+        case kGinoScappelloni:
+            sceneToRun = [GinoScappelloni node];
+            break;
+        case kGameMainIntro:
+            sceneToRun = [MainIntro node];
+            break;
         case kMainMenuScene:
             _currentLevel = 0;
             _totalScore = 0;
@@ -679,7 +698,14 @@ static GameManager* _sharedGameManager = nil;
 
         [hudlayer onPause:self];
     }
+    else [[CCDirectorIOS sharedDirector] pause];
     
+    
+}
+
+-(void)resumeGame{
+    
+        [[CCDirectorIOS sharedDirector] resume];
 }
 
 #pragma mark -

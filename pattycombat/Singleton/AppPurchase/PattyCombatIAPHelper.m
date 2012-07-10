@@ -28,7 +28,18 @@ static PattyCombatIAPHelper * _sharedHelper;
 
 - (id)init
 {
-    NSSet *productIdentifiers = [NSSet setWithObjects:kProductPurchase25coins,kProductPurchse75coins,kProductPurchase200coins,kProductTest, nil];
+    NSSet *productIdentifiers = [NSSet setWithObjects:kProductPurchase30coins,kProductPurchase90coins,kProductPurchase300coins,kProductTest, nil];
+    
+    bool firstCoin = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstCoin"];
+    
+    if (!firstCoin) {
+        
+        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:kQuantityProductPurchased];  
+        firstCoin = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:firstCoin forKey:@"FirstCoin"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
     
     if ((self = [super initWithProductIdentifiers:productIdentifiers])) {}
     return self;
@@ -50,10 +61,10 @@ static PattyCombatIAPHelper * _sharedHelper;
     
     value = [self quantity];
     
-    if ([productIdentifier isEqualToString:kProductPurchaseFacebookCoins]) constant = 3;
-        else if ([productIdentifier isEqualToString:kProductPurchase25coins])constant = 25;
-            else if([productIdentifier isEqualToString:kProductPurchse75coins]) constant = 75;
-                    else if ([productIdentifier isEqualToString:kProductPurchase200coins])constant = 200;
+    if ([productIdentifier isEqualToString:kProductPurchaseSocialCoins]) constant = 5;
+        else if ([productIdentifier isEqualToString:kProductPurchase30coins])constant = 30;
+            else if([productIdentifier isEqualToString:kProductPurchase90coins]) constant = 90;
+                    else if ([productIdentifier isEqualToString:kProductPurchase300coins])constant = 300;
     
     quantity = constant + value;
     
@@ -62,7 +73,7 @@ static PattyCombatIAPHelper * _sharedHelper;
         
 }
 
--(void)coinWillUsedinView:(UIView *)view{
+-(BOOL)coinWillUsedinView:(UIView *)view forProductIdentifier:(NSString *)productId{
     
     int quantity = [self quantity];
     
@@ -71,7 +82,7 @@ static PattyCombatIAPHelper * _sharedHelper;
         quantity--;
         [[NSUserDefaults standardUserDefaults] setInteger:quantity forKey:kQuantityProductPurchased];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        return;
+        return YES;
     }
     
     if (quantity == 0) {
@@ -86,33 +97,32 @@ static PattyCombatIAPHelper * _sharedHelper;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
                                                                 message:@"No internet Connection" 
                                                                delegate:nil 
-                                                      cancelButtonTitle:nil 
-                                                      otherButtonTitles:@"OK", nil];
+                                                      cancelButtonTitle:@"OK" 
+                                                      otherButtonTitles:nil];
                 [alert show];
+                return NO;
                 
             } else if (self.products == nil) {
                 
                 [self requestProducts];
                 MBProgressHUD* _hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
                 _hud.labelText = @"Loading coins...";
-                [self performSelector:@selector(timeout:) withObject:view afterDelay:30.0];
+                [self performSelector:@selector(timeout:) withObject:view afterDelay:60.0f];
                 
             }else {
                 
                 if ([self.products count] > 0) {
                     
-                SKProduct* product  = [self.products objectAtIndex:1];
                 MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
                 hud.labelText = @"Buying Coins";
-                [self buyProductIdentifier:product];
-                [self performSelector:@selector(timeout:) withObject:view afterDelay:60];
+                [self buyProductIdentifier:productId];
+                [self performSelector:@selector(timeout:) withObject:view afterDelay:60.0f];
                     
-                }
+                } else if ([self.products count] == 0)
+                    return NO;
             }
-
-        
-    }
-    
+    } 
+    return YES;
 }
 
 - (void)dismissHUD:(id)arg {

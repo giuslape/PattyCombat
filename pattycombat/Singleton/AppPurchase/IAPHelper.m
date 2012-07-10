@@ -21,7 +21,7 @@
     self.request = [[SKProductsRequest alloc] initWithProductIdentifiers:_productIdentifiers];
     _request.delegate = self;
     [_request start];
-    
+
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
@@ -108,15 +108,12 @@
     }
 }
 
-- (void)buyProductIdentifier:(SKProduct *)product {
+- (void)buyProductIdentifier:(NSString *)productIdentifier {
     
-    SKPayment *payment = [SKPayment paymentWithProduct:product];
+    SKPayment *payment = [SKPayment paymentWithProductIdentifier:productIdentifier];
         
     [[SKPaymentQueue defaultQueue] addPayment:payment];
     
 }
-
-
-
 
 @end

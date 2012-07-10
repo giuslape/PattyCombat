@@ -13,8 +13,8 @@
 #import <Twitter/Twitter.h>
 #import "PattyCombatIAPHelper.h"
 #import "MBProgressHUD.h"
-#import "Reachability.h"
 #import "LoadingScene.h"
+#import "SocialHelper.h"
 
 
 
@@ -96,6 +96,7 @@
                     {
                         NSLog(@"Tweet sending");
                     }
+                    
                     [[CCDirectorIOS sharedDirector] dismissModalViewControllerAnimated:YES];
                     self.isTouchEnabled = TRUE;
                     
@@ -103,7 +104,7 @@
                 [tweetSheet setInitialText:[NSString stringWithFormat:@"I got %d points in #PattyCombat Beat that! ", _totalGameScore]];
                 // Hide the HUD in the main tread 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:[CCDirectorIOS sharedDirector].view animated:YES];
+                    [hud hide:YES];
                     [[CCDirectorIOS sharedDirector] presentViewController:tweetSheet animated:YES completion:nil];
                 });
                 
@@ -117,9 +118,9 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
                 [alertView show];
-            }
-            
+                [hud hide:YES];
 
+            }
            
         });       
         
@@ -128,31 +129,69 @@
         
         if (!_thresholdReached) {
             
-            if ([[PattyCombatIAPHelper sharedHelper] quantity] == 0) {
-                            
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Patty Coins esauriti"
-                                                            message:@"Compra altri Patty Coins per continuare"
-                                                            delegate:self
-                                                            cancelButtonTitle:@"Cancel" 
-                                                            otherButtonTitles:@"Compra", nil];
+            NSInteger currentLevel = [[GameManager sharedGameManager] currentLevel];
             
-            [alert show];
+            if (currentLevel == 1) {
+             
+                [[GameManager sharedGameManager] stopBackgroundMusic];
+                LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+                [[CCDirector sharedDirector] replaceScene:scene];
+                
+                return YES;
+            }
             
-            return YES;
+            else {
+            
+            NSInteger quantity = [[PattyCombatIAPHelper sharedHelper] quantity];
+            
+            if (quantity == 0) {
+                
+                _alert = [[UIAlertTableView alloc] initWithTitle:@"You've run out of coins" message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+                ;                
+                _alert.tag = kAlertViewCoinsFinished;
+                
+                [_alert setTableDelegate:self];
+                [_alert setDataSource:self];
+                
+                [_alert show];
+                
+                return YES;
+            }
+            
+            if (quantity == 1) {
+                
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"One Coin Left"
+                                                                message:@"Want to use your last coin now? \n Remember You can get more coins in the Store"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"No" 
+                                                      otherButtonTitles:@"Yes",nil];
+                
+                [alert show];
+                
+                alert.tag = kAlertViewLastCoin;
+                
+                return YES;
                 
             }
             
-            // Threshold is Reached and the button is next!
-            
-            self.isTouchEnabled = FALSE;
-            [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
-            LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
-            [[CCDirectorIOS sharedDirector] replaceScene:scene];
+            if (quantity > 1) {
+                    
+                [[PattyCombatIAPHelper sharedHelper]
+                 coinWillUsedinView:[CCDirector sharedDirector].view forProductIdentifier:nil];
+                
+                [[GameManager sharedGameManager] stopBackgroundMusic];
+                LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+                [[CCDirector sharedDirector] replaceScene:scene];
 
+            }
+        }
+
+           
 
         } else{
             
             BOOL isLastLevel = [[GameManager sharedGameManager] isLastLevel];
+            
             if (isLastLevel)   {
                 
             [[GameManager sharedGameManager] runSceneWithID:kGamelevelFinal];
@@ -339,12 +378,7 @@
     [self runAction:seq];
     
     self.isTouchEnabled = TRUE;
-        
-  /*  [self runAction:[CCSequence actionOne:[CCDelayTime actionWithDuration:1] two:[CCCallBlock actionWithBlock:^{
-        
-        [[GameManager sharedGameManager] playBackgroundTrack:BACKGROUND_TRACK_MAIN_MENU];
-
-    }]]];*/
+    
 }
 
 -(void)sendAchievementsForLevel:(int)currentLevel{
@@ -391,7 +425,7 @@
             [TestFlight passCheckpoint:@"Livello 3 superato"];
         }        
         
-    }else if (currentLevel == 5) {
+    }else if (currentLevel == 6) {
         
         CCLOG(@"Finished level 4");
         
@@ -405,7 +439,7 @@
                         [TestFlight passCheckpoint:@"Livello 4 superato"];
         }        
         
-    }else if (currentLevel == 6) {
+    }else if (currentLevel == 5) {
         
         CCLOG(@"Finished level 5");
         
@@ -433,7 +467,7 @@
                         [TestFlight passCheckpoint:@"Livello 6 superato"];
         }        
         
-    }else if (currentLevel == 8) {
+    }else if (currentLevel == 9) {
         
         CCLOG(@"Finished level 7");
         
@@ -475,7 +509,7 @@
                         [TestFlight passCheckpoint:@"Livello 9 superato"];
         }        
         
-    }else if (currentLevel == 12) {
+    }else if (currentLevel == 13) {
         
         CCLOG(@"Finished level 10");
         
@@ -583,6 +617,8 @@
         
         [[GameManager sharedGameManager] setBestScore:_totalGameScore];
         
+        [[GCHelper sharedInstance] reportScore:kPattyLeaderboard score:_bestScore];
+        
     }
     
     //TestFlight
@@ -598,9 +634,9 @@
     
     if (self) {
         
-         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Feedback_default.plist" textureFilename:@"Feedback_default.png"];
+         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Feedback.plist" textureFilename:@"Feedback.pvr.ccz"];
         
-         _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"Feedback_default.png"];
+         _spriteBatchNode = [CCSpriteBatchNode batchNodeWithFile:@"Feedback.pvr.ccz"];
         
         [self addChild:_spriteBatchNode z:2 tag:2];
         
@@ -647,8 +683,13 @@
         
         // Add button next or retry
         
-        CCSprite* nextLevel =  (_thresholdReached) ? [CCSprite spriteWithSpriteFrameName:@"next_btn.png"] :[CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
+        CCSprite* nextLevel = [CCSprite node];
         
+        if (!_thresholdReached && [[GameManager sharedGameManager] currentLevel] == 1) 
+            nextLevel = [CCSprite spriteWithSpriteFrameName:@"retry_free_btn.png"];
+        else if(!_thresholdReached) nextLevel = [CCSprite spriteWithSpriteFrameName:@"retry_btn.png"];
+        else if (_thresholdReached)nextLevel = [CCSprite spriteWithSpriteFrameName:@"next_btn.png"];        
+            
         [nextLevel setPosition:ccp(size.width* 0.87f , size.height * 0.1f)];
         [nextLevel setAnchorPoint:ccp(0, 0.5f)];
         [_spriteBatchNode addChild:nextLevel z:kNextLevelZValue tag:kNextLevelTagValue];
@@ -702,19 +743,40 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
-    [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+    [alertView dismissWithClickedButtonIndex:buttonIndex animated:NO];
     
-    switch (buttonIndex) {
-        case 0:
-            NSLog(@"Cancel");
-            break;
-        case 1:
-            [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view];
-            NSLog(@"Compra");
-            break;
-        default:
-            break;
+    if (alertView.tag == kAlertViewCoinsFinished) {
+        
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+                break;
+            default:
+                break;
+        }
     }
+    
+    if (alertView.tag == kAlertViewLastCoin) {
+        
+        switch (buttonIndex) {
+            case 0:
+                break;
+            case 1:
+            {
+                [[PattyCombatIAPHelper sharedHelper]
+                 coinWillUsedinView:[CCDirector sharedDirector].view forProductIdentifier:nil];
+                
+                [[GameManager sharedGameManager] stopBackgroundMusic];
+                LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
+                [[CCDirector sharedDirector] replaceScene:scene];
+            }
+                break;
+            default:
+                break;
+        }
+    }
+
     
 }
 
@@ -738,9 +800,9 @@
     NSString *productIdentifier = (NSString *) notification.object;
     
     [[PattyCombatIAPHelper sharedHelper] updateQuantityForProductIdentifier:productIdentifier];
+    self.isTouchEnabled = true;
     
     NSLog(@"Purchased: %@", productIdentifier);
-    
     
 }
 
@@ -750,7 +812,7 @@
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-       
+    self.isTouchEnabled = true;  
     SKPaymentTransaction * transaction = (SKPaymentTransaction *) notification.object;    
     if (transaction.error.code != SKErrorPaymentCancelled) {    
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" 
@@ -770,9 +832,101 @@
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:_cmd object:nil];
     [MBProgressHUD hideHUDForView:[CCDirector sharedDirector].view animated:YES];
-    [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirectorIOS sharedDirector].view];
+    bool reach = [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirectorIOS sharedDirector].view forProductIdentifier:_productId];
+    if (!reach) {
+        self.isTouchEnabled = true;
+    }
 }
 
+#pragma mark ===  Table Alert View  ===
+#pragma mark -
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+	UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+	
+    NSString* text = [NSString string];
+    
+    bool isFirstPostFb = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostFacebook"]; 
+    
+    bool isFirstPostTw = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostTw"];
+    
+    switch (indexPath.row) {
+        case 0:
+            if (!isFirstPostFb)text = @"5 free coins - Facebook";
+            else if (!isFirstPostTw)text = @"5 free coins - Twitter";
+            else text = @"Buy 30 coins";
+            break;
+        case 1:
+            if (!isFirstPostFb && !isFirstPostTw) text = @"5 free coins - Twitter";
+            else if (!isFirstPostTw || !isFirstPostFb) text = @"Buy 30 coins";
+            else text = @"Buy 90 coins";
+            break;
+        case 2:
+            if (!isFirstPostFb && !isFirstPostTw) text = @"Buy 30 coins";
+            else if (!isFirstPostTw || !isFirstPostFb) text = @"Buy 90 coins";
+            else text = @"Buy 300 coins";
+            break;
+        case 3:
+            if (!isFirstPostFb && !isFirstPostTw) text = @"Buy 90 coins";
+            else if (!isFirstPostTw || !isFirstPostFb) text = @"Buy 300 coins";
+            break;
+        case 4:
+            text = @"Buy 300 coins";
+            break;
+        default:
+            break;
+    }
+    
+	[cell.textLabel setText:text];
+	
+	return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	
+    bool isFirstPostFb = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostFacebook"]; 
+    
+    bool isFirstPostTw = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstPostTw"];
+    
+    if (!isFirstPostFb && !isFirstPostTw) return 5;
+    else if (!isFirstPostFb || !isFirstPostTw) return 4; 
+    else return 3;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 1;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSString* text = cell.textLabel.text;
+    
+    if ([text isEqualToString:@"Facebook"])    [[SocialHelper sharedHelper] loginToFacebook:self];
+    else if([text isEqualToString:@"Twitter"]) [[SocialHelper sharedHelper] postOnTwitter:self];
+    else if([text isEqualToString:@"Buy 30 coins"]) 
+        _productId = kProductPurchase30coins;
+    else if([text isEqualToString:@"Buy 90 coins"]) 
+        _productId = kProductPurchase90coins;
+    else if([text isEqualToString:@"Buy 300 coins"]) 
+        _productId = kProductPurchase300coins;
+    
+    [_alert dismissWithClickedButtonIndex:indexPath.row animated:YES];
+    self.isTouchEnabled = false;
+    if (_productId){ 
+        
+        bool reach = [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view 
+                                           forProductIdentifier:_productId];
+        if (!reach) {
+            self.isTouchEnabled = true;
+        }
+    }
+}
 
 
 @end

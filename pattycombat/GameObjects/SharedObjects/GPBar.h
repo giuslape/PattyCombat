@@ -32,13 +32,28 @@ typedef enum{
     BOOL active, spritesheet;
     BOOL barLR;
     CGPoint screenMid;
+    
+#if __has_feature(objc_arc_weak)
     __weak id <GPBarDelegate> _delegate;
+#elif __has_feature(objc_arc)
+    __unsafe_unretained  id <GPBarDelegate> _delegate;
+#else
+     id <GPBarDelegate> _delegate;  
+#endif
 }
 @property (nonatomic, strong ,readonly)	NSString *bar, *inset, *mask;
-@property (nonatomic, weak) id <GPBarDelegate> delegate;
 @property (nonatomic) float progress;
 @property kBarTypes type;
 @property BOOL active;
+
+#if __has_feature(objc_arc_weak)
+@property (nonatomic, weak) id <GPBarDelegate> delegate;
+#elif __has_feature(objc_arc)
+@property (nonatomic, unsafe_unretained) id <GPBarDelegate> delegate;
+#else
+@property (nonatomic, assign) id <GPBarDelegate> delegate;
+#endif
+
 
 +(id) barWithBar:(NSString *)b inset:(NSString *)i mask:(NSString *)m;
 -(id) initBarWithBar:(NSString *)b inset:(NSString *)i mask:(NSString *)m;

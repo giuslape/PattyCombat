@@ -16,6 +16,8 @@
 
 #import "GCHelper.h"
 
+#import "Appirater.h"
+
 static NSString* kAppId = @"321845184543524";
 
 static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyLTA0LTEwIDA0OjM3OjQ1LjE4OTQ1MQ";
@@ -29,6 +31,14 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 {
     
     [TestFlight takeOff:kTokenFlight];
+    
+    //App Purchase Init
+    
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:[PattyCombatIAPHelper sharedHelper]];
+    
+    //Game center Init
+    
+    [[GCHelper sharedInstance] authenticateLocalUser];
 
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -92,15 +102,6 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
         [alertView show];
     }
 
-    
-    //App Purchase Init
-    
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:[PattyCombatIAPHelper sharedHelper]];
-    
-    //Game center Init
-    
-    [[GCHelper sharedInstance] authenticateLocalUser];
-
 	director_.wantsFullScreenLayout = YES;
 
 	// Display FSP and SPF
@@ -137,7 +138,7 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
-	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
 
 	// When in iPhone RetinaDisplay, iPad, iPad RetinaDisplay mode, CCFileUtils will append the "-hd", "-ipad", "-ipadhd" to all loaded files
 	// If the -hd, -ipad, -ipadhd files are not found, it will load the non-suffixed version
@@ -152,7 +153,9 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
     
-    [[GameManager sharedGameManager] runSceneWithID:kMainMenuScene];
+    [[GameManager sharedGameManager] runSceneWithID:kGinoScappelloni];
+    
+    [Appirater appLaunched:YES]; 
 
 	return YES;
 }
@@ -167,26 +170,24 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application
 {
-    [[GameManager sharedGameManager] pauseGame];
+        [[GameManager sharedGameManager] pauseGame];
 }
 
 // call got rejected
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
-	//if( [navController_ visibleViewController] == director_ )
-		//[director_ resume];
+        [[GameManager sharedGameManager] resumeGame];
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ stopAnimation];
+		[[CCDirectorIOS sharedDirector] stopAnimation];
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ startAnimation];
+		[[CCDirectorIOS sharedDirector] startAnimation];
+       // [Appirater appEnteredForeground:YES]; 
 }
 
 // application will be killed
