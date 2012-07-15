@@ -55,9 +55,7 @@
     
     CGRect balzorect = CGRectMake(size.width * 0.90f, 0, 100, 100);
     CGRect patty     = CGRectMake(size.width * 0.20f, 0, 100, 100);
-    
-    NSLog(@"Rect: %@",NSStringFromCGRect(balzorect));
-    NSLog(@"Location: %@", NSStringFromCGPoint(location));
+    CGRect rate      = CGRectMake(size.width * 0.70f, size.height * 0.85f, 170, 40);
     
     CCSprite* closeButton = (CCSprite *)[self getChildByTag:10];
     
@@ -78,6 +76,11 @@
         [self showWebSite:@"Patty"];
         return YES;
     }
+    if (CGRectContainsPoint(rate, location)) {
+        
+        NSLog(@"Rate");
+        [self showWebSite:@"Rate"];
+    }
     
     return NO;
 }
@@ -90,6 +93,7 @@
     
     if ([sender isEqualToString:@"Balzo"]) urlToOpen = [NSURL URLWithString:@"http://balzo.eu"];
     else if ([sender isEqualToString:@"Patty"]) urlToOpen = [NSURL URLWithString:@"http://www.pattycombat.com"];
+    else if ([sender isEqualToString:@"Rate"])  urlToOpen = [NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=507881555&pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8"];
     
     if (![[UIApplication sharedApplication] openURL:urlToOpen]) {
         CCLOG(@"%@%@",@"Failed to open url:",[urlToOpen description]);

@@ -10,6 +10,14 @@
 #import "cocos2d.h"
 #import "CreditsLayer.h"
 
-@interface FinalSceneLayer : CCLayer <CreditsLayerProtocol>
+@interface FinalSceneLayer : CCLayer <CreditsLayerProtocol>{
+    
+    CGSize size;
+    
+    CCLabelBMFont* _text;
+    
+    CCSprite* cloud1;
+    CCSprite* cloud2;
+}
 
 @end

@@ -35,8 +35,6 @@
 @synthesize player = _player;
 @synthesize hudLayer = _hudLayer;
 
-
-
 #pragma mark -
 #pragma mark ===  Dealloc  ===
 #pragma mark -
@@ -48,6 +46,9 @@
     self.player = nil;
     self.hudLayer = nil;
     
+    backgroundMusic.delegate = nil;
+    [backgroundMusic stop];
+    backgroundMusic = nil;
     [self unscheduleAllSelectors];
     [[[CCDirectorIOS sharedDirector] touchDispatcher] removeDelegate:self];
     [[CCTextureCache sharedTextureCache] removeUnusedTextures];
@@ -75,7 +76,6 @@
         
         [[GameManager sharedGameManager] setIsPerfectForLevel:NO];
     }
-    
 }
 
 -(void)didPlayerHasTouched:(BOOL)handsIsTouched{
@@ -91,7 +91,6 @@
     
     switch (states) {
         case kStateLeftHandOpen:
-            
             leftHand.opacity = 100;
             
             break;
@@ -101,9 +100,20 @@
         default:
             break;
     }
-    
+    if ((!_player.handIsOpen || !_player.handsAreOpen) && isPause) {
+        
+        [self pauseGame];
+    }
+
 }
 
+-(void)pauseGame{
+    
+    [backgroundMusic.audioSourcePlayer pause];
+    [[CCDirector sharedDirector] pause];
+    CCMenu* pauseMenu = (CCMenu *)[_hudLayer getChildByTag:kPauseMenuTagValue];
+    pauseMenu.isTouchEnabled = YES;
+}
 // Handle Game Over 
 
 -(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score{
@@ -114,7 +124,9 @@
     
     [self unscheduleAllSelectors];
     
-    [[GameManager sharedGameManager]  stopBackgroundMusic];
+    backgroundMusic.delegate = nil;
+    [backgroundMusic stop];
+    backgroundMusic = nil;
     [[GameManager sharedGameManager]  setCurrentScore:[score intValue]];
     [[GameManager sharedGameManager]  setElapsedTime:_elapsedTime];
     
@@ -133,16 +145,36 @@
 
 -(void)pauseDidEnter:(HUDLayer *)layer{
     
-    [self pauseSchedulerAndActions];
+   // [self pauseSchedulerAndActions];
+   // [backgroundMusic.audioSourcePlayer pause];
     
+    if (_elapsedTime < 0.18) {
+        
+        [self pauseGame];
+    }
+    isPause = true;
 }
 
 -(void)pauseDidExit:(HUDLayer *)layer{
-    
-    [self resumeSchedulerAndActions];
+        
+    [backgroundMusic.audioSourcePlayer setCurrentTime:_currentTime];
+    [backgroundMusic.audioSourcePlayer play];
+   // _currentTime = _currentTime - 0.17;
+   // if (_elapsedTime > 0.18)
+   // _elapsedTime = _elapsedTime - 0.17;
+    isPause = false;
 }
 
-
+-(void)pauseDidEnterFromApplication:(HUDLayer *)layer{
+    
+    [backgroundMusic.audioSourcePlayer pause];
+   // _currentTime = _currentTime - 0.17;
+   // if (_elapsedTime > 0.18)
+    //    _elapsedTime = _elapsedTime - 0.17;
+   // isPause = false;
+    [_player stopAllActions];
+    [[CCDirector sharedDirector] pause];
+}
 
 #pragma mark -
 #pragma mark ===  Touch Handler  ===
@@ -269,9 +301,9 @@
         _currentTime = 0;
         _count = 1;
         _elapsedTime = 0;
-        
-        _gameTimeInit = 12;
-        
+        isPause = true;
+        _gameTimeInit = [[GameManager sharedGameManager] gameTimeInit];
+                
         id dao = [GameManager sharedGameManager].dao;
         
         CGSize size = [[CCDirectorIOS sharedDirector] winSize];
@@ -291,14 +323,14 @@
         NSDictionary* playerSettings = [sceneObjects objectForKey:@"player"];
         
         _bpm = [[playerSettings objectForKey:@"bpm"] intValue];
-
+        
         _player = [Player playerWithDictionary:playerSettings];
         
         [self addChild:_player z:kPlayerZValue tag:kPlayerTagValue];
         
         [_player setDelegate:self];
                 
-        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Get ready to play the sequence" fntFile:FONTHIGHSCORES];
+        CCLabelBMFont* label = [CCLabelBMFont labelWithString:@"Get the rhythm" fntFile:FONTHIGHSCORES];
         [self addChild:label z:kLabelReadyZValue tag:kLabelReadyTagValue];
         [label setPosition:ccp(size.width/2, size.height/2)];
         
@@ -337,8 +369,21 @@
 
 -(void)playSound{
     
-    [[GameManager sharedGameManager] playBackgroundTrack:backgroundTrack];
-    [self schedule:@selector(countDown:) interval:0.01f];
+    backgroundMusic = [[CDAudioManager sharedManager] audioSourceForChannel:kASC_Left];
+    backgroundMusic.delegate = self;
+    [backgroundMusic load:backgroundTrack];
+    
+}
+
+/** The audio source completed playing */
+- (void) cdAudioSourceDidFinishPlaying:(CDLongAudioSource *) audioSource{
+        
+}
+/** The file used to load the audio source has changed */
+- (void) cdAudioSourceFileDidChange:(CDLongAudioSource *) audioSource{
+    
+    [self schedule:@selector(countDown:)];
+    [backgroundMusic play];
 }
     
 
@@ -349,11 +394,11 @@
     
     _currentTime += delta;
         
-    if ((_count * (60.0f / _bpm)) <= _currentTime) {
-        
+    if ((_count * (60.0 / _bpm)) <= _currentTime) {
+    
     int count = _count;
     _count++;
-
+        
     CCLabelBMFont* label = (CCLabelBMFont*)[self getChildByTag:kLabelReadyTagValue];
    
     if (count == _gameTimeInit + 3) {
@@ -363,13 +408,15 @@
             id change = [CCCallBlock actionWithBlock:^{
                  [label setString:@"4"];
              }];
-            
-            id d2 = [CCDelayTime actionWithDuration:(60.0f / _bpm)];
+        
+            float d1 = (60.0f / _bpm);
+            id d2 = [CCDelayTime actionWithDuration:d1];
             id delete = [CCCallBlock actionWithBlock:^{
                 [self removeChild:label cleanup:YES];
             }];
             
             [self runAction:[CCSequence actions:change,d2,delete,nil]];
+            isPause = false;
             [self schedule:@selector(update:) interval:0 repeat:kCCRepeatForever delay:0.00001f];
             self.isTouchEnabled = TRUE;
         
@@ -395,9 +442,10 @@
 -(void) update:(ccTime)deltaTime
 {
     _elapsedTime += deltaTime;
+    _currentTime += deltaTime;
     
-    [_player updateStateWithDeltaTime:deltaTime];
-    [_hudLayer updateStateWithDelta:deltaTime];
+    [_player updateStateWithDeltaTime:_elapsedTime];
+    [_hudLayer updateStateWithDelta:_elapsedTime];
     
 }
 

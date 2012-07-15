@@ -18,6 +18,7 @@
 
 -(void)gameOverHandler:(CharacterStates)gameOverState withScore:(NSNumber *)score;
 -(void)pauseDidEnter:(HUDLayer *)layer;
+-(void)pauseDidEnterFromApplication:(HUDLayer *)layer;
 -(void)pauseDidExit:(HUDLayer*)layer;
 
 @end
@@ -67,6 +68,8 @@
 
 
 -(void)onPause:(id)sender;
+
+-(void)onPauseApplication:(id)sender;
 
 -(void)resumeGame:(id)sender;
 

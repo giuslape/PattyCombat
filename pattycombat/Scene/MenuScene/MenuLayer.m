@@ -543,13 +543,6 @@ static int kpadding = 10;
     [myagi runAction:[CCSequence actions:rotate,[CCRepeat actionWithAction:[CCSequence actions:move,movereverse, nil] times:1], nil]];
     
     [self scheduleUpdate];
-    
-    //Test Flight Level Reached
-    
-    CCLabelBMFont* levelReachedValue = (CCLabelBMFont *)[self getChildByTag:kLevelReachedValueTagValue];
-    
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"Livello Raggiunto %@",levelReachedValue.string]];
-
 }
 
 #pragma mark -
@@ -639,6 +632,8 @@ static int kpadding = 10;
     
     CCLabelBMFont* highscoreValue = (CCLabelBMFont *)[self getChildByTag:kHighScoreLabelTagValue];
     
+    [[GameManager sharedGameManager] setIsExtreme:NO];
+    
     [levelReachedValue setString:@"0"];
     [highscoreValue setString:@"0"];
 
@@ -705,10 +700,6 @@ static int kpadding = 10;
     
     self.isTouchEnabled = false;
 
-    //TestFlight
-    [TestFlight passCheckpoint:@"Controllo gettoni"];
-    TFLog(@"Controllo gettoni");
-    
     // Movement animation to Get Coins Area
     
     CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(size.width , 0)];
@@ -742,8 +733,7 @@ static int kpadding = 10;
             else {
                 if ([[PattyCombatIAPHelper sharedHelper].products count] > 0) {
                     
-                    for (CCMenuItemSprite* item in _purchaseMenu.children) item.opacity = 255;
-                
+                    [self labelForMenuPurchase:[PattyCombatIAPHelper sharedHelper].products];
                     _purchaseMenu.isTouchEnabled = TRUE; 
                 
                     }
@@ -766,10 +756,6 @@ static int kpadding = 10;
     
     mainMenu.enabled = false;
     
-    //TestFlight
-    [TestFlight passCheckpoint:@"Controllo statistiche"];
-    TFLog(@"Controllo statistiche");
-
     CCMoveTo* move = [CCMoveTo actionWithDuration:1 position:CGPointMake(-size.width, 0)];
 	CCEaseExponentialOut* ease = [CCEaseExponentialOut actionWithAction:move];
 	[self runAction:ease];
@@ -780,11 +766,6 @@ static int kpadding = 10;
 // Called when Credits Button is Touched
 
 -(void) itemCreditsTouched{
-    
-    //TestFlight
-    [TestFlight passCheckpoint:@"Controllo crediti"];
-    TFLog(@"Controllo crediti");
-
     
     CreditsLayer* creditsLayer = [CreditsLayer layerWithColor:ccc4(0, 0, 0, 0) width:size.width height:size.height];
     
@@ -838,11 +819,6 @@ static int kpadding = 10;
 
 -(void)showAchievements{
     
-    // Test Flight
-    [TestFlight passCheckpoint:@"Controllo achievement"];
-    TFLog(@"Controllo achievement");
-
-    
     GKAchievementViewController* achievements = [[GKAchievementViewController alloc] init];
     
     if (achievements != NULL)
@@ -863,10 +839,6 @@ static int kpadding = 10;
 
 
 -(void)showLeaderboard{
-    
-    // Test Flight
-    [TestFlight passCheckpoint:@"Controllo Leaderboard"];
-    TFLog(@"Controllo leaderboard");
     
     GKLeaderboardViewController *leaderboardController =
     [[GKLeaderboardViewController alloc] init];
@@ -919,10 +891,6 @@ viewController
     
     NSString *productIdentifier = (NSString *) notification.object;
     [self updateLabelCoinsForProductIdentifier:productIdentifier];
-       
-    // Test Flight
-    TFLog(@"Prodotto comprato: %@", productIdentifier);
-    
             
 }
 
@@ -956,6 +924,34 @@ viewController
     self.isTouchEnabled = true;
     
 }
+ 
+-(void)labelForMenuPurchase:(NSArray *)array{
+    
+    int index = 0;
+    SKProduct* product = [SKProduct new];  
+    
+    for (CCMenuItemSprite* item in _purchaseMenu.children){
+        
+        if (item.tag == kFacebookItemTagValue) continue;
+        else if(item.tag == kFirstPurchaseItemTagValue) index = kFirstPurchaseItemTagValue;
+        else if(item.tag == kSecondPurchaseItemTagValue)index = kSecondPurchaseItemTagValue;
+        else if(item.tag == kThirdPurchaseItemTagValue) index = kThirdPurchaseItemTagValue;
+        
+        CCLabelTTF* labelPrice = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:10];
+        item.opacity = 255;
+        product = [array objectAtIndex:index];
+        NSLocale* pricelocale = product.priceLocale;
+        NSDecimalNumber *price = product.price;
+        labelPrice.string = [NSString stringWithFormat:@"%@ %@", [price stringValue], [pricelocale objectForKey:NSLocaleCurrencySymbol]];
+        labelPrice.color = ccc3(0, 0, 0); 
+        labelPrice.anchorPoint = ccp(1,0.5f);
+        labelPrice.position = ccp(item.position.x + item.contentSize.width - kpadding, item.contentSize.height/2);
+        
+        [item addChild:labelPrice];
+        
+        index++;
+    }
+}
 
 //Callback when products are loaded
 
@@ -965,35 +961,11 @@ viewController
     self.isTouchEnabled = true;
     [self dismissHUD:self];
     
-    int index = 0;
     NSArray* array = (NSArray *)[notification object];
     
     if ([array count] > 0) {
         
-        SKProduct* product = [SKProduct new];  
-        
-        for (CCMenuItemSprite* item in _purchaseMenu.children){
-            
-            if (item.tag == kFacebookItemTagValue) continue;
-            else if(item.tag == kFirstPurchaseItemTagValue) index = kFirstPurchaseItemTagValue;
-            else if(item.tag == kSecondPurchaseItemTagValue)index = kSecondPurchaseItemTagValue;
-            else if(item.tag == kThirdPurchaseItemTagValue) index = kThirdPurchaseItemTagValue;
-            
-            CCLabelTTF* labelPrice = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:10];
-            item.opacity = 255;
-            product = [array objectAtIndex:index];
-            NSLocale* pricelocale = product.priceLocale;
-            NSDecimalNumber *price = product.price;
-            labelPrice.string = [NSString stringWithFormat:@"%@ %@", [price stringValue], [pricelocale objectForKey:NSLocaleCurrencySymbol]];
-            labelPrice.color = ccc3(0, 0, 0); 
-            labelPrice.anchorPoint = ccp(1,0.5f);
-            labelPrice.position = ccp(item.position.x + item.contentSize.width - kpadding, item.contentSize.height/2);
-            
-            [item addChild:labelPrice];
-            
-            index++;
-        }
-        
+        [self labelForMenuPurchase:array];
     }
 }
 
@@ -1017,9 +989,7 @@ viewController
     SKProduct *product = [[PattyCombatIAPHelper sharedHelper].products objectAtIndex:buyButton.tag];
     
     NSString* identifier = product.productIdentifier;
-                
-    TFLog(@"Comprando %@",product.productIdentifier);
-        
+                    
     [[PattyCombatIAPHelper sharedHelper] buyProductIdentifier:identifier];
     
     self.hud = [MBProgressHUD showHUDAddedTo:[CCDirectorIOS sharedDirector].view animated:YES];

@@ -28,6 +28,7 @@
     int score;
     int scoreDown;
     int totalScore;
+    float elapsedTime;
     BOOL isFinish;
 
     CGSize size;

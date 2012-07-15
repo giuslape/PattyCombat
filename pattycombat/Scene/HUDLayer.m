@@ -38,7 +38,8 @@
     
     if (_barProgress < 0) _barProgress = 0;
     
-    _score += (signValue * kScore * moltiplicator);
+    int extremeMoltiplicator = ([[GameManager sharedGameManager] isExtreme]) ? 5 : 1;
+    _score += (signValue * kScore * moltiplicator * extremeMoltiplicator);
     
     if (_score < 0) _score = 0;
     
@@ -308,40 +309,43 @@
 #pragma mark ===  Events Handler  ===
 #pragma mark -
 
-
--(void)onPause:(id)sender{
+-(void)onPauseApplication:(id)sender{
     
     if (!isPause) {
         
         isPause = TRUE;
-    
-        [_delegate pauseDidEnter:self];
-        
-        [[CCDirectorIOS sharedDirector] pause];
-        
-        [[CDAudioManager sharedManager] pauseBackgroundMusic];
         
         CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         
         pauseMenu.opacity = 255;
         
         pauseMenu.isTouchEnabled = TRUE;
-            
-        //TestFlight
-        TFLog(@"Pausa nel gioco");
         
+        [_delegate pauseDidEnterFromApplication:self];
+    }
+}
 
+-(void)onPause:(id)sender{
+    
+    if (!isPause) {
+        
+        isPause = TRUE;
+                    
+        CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
+        
+        pauseMenu.opacity = 255;
+        
+        pauseMenu.isTouchEnabled = false;
+                    
+        [_delegate pauseDidEnter:self];
     }
 
 }
 
 -(void)resumeGame:(id)sender{
-    
-    //TestFlight
-    TFLog(@"Resume");
         
-    [[GameManager sharedGameManager] resumeBackgroundMusic];
-        
+    [_delegate pauseDidExit:self];
+                
     isPause = FALSE;
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
@@ -349,19 +353,14 @@
     pauseMenu.opacity = 0;
             
     pauseMenu.isTouchEnabled = FALSE;
-    
-    [[CCDirectorIOS sharedDirector] resume];
-    
-    [_delegate pauseDidExit:self];
-
+            
+    [[CCDirector sharedDirector] resume];
 }
 
 -(void)mainMenu:(id)sender{
     
-    //TestFlight
-    TFLog(@"Ritorno al main menu");
     
-    [_delegate pauseDidExit:self];
+   // [_delegate pauseDidExit:self];
     
     CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         
@@ -369,25 +368,25 @@
         
     [self removeChild:pauseMenu cleanup:YES]; 
     
-    [[CCDirectorIOS sharedDirector]  resume];
-    [[GameManager sharedGameManager] stopBackgroundMusic];
+   // [self resumeSchedulerAndActions];
+    [[CCDirector sharedDirector] resume];
     LoadingScene* scene = [LoadingScene sceneWithTargetScene:kMainMenuScene];
     [[CCDirectorIOS sharedDirector] replaceScene:scene];
+    
+    
 }
 
 -(void)restartTapped:(id)sender{
-    
-    //TestFlight
-    TFLog(@"Restart");
-    
+        
     NSInteger currentLevel = [[GameManager sharedGameManager] currentLevel];
     
     if (currentLevel == 1) {
     
+      //  [_delegate pauseDidExit:self];
         CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         [self removeChild: pauseMenu cleanup:YES];
-        [[CCDirectorIOS sharedDirector]  resume];
-        [[GameManager sharedGameManager] stopBackgroundMusic];
+        [[CCDirector sharedDirector] resume];
+        //[self resumeSchedulerAndActions];
         LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
         [[CCDirector sharedDirector] replaceScene:scene];
         return;
@@ -429,8 +428,8 @@
          coinWillUsedinView:[CCDirector sharedDirector].view forProductIdentifier:nil];
         CCMenu* pauseMenu = (CCMenu *)[self getChildByTag:kPauseMenuTagValue];
         [self removeChild: pauseMenu cleanup:YES];
-        [[CCDirectorIOS sharedDirector]  resume];
-        [[GameManager sharedGameManager] stopBackgroundMusic];
+        [[CCDirector sharedDirector] resume];
+       // [self resumeSchedulerAndActions];
         LoadingScene* scene = [LoadingScene sceneWithTargetScene:kGamelevel1];
         [[CCDirectorIOS sharedDirector] replaceScene:scene];
 
@@ -485,10 +484,7 @@
     
     [[PattyCombatIAPHelper sharedHelper] updateQuantityForProductIdentifier:productIdentifier];
     
-    NSLog(@"Purchased: %@", productIdentifier);
-    //TestFlight
-    [TestFlight passCheckpoint:@"Comprati 30 gettoni nel gioco"];
-        
+    NSLog(@"Purchased: %@", productIdentifier);        
 }
 
 // Notification Callback when purchase is failed
@@ -630,8 +626,8 @@
         UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
         NSString* text = cell.textLabel.text;
     
-    if ([text isEqualToString:@"Facebook"])    [[SocialHelper sharedHelper] loginToFacebook:self];
-    else if([text isEqualToString:@"Twitter"]) [[SocialHelper sharedHelper] postOnTwitter:self];
+    if ([text isEqualToString:@"5 free coins - Facebook"])    [[SocialHelper sharedHelper] loginToFacebook:self];
+    else if([text isEqualToString:@"5 free coins - Twitter"]) [[SocialHelper sharedHelper] postOnTwitter:self];
     else if([text isEqualToString:@"Buy 30 coins"]) 
         _productId = kProductPurchase30coins;
     else if([text isEqualToString:@"Buy 90 coins"]) 

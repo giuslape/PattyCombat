@@ -14,7 +14,8 @@
 #import "Player.h"
 
 
-@interface GamePlayLayer : CCLayer <PlayerDelegate, HUDDelegate>
+
+@interface GamePlayLayer : CCLayer <PlayerDelegate, HUDDelegate, CDLongAudioSourceDelegate>
 {
     
     double    _currentTime;
@@ -23,6 +24,9 @@
     int       _count;
     int       _gameTimeInit;
     BOOL      _isTouchInTime;
+    bool      isPause;
+    
+    CDLongAudioSource* backgroundMusic;
 
     HUDLayer* _hudLayer;
     Player*   _player;

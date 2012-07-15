@@ -101,7 +101,7 @@
             yCropAmount = wallBoundingBox.size.height*0.71;
             break;
         default:
-            yCropAmount = wallBoundingBox.size.height;
+            yCropAmount = wallBoundingBox.size.height*0.71;
             break;
     }
     

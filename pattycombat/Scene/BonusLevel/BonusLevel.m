@@ -62,6 +62,8 @@
         
         isFinish = FALSE;
         
+        elapsedTime = 0;
+        
         totalScore = [[GameManager sharedGameManager] totalScore];
         
         scoreUp = totalScore;
@@ -166,9 +168,11 @@
 -(void) update:(ccTime)delta
 {
     
+    elapsedTime += delta;
+    
     GameCharacter* tempChar = (GameCharacter *)[spriteBatchNode getChildByTag:kBellTagValue];
         
-    [tempChar updateStateWithDeltaTime:delta];
+    [tempChar updateStateWithDeltaTime:elapsedTime];
     
     if (indexSprite >= 6) {
         

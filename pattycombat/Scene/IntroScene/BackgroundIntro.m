@@ -30,9 +30,6 @@
             
         }
         
-        //TestFlight
-        TFLog(@"Livello: %d",[[GameManager sharedGameManager]currentLevel]);
-        
     }
     return self;
 }

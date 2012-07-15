@@ -271,6 +271,7 @@ typedef enum {
 #define ComicsPag1 @"fumetto_pagina_1.mp3"
 #define ComicsPag2 @"fumetto_pagina_2.mp3"
 #define ComicsPag3 @"fumetto_pagina_3.mp3"
+#define FINAL_THEME @"musica_vittoria_totale.mp3"
 
 // Audio Constants
 #define SFX_NOTLOADED NO
@@ -281,7 +282,4 @@ typedef enum {
 
 #define STOPSOUNDEFFECT(...) \
 [[GameManager sharedGameManager] stopSoundEffect:__VA_ARGS__]
-
-
- #define NSLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 

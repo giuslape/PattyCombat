@@ -140,22 +140,22 @@ static SocialHelper * _sharedHelper;
     
     // The action links to be shown with the post in the feed
     NSArray* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                      @"Get Started",
+                                                      @"Must Try",
                                                       @"name",
-                                                      @"http://bit.ly/HwglVX",
+                                                      @"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=507881555&pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8",
                                                       @"link",
-                                                      @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX",
+                                                      @"I'm enjoying PattyCombat, a free rhythm-memory-fighting game. Must try! ",
                                                       @"message", nil], nil];
     
     NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
     
     // Dialog parameters
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"I'm Patty Combat beta tester", @"name",
-                                   @"Patty Combat.", @"caption",
-                                   @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX", @"message",
-                                   @"I'm enjoying to be a PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX", @"description",
-                                   @"http://bit.ly/HwglVX", @"link",
+                                   @"I'm a PattyFighter", @"name",
+                                   @"PattyCombat.", @"caption",
+                                   @"I'm enjoying PattyCombat, a free rhythm-memory-fighting game. Must try!", @"message",
+                                   @"I'm enjoying PattyCombat, a free rhythm-memory-fighting game. Must try!", @"description",
+                                   @"http://www.facebook.com/pattycombat", @"link",
                                    @"http://www.balzo.eu/wp-content/uploads/2012/04/iTunesArtwork.png", @"picture",
                                    actionLinksStr, @"actions",
                                    nil];
@@ -181,10 +181,7 @@ static SocialHelper * _sharedHelper;
         return;
     }
     
-    [self updateForSocialCoins:@"Facebook"];
-    // Test Flight
-    
-    [TestFlight passCheckpoint:@"Post su Facebook"];
+    [self updateForSocialCoins:@"Facebook"];    
     
     NSLog(@"Dialog Complete");
 }
@@ -207,10 +204,6 @@ static SocialHelper * _sharedHelper;
 
 -(void)postOnTwitter:(id)sender{
     
-    // Test Flight
-    [TestFlight passCheckpoint:@"Post su Twitter"];
-    TFLog(@"Post su twitter");
-    
     if ([TWTweetComposeViewController canSendTweet])
     {
         TWTweetComposeViewController *tweetSheet =
@@ -229,7 +222,7 @@ static SocialHelper * _sharedHelper;
             
         };
         [tweetSheet setInitialText:
-         [NSString stringWithFormat:@"I'm enjoying to be a #PattyCombat beta tester. Wanna join the Patty Team? http://bit.ly/HwglVX"]];
+         [NSString stringWithFormat:@"I'm enjoying #PattyCombat, a free rhythm-memory-fighting game. Must try! http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=507881555&pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8"]];
         [[CCDirectorIOS sharedDirector] presentViewController:tweetSheet animated:YES completion:^{
             
             NSLog(@"Completato");

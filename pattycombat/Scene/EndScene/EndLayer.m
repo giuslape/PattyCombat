@@ -73,7 +73,7 @@
     CCSprite* nextLevel =  (CCSprite *)[_spriteBatchNode getChildByTag:kNextLevelTagValue];
     CCSprite* tweetBtn = (CCSprite *)[_spriteBatchNode getChildByTag:kTweetBtnTagValue];
     
-    if (CGRectContainsPoint([tweetBtn boundingBox], touchLocation)) {
+    if (CGRectContainsPoint([tweetBtn boundingBox], touchLocation) && tweetBtn.opacity == 255) {
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[CCDirectorIOS sharedDirector].view animated:YES];
         hud.labelText = @"Loading";
@@ -82,8 +82,6 @@
             // Do a taks in the background
             if ([TWTweetComposeViewController canSendTweet])
             {
-                
-                self.isTouchEnabled = NO;
                 TWTweetComposeViewController *tweetSheet =
                 [[TWTweetComposeViewController alloc] init];
                 tweetSheet.completionHandler = ^(TWTweetComposeViewControllerResult
@@ -101,7 +99,7 @@
                     self.isTouchEnabled = TRUE;
                     
                 };
-                [tweetSheet setInitialText:[NSString stringWithFormat:@"I got %d points in #PattyCombat Beat that! ", _totalGameScore]];
+                [tweetSheet setInitialText:[NSString stringWithFormat:@"I got %d points in #PattyCombat Beat that! http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=507881555&pageNumber=0&sortOrdering=1&type=Purple+Software&mt=8", _totalGameScore]];
                 // Hide the HUD in the main tread 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [hud hide:YES];
@@ -119,12 +117,11 @@
                                           otherButtonTitles:nil];
                 [alertView show];
                 [hud hide:YES];
-
             }
            
         });       
         
-    }else if (CGRectContainsPoint([nextLevel boundingBox], touchLocation)) {
+    }else if (CGRectContainsPoint([nextLevel boundingBox], touchLocation) && nextLevel.opacity== 255) {
                 
         
         if (!_thresholdReached) {
@@ -299,9 +296,7 @@
 -(void)detectState{
     
     GameStates gameState = [[GameManager sharedGameManager] gameState];
-    
-    TFLog([NSString stringWithFormat:@"Game State: %d", gameState]);
-    
+        
     switch (gameState) {
             
         case kStateKo:
@@ -394,8 +389,6 @@
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel1
                                          percentComplete:100.0];
             
-            //TestFlight
-            [TestFlight passCheckpoint:@"Livello 1 superato"];
         }        
     }else if (currentLevel == 2) {
         
@@ -407,8 +400,6 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel2
                                          percentComplete:100.0];
-            //TestFlight
-            [TestFlight passCheckpoint:@"Livello 2 superato"];
         }        
 
     }else if (currentLevel == 3) {
@@ -421,8 +412,7 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel3
                                          percentComplete:100.0];
-            //TestFlight
-            [TestFlight passCheckpoint:@"Livello 3 superato"];
+        
         }        
         
     }else if (currentLevel == 6) {
@@ -436,7 +426,6 @@
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel4
                                          percentComplete:100.0];
             
-                        [TestFlight passCheckpoint:@"Livello 4 superato"];
         }        
         
     }else if (currentLevel == 5) {
@@ -449,9 +438,7 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel5
                                          percentComplete:100.0];
-            
-            [TestFlight passCheckpoint:@"Livello 5 superato"];
-        }        
+            }        
         
     }else if (currentLevel == 7) {
         
@@ -463,9 +450,7 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel6
                                          percentComplete:100.0];
-            
-                        [TestFlight passCheckpoint:@"Livello 6 superato"];
-        }        
+            }        
         
     }else if (currentLevel == 9) {
         
@@ -477,9 +462,7 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel7
                                          percentComplete:100.0];
-            
-            [TestFlight passCheckpoint:@"Livello 7 superato"];
-        }        
+            }        
         
     }else if (currentLevel == 10) {
         
@@ -491,9 +474,7 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel8
                                          percentComplete:100.0];
-            
-                        [TestFlight passCheckpoint:@"Livello 8 superato"];
-        }        
+            }        
         
     }else if (currentLevel == 11) {
         
@@ -505,9 +486,7 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel9
                                          percentComplete:100.0];
-            
-                        [TestFlight passCheckpoint:@"Livello 9 superato"];
-        }        
+            }        
         
     }else if (currentLevel == 13) {
         
@@ -519,9 +498,7 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementLevel10
                                          percentComplete:100.0];
-            
-            [TestFlight passCheckpoint:@"Gioco Terminato"];
-            
+                        
             if (![GameState sharedInstance].extreme) {
                 
                 [GameState sharedInstance].extreme = true;
@@ -538,9 +515,7 @@
             [[GameState sharedInstance] save];
             [[GCHelper sharedInstance] reportAchievement:kAchievementPerfect
                                          percentComplete:100.0];
-            
-                        [TestFlight passCheckpoint:@"Gioco terminato con Perfect"];
-            
+                        
         }
         
         if (![GameState sharedInstance].ko && [GameManager sharedGameManager].isKo) {
@@ -550,8 +525,6 @@
             [[GCHelper sharedInstance] reportAchievement:kAchievementKO
                                          percentComplete:100.0];
             
-                        [TestFlight passCheckpoint:@"gioco terminato con Ko"];
-
         }
         
     }
@@ -621,11 +594,6 @@
         
     }
     
-    //TestFlight
-    TFLog([NSString stringWithFormat:@"Level Score: %d", _currentLevelScore]);
-    TFLog([NSString stringWithFormat:@"Total Score: %d", _totalGameScore]);
-    TFLog([NSString stringWithFormat:@"Best Score: %d", _bestScore]);
-    TFLog([NSString stringWithFormat:@"Time Bonus: %d", _timeBonus]);
 }
 
 - (id)init {
@@ -906,9 +874,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString* text = cell.textLabel.text;
-    
-    if ([text isEqualToString:@"Facebook"])    [[SocialHelper sharedHelper] loginToFacebook:self];
-    else if([text isEqualToString:@"Twitter"]) [[SocialHelper sharedHelper] postOnTwitter:self];
+    _productId = nil;
+    if ([text isEqualToString:@"5 free coins - Facebook"])    [[SocialHelper sharedHelper] loginToFacebook:self];
+    else if([text isEqualToString:@"5 free coins - Twitter"]) [[SocialHelper sharedHelper] postOnTwitter:self];
     else if([text isEqualToString:@"Buy 30 coins"]) 
         _productId = kProductPurchase30coins;
     else if([text isEqualToString:@"Buy 90 coins"]) 
@@ -917,9 +885,8 @@
         _productId = kProductPurchase300coins;
     
     [_alert dismissWithClickedButtonIndex:indexPath.row animated:YES];
-    self.isTouchEnabled = false;
     if (_productId){ 
-        
+        self.isTouchEnabled = false;
         bool reach = [[PattyCombatIAPHelper sharedHelper] coinWillUsedinView:[CCDirector sharedDirector].view 
                                            forProductIdentifier:_productId];
         if (!reach) {

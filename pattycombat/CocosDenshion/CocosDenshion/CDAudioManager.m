@@ -89,6 +89,10 @@ NSString * const kCDN_AudioManagerInitialised = @"kCDN_AudioManagerInitialised";
 	audioSourcePlayer.volume = volume;
 	audioSourcePlayer.numberOfLoops = numberOfLoops;
 	state = kLAS_Loaded;
+    if (delegate && [delegate respondsToSelector:@selector(cdAudioSourceFileDidChange:)]) {
+        //Tell our delegate the file has changed
+        [delegate cdAudioSourceFileDidChange:self];
+    }
 }
 
 -(void) play {

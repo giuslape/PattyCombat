@@ -20,18 +20,13 @@
 
 static NSString* kAppId = @"321845184543524";
 
-static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyLTA0LTEwIDA0OjM3OjQ1LjE4OTQ1MQ";
-
-
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_, facebook=_facebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    [TestFlight takeOff:kTokenFlight];
-    
+        
     //App Purchase Init
     
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[PattyCombatIAPHelper sharedHelper]];
@@ -181,13 +176,13 @@ static NSString* kTokenFlight = @"bc4c8bf9338d38f6a471a021b6b58a7e_Nzk0MDAyMDEyL
 
 -(void) applicationDidEnterBackground:(UIApplication*)application
 {
-		[[CCDirectorIOS sharedDirector] stopAnimation];
+        [[CCDirectorIOS sharedDirector] stopAnimation];
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application
 {
 		[[CCDirectorIOS sharedDirector] startAnimation];
-       // [Appirater appEnteredForeground:YES]; 
+        [Appirater appEnteredForeground:YES]; 
 }
 
 // application will be killed

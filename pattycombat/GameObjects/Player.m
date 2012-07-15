@@ -73,11 +73,11 @@
 
     currentTime += deltaTime;
         
-    if ((cnt * (60.0 / bpm)) <= currentTime) {
+    if ((cnt * (60.0 / bpm)) <= deltaTime) {
         
         if (handIsOpen || handsAreOpen) {
             
-        [_delegate didPlayerChangeHands:touchOk];
+            [_delegate didPlayerChangeHands:touchOk];
             
             if (!touchOk && feedBodyErr != nil) {
                 
@@ -92,6 +92,7 @@
 
         }
         else currentItem = (currentItem +1)%([pattern count]);
+        
 
         cnt++;
         [self handleHands];
@@ -107,21 +108,24 @@
 
     touchOk = NO;
         
+    frameForDoubleTouch = (bpm == 180) ? 1 : 2;
+    
     if ([self characterState] == kStateDead) return;
     
     NSString* indexPattern = (NSString*)[pattern objectAtIndex:currentItem];
     
     if([indexPattern isEqualToString:@"two"]){
-                
+    
         if (handsAreOpen) {
             [self changeState:[NSNumber numberWithInt:kStateTwoHandsAreClosed]];
             handsAreOpen = FALSE;
         }else{
             
             [self changeState:[NSNumber numberWithInt:kStateTwoHandsAreOpen]];
+            [_delegate didPlayerOpenHand:kStateLeftHandOpen];
+            frameForDoubleTouch = 1;
             handsAreOpen = TRUE;
         }
-        
     } else if ([indexPattern isEqualToString:@"dx"]) {
         
         if (handIsOpen) {
@@ -150,6 +154,7 @@
             handIsOpen = FALSE;
         }else{
             [self changeState:[NSNumber numberWithInt:kStateLeftCrossHandOpen]];
+            [_delegate didPlayerOpenHand:kStateLeftHandOpen];
             handIsOpen = TRUE;
         }
     }else if([indexPattern isEqualToString:@"dxCross"]){
@@ -159,6 +164,7 @@
             handIsOpen = FALSE;
         }else{
             [self changeState:[NSNumber numberWithInt:kStateRightCrossHandOpen]];
+            [_delegate didPlayerOpenHand:kStateLeftHandOpen];
             handIsOpen = TRUE;
         }
 
@@ -225,10 +231,10 @@
     
     if (handsAreOpen) {
         
-        if (([leftHand isFrameDisplayed:[[[manoSinistraApre frames]objectAtIndex:frameForDoubleTouch]spriteFrame]]
+        if ((([leftHand isFrameDisplayed:[[[manoSinistraApre frames]objectAtIndex:frameForDoubleTouch]spriteFrame]] || [leftHand isFrameDisplayed:[[[manoSinistraApre frames]lastObject]spriteFrame]])
             && (CGRectContainsPoint(rectLeft, firstLocation) 
             || CGRectContainsPoint(rectLeft, secondLocation)))
-            && ([rightHand isFrameDisplayed:[[[manoDestraApre frames]objectAtIndex:frameForDoubleTouch]spriteFrame]]
+            && (([rightHand isFrameDisplayed:[[[manoDestraApre frames]objectAtIndex:frameForDoubleTouch]spriteFrame]] || [rightHand isFrameDisplayed:[[[manoDestraApre frames]lastObject]spriteFrame]])
             && (CGRectContainsPoint(rectRight, secondLocation)
             || CGRectContainsPoint(rectRight, firstLocation))))
         {
@@ -317,14 +323,14 @@
             
              action             = [CCAnimate actionWithAnimation:manoSinistraColpita];
              actionHitUnder     = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoSinistraHitUnder],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
 
              actionHitOver      = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoSinistraHitOver],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
 
              hitAnimationUnder  = leftHitUnder;
              hitAnimationOver   = leftHitOver;
@@ -415,14 +421,14 @@
             action = [CCAnimate actionWithAnimation:manoDestraCrossColpita];
             
             actionHitUnder     = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoDestraCrossHitUnder],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
             
             actionHitOver      = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoDestraCrossHitOver],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
             
             hitAnimationUnder  = rightHitUnder;
             hitAnimationOver   = rightHitOver;
@@ -432,14 +438,14 @@
             
             action = [CCAnimate actionWithAnimation:manoSinistraCrossColpita];
             actionHitUnder     = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoSinistraCrossHitUnder],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
             
             actionHitOver      = [CCSequence actions:
-                                  [CCFadeIn actionWithDuration:0.01f],
+                                  [CCFadeIn actionWithDuration:0.001f],
                                   [CCAnimate actionWithAnimation:manoSinistraCrossHitOver],
-                                  [CCFadeOut actionWithDuration:0.01f], nil ];
+                                  [CCFadeOut actionWithDuration:0.001f], nil ];
             
             hitAnimationUnder  = leftHitUnder;
             hitAnimationOver   = leftHitOver;
@@ -774,7 +780,6 @@
         handIsOpen = FALSE;
         
         handsAreOpen = FALSE;
-        //[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
     }
     return self;
 }

@@ -85,15 +85,15 @@
     
     _elapsedTime += deltaTime;
     
-    float diff = _elapsedTime - _oldElapsedTime;
+    float diff = deltaTime - _oldElapsedTime;
     
     if (diff >= _delayBetweenFrames) {
         
         [self changeState:[NSNumber numberWithInt:kStateBellUpdate]];
-        _oldElapsedTime = _elapsedTime;
+        _oldElapsedTime = deltaTime;
 
     }
-    else if (_elapsedTime >= _gameTime &&
+    else if (deltaTime >= _gameTime &&
              [self isFrameDisplayed:[[[_bellAnimation frames] lastObject]spriteFrame]]) 
     {
         

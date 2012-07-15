@@ -103,7 +103,7 @@ static GameManager* _sharedGameManager = nil;
         _namePlayer = nil;
         _gameTime = 0;
         _gameState = kStateLose;
-        _gameTimeInit = 12;
+        _gameTimeInit = 13;
     }
     return self;
 }
@@ -251,7 +251,7 @@ static GameManager* _sharedGameManager = nil;
             _gameTime = 64;
             break;
         case 6:
-            _gameTime = 56;
+            _gameTime = 55;
             break;
         case 5:
             _gameTime = 55;
@@ -260,13 +260,13 @@ static GameManager* _sharedGameManager = nil;
             _gameTime = 56;
             break;
         case 9:
-            _gameTime = 49;
+            _gameTime = 48;
             break;
         case 10:
-            _gameTime = 50;
+            _gameTime = 49;
             break;
         case 11:
-            _gameTime = 55;
+            _gameTime = 48;
             break;
         case 13:
             _gameTime = 45;
@@ -696,7 +696,7 @@ static GameManager* _sharedGameManager = nil;
         
         HUDLayer * hudlayer = (HUDLayer *)[runningScene getChildByTag:10];
 
-        [hudlayer onPause:self];
+        [hudlayer onPauseApplication:self];
     }
     else [[CCDirectorIOS sharedDirector] pause];
     
@@ -705,7 +705,13 @@ static GameManager* _sharedGameManager = nil;
 
 -(void)resumeGame{
     
+    CCScene* runningScene = [[CCDirectorIOS sharedDirector] runningScene];
+
+    if (![runningScene isKindOfClass:[GameScene class]]) {
+        
         [[CCDirectorIOS sharedDirector] resume];
+
+    }
 }
 
 #pragma mark -
@@ -721,7 +727,7 @@ static GameManager* _sharedGameManager = nil;
 
 -(void)setLevelReached:(int)newLevel{
     
-    [[NSUserDefaults standardUserDefaults]setInteger:newLevel forKey:@"LevelReached"];
+    [[NSUserDefaults standardUserDefaults] setInteger:newLevel forKey:@"LevelReached"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }

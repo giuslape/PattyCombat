@@ -93,7 +93,7 @@ extern NSString *const kAppiraterReminderRequestDate;
  Users will need to have the same version of your app installed for this many
  days before they will be prompted to rate it.
  */
-#define APPIRATER_DAYS_UNTIL_PROMPT		10		// double
+#define APPIRATER_DAYS_UNTIL_PROMPT		3		// double
 
 /*
  An example of a 'use' would be if the user launched the app. Bringing the app

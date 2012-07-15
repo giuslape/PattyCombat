@@ -31,7 +31,17 @@ bool fadingOutLoop2;
     if (self) {
         
         CGSize screenSize = [CCDirector sharedDirector].winSize;
-
+        
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"loop_sinth.mp3"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"loop_metronomo.mp3"];
+        sound1 = [[SimpleAudioEngine sharedEngine] soundSourceForFile:@"loop_sinth.mp3"];
+        sound2 = [[SimpleAudioEngine sharedEngine] soundSourceForFile:@"loop_metronomo.mp3"];
+        
+        fadingOutLoop1 = YES;
+        fadingOutLoop2 = YES;
+        sound1.gain = 0.0f;
+        sound2.gain = 0.0f;
+        
         CCSprite* skip = [CCSprite spriteWithFile:@"skip.png"];
         CCSprite* skipSel = [CCSprite spriteWithFile:@"skip_tap.png"];
         
@@ -41,8 +51,6 @@ bool fadingOutLoop2;
             
             [[[CCDirector sharedDirector] actionManager] removeAllActionsFromTarget:sound1];                  
             [[[CCDirector sharedDirector] actionManager] removeAllActionsFromTarget:sound2];
-          //  [[SimpleAudioEngine sharedEngine] unloadEffect:@"loop_sinth.mp3"];
-          //  [[SimpleAudioEngine sharedEngine] unloadEffect:@"loop_metronomo.mp3"];
             [sound1 stop];
             [sound2 stop];
             
@@ -63,14 +71,6 @@ bool fadingOutLoop2;
         [menu setAnchorPoint:ccp(1, 1)];
                 
         [self updateForScreenReshape];
-        
-        sound1 = [[SimpleAudioEngine sharedEngine] soundSourceForFile:@"loop_sinth.mp3"];
-        sound2 = [[SimpleAudioEngine sharedEngine] soundSourceForFile:@"loop_metronomo.mp3"];
-        
-        fadingOutLoop1 = YES;
-        fadingOutLoop2 = YES;
-        sound1.gain = 0.0f;
-        sound2.gain = 0.0f;
         
         [self fadeSound:sound1];
     }
@@ -125,7 +125,6 @@ bool fadingOutLoop2;
 	CCSprite *s2 = [CCSprite spriteWithFile:@"002.png"];
 	s2.position =  ccp( screenSize.width /2 , screenSize.height/2 );
 	[pageTwo addChild:s2];
-    
     
 	return [NSArray arrayWithObjects: pageOne,pageTwo,nil];
 }
